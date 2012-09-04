@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D2115627-C30A-4F71-8EE0-DA1A21BB8FCB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>thrust_js</RootNamespace>
+    <AssemblyName>thrust-js</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="build-test-runners\thrust-build.html" />
+    <Content Include="build-test\require.test.settings.js" />
+    <Content Include="build-test\thrust-build.js" />
+    <Content Include="example\spa\about.html" />
+    <Content Include="example\spa\account.controls\account.controls.js" />
+    <Content Include="example\spa\contact.html" />
+    <Content Include="example\spa\grunt.js" />
+    <Content Include="example\spa\index.html" />
+    <Content Include="example\spa\loader.gif" />
+    <Content Include="example\spa\main.js" />
+    <Content Include="example\spa\menu\menu.js" />
+    <Content Include="example\spa\menu\side.js" />
+    <Content Include="example\spa\module\about\main.js" />
+    <Content Include="example\spa\module\contact\main.js" />
+    <Content Include="example\spa\module\index.js" />
+    <Content Include="example\spa\module\alert.js" />
+    <Content Include="example\spa\module\home\main.js" />
+    <Content Include="example\spa\ready.js" />
+    <Content Include="example\spa\require.settings.js" />
+    <Content Include="example\spa\side.menu.js" />
+    <Content Include="example\spa\spa.css" />
+    <Content Include="grunt.js" />
+    <Content Include="src\config.js" />
+    <Content Include="src\data\config.js" />
+    <Content Include="src\data\event.types.js" />
+    <Content Include="src\dom\config.js" />
+    <Content Include="src\mediator\config.js" />
+    <Content Include="src\mediator\convention\dependant.modules.js" />
+    <Content Include="src\mediator\convention\autostart.js" />
+    <Content Include="src\mediator\convention\container.js" />
+    <Content Include="src\mediator\convention\subscription.js" />
+    <Content Include="src\mediator\main.js" />
+    <Content Include="src\data\convention\start.js" />
+    <Content Include="src\data\main.js" />
+    <Content Include="src\dom\convention\action.js" />
+    <Content Include="src\dom\convention\animate.container.js" />
+    <Content Include="src\dom\convention\context.js" />
+    <Content Include="src\dom\convention\event.js" />
+    <Content Include="src\instance.js" />
+    <Content Include="src\spa\config.js" />
+    <Content Include="src\spa\convention\start.js" />
+    <Content Include="src\spa\main.js" />
+    <Content Include="src\template\config.js" />
+    <Content Include="src\template\convention\knockout.engine.js" />
+    <Content Include="src\template\convention\template.js" />
+    <Content Include="src\dom\main.js" />
+    <Content Include="src\events.js" />
+    <Content Include="src\facade.js" />
+    <Content Include="src\ignite.js" />
+    <Content Include="src\log.js" />
+    <Content Include="src\main.js" />
+    <Content Include="src\module.js" />
+    <Content Include="src\moduledefine.js" />
+    <Content Include="src\template\main.js" />
+    <Content Include="src\convention.js" />
+    <Content Include="src\util\array.js" />
+    <Content Include="src\util\collection.js" />
+    <Content Include="src\util\function.js" />
+    <Content Include="src\util\guid.js" />
+    <Content Include="src\util\lib\camelcase.js" />
+    <Content Include="src\util\lib\extend.js" />
+    <Content Include="src\util\lib\param.js" />
+    <Content Include="src\util\lib\type.js" />
+    <Content Include="src\util\main.js" />
+    <Content Include="src\util\object.js" />
+    <Content Include="src\util\string.js" />
+    <Content Include="src\util\type.js" />
+    <Content Include="src\util\url.js" />
+    <Content Include="src\util\when.js" />
+    <Content Include="test-runners\convention.html" />
+    <Content Include="test-runners\module.html" />
+    <Content Include="test-runners\facade.html" />
+    <Content Include="test-runners\thrust-mediator.html" />
+    <Content Include="test-runners\events.html" />
+    <Content Include="testing\app-min1\thrust-data-module.js" />
+    <Content Include="testing\body-module-1.js" />
+    <Content Include="testing\body-module-2.js" />
+    <Content Include="test\convention.js" />
+    <Content Include="test\module.js" />
+    <Content Include="test\facade.js" />
+    <Content Include="test\thrust-mediator.js" />
+    <Content Include="test\events.js" />
+    <Content Include="test\require.test.settings.js" />
+    <Content Include="test-runners\thrust.html" />
+    <Content Include="testing\thrust-data-module.js" />
+    <Content Include="testing\app1\index.html" />
+    <Content Include="testing\main.js" />
+    <Content Include="testing\app1\require.settings.js" />
+    <Content Include="testing\thrust-module.js" />
+    <Content Include="testing\app-min1\index.html" />
+    <Content Include="testing\app-min1\require.settings.js" />
+    <Content Include="test\thrust.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\data\event.factory.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\data\response.queue.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\dom\jquery.interface.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="example\dataheavy\" />
+    <Folder Include="src\spa\router\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="example\spa\account.controls\account.controls.dot.tmpl" />
+    <Content Include="example\spa\actionlink.dot.tmpl" />
+    <Content Include="example\spa\menu\menu.json" />
+    <Content Include="example\spa\menu\menu.dot.tmpl" />
+    <Content Include="example\spa\package.json" />
+    <Content Include="example\spa\menu\side.dot.tmpl" />
+    <Content Include="example\spa\menu\side.json" />
+    <Content Include="example\spa\menu\side.header.dot.tmpl" />
+    <Content Include="example\spa\module\home\alert.json" />
+    <Content Include="example\spa\module\about\alert.json" />
+    <Content Include="example\spa\module\contact\alert.json" />
+    <Content Include="example\spa\module\contact\content.dot.tmpl">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="example\spa\module\about\content.dot.tmpl">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="example\spa\module\home\content.dot.tmpl">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="test\test.runner.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="example\spa\account.controls\account.controls.json" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:3141/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,12 @@
+﻿{
+    "username": "Guest",
+    "actions": [
+        { "url": "#", "text": "Profile" },
+        { "url": "#", "text": "My Account" },
+        { "url": "#", "text": "Settings" }
+    ],
+    "context_actions": [
+        { "url": "#", "text": "Register" },
+        { "url": "#", "text": "Sign In" }
+    ]
+}

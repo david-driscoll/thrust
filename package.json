@@ -1,0 +1,38 @@
+{
+    "name": "thrust-js",
+    "title": "Thrust JS Framework",
+    "author": {
+        "name": "David Driscoll"
+    },
+    "version": "0.1.0",
+    "homepage": "thrust-home",
+    "description": "Ignite into a new world with thrust-js getting your application upto speed.",
+    "keywords": ["thrust"],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://www.opensource.org/licenses/mit-license.php"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": ""
+        }
+    ],
+    "bugs": "",
+    "maintainers": [
+        {
+            "name": "David Driscoll",
+            "web": "http://blacklite.ca"
+        }
+    ],
+    "main": "./src/main.js",
+    "devDependencies" : {
+        "grunt-rigger": "*",
+        "grunt-requirejs": "*",
+        "node.extend": "*",
+        "grunt-shell": "*",
+        "grunt-jasmine-task": "*"
+    }
+}

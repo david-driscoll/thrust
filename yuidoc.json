@@ -1,0 +1,1 @@
+{"name":"Thrust JS Framework","description":"Ignite into a new world with thrust-js getting your application upto speed.","version":"0.1.0","url":"thrust-home","options":{"linkNatives":true,"attributesEmit":true,"selleck":true,"paths":["./src"],"outdir":"./docs","exclude":"test,plugins,dist,build,lib,node_modules,example"}}

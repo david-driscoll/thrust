@@ -1,0 +1,7 @@
+﻿{
+    "items": [
+        { "url": "/example/spa/index.html", "text": "Home" },
+        { "url": "/example/spa/about.html", "text": "About" },
+        { "url": "/example/spa/contact.html", "text": "Contact" }
+    ]
+}

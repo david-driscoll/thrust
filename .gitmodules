@@ -1,9 +1,9 @@
-[submodule "lib/wire"]
-	path = lib/wire
-	url = git://github.com/david-driscoll/wire.git
 [submodule "lib/requirejs"]
 	path = lib/requirejs
 	url = git://github.com/jrburke/requirejs.git
+[submodule "lib/when"]
+	path = lib/when
+	url = git://github.com/cujojs/when.git
 [submodule "lib/es5-shim"]
 	path = lib/es5-shim
 	url = git://github.com/kriskowal/es5-shim.git
@@ -16,18 +16,12 @@
 [submodule "lib/domReady"]
 	path = lib/domReady
 	url = git://github.com/requirejs/domReady.git
-[submodule "lib/aop"]
-	path = lib/aop
-	url = git://github.com/cujojs/aop.git
 [submodule "lib/jquery"]
 	path = lib/jquery
 	url = git://github.com/jquery/jquery.git
 [submodule "lib/doT"]
 	path = lib/doT
 	url = git://github.com/olado/doT.git
-[submodule "lib/sizzle"]
-	path = lib/sizzle
-	url = git://github.com/jquery/sizzle.git
 [submodule "lib/davis"]
 	path = lib/davis
 	url = git://github.com/olivernn/davis.js.git
@@ -40,9 +34,6 @@
 [submodule "lib/kob-model"]
 	path = lib/kob-model
 	url = git@bitbucket.org:sithy/kob-model.git
-[submodule "lib/when"]
-	path = lib/when
-	url = git://github.com/cujojs/when.git
 [submodule "lib/showdown"]
 	path = lib/showdown
 	url = git://github.com/coreyti/showdown.git

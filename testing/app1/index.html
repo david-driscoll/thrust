@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div id="context"></div>
+    <script type="text/javascript" src="../../lib/requirejs/require.js" data-main="../main.js"></script>
+    <script type="text/javascript" src="require.settings.js"></script>
+    <script type="text/javascript" src="../xrayquire/xrayquire.js"></script>
+    <script type="text/javascript" src="../xstats/xstats.js"></script>
+    <script type="text/javascript">
+        var stats = new xStats;
+        document.body.appendChild(stats.element);
+    </script>
+
+    <a href="local">Navigate to 'local'</a><br />
+    <a href="home">Navigate to 'home'</a><br />
+
+    <script type="text/template-doT" data-type="doT" data-template="asdf" id="template">
+        Sample Template!
+    </script>
+</body>
+</html>

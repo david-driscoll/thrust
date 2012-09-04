@@ -1,0 +1,11 @@
+node_modules/
+*.user
+bin/
+obj/
+*.suo
+_ReSharper*
+*.pidb
+test-results/
+*.userprefs
+*.dotCover
+build/

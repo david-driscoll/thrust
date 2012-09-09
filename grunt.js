@@ -2,7 +2,6 @@
 module.exports = function (grunt)
 {
     grunt.loadNpmTasks('grunt-requirejs');
-    grunt.loadNpmTasks('grunt-rigger');
     grunt.loadNpmTasks('grunt-bom');
     grunt.loadNpmTasks('grunt-jasmine-task');
     grunt.loadNpmTasks('grunt-shell');
@@ -20,7 +19,7 @@ module.exports = function (grunt)
         'i18n': 'lib/i18n/i18n',
         'domReady': 'lib/domReady/domReady',
         'doT': 'lib/doT/doT',
-        'jquery': 'lib/jquery/dist/jquery',
+        'jquery': 'lib/jquery/jquery-1.8.1',
         'davis': 'lib/davis/davis',
         'has': 'lib/has/has',
         'backbone': 'lib/backbone/backbone',
@@ -240,10 +239,9 @@ module.exports = function (grunt)
         findNestedDependencies: true
     };
 
-    var pkg = require('./package.json');
-
-    var fs = require('fs');
-    var yuiConfig = {
+    var pkg = require('./package.json'),
+        fs = require('fs'),
+        yuiConfig = {
         name: pkg.title || pkg.name,
         description: pkg.description || pkg.title || pkg.name,
         version: pkg.version,

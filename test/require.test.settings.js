@@ -16,7 +16,7 @@
             'i18n': '../lib/i18n/i18n',
             'domReady': '../lib/domReady/domReady',
             'doT': '../lib/doT/doT',
-            'jquery': '../lib/jquery/dist/jquery',
+            'jquery': '../lib/jquery/jquery-1.8.1',
             'has': '../lib/has/has',
             'knockout': '../lib/knockout/build/output/knockout-latest.debug',
             'davis': '../lib/davis/davis',

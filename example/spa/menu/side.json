@@ -3,25 +3,25 @@
         {
             "title": "Home",
             "items": [
-                { "url": "index.html", "text": "Link 1" },
-                { "url": "about.html", "text": "Link 2" },
-                { "url": "contact.html", "text": "Link 3" }
+                { "url": "/example/spa/index.html", "text": "Link 1" },
+                { "url": "/example/spa/about.html", "text": "Link 2" },
+                { "url": "/example/spa/contact.html", "text": "Link 3" }
             ]
         },
         {
             "title": "About",
             "items": [
-                { "url": "index.html", "text": "Link 4" },
-                { "url": "about.html", "text": "Link 5" },
-                { "url": "contact.html", "text": "Link 6" }
+                { "url": "/example/spa/index.html", "text": "Link 4" },
+                { "url": "/example/spa/about.html", "text": "Link 5" },
+                { "url": "/example/spa/contact.html", "text": "Link 6" }
             ]
         },
         {
             "title": "Contact",
             "items": [
-                { "url": "index.html", "text": "Link 7" },
-                { "url": "about.html", "text": "Link 8" },
-                { "url": "contact.html", "text": "Link 9" }
+                { "url": "/example/spa/index.html", "text": "Link 7" },
+                { "url": "/example/spa/about.html", "text": "Link 8" },
+                { "url": "/example/spa/contact.html", "text": "Link 9" }
             ]
         }
     ]

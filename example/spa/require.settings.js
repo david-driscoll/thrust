@@ -20,7 +20,7 @@
             'i18n': '../../lib/i18n/i18n',
             'domReady': '../../lib/domReady/domReady',
             'sizzle': '../../lib/sizzle/sizzle',
-            'jquery': '../../lib/jquery/dist/jquery',
+            'jquery': '../../lib/jquery/jquery-1.8.1',
             'doT': '../../lib/doT/doT',
             'davis': '../../lib/davis/davis',
             'has': '../../lib/has/has',

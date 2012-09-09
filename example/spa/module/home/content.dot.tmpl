@@ -1,5 +1,5 @@
 ﻿<div class="row-fluid">
-    <div class="span4">
+    <div class="span12">
         <h2>Concept</h2>
         <p>
             Thrust helps you utilize Module Pattern, Mediator Pattern and Facade pattern in your client side architecture.
@@ -12,41 +12,6 @@
         <p>
             No two modules know of the others existance, for inter-module communication you can use the pub/sub functionality from <strong>thrust/mediator</strong>.<br />
             Some modules may be dependant on others being loaded, but that is to tell thrust what else it needs to wireup, communication is still done via events.
-        </p>
-    </div>
-    <div class="span4">
-        <h2>Features</h2>
-        <p>
-            <a href="#" rel="popover" data-content="Each module is loaded with it's own sandboxed facades, this allows plugin authors the ability to differentiate between modules.\n\n
-                    A great example where this comes in handy is for events, or dom events.  __thrust/dom__ and __thrust/mediator__ both track events using namespaces, 
-                    specific to the module, when it comes time to clean up, the plugin has a simple way to remove all bindings.">Sandboxed Modules</a>
-        </p>
-        <p>
-            <a href="#" rel="popover" data-content="Thrust comes with a central mediator that controls the event flow between itself, the available plugins, and the running modules.\n\n
-               The mediator supports namespaces, so that subscriptions can be removed enmasse for a single namespace.">Central Mediator</a>
-        </p>
-        <p>
-            <a href="#" rel="popover" data-content="Thrust was designed from the ground up for extensiblity.\n\n
-               ---\n
-               __Plugins__\n\n
-               Thrust has full support for plugins, infact, the mediator, which is a required component, was built as a plugin.\n\n
-               ---\n
-               __Conventions__\n\n
-               Subscribing to a set of events is a task that has lots of ceremony, calling `this.subscribe(eventName, function() { // Event method here });`\n\n
-               Conventions allow you to create short hand properties that can be used in modules, building a stronger convention over configuration coding practice.\n\n
-               Thrust comes with a full suite of these conventions, but is also built to accept custom built conventions.
-               
-               ">Completely Extensible</a>
-        </p>
-        <p>
-            <a href="#" rel="popover" data-content="Thrust wraps the popular underscore (or lodash if you prefer) in it's own util namespace, to minimize the need to constantly require extra modules
-               in.\n\n---\n In addition, this comes as a business decision.  When training non-JavaScript developers, giving them a simpler, straight forward and common toolset to consume, means you get more
-               productivity and reproduceable code.\n\n
-               Sometimes it's better to build a better box, then let the zoo run wild.">Utility Suite</a>
-        </p>
-        <p>
-            <a href="#" rel="popover" data-content="Thrust offers a full life cycle your application and modules, from initalize all the way to DOM Loaded, thrust will be there every step of the way.\n\n Gone
-               are the days of waiting for the DOM to be ready, to build up any of your code.  Thrust gives you the ability to do the leg work before the dom is loaded, and then once ready you can operate against it.">Application / Module Life Cycle</a>
         </p>
     </div>
 </div>

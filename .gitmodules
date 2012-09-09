@@ -16,15 +16,9 @@
 [submodule "lib/domReady"]
 	path = lib/domReady
 	url = git://github.com/requirejs/domReady.git
-[submodule "lib/jquery"]
-	path = lib/jquery
-	url = git://github.com/jquery/jquery.git
 [submodule "lib/doT"]
 	path = lib/doT
 	url = git://github.com/olado/doT.git
-[submodule "lib/davis"]
-	path = lib/davis
-	url = git://github.com/olivernn/davis.js.git
 [submodule "lib/bootstrap"]
 	path = lib/bootstrap
 	url = git://github.com/twitter/bootstrap.git
@@ -46,3 +40,6 @@
 [submodule "lib/knockout"]
 	path = lib/knockout
 	url = git://github.com/SteveSanderson/knockout.git
+[submodule "lib/director"]
+	path = lib/director
+	url = git://github.com/flatiron/director.git

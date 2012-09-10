@@ -1,4 +1,4 @@
-/*! Thrust JS Framework - v0.1.0 - 2012-09-03
+/*! Thrust JS Framework - v0.1.0 - 2012-09-09
 * thrust-home
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 
@@ -1057,15 +1057,16 @@ function (param, module)
         @param {String} url The url to fixup
         @retrusn {String} The fixed url
         **/
-        fixupUrl: function (url)
+        fixupUrl: function (url, urlPath)
         {
             if (url.indexOf('http') === -1)
             {
+                var path = urlPath.lastIndexOf('/') === urlPath.length - 1 ? urlPath.substring(0, -1) : urlPath;
                 if (url.indexOf(urlPath) === -1)
                 {
                     url = urlPath + url;
                 }
-                url = exports.cleanUrl(path + url);
+                url = exports.cleanUrl(url);
             }
             return url;
         }
@@ -3099,7 +3100,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
                     {
                         that.createModule(moduleDefn.name || name, moduleDefn);
 
-                        var result = runRunnerFactory(method).apply(that, [name].concat(args));
+                        var result = runRunnerFactory(method).apply(that, [moduleDefn.name].concat(args));
                         when.chain(when.all(util.flatten(result)), loaderDefer);
                     }, function ()
                     {
@@ -3129,7 +3130,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
                 }
             });
 
-            return results;
+            return results.length && results;
         };
     });
 
@@ -3449,18 +3450,22 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             when.all(util.flatten(items)).then(function ()
             {
                 var results = [];
-                results.push(runRunnerFactory(method).apply(that, args));
+                var result = runRunnerFactory(method).apply(that, args);
+                //if (result)
+                //{
+                    results.push(result);
 
-                var resultsDefer = when.all(util.flatten(results));
-                if (that.started)
-                {
-                    var runReady = function () { when.chain(that.ready.apply(that, args), startDefer); };
-                    resultsDefer.then(runReady);
-                }
-                else
-                {
-                    when.chain(resultsDefer, startDefer);
-                }
+                    var resultsDefer = when.all(util.flatten(results));
+                    if (that.started)
+                    {
+                        var runReady = function () { when.chain(that.ready.apply(that, args), startDefer); };
+                        resultsDefer.then(runReady);
+                    }
+                    else
+                    {
+                        when.chain(resultsDefer, startDefer);
+                    }
+                //}
             });
 
             return startDefer.promise;
@@ -4603,12 +4608,13 @@ function (util, log, Events, facade, has)
     @constructor
     @param {String} name The name of the mediator.
     **/
-    var Mediator = function (name)
+    var Mediator = function (name, config)
     {
         if (!(this instanceof Mediator))
             return new Mediator(name);
 
-        var that = this;
+        var that = this,
+            appPath = config && config.url && config.url.path;
         that.name = name;
         has('DEBUG') && log.debug(format('Mediator: Creating new Mediator {0}', name));
 
@@ -4623,7 +4629,7 @@ function (util, log, Events, facade, has)
         {
             if (path === window.location.pathname)
                 window.location.reload();
-            window.location = util.fixupUrl(path);
+            window.location = util.fixupUrl(path, appPath);
         });
     };
 

@@ -12,7 +12,7 @@ module.exports = function (grunt)
                    'domReady',
                    'jquery',
                    'doT',
-                   'davis',
+                   'flatiron/director',
                    'backbone',
                    'thrust',
                    'thrust/util',
@@ -64,7 +64,7 @@ module.exports = function (grunt)
                 'sizzle': '../../lib/sizzle/sizzle',
                 'jquery': '../../lib/jquery/jquery-1.8.1',
                 'doT': '../../lib/doT/doT',
-                'davis': '../../lib/davis/davis',
+                'flatiron/director': '../../lib/director/build/director-1.1.6',
                 'backbone': '../../lib/backbone/backbone',
                 'thrust': '../../dist/thrust.debug',
                 'thrust/util': '../../dist/thrust.util.debug',
@@ -83,10 +83,7 @@ module.exports = function (grunt)
                 { name: 'kob-model/complex', location: '../../lib/kob-model/src/complex' }
             ],
             shim: {
-                'davis': {
-                    deps: ['jquery'],
-                    exports: 'Davis'
-                },
+                'flatiron/director': { exports: 'Router' },
                 'showdown': {
                     exports: 'Showdown'
                 },

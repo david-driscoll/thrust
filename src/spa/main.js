@@ -3,17 +3,19 @@ define([
     'thrust',
     'thrust/util',
     'thrust/log',
-    'davis',
-    'jquery',
-    'domReady'
+    'has',
+    'flatiron/director',
+    'domReady',
+    'thrust/instance'
 ],
-function (require, Thrust, util, log, Davis, jQuery, domReady)
+function (require, Thrust, util, log, has, Router, domReady, instance)
 {
     var each       = util.each,
         isString   = util.isString,
         isArray    = util.isArray,
         isFunction = util.isFunction,
         isObject   = util.isObject,
+        isRegExp   = util.isRegExp,
         extend     = util.extend,
         once       = util.once,
         when       = util.when,
@@ -22,10 +24,30 @@ function (require, Thrust, util, log, Davis, jQuery, domReady)
         pluck      = util.pluck,
         map        = util.map,
         defer      = util.defer,
+        reduce     = util.reduce,
         memoize    = util.memoize,
         toArray    = util.toArray,
+        format     = util.format,
         START      = 'start';
 
+
+    var extractParams = function (route)
+    {
+        var params = [],
+            index = route.indexOf(':'),
+            slashIndex;
+        while (index > -1)
+        {
+            slashIndex = route.indexOf('/', index);
+            if (slashIndex === -1)
+                slashIndex = route.length;
+            params.push(route.substring(index, slashIndex - index + 1));
+            route = route.substring(slashIndex);
+            index = route.indexOf(':');
+        }
+
+        return params;
+    };
     /**
 
     @for thrust.spa
@@ -35,250 +57,184 @@ function (require, Thrust, util, log, Davis, jQuery, domReady)
     @param {String} instanceName The thrust instance name
     @param {thrust.mediatorMediator} mediator The thrust instance mediator
     **/
-    var SinglePageApp = function (config, /* $ref : name */ instanceName, mediator)
+    var SinglePageApp = function (config, instanceName, mediator)
     {
-        // Need to build a shim for the jQuery methods Davis needs.
-        if (!Davis.$) Davis.$ = jQuery;
-
         var that = this;
-        that.baseUrl = config.url.path + '/';
+        that.baseUrl = config.url.path;
 
         config = config.spa;
 
-        that.thrustInstanceName = instanceName;
-        that.router = new Davis.App();
-        that.router.configure(function (config)
-        {
-            config.generateRequestOnPageLoad = true;
-        });
+        that.fileExtension = config.fileExtension;
 
-        that.loadRoutes(config.routes);
-        
+        var routes = that.configureRoutes(config.routes),
+            params = config.params;
+
         var eventFactory = memoize(function (event)
         {
             return function ()
             {
+                has('DEBUG') && log.debug(format('Firing spa "{0}" with [{1}]', event, toArray(arguments).join(',')));
                 mediator.fire.async.apply(mediator, [event].concat(toArray(arguments)));
             };
         });
 
-        // Forward events
-        // Technically we should wrap certian parts of the events, to offer a common api that won't shift.
-        /**
-        The `thrust/spa/start` event is wrapped by thrust, and fired through Davis.js.
+        var router = that.router = new Router(routes)
+            .configure({
+                recurse: false,
+                strict: false,
+                async: false,
+                html5history: true,
+                notfound: eventFactory('thrust/spa/route/notfound'),
+                before: eventFactory('thrust/spa/route/before'),
+                on: eventFactory('thrust/spa/route/run'),
+                after: eventFactory('thrust/spa/route/after'),
+            });
 
+        each(params, function (x, i)
+        {
+            router.param(i, x);
+        });
 
-        NOTE: Marked as private because this event exposes underlying Davis arguments, and may
-        be changed in the future.
-
-        @event thrust/spa/start
-        @private
-        **/
-        that.router.bind('start', eventFactory('thrust/spa/start'));
-        /**
-        The `thrust/spa/route/lookup` event is wrapped by thrust, and fired through Davis.js.
-
-
-        NOTE: Marked as private because this event exposes underlying Davis arguments, and may
-        be changed in the future.
-
-        @event thrust/spa/route/lookup
-        @private
-        **/
-        that.router.bind('lookupRoute', eventFactory('thrust/spa/route/lookup'));
-        /**
-        The `thrust/spa/route/run` event is wrapped by thrust, and fired through Davis.js.
-
-
-        NOTE: Marked as private because this event exposes underlying Davis arguments, and may
-        be changed in the future.
-
-        @event thrust/spa/route/run
-        @private
-        **/
-        that.router.bind('runRoute', eventFactory('thrust/spa/route/run'));
-        /**
-        The `thrust/spa/route/run` event is wrapped by thrust, and fired through Davis.js.
-
-
-        NOTE: Marked as private because this event exposes underlying Davis arguments, and may
-        be changed in the future.
-
-        @event thrust/spa/route/notfound
-        @private
-        **/
-        that.router.bind('routeNotFound', eventFactory('thrust/spa/route/notfound'));
-        /**
-        The `thrust/spa/request/halt` event is wrapped by thrust, and fired through Davis.js.
-
-
-        NOTE: Marked as private because this event exposes underlying Davis arguments, and may
-        be changed in the future.
-
-        @event thrust/spa/request/halt
-        @private
-        **/
-        that.router.bind('requestHalted', eventFactory('thrust/spa/request/halt'));
-        /**
-        The `thrust/spa/unsupported` event is wrapped by thrust, and fired through Davis.js.
-
-            
-        NOTE: Marked as private because this event exposes underlying Davis arguments, and may
-        be changed in the future.
-
-        @event thrust/spa/unsupported
-        @private
-        **/
-        that.router.bind('unsupported', eventFactory('thrust/spa/unsupported'));
-    };
-
-    SinglePageApp.prototype = {
         /**
         Start the single page app router.
 
         @method start
         **/
-        start: function ()
+        that.start = function ()
+        {
+            that.thrust = instance.getInstance(instanceName);
+            that.router.init();
+            mediator.fire.async('thrust/spa/start');
+        };
+
+        that.navigate = that.navigate.bind(that);
+    };
+
+    SinglePageApp.prototype = {
+        /**
+        Hands the navigate method off to the module, so any module can trigger a navigation event.
+
+        @for thrust.spa.SinglePageApp
+        @method createFacade
+        @param {thrust.Thrust} thrust The thrust instance
+        @param {thrust.Module} module The module to create the facade for
+        @param {Object} facades The facades already added for this module.
+        **/
+        createFacade: function (thrust, module, facades)
         {
             var that = this;
-            that.router.start();
+            if (module.navigate) throw new Error('"navigate" is a reserved property');
+
+            // Already pre bound, so we only pass around 1 function per instance.
+            module.navigate = that.navigate;
         },
         /**
-        Loads routes into the spa instance
+        Navigates to the given url.
 
-        Routes can be in 3 forms
+        @method navigate
+        @param {String} location The location to navigate to.
+        **/
+        navigate: function(location)
+        {
+            var that = this;
+            var url = util.fixupUrl(location, that.baseUrl);
+            that.router.setRoute(url);
+        },
+        /**
+        Configures the route object for the spa instance
+
+        Routes can be in 4 forms
 
             {
                 '/path/to/:foo': 'path/to/module',
                 '/path/to/:bar': ['path/to/module1', 'path/to/module2'],
                 '/path/to/:fb': { path: 'path/to/module', args: ['args', 'to', 'hand off to start'] }
-                '/path/to/:foo/:bar': function(){  custom handler }
+                '/path/to/:foo/:bar': function(foo, bar){  custom handler }
             }
 
-        @method loadRoutes
+        @method configureRoutes
         @param {Object} routes Object of routes.
         **/
-        loadRoutes: function (routes)
+        configureRoutes: function (routes)
         {
-            var that = this;
+            var that = this, configuredRoutes = {};
             each(routes, function (value, route)
             {
-                var realRoute = util.fixupUrl(that.baseUrl + route);
+                var realRoute = util.fixupUrl(route, that.baseUrl);
                 if (isFunction(value))
                 {
-                    that.router.get(realRoute, value);
-                    // Run custom function in davis.
+                    configuredRoutes[realRoute] = value;
                 }
-                /*else if (isArray(value))
+                else if (isArray(value))
                 {
-                    var routeResult = map(value, that.__processRoute);
-
-                    that.router.get(realRoute, function (req)
+                    var modules = [], methods = [];
+                    for (var i = 0, iLen = value.length; i < iLen; i++)
                     {
-                        invoke(routeResult, 'cb', req);
-                    });
+                        var v = value[v];
+                        if (isString(v) || isObject(v))
+                            modules.push(v);
+                        else if (isFunction(v))
+                            methods.push(v);
+                    }
 
-                    when.all(pluck(routeResult, 'promise'))
-                        .then(bind(that.startModules, that, map(value, function(x)
-                        {
-                            return isObject(x) && x.args || [];
-                        })));
-                }*/
-                else
+                    var moduleCallback = that.__moduleStartCallback(route, modules);
+                    methods.push(moduleCallback);
+                    configuredRoutes[realRoute] = methods;
+                }
+                else if (isString(value))
                 {
-                    var routeResult = that.__processRoute(value);
-
-                    that.router.get(realRoute, routeResult);
-                    //routeResult.promise.then(bind(that.startModules, that, value.args || []));
+                    var moduleCallback = that.__moduleStartCallback(route, value);
+                    configuredRoutes[realRoute] = moduleCallback;
                 }
             });
+
+            return configuredRoutes;
         },
         /**
-        Process each route node depending if it is an object or string.
 
-        @method __processRoute
+        @method __moduleStartCallback
         @private
-        @param {Object|String} value The module or module + args to process.
+        @param {String | Array | Object} modules String to start a single module, Array to start many modules, Object to start a module with specific arguments.
         **/
-        __processRoute: function(value)
+        __moduleStartCallback: function(route, modules)
         {
-            var that = this,
-                args = value.args || [];
+            var args = [], params = extractParams(route),
+                that = this,
+                fileExtension = that.fileExtension;
 
-            if (isObject(value))
+            if (isObject(modules))
             {
-                return that.routeGetModuleFactory(value.path, args);
+                args = modules.args || args;
+                modules = modules.path;
             }
-            else if (isString(value))
+
+            if (isString(modules))
             {
-                return that.routeGetModuleFactory(value, args);
+                modules = [modules];
             }
-        },
-        /**
-        Creates a method that is handed off to the router
-        When the route invokes that module, it will asyncronously load the given module, and return a promise for the result.
 
-        @method routeGetModuleFactory
-        @param {String} modulePath The path to the module
-        @param {Function} themMethod The method that is called, after the function is resolved.
-        @returns {Promise} The promise for when the module gets loaded.
-        **/
-        routeGetModuleFactory: function (modulePath, args)
-        {
-            var that = this;
-
-            return function (req)
+            return function ()
             {
-                var mp;
-                if (modulePath.indexOf(':') > -1)
-                {
-                    mp = util.reduce(req.params, function (memo, param, i) { return memo.replace(':' + i, param.toLowerCase()); }, modulePath);
-                    if (mp.lastIndexOf('.') > -1)
-                        mp = mp.substring(0, mp.lastIndexOf('.'));
-                }
-                that.startModules(args, mp);
-            };
-        },
-        /**
-        Starts the given modules, if only one module is passed in, it will start that individually.
-
-        @method startModules
-        @param {Array of Object} args to pass onto thrust's start method.
-        @param {Array of Module|Module} modules The modules to start
-        **/
-        startModules: function (args, module)
-        {
-            var that = this;
-
-            if (!that.thrust)
-                that.thrust = Thrust.getInstance(that.thrustInstanceName);
-
-            if (isArray(module))
-            {
-                each(module, function (x)
-                {
-                    defer(function ()
+                var ar = toArray(arguments),
+                    thrust = that.thrust,
+                    mappedModules = map(modules, function (modulePath)
                     {
-                        var promise = that.thrust.start.apply(that.thrust, [x].concat(args));
-                        if (!that.thrust.started)
-                            promise.then(function ()
-                            {
-                                that.thrust.ready(x);
-                            });
+                        return reduce(ar, function (memo, arg, i)
+                        {
+                            return memo.replace(params[i],
+                                arg.toLowerCase());
+                        }, modulePath).replace(fileExtension, '');
                     });
-                });
-            }
-            else
-            {
-                var promise = that.thrust.start.apply(that.thrust, [module].concat(args));
+
+                var promise = thrust.start.apply(thrust, [mappedModules].concat(args));
                 if (!that.thrust.started)
                     promise.then(function ()
                     {
-                        that.thrust.ready(module);
+                        thrust.ready(mappedModules, args);
                     });
 
-                that.startingModulePromise = [promise];
-            }
+                that.startingModulePromise = promise;
+            };
         }
     };
 

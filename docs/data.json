@@ -176,6 +176,15 @@
             },
             "namespaces": {}
         },
+        "src\\spa\\convention\\spalink.js": {
+            "name": "src\\spa\\convention\\spalink.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "thrust.dom.convention": 1
+            },
+            "namespaces": {}
+        },
         "src\\spa\\convention\\start.js": {
             "name": "src\\spa\\convention\\start.js",
             "modules": {
@@ -621,7 +630,7 @@
             },
             "namespaces": {},
             "file": "src\\spa\\main.js",
-            "line": 29
+            "line": 51
         },
         "thrust.spa.convention": {
             "name": "thrust.spa.convention",
@@ -979,7 +988,7 @@
             "module": "thrust.data",
             "namespace": "",
             "file": "src\\data\\main.js",
-            "line": 70,
+            "line": 71,
             "description": "The master data plugin.\n\n\nEnables data transport, using jQuery for thrust.",
             "params": [
                 {
@@ -1186,7 +1195,7 @@
             "module": "thrust.spa",
             "namespace": "",
             "file": "src\\spa\\main.js",
-            "line": 29,
+            "line": 51,
             "is_constructor": 1,
             "params": [
                 {
@@ -1815,7 +1824,7 @@
         },
         {
             "file": "src\\data\\main.js",
-            "line": 114,
+            "line": 117,
             "description": "Creates a DataFacade for the given module.",
             "itemtype": "method",
             "name": "createFacade",
@@ -1845,7 +1854,7 @@
         },
         {
             "file": "src\\data\\main.js",
-            "line": 143,
+            "line": 146,
             "description": "Does a GET to the server, for the given data and settings.",
             "itemtype": "method",
             "name": "getData",
@@ -1887,7 +1896,7 @@
         },
         {
             "file": "src\\data\\main.js",
-            "line": 155,
+            "line": 158,
             "description": "Does a GET to the server, for the given data and settings.",
             "itemtype": "method",
             "name": "getData",
@@ -1929,7 +1938,7 @@
         },
         {
             "file": "src\\data\\main.js",
-            "line": 172,
+            "line": 175,
             "description": "Does a POST to the server, for the given data and settings.",
             "itemtype": "method",
             "name": "postData",
@@ -1971,7 +1980,7 @@
         },
         {
             "file": "src\\data\\main.js",
-            "line": 184,
+            "line": 187,
             "description": "Does a POST to the server, for the given data and settings.",
             "itemtype": "method",
             "name": "postData",
@@ -2013,7 +2022,7 @@
         },
         {
             "file": "src\\data\\main.js",
-            "line": 201,
+            "line": 204,
             "description": "Does a GET to the server, using the given settings.\n\nData must be passed in using settings: { data: {} } otherwise use getData.",
             "itemtype": "method",
             "name": "get",
@@ -2050,7 +2059,7 @@
         },
         {
             "file": "src\\data\\main.js",
-            "line": 214,
+            "line": 217,
             "description": "Does a GET to the server, using the given settings.\n\nData must be passed in using settings: { data: {} } otherwise use getData.",
             "itemtype": "method",
             "name": "get",
@@ -2087,7 +2096,7 @@
         },
         {
             "file": "src\\data\\main.js",
-            "line": 242,
+            "line": 245,
             "description": "Does a POST to the server, using the given settings.\n\nData must be passed in using settings: { data: {} } otherwise use postData.",
             "itemtype": "method",
             "name": "post",
@@ -2124,7 +2133,7 @@
         },
         {
             "file": "src\\data\\main.js",
-            "line": 255,
+            "line": 258,
             "description": "Does a POST to the server, using the given settings.\n\nData must be passed in using settings: { data: {} } otherwise use postData.",
             "itemtype": "method",
             "name": "post",
@@ -2161,7 +2170,7 @@
         },
         {
             "file": "src\\data\\main.js",
-            "line": 283,
+            "line": 286,
             "description": "Does an ajax call to the given url, with the given settings.",
             "itemtype": "method",
             "name": "ajax",
@@ -2198,7 +2207,7 @@
         },
         {
             "file": "src\\data\\main.js",
-            "line": 294,
+            "line": 297,
             "description": "Does an ajax call to the given url, with the given settings.",
             "itemtype": "method",
             "name": "ajax",
@@ -2434,7 +2443,7 @@
         },
         {
             "file": "src\\mediator\\main.js",
-            "line": 119,
+            "line": 120,
             "description": "Creates a new MediatorFacade, based on the given module.",
             "itemtype": "method",
             "name": "createFacade",
@@ -2457,6 +2466,16 @@
             ],
             "class": "thrust.mediator.Mediator",
             "module": "thrust.mediator"
+        },
+        {
+            "file": "src\\spa\\convention\\spalink.js",
+            "line": 24,
+            "description": "# __thrust/dom__ Convention - Single Page App Link\n\nRequires thrust/dom",
+            "itemtype": "property",
+            "name": "spa;ink",
+            "class": "thrust.dom.convention",
+            "module": "thrust.dom",
+            "submodule": "thrust.dom.convention"
         },
         {
             "file": "src\\spa\\convention\\start.js",
@@ -2496,7 +2515,19 @@
         },
         {
             "file": "src\\spa\\config.js",
-            "line": 35,
+            "line": 36,
+            "description": "Defines the value of custom parameters.\nYou can also define custom parameters to be a regular expression, and then use them in your routes",
+            "itemtype": "property",
+            "name": "params",
+            "readonly": "",
+            "type": "{Object}",
+            "class": "thrust.spa.config",
+            "module": "thrust.spa",
+            "submodule": "thrust.spa.config"
+        },
+        {
+            "file": "src\\spa\\config.js",
+            "line": 45,
             "description": "The predfined routes to be used by spa.",
             "itemtype": "property",
             "name": "routes",
@@ -2507,74 +2538,20 @@
             "submodule": "thrust.spa.config"
         },
         {
-            "file": "src\\spa\\main.js",
-            "line": 67,
-            "description": "The `thrust/spa/start` event is wrapped by thrust, and fired through Davis.js.\n\n\nNOTE: Marked as private because this event exposes underlying Davis arguments, and may\nbe changed in the future.",
-            "itemtype": "event",
-            "name": "thrust/spa/start",
-            "access": "private",
-            "tagname": "",
-            "class": "thrust.spa.SinglePageApp",
-            "module": "thrust.spa"
+            "file": "src\\spa\\config.js",
+            "line": 53,
+            "description": "The file exstenion that should be removed when resolving routes and starting modules.",
+            "itemtype": "property",
+            "name": "fileExtension",
+            "readonly": "",
+            "type": "{String}",
+            "class": "thrust.spa.config",
+            "module": "thrust.spa",
+            "submodule": "thrust.spa.config"
         },
         {
             "file": "src\\spa\\main.js",
-            "line": 78,
-            "description": "The `thrust/spa/route/lookup` event is wrapped by thrust, and fired through Davis.js.\n\n\nNOTE: Marked as private because this event exposes underlying Davis arguments, and may\nbe changed in the future.",
-            "itemtype": "event",
-            "name": "thrust/spa/route/lookup",
-            "access": "private",
-            "tagname": "",
-            "class": "thrust.spa.SinglePageApp",
-            "module": "thrust.spa"
-        },
-        {
-            "file": "src\\spa\\main.js",
-            "line": 89,
-            "description": "The `thrust/spa/route/run` event is wrapped by thrust, and fired through Davis.js.\n\n\nNOTE: Marked as private because this event exposes underlying Davis arguments, and may\nbe changed in the future.",
-            "itemtype": "event",
-            "name": "thrust/spa/route/run",
-            "access": "private",
-            "tagname": "",
-            "class": "thrust.spa.SinglePageApp",
-            "module": "thrust.spa"
-        },
-        {
-            "file": "src\\spa\\main.js",
-            "line": 100,
-            "description": "The `thrust/spa/route/run` event is wrapped by thrust, and fired through Davis.js.\n\n\nNOTE: Marked as private because this event exposes underlying Davis arguments, and may\nbe changed in the future.",
-            "itemtype": "event",
-            "name": "thrust/spa/route/notfound",
-            "access": "private",
-            "tagname": "",
-            "class": "thrust.spa.SinglePageApp",
-            "module": "thrust.spa"
-        },
-        {
-            "file": "src\\spa\\main.js",
-            "line": 111,
-            "description": "The `thrust/spa/request/halt` event is wrapped by thrust, and fired through Davis.js.\n\n\nNOTE: Marked as private because this event exposes underlying Davis arguments, and may\nbe changed in the future.",
-            "itemtype": "event",
-            "name": "thrust/spa/request/halt",
-            "access": "private",
-            "tagname": "",
-            "class": "thrust.spa.SinglePageApp",
-            "module": "thrust.spa"
-        },
-        {
-            "file": "src\\spa\\main.js",
-            "line": 122,
-            "description": "The `thrust/spa/unsupported` event is wrapped by thrust, and fired through Davis.js.\n\n    \nNOTE: Marked as private because this event exposes underlying Davis arguments, and may\nbe changed in the future.",
-            "itemtype": "event",
-            "name": "thrust/spa/unsupported",
-            "access": "private",
-            "tagname": "",
-            "class": "thrust.spa.SinglePageApp",
-            "module": "thrust.spa"
-        },
-        {
-            "file": "src\\spa\\main.js",
-            "line": 136,
+            "line": 98,
             "description": "Start the single page app router.",
             "itemtype": "method",
             "name": "start",
@@ -2583,10 +2560,10 @@
         },
         {
             "file": "src\\spa\\main.js",
-            "line": 146,
-            "description": "Loads routes into the spa instance\n\nRoutes can be in 3 forms\n\n    {\n        '/path/to/:foo': 'path/to/module',\n        '/path/to/:bar': ['path/to/module1', 'path/to/module2'],\n        '/path/to/:fb': { path: 'path/to/module', args: ['args', 'to', 'hand off to start'] }\n        '/path/to/:foo/:bar': function(){  custom handler }\n    }",
+            "line": 112,
+            "description": "Configures the route object for the spa instance\n\nRoutes can be in 4 forms\n\n    {\n        '/path/to/:foo': 'path/to/module',\n        '/path/to/:bar': ['path/to/module1', 'path/to/module2'],\n        '/path/to/:fb': { path: 'path/to/module', args: ['args', 'to', 'hand off to start'] }\n        '/path/to/:foo/:bar': function(foo, bar){  custom handler }\n    }",
             "itemtype": "method",
-            "name": "loadRoutes",
+            "name": "configureRoutes",
             "params": [
                 {
                     "name": "routes",
@@ -2599,63 +2576,16 @@
         },
         {
             "file": "src\\spa\\main.js",
-            "line": 196,
-            "description": "Process each route node depending if it is an object or string.",
+            "line": 162,
             "itemtype": "method",
-            "name": "__processRoute",
+            "name": "__moduleStartCallback",
             "access": "private",
             "tagname": "",
             "params": [
                 {
-                    "name": "value",
-                    "description": "The module or module + args to process.",
-                    "type": "Object|String"
-                }
-            ],
-            "class": "thrust.spa.SinglePageApp",
-            "module": "thrust.spa"
-        },
-        {
-            "file": "src\\spa\\main.js",
-            "line": 217,
-            "description": "Creates a method that is handed off to the router\nWhen the route invokes that module, it will asyncronously load the given module, and return a promise for the result.",
-            "itemtype": "method",
-            "name": "routeGetModuleFactory",
-            "params": [
-                {
-                    "name": "modulePath",
-                    "description": "The path to the module",
-                    "type": "String"
-                },
-                {
-                    "name": "themMethod",
-                    "description": "The method that is called, after the function is resolved.",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "The promise for when the module gets loaded.",
-                "type": "Promise"
-            },
-            "class": "thrust.spa.SinglePageApp",
-            "module": "thrust.spa"
-        },
-        {
-            "file": "src\\spa\\main.js",
-            "line": 242,
-            "description": "Starts the given modules, if only one module is passed in, it will start that individually.",
-            "itemtype": "method",
-            "name": "startModules",
-            "params": [
-                {
-                    "name": "args",
-                    "description": "to pass onto thrust's start method.",
-                    "type": "Array of Object"
-                },
-                {
                     "name": "modules",
-                    "description": "The modules to start",
-                    "type": "Array of Module|Module"
+                    "description": "String to start a single module, Array to start many modules, Object to start a module with specific arguments.",
+                    "type": "String | Array | Object"
                 }
             ],
             "class": "thrust.spa.SinglePageApp",
@@ -5551,7 +5481,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 455,
+            "line": 459,
             "description": "Begins the ready process for a module.  This runs as part of the\n    orbit phase, during ready, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "ready",
@@ -5572,7 +5502,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 491,
+            "line": 495,
             "description": "Begins the stop process for a module.  This runs as part of the\n    deorbit phase, during stop, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "stop",
@@ -5593,7 +5523,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 515,
+            "line": 519,
             "description": "Begins the destroy process for a module.  This runs as part of the\n    slashdown phase, during destroy, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "destroy",
@@ -5614,7 +5544,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 552,
+            "line": 556,
             "description": "Injects a preconstructed module into the thrust instance.",
             "itemtype": "method",
             "name": "__injectModule",
@@ -5632,7 +5562,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 563,
+            "line": 567,
             "description": "Creates a module from the given definition object, with the given name.",
             "itemtype": "method",
             "name": "createModule",
@@ -5653,7 +5583,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 583,
+            "line": 587,
             "description": "Initalizes a new Thrust instance based on the given settings.",
             "itemtype": "method",
             "name": "launch",
@@ -5670,7 +5600,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 625,
+            "line": 629,
             "description": "Gets a named thrust stance if it exists.",
             "itemtype": "method",
             "name": "getInstance",
@@ -5691,7 +5621,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 638,
+            "line": 642,
             "description": "Fetchs a named thrust stance if it exists.\nThis loads asyncronously, as the instance may not be loaded",
             "itemtype": "method",
             "name": "__fetchInstance",
@@ -5714,7 +5644,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 653,
+            "line": 657,
             "description": "Creates a new module and hands it off to the given instance, if that instance exists.",
             "itemtype": "method",
             "name": "createModule",
@@ -5741,7 +5671,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 673,
+            "line": 677,
             "description": "AMD API\nload\n\nHandles fetching of a current thurst instance, by expected name.\nAdding the : character requests a specific plugin.\nthrust!global = Thrust instance\nthrust!global:dom = The thrust dom plugin instance",
             "itemtype": "method",
             "name": "load",

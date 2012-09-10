@@ -1,4 +1,4 @@
-/*! Thrust JS Framework - v0.1.0 - 2012-09-03
+/*! Thrust JS Framework - v0.1.0 - 2012-09-09
 * thrust-home
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 
@@ -575,6 +575,7 @@ function (jQuery, util, log, config, tConfig, eventFactory, ResponseQueue, event
         this.initEvents();
 
         this.defaults = parent.defaults;
+        this.appPath = parent.appPath;
     });
     util.extend(DataFacade.fn, events);
     //#endregion
@@ -620,6 +621,8 @@ function (jQuery, util, log, config, tConfig, eventFactory, ResponseQueue, event
             __mediator_data_fired__: true,
             silent: false
         };
+
+        this.appPath = config.url.path + '/';
     };
 
     var DataMethods = {
@@ -831,7 +834,7 @@ function (jQuery, util, log, config, tConfig, eventFactory, ResponseQueue, event
                 url = settings.url;
 
 
-            url = util.fixupUrl(url);
+            url = util.fixupUrl(url, that.appPath);
 
             var module = (that.module && that.module.module);
             if (settings.silent)

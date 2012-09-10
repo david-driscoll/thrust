@@ -22,10 +22,9 @@
             'sizzle': '../../lib/sizzle/sizzle',
             'jquery': '../../lib/jquery/jquery-1.8.1',
             'doT': '../../lib/doT/doT',
-            'davis': '../../lib/davis/davis',
+            'flatiron/director': '../../lib/director/build/director-1.1.6',
             'has': '../../lib/has/has',
             'backbone': '../../lib/backbone/backbone',
-            'module/index/main': 'module/index',
             'showdown': '../../lib/showdown/compressed/showdown'
             //#endregion
         },
@@ -43,10 +42,7 @@
             { name: 'kob-model/complex', location: '../../lib/kob-model/src/complex' }
         ],
         shim: {
-            'davis': {
-                deps: ['jquery'],
-                exports: 'Davis'
-            },
+            'flatiron/director': { exports: 'Router' },
             'showdown': {
                 exports: 'Showdown'
             },
@@ -73,8 +69,11 @@
                     'ready',
                 ],
                 spa: {
+                    params: {
+                        'path': /(.*?)\.html/i
+                    },
                     routes: {
-                        '/': 'module/home',
+                        '/': 'module/index',
                         '/:path': 'module/:path'
                     }
                 }
@@ -85,9 +84,9 @@
     var load = requirejs.load;
     requirejs.load = function (context, moduleId, url)
     {
-        if (moduleId.indexOf('module/') === 0 && moduleId.indexOf('/') === 6 && moduleId.indexOf('index') !== moduleId.length - 5 && moduleId.indexOf('alert') !== moduleId.length - 5)
+        if (moduleId.indexOf('module/') === 0 && moduleId.indexOf('/') === 6 && moduleId.indexOf('alert') !== moduleId.length - 5)
         {
-            url = url.replace(moduleId, moduleId + '/main');
+            url = url.replace(moduleId, moduleId.replace('.html', '') + '/main');
         }
         return load(context, moduleId, url);
     };

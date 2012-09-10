@@ -303,12 +303,13 @@ function (util, log, Events, facade, has)
     @constructor
     @param {String} name The name of the mediator.
     **&#x2F;
-    var Mediator = function (name)
+    var Mediator = function (name, config)
     {
         if (!(this instanceof Mediator))
             return new Mediator(name);
 
-        var that = this;
+        var that = this,
+            appPath = config &amp;&amp; config.url &amp;&amp; config.url.path;
         that.name = name;
         has(&#x27;DEBUG&#x27;) &amp;&amp; log.debug(format(&#x27;Mediator: Creating new Mediator {0}&#x27;, name));
 
@@ -323,7 +324,7 @@ function (util, log, Events, facade, has)
         {
             if (path === window.location.pathname)
                 window.location.reload();
-            window.location = util.fixupUrl(path);
+            window.location = util.fixupUrl(path, appPath);
         });
     };
 

@@ -71,9 +71,8 @@
     <Content Include="example\spa\menu\side.js" />
     <Content Include="example\spa\module\about\main.js" />
     <Content Include="example\spa\module\contact\main.js" />
-    <Content Include="example\spa\module\index.js" />
     <Content Include="example\spa\module\alert.js" />
-    <Content Include="example\spa\module\home\main.js" />
+    <Content Include="example\spa\module\index\main.js" />
     <Content Include="example\spa\ready.js" />
     <Content Include="example\spa\require.settings.js" />
     <Content Include="example\spa\side.menu.js" />
@@ -83,6 +82,7 @@
     <Content Include="src\data\config.js" />
     <Content Include="src\data\event.types.js" />
     <Content Include="src\dom\config.js" />
+    <Content Include="src\spa\convention\spalink.js" />
     <Content Include="src\mediator\config.js" />
     <Content Include="src\mediator\convention\dependant.modules.js" />
     <Content Include="src\mediator\convention\autostart.js" />
@@ -189,7 +189,7 @@
     <Content Include="example\spa\menu\side.dot.tmpl" />
     <Content Include="example\spa\menu\side.json" />
     <Content Include="example\spa\menu\side.header.dot.tmpl" />
-    <Content Include="example\spa\module\home\alert.json" />
+    <Content Include="example\spa\module\index\alert.json" />
     <Content Include="example\spa\module\about\alert.json" />
     <Content Include="example\spa\module\contact\alert.json" />
     <Content Include="example\spa\module\contact\content.dot.tmpl">
@@ -198,7 +198,7 @@
     <Content Include="example\spa\module\about\content.dot.tmpl">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="example\spa\module\home\content.dot.tmpl">
+    <None Include="example\spa\module\index\content.dot.tmpl">
       <SubType>Designer</SubType>
     </None>
     <Content Include="test\test.runner.js" />

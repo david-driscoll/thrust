@@ -1,24 +1,716 @@
-/*! Thrust JS Framework - v0.1.0 - 2012-09-03
+/*! Thrust JS Framework - v0.1.0 - 2012-09-09
 * thrust-home
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 
+
+
+
+//
+// Generated on Sat Sep 01 2012 21:49:06 GMT+0530 (IST) by Nodejitsu, Inc (Using Codesurgeon).
+// Version 1.1.6
+//
+
+(function (exports) {
+
+
+/*
+ * browser.js: Browser specific functionality for director.
+ *
+ * (C) 2011, Nodejitsu Inc.
+ * MIT LICENSE
+ *
+ */
+
+if (!Array.prototype.filter) {
+  Array.prototype.filter = function(filter, that) {
+    var other = [], v;
+    for (var i = 0, n = this.length; i < n; i++) {
+      if (i in this && filter.call(that, v = this[i], i, this)) {
+        other.push(v);
+      }
+    }
+    return other;
+  };
+}
+
+if (!Array.isArray){
+  Array.isArray = function(obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
+  };
+}
+
+var dloc = document.location;
+
+function dlocHashEmpty() {
+  // Non-IE browsers return '' when the address bar shows '#'; Director's logic
+  // assumes both mean empty.
+  return dloc.hash === '' || dloc.hash === '#';
+}
+
+var listener = {
+  mode: 'modern',
+  hash: dloc.hash,
+  history: false,
+
+  check: function () {
+    var h = dloc.hash;
+    if (h != this.hash) {
+      this.hash = h;
+      this.onHashChanged();
+    }
+  },
+
+  fire: function () {
+    if (this.mode === 'modern') {
+      this.history === true ? window.onpopstate() : window.onhashchange();
+    }
+    else {
+      this.onHashChanged();
+    }
+  },
+
+  init: function (fn, history) {
+    var self = this;
+    this.history = history;
+
+    if (!Router.listeners) {
+      Router.listeners = [];
+    }
+
+    function onchange(onChangeEvent) {
+      for (var i = 0, l = Router.listeners.length; i < l; i++) {
+        Router.listeners[i](onChangeEvent);
+      }
+    }
+
+    //note IE8 is being counted as 'modern' because it has the hashchange event
+    if ('onhashchange' in window && (document.documentMode === undefined
+      || document.documentMode > 7)) {
+      // At least for now HTML5 history is available for 'modern' browsers only
+      if (this.history === true) {
+        // There is an old bug in Chrome that causes onpopstate to fire even
+        // upon initial page load. Since the handler is run manually in init(),
+        // this would cause Chrome to run it twise. Currently the only
+        // workaround seems to be to set the handler after the initial page load
+        // http://code.google.com/p/chromium/issues/detail?id=63040
+        setTimeout(function() {
+          window.onpopstate = onchange;
+        }, 500);
+      }
+      else {
+        window.onhashchange = onchange;
+      }
+      this.mode = 'modern';
+    }
+    else {
+      //
+      // IE support, based on a concept by Erik Arvidson ...
+      //
+      var frame = document.createElement('iframe');
+      frame.id = 'state-frame';
+      frame.style.display = 'none';
+      document.body.appendChild(frame);
+      this.writeFrame('');
+
+      if ('onpropertychange' in document && 'attachEvent' in document) {
+        document.attachEvent('onpropertychange', function () {
+          if (event.propertyName === 'location') {
+            self.check();
+          }
+        });
+      }
+
+      window.setInterval(function () { self.check(); }, 50);
+
+      this.onHashChanged = onchange;
+      this.mode = 'legacy';
+    }
+
+    Router.listeners.push(fn);
+
+    return this.mode;
+  },
+
+  destroy: function (fn) {
+    if (!Router || !Router.listeners) {
+      return;
+    }
+
+    var listeners = Router.listeners;
+
+    for (var i = listeners.length - 1; i >= 0; i--) {
+      if (listeners[i] === fn) {
+        listeners.splice(i, 1);
+      }
+    }
+  },
+
+  setHash: function (s) {
+    // Mozilla always adds an entry to the history
+    if (this.mode === 'legacy') {
+      this.writeFrame(s);
+    }
+
+    if (this.history === true) {
+      window.history.pushState({}, document.title, s);
+      // Fire an onpopstate event manually since pushing does not obviously
+      // trigger the pop event.
+      this.fire();
+    } else {
+      dloc.hash = (s[0] === '/') ? s : '/' + s;
+    }
+    return this;
+  },
+
+  writeFrame: function (s) {
+    // IE support...
+    var f = document.getElementById('state-frame');
+    var d = f.contentDocument || f.contentWindow.document;
+    d.open();
+    d.write("<script>_hash = '" + s + "'; onload = parent.listener.syncHash;<script>");
+    d.close();
+  },
+
+  syncHash: function () {
+    // IE support...
+    var s = this._hash;
+    if (s != dloc.hash) {
+      dloc.hash = s;
+    }
+    return this;
+  },
+
+  onHashChanged: function () {}
+};
+
+var Router = exports.Router = function (routes) {
+  if (!(this instanceof Router)) return new Router(routes);
+
+  this.params   = {};
+  this.routes   = {};
+  this.methods  = ['on', 'once', 'after', 'before'];
+  this._methods = {};
+
+  this._insert = this.insert;
+  this.insert = this.insertEx;
+
+  this.historySupport = (window.history != null ? window.history.pushState : null) != null
+
+  this.configure();
+  this.mount(routes || {});
+};
+
+Router.prototype.init = function (r) {
+  var self = this;
+  this.handler = function(onChangeEvent) {
+    var newURL = onChangeEvent && onChangeEvent.newURL || window.location.hash;
+    var url = self.history === true ? self.getPath() : newURL.replace(/.*#/, '');
+    self.dispatch('on', url);
+  };
+
+  listener.init(this.handler, this.history);
+
+  if (this.history === false) {
+    if (dlocHashEmpty() && r) {
+      dloc.hash = r;
+    } else if (!dlocHashEmpty()) {
+      self.dispatch('on', dloc.hash.replace(/^#/, ''));
+    }
+  }
+  else {
+    var routeTo = dlocHashEmpty() && r ? r : !dlocHashEmpty() ? dloc.hash.replace(/^#/, '') : null;
+    if (routeTo) {
+      window.history.replaceState({}, document.title, routeTo);
+    }
+
+    // Router has been initialized, but due to the chrome bug it will not
+    // yet actually route HTML5 history state changes. Thus, decide if should route.
+    if (routeTo || this.run_in_init === true) {
+      this.handler();
+    }
+  }
+
+  return this;
+};
+
+Router.prototype.explode = function () {
+  var v = this.history === true ? this.getPath() : dloc.hash;
+  if (v[1] === '/') { v=v.slice(1) }
+  return v.slice(1, v.length).split("/");
+};
+
+Router.prototype.setRoute = function (i, v, val) {
+  var url = this.explode();
+
+  if (typeof i === 'number' && typeof v === 'string') {
+    url[i] = v;
+  }
+  else if (typeof val === 'string') {
+    url.splice(i, v, s);
+  }
+  else {
+    url = [i];
+  }
+
+  listener.setHash(url.join('/'));
+  return url;
+};
+
+//
+// ### function insertEx(method, path, route, parent)
+// #### @method {string} Method to insert the specific `route`.
+// #### @path {Array} Parsed path to insert the `route` at.
+// #### @route {Array|function} Route handlers to insert.
+// #### @parent {Object} **Optional** Parent "routes" to insert into.
+// insert a callback that will only occur once per the matched route.
+//
+Router.prototype.insertEx = function(method, path, route, parent) {
+  if (method === "once") {
+    method = "on";
+    route = function(route) {
+      var once = false;
+      return function() {
+        if (once) return;
+        once = true;
+        return route.apply(this, arguments);
+      };
+    }(route);
+  }
+  return this._insert(method, path, route, parent);
+};
+
+Router.prototype.getRoute = function (v) {
+  var ret = v;
+
+  if (typeof v === "number") {
+    ret = this.explode()[v];
+  }
+  else if (typeof v === "string"){
+    var h = this.explode();
+    ret = h.indexOf(v);
+  }
+  else {
+    ret = this.explode();
+  }
+
+  return ret;
+};
+
+Router.prototype.destroy = function () {
+  listener.destroy(this.handler);
+  return this;
+};
+
+Router.prototype.getPath = function () {
+  var path = window.location.pathname;
+  if (path.substr(0, 1) !== '/') {
+    path = '/' + path;
+  }
+  return path;
+};
+function _every(arr, iterator) {
+  for (var i = 0; i < arr.length; i += 1) {
+    if (iterator(arr[i], i, arr) === false) {
+      return;
+    }
+  }
+}
+
+function _flatten(arr) {
+  var flat = [];
+  for (var i = 0, n = arr.length; i < n; i++) {
+    flat = flat.concat(arr[i]);
+  }
+  return flat;
+}
+
+function _asyncEverySeries(arr, iterator, callback) {
+  if (!arr.length) {
+    return callback();
+  }
+  var completed = 0;
+  (function iterate() {
+    iterator(arr[completed], function(err) {
+      if (err || err === false) {
+        callback(err);
+        callback = function() {};
+      } else {
+        completed += 1;
+        if (completed === arr.length) {
+          callback();
+        } else {
+          iterate();
+        }
+      }
+    });
+  })();
+}
+
+function paramifyString(str, params, mod) {
+  mod = str;
+  for (var param in params) {
+    if (params.hasOwnProperty(param)) {
+      mod = params[param](str);
+      if (mod !== str) {
+        break;
+      }
+    }
+  }
+  return mod === str ? "([._a-zA-Z0-9-]+)" : mod;
+}
+
+function regifyString(str, params) {
+  if (~str.indexOf("*")) {
+    str = str.replace(/\*/g, "([_.()!\\ %@&a-zA-Z0-9-]+)");
+  }
+  var captures = str.match(/:([^\/]+)/ig), length;
+  if (captures) {
+    length = captures.length;
+    for (var i = 0; i < length; i++) {
+      str = str.replace(captures[i], paramifyString(captures[i], params));
+    }
+  }
+  return str;
+}
+
+Router.prototype.configure = function(options) {
+  options = options || {};
+  for (var i = 0; i < this.methods.length; i++) {
+    this._methods[this.methods[i]] = true;
+  }
+  this.recurse = options.recurse || this.recurse || false;
+  this.async = options.async || false;
+  this.delimiter = options.delimiter || "/";
+  this.strict = typeof options.strict === "undefined" ? true : options.strict;
+  this.notfound = options.notfound;
+  this.resource = options.resource;
+  this.history = options.html5history && this.historySupport || false;
+  this.run_in_init = this.history === true && options.run_handler_in_init !== false;
+  this.every = {
+    after: options.after || null,
+    before: options.before || null,
+    on: options.on || null
+  };
+  return this;
+};
+
+Router.prototype.param = function(token, matcher) {
+  if (token[0] !== ":") {
+    token = ":" + token;
+  }
+  var compiled = new RegExp(token, "g");
+  this.params[token] = function(str) {
+    return str.replace(compiled, matcher.source || matcher);
+  };
+};
+
+Router.prototype.on = Router.prototype.route = function(method, path, route) {
+  var self = this;
+  if (!route && typeof path == "function") {
+    route = path;
+    path = method;
+    method = "on";
+  }
+  if (Array.isArray(path)) {
+    return path.forEach(function(p) {
+      self.on(method, p, route);
+    });
+  }
+  if (path.source) {
+    path = path.source.replace(/\\\//ig, "/");
+  }
+  if (Array.isArray(method)) {
+    return method.forEach(function(m) {
+      self.on(m.toLowerCase(), path, route);
+    });
+  }
+  this.insert(method, this.scope.concat(path.split(new RegExp(this.delimiter))), route);
+};
+
+Router.prototype.dispatch = function(method, path, callback) {
+  var self = this, fns = this.traverse(method, path, this.routes, ""), invoked = this._invoked, after;
+  this._invoked = true;
+  if (!fns || fns.length === 0) {
+    this.last = [];
+    if (typeof this.notfound === "function") {
+      this.invoke([ this.notfound ], {
+        method: method,
+        path: path
+      }, callback);
+    }
+    return false;
+  }
+  if (this.recurse === "forward") {
+    fns = fns.reverse();
+  }
+  function updateAndInvoke() {
+    self.last = fns.after;
+    self.invoke(self.runlist(fns), self, callback);
+  }
+  after = this.every && this.every.after ? [ this.every.after ].concat(this.last) : [ this.last ];
+  if (after && after.length > 0 && invoked) {
+    if (this.async) {
+      this.invoke(after, this, updateAndInvoke);
+    } else {
+      this.invoke(after, this);
+      updateAndInvoke();
+    }
+    return true;
+  }
+  updateAndInvoke();
+  return true;
+};
+
+Router.prototype.invoke = function(fns, thisArg, callback) {
+  var self = this;
+  if (this.async) {
+    _asyncEverySeries(fns, function apply(fn, next) {
+      if (Array.isArray(fn)) {
+        return _asyncEverySeries(fn, apply, next);
+      } else if (typeof fn == "function") {
+        fn.apply(thisArg, fns.captures.concat(next));
+      }
+    }, function() {
+      if (callback) {
+        callback.apply(thisArg, arguments);
+      }
+    });
+  } else {
+    _every(fns, function apply(fn) {
+      if (Array.isArray(fn)) {
+        return _every(fn, apply);
+      } else if (typeof fn === "function") {
+        return fn.apply(thisArg, fns.captures || []);
+      } else if (typeof fn === "string" && self.resource) {
+        self.resource[fn].apply(thisArg, fns.captures || []);
+      }
+    });
+  }
+};
+
+Router.prototype.traverse = function(method, path, routes, regexp, filter) {
+  var fns = [], current, exact, match, next, that;
+  function filterRoutes(routes) {
+    if (!filter) {
+      return routes;
+    }
+    function deepCopy(source) {
+      var result = [];
+      for (var i = 0; i < source.length; i++) {
+        result[i] = Array.isArray(source[i]) ? deepCopy(source[i]) : source[i];
+      }
+      return result;
+    }
+    function applyFilter(fns) {
+      for (var i = fns.length - 1; i >= 0; i--) {
+        if (Array.isArray(fns[i])) {
+          applyFilter(fns[i]);
+          if (fns[i].length === 0) {
+            fns.splice(i, 1);
+          }
+        } else {
+          if (!filter(fns[i])) {
+            fns.splice(i, 1);
+          }
+        }
+      }
+    }
+    var newRoutes = deepCopy(routes);
+    newRoutes.matched = routes.matched;
+    newRoutes.captures = routes.captures;
+    newRoutes.after = routes.after.filter(filter);
+    applyFilter(newRoutes);
+    return newRoutes;
+  }
+  if (path === this.delimiter && routes[method]) {
+    next = [ [ routes.before, routes[method] ].filter(Boolean) ];
+    next.after = [ routes.after ].filter(Boolean);
+    next.matched = true;
+    next.captures = [];
+    return filterRoutes(next);
+  }
+  for (var r in routes) {
+    if (routes.hasOwnProperty(r) && (!this._methods[r] || this._methods[r] && typeof routes[r] === "object" && !Array.isArray(routes[r]))) {
+      current = exact = regexp + this.delimiter + r;
+      if (!this.strict) {
+        exact += "[" + this.delimiter + "]?";
+      }
+      match = path.match(new RegExp("^" + exact));
+      if (!match) {
+        continue;
+      }
+      if (match[0] && match[0] == path && routes[r][method]) {
+        next = [ [ routes[r].before, routes[r][method] ].filter(Boolean) ];
+        next.after = [ routes[r].after ].filter(Boolean);
+        next.matched = true;
+        next.captures = match.slice(1);
+        if (this.recurse && routes === this.routes) {
+          next.push([ routes.before, routes.on ].filter(Boolean));
+          next.after = next.after.concat([ routes.after ].filter(Boolean));
+        }
+        return filterRoutes(next);
+      }
+      next = this.traverse(method, path, routes[r], current);
+      if (next.matched) {
+        if (next.length > 0) {
+          fns = fns.concat(next);
+        }
+        if (this.recurse) {
+          fns.push([ routes[r].before, routes[r].on ].filter(Boolean));
+          next.after = next.after.concat([ routes[r].after ].filter(Boolean));
+          if (routes === this.routes) {
+            fns.push([ routes["before"], routes["on"] ].filter(Boolean));
+            next.after = next.after.concat([ routes["after"] ].filter(Boolean));
+          }
+        }
+        fns.matched = true;
+        fns.captures = next.captures;
+        fns.after = next.after;
+        return filterRoutes(fns);
+      }
+    }
+  }
+  return false;
+};
+
+Router.prototype.insert = function(method, path, route, parent) {
+  var methodType, parentType, isArray, nested, part;
+  path = path.filter(function(p) {
+    return p && p.length > 0;
+  });
+  parent = parent || this.routes;
+  part = path.shift();
+  if (/\:|\*/.test(part) && !/\\d|\\w/.test(part)) {
+    part = regifyString(part, this.params);
+  }
+  if (path.length > 0) {
+    parent[part] = parent[part] || {};
+    return this.insert(method, path, route, parent[part]);
+  }
+  if (!part && !path.length && parent === this.routes) {
+    methodType = typeof parent[method];
+    switch (methodType) {
+     case "function":
+      parent[method] = [ parent[method], route ];
+      return;
+     case "object":
+      parent[method].push(route);
+      return;
+     case "undefined":
+      parent[method] = route;
+      return;
+    }
+    return;
+  }
+  parentType = typeof parent[part];
+  isArray = Array.isArray(parent[part]);
+  if (parent[part] && !isArray && parentType == "object") {
+    methodType = typeof parent[part][method];
+    switch (methodType) {
+     case "function":
+      parent[part][method] = [ parent[part][method], route ];
+      return;
+     case "object":
+      parent[part][method].push(route);
+      return;
+     case "undefined":
+      parent[part][method] = route;
+      return;
+    }
+  } else if (parentType == "undefined") {
+    nested = {};
+    nested[method] = route;
+    parent[part] = nested;
+    return;
+  }
+  throw new Error("Invalid route context: " + parentType);
+};
+
+
+
+Router.prototype.extend = function(methods) {
+  var self = this, len = methods.length, i;
+  function extend(method) {
+    self._methods[method] = true;
+    self[method] = function() {
+      var extra = arguments.length === 1 ? [ method, "" ] : [ method ];
+      self.on.apply(self, extra.concat(Array.prototype.slice.call(arguments)));
+    };
+  }
+  for (i = 0; i < len; i++) {
+    extend(methods[i]);
+  }
+};
+
+Router.prototype.runlist = function(fns) {
+  var runlist = this.every && this.every.before ? [ this.every.before ].concat(_flatten(fns)) : _flatten(fns);
+  if (this.every && this.every.on) {
+    runlist.push(this.every.on);
+  }
+  runlist.captures = fns.captures;
+  runlist.source = fns.source;
+  return runlist;
+};
+
+Router.prototype.mount = function(routes, path) {
+  if (!routes || typeof routes !== "object" || Array.isArray(routes)) {
+    return;
+  }
+  var self = this;
+  path = path || [];
+  if (!Array.isArray(path)) {
+    path = path.split(self.delimiter);
+  }
+  function insertOrMount(route, local) {
+    var rename = route, parts = route.split(self.delimiter), routeType = typeof routes[route], isRoute = parts[0] === "" || !self._methods[parts[0]], event = isRoute ? "on" : rename;
+    if (isRoute) {
+      rename = rename.slice((rename.match(new RegExp(self.delimiter)) || [ "" ])[0].length);
+      parts.shift();
+    }
+    if (isRoute && routeType === "object" && !Array.isArray(routes[route])) {
+      local = local.concat(parts);
+      self.mount(routes[route], local);
+      return;
+    }
+    if (isRoute) {
+      local = local.concat(rename.split(self.delimiter));
+    }
+    self.insert(event, local, routes[route]);
+  }
+  for (var route in routes) {
+    if (routes.hasOwnProperty(route)) {
+      insertOrMount(route, path.slice(0));
+    }
+  }
+};
+
+
+
+}(typeof exports === "object" ? exports : window));
+define("flatiron/director", (function (global) {
+    return function () {
+        return global.Router;
+    }
+}(this)));
 
 define('thrust/spa/main',[
     'require',
     'thrust',
     'thrust/util',
     'thrust/log',
-    'davis',
-    'jquery',
-    'domReady'
+    'has',
+    'flatiron/director',
+    'domReady',
+    'thrust/instance'
 ],
-function (require, Thrust, util, log, Davis, jQuery, domReady)
+function (require, Thrust, util, log, has, Router, domReady, instance)
 {
     var each       = util.each,
         isString   = util.isString,
         isArray    = util.isArray,
         isFunction = util.isFunction,
         isObject   = util.isObject,
+        isRegExp   = util.isRegExp,
         extend     = util.extend,
         once       = util.once,
         when       = util.when,
@@ -27,10 +719,30 @@ function (require, Thrust, util, log, Davis, jQuery, domReady)
         pluck      = util.pluck,
         map        = util.map,
         defer      = util.defer,
+        reduce     = util.reduce,
         memoize    = util.memoize,
         toArray    = util.toArray,
+        format     = util.format,
         START      = 'start';
 
+
+    var extractParams = function (route)
+    {
+        var params = [],
+            index = route.indexOf(':'),
+            slashIndex;
+        while (index > -1)
+        {
+            slashIndex = route.indexOf('/', index);
+            if (slashIndex === -1)
+                slashIndex = route.length;
+            params.push(route.substring(index, slashIndex - index + 1));
+            route = route.substring(slashIndex);
+            index = route.indexOf(':');
+        }
+
+        return params;
+    };
     /**
 
     @for thrust.spa
@@ -40,250 +752,153 @@ function (require, Thrust, util, log, Davis, jQuery, domReady)
     @param {String} instanceName The thrust instance name
     @param {thrust.mediatorMediator} mediator The thrust instance mediator
     **/
-    var SinglePageApp = function (config, /* $ref : name */ instanceName, mediator)
+    var SinglePageApp = function (config, instanceName, mediator)
     {
-        // Need to build a shim for the jQuery methods Davis needs.
-        if (!Davis.$) Davis.$ = jQuery;
-
         var that = this;
-        that.baseUrl = config.url.path + '/';
+        that.baseUrl = config.url.path;
 
         config = config.spa;
 
-        that.thrustInstanceName = instanceName;
-        that.router = new Davis.App();
-        that.router.configure(function (config)
-        {
-            config.generateRequestOnPageLoad = true;
-        });
+        that.fileExtension = config.fileExtension;
 
-        that.loadRoutes(config.routes);
-        
+        var routes = that.configureRoutes(config.routes),
+            params = config.params;
+
         var eventFactory = memoize(function (event)
         {
             return function ()
             {
+                has('DEBUG') && log.debug(format('Firing spa "{0}" with [{1}]', event, toArray(arguments).join(',')));
                 mediator.fire.async.apply(mediator, [event].concat(toArray(arguments)));
             };
         });
 
-        // Forward events
-        // Technically we should wrap certian parts of the events, to offer a common api that won't shift.
-        /**
-        The `thrust/spa/start` event is wrapped by thrust, and fired through Davis.js.
+        var router = that.router = new Router(routes)
+            .configure({
+                recurse: false,
+                strict: false,
+                async: false,
+                html5history: true,
+                notfound: eventFactory('thrust/spa/route/notfound'),
+                before: eventFactory('thrust/spa/route/before'),
+                on: eventFactory('thrust/spa/route/run'),
+                after: eventFactory('thrust/spa/route/after'),
+            });
 
+        each(params, function (x, i)
+        {
+            router.param(i, x);
+        });
 
-        NOTE: Marked as private because this event exposes underlying Davis arguments, and may
-        be changed in the future.
-
-        @event thrust/spa/start
-        @private
-        **/
-        that.router.bind('start', eventFactory('thrust/spa/start'));
-        /**
-        The `thrust/spa/route/lookup` event is wrapped by thrust, and fired through Davis.js.
-
-
-        NOTE: Marked as private because this event exposes underlying Davis arguments, and may
-        be changed in the future.
-
-        @event thrust/spa/route/lookup
-        @private
-        **/
-        that.router.bind('lookupRoute', eventFactory('thrust/spa/route/lookup'));
-        /**
-        The `thrust/spa/route/run` event is wrapped by thrust, and fired through Davis.js.
-
-
-        NOTE: Marked as private because this event exposes underlying Davis arguments, and may
-        be changed in the future.
-
-        @event thrust/spa/route/run
-        @private
-        **/
-        that.router.bind('runRoute', eventFactory('thrust/spa/route/run'));
-        /**
-        The `thrust/spa/route/run` event is wrapped by thrust, and fired through Davis.js.
-
-
-        NOTE: Marked as private because this event exposes underlying Davis arguments, and may
-        be changed in the future.
-
-        @event thrust/spa/route/notfound
-        @private
-        **/
-        that.router.bind('routeNotFound', eventFactory('thrust/spa/route/notfound'));
-        /**
-        The `thrust/spa/request/halt` event is wrapped by thrust, and fired through Davis.js.
-
-
-        NOTE: Marked as private because this event exposes underlying Davis arguments, and may
-        be changed in the future.
-
-        @event thrust/spa/request/halt
-        @private
-        **/
-        that.router.bind('requestHalted', eventFactory('thrust/spa/request/halt'));
-        /**
-        The `thrust/spa/unsupported` event is wrapped by thrust, and fired through Davis.js.
-
-            
-        NOTE: Marked as private because this event exposes underlying Davis arguments, and may
-        be changed in the future.
-
-        @event thrust/spa/unsupported
-        @private
-        **/
-        that.router.bind('unsupported', eventFactory('thrust/spa/unsupported'));
-    };
-
-    SinglePageApp.prototype = {
         /**
         Start the single page app router.
 
         @method start
         **/
-        start: function ()
+        that.start = function ()
         {
-            var that = this;
-            that.router.start();
-        },
-        /**
-        Loads routes into the spa instance
+            that.thrust = instance.getInstance(instanceName);
+            that.router.init();
+            mediator.fire.async('thrust/spa/start');
+        };
+    };
 
-        Routes can be in 3 forms
+    SinglePageApp.prototype = {
+        /**
+        Configures the route object for the spa instance
+
+        Routes can be in 4 forms
 
             {
                 '/path/to/:foo': 'path/to/module',
                 '/path/to/:bar': ['path/to/module1', 'path/to/module2'],
                 '/path/to/:fb': { path: 'path/to/module', args: ['args', 'to', 'hand off to start'] }
-                '/path/to/:foo/:bar': function(){  custom handler }
+                '/path/to/:foo/:bar': function(foo, bar){  custom handler }
             }
 
-        @method loadRoutes
+        @method configureRoutes
         @param {Object} routes Object of routes.
         **/
-        loadRoutes: function (routes)
+        configureRoutes: function (routes)
         {
-            var that = this;
+            var that = this, configuredRoutes = {};
             each(routes, function (value, route)
             {
-                var realRoute = util.fixupUrl(that.baseUrl + route);
+                var realRoute = util.fixupUrl(route, that.baseUrl);
                 if (isFunction(value))
                 {
-                    that.router.get(realRoute, value);
-                    // Run custom function in davis.
+                    configuredRoutes[realRoute] = value;
                 }
-                /*else if (isArray(value))
+                else if (isArray(value))
                 {
-                    var routeResult = map(value, that.__processRoute);
-
-                    that.router.get(realRoute, function (req)
+                    var modules = [], methods = [];
+                    for (var i = 0, iLen = value.length; i < iLen; i++)
                     {
-                        invoke(routeResult, 'cb', req);
-                    });
+                        var v = value[v];
+                        if (isString(v) || isObject(v))
+                            modules.push(v);
+                        else if (isFunction(v))
+                            methods.push(v);
+                    }
 
-                    when.all(pluck(routeResult, 'promise'))
-                        .then(bind(that.startModules, that, map(value, function(x)
-                        {
-                            return isObject(x) && x.args || [];
-                        })));
-                }*/
-                else
+                    var moduleCallback = that.__moduleStartCallback(route, modules);
+                    methods.push(moduleCallback);
+                    configuredRoutes[realRoute] = methods;
+                }
+                else if (isString(value))
                 {
-                    var routeResult = that.__processRoute(value);
-
-                    that.router.get(realRoute, routeResult);
-                    //routeResult.promise.then(bind(that.startModules, that, value.args || []));
+                    var moduleCallback = that.__moduleStartCallback(route, value);
+                    configuredRoutes[realRoute] = moduleCallback;
                 }
             });
+
+            return configuredRoutes;
         },
         /**
-        Process each route node depending if it is an object or string.
 
-        @method __processRoute
+        @method __moduleStartCallback
         @private
-        @param {Object|String} value The module or module + args to process.
+        @param {String | Array | Object} modules String to start a single module, Array to start many modules, Object to start a module with specific arguments.
         **/
-        __processRoute: function(value)
+        __moduleStartCallback: function(route, modules)
         {
-            var that = this,
-                args = value.args || [];
+            var args = [], params = extractParams(route),
+                that = this,
+                fileExtension = that.fileExtension;
 
-            if (isObject(value))
+            if (isObject(modules))
             {
-                return that.routeGetModuleFactory(value.path, args);
+                args = modules.args || args;
+                modules = modules.path;
             }
-            else if (isString(value))
+
+            if (isString(modules))
             {
-                return that.routeGetModuleFactory(value, args);
+                modules = [modules];
             }
-        },
-        /**
-        Creates a method that is handed off to the router
-        When the route invokes that module, it will asyncronously load the given module, and return a promise for the result.
 
-        @method routeGetModuleFactory
-        @param {String} modulePath The path to the module
-        @param {Function} themMethod The method that is called, after the function is resolved.
-        @returns {Promise} The promise for when the module gets loaded.
-        **/
-        routeGetModuleFactory: function (modulePath, args)
-        {
-            var that = this;
-
-            return function (req)
+            return function ()
             {
-                var mp;
-                if (modulePath.indexOf(':') > -1)
-                {
-                    mp = util.reduce(req.params, function (memo, param, i) { return memo.replace(':' + i, param.toLowerCase()); }, modulePath);
-                    if (mp.lastIndexOf('.') > -1)
-                        mp = mp.substring(0, mp.lastIndexOf('.'));
-                }
-                that.startModules(args, mp);
-            };
-        },
-        /**
-        Starts the given modules, if only one module is passed in, it will start that individually.
-
-        @method startModules
-        @param {Array of Object} args to pass onto thrust's start method.
-        @param {Array of Module|Module} modules The modules to start
-        **/
-        startModules: function (args, module)
-        {
-            var that = this;
-
-            if (!that.thrust)
-                that.thrust = Thrust.getInstance(that.thrustInstanceName);
-
-            if (isArray(module))
-            {
-                each(module, function (x)
-                {
-                    defer(function ()
+                var ar = toArray(arguments),
+                    thrust = that.thrust,
+                    mappedModules = map(modules, function (modulePath)
                     {
-                        var promise = that.thrust.start.apply(that.thrust, [x].concat(args));
-                        if (!that.thrust.started)
-                            promise.then(function ()
-                            {
-                                that.thrust.ready(x);
-                            });
+                        return reduce(ar, function (memo, arg, i)
+                        {
+                            return memo.replace(params[i],
+                                arg.toLowerCase());
+                        }, modulePath).replace(fileExtension, '');
                     });
-                });
-            }
-            else
-            {
-                var promise = that.thrust.start.apply(that.thrust, [module].concat(args));
+
+                var promise = thrust.start.apply(thrust, [mappedModules].concat(args));
                 if (!that.thrust.started)
                     promise.then(function ()
                     {
-                        that.thrust.ready(module);
+                        thrust.ready(mappedModules, args);
                     });
 
-                that.startingModulePromise = [promise];
-            }
+                that.startingModulePromise = promise;
+            };
         }
     };
 

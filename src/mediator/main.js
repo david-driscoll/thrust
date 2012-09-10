@@ -91,12 +91,13 @@ function (util, log, Events, facade, has)
     @constructor
     @param {String} name The name of the mediator.
     **/
-    var Mediator = function (name)
+    var Mediator = function (name, config)
     {
         if (!(this instanceof Mediator))
             return new Mediator(name);
 
-        var that = this;
+        var that = this,
+            appPath = config && config.url && config.url.path;
         that.name = name;
         has('DEBUG') && log.debug(format('Mediator: Creating new Mediator {0}', name));
 
@@ -105,13 +106,6 @@ function (util, log, Events, facade, has)
         that.subscribe('thrust/ready', function ()
         {
             has('DEBUG') && log.info('Mediator: Ready!');
-        });
-
-        that.subscribe('thrust/navigate', function (path)
-        {
-            if (path === window.location.pathname)
-                window.location.reload();
-            window.location = util.fixupUrl(path);
         });
     };
 

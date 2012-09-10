@@ -30,8 +30,18 @@ define(function (thrustInstance)
         @type {Array}
         **/
         conventions: [
-            'thrust/spa/convention/start'
+            'thrust/spa/convention/start',
+            'thrust/spa/convention/spalink'
         ],
+        /**
+        Defines the value of custom parameters.
+        You can also define custom parameters to be a regular expression, and then use them in your routes
+
+        @property params
+        @readOnly
+        @type {Object}
+        **/
+        params: {},
         /**
         The predfined routes to be used by spa.
 
@@ -39,7 +49,15 @@ define(function (thrustInstance)
         @readOnly
         @type {Object}
         **/
-        routes: {}
+        routes: {},
+        /**
+        The file exstenion that should be removed when resolving routes and starting modules.
+
+        @property fileExtension
+        @readOnly
+        @type {String}
+        **/
+        fileExtension: '.html'
     };
 
     return config;

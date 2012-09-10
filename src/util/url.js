@@ -33,15 +33,16 @@ function (param, module)
         @param {String} url The url to fixup
         @retrusn {String} The fixed url
         **/
-        fixupUrl: function (url)
+        fixupUrl: function (url, urlPath)
         {
             if (url.indexOf('http') === -1)
             {
+                var path = urlPath.lastIndexOf('/') === urlPath.length - 1 ? urlPath.substring(0, -1) : urlPath;
                 if (url.indexOf(urlPath) === -1)
                 {
                     url = urlPath + url;
                 }
-                url = exports.cleanUrl(path + url);
+                url = exports.cleanUrl(url);
             }
             return url;
         }

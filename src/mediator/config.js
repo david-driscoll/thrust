@@ -22,7 +22,7 @@ define(function (thrustInstance)
         @readOnly
         @type {Array}
         **/
-        resolve: ['name'],
+        resolve: ['name', 'cfg'],
         /**
         The set of conventions to load into thrust/mediator.
 

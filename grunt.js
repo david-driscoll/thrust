@@ -5,6 +5,7 @@ module.exports = function (grunt)
     grunt.loadNpmTasks('grunt-bom');
     grunt.loadNpmTasks('grunt-jasmine-task');
     grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-bom');
 
     var extend = require('node.extend');
 
@@ -12,7 +13,6 @@ module.exports = function (grunt)
         //#region lib References
         'require': 'lib/requirejs/require',
         'lodash': 'lib/lodash/lodash',
-        'aop': 'lib/aop/aop',
         //#endregion
         //#region References for RequireJs
         'text': 'lib/text/text',
@@ -20,7 +20,7 @@ module.exports = function (grunt)
         'domReady': 'lib/domReady/domReady',
         'doT': 'lib/doT/doT',
         'jquery': 'lib/jquery/jquery-1.8.1',
-        'davis': 'lib/davis/davis',
+        'flatiron/director': 'lib/director/build/director-1.1.6',
         'has': 'lib/has/has',
         'backbone': 'lib/backbone/backbone',
         'knockout': 'lib/knockout/build/output/knockout-latest.debug',
@@ -73,7 +73,7 @@ module.exports = function (grunt)
     var requireJsSettings = {},
         concatSettings = {},
         minSettings = {},
-        overallInclude = ['when', 'aop'];
+        overallInclude = ['when'];
 
     var buildRequireJsSettings = function (name, fileType, settings)
     {
@@ -103,10 +103,7 @@ module.exports = function (grunt)
             paths: extend(settings.paths || {}, paths),
             packages: (settings.packages || []).concat(packages),
             shim: {
-                'davis': {
-                    deps: ['jquery'],
-                    exports: 'Davis'
-                }
+                'flatiron/director': { exports: 'Router' }
             },
             pragmas: {
                 doExclude: true
@@ -214,7 +211,7 @@ module.exports = function (grunt)
         include: [
             'thrust/spa/convention/start',
         ],
-        exclude: ['davis'].concat(thrustModules),
+        exclude: [].concat(thrustModules),
     });
 
     requireJsSettings['integrated'] = {
@@ -226,10 +223,7 @@ module.exports = function (grunt)
         paths: paths,
         packages: overallPackages,
         shim: {
-            'davis': {
-                deps: ['jquery'],
-                exports: 'Davis'
-            }
+            'flatiron/director': { exports: 'Router' }
         },
         pragmas: {
             doExclude: true
@@ -266,7 +260,7 @@ module.exports = function (grunt)
               '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
               '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
               '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-              ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
+              ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */',
         },
         lint: {
             files: [
@@ -278,6 +272,12 @@ module.exports = function (grunt)
                 'src/dom/**/*.js',
                 'src/template/**/*.js',
                 'src/spa/**/*.js',
+            ]
+        },
+        bom: {
+            files: [
+                'grunt.js',
+                'src/**/*.js',
             ]
         },
         jasmine: {
@@ -310,7 +310,7 @@ module.exports = function (grunt)
         }, minSettings),
         watch: {
             files: '<config:lint.files>',
-            tasks: 'lint jasmine'
+            tasks: 'bom lint jasmine'
         },
         requirejs: requireJsSettings,
         jshint: {
@@ -389,11 +389,11 @@ module.exports = function (grunt)
     });
 
     // Default task.
-    grunt.registerTask('debug', 'lint jasmine thrust_debug thrust_data_debug thrust_dom_debug thrust_template_debug thrust_spa_debug');
+    grunt.registerTask('debug', 'bom lint jasmine thrust_debug thrust_data_debug thrust_dom_debug thrust_template_debug thrust_spa_debug');
 
-    grunt.registerTask('default', 'lint jasmine thrust thrust_data thrust_dom thrust_template thrust_spa concat:all min:all shell:yuidoc');
+    grunt.registerTask('default', 'bom lint jasmine thrust thrust_data thrust_dom thrust_template thrust_spa concat:all min:all shell:yuidoc');
 
-    grunt.registerTask('integrated', 'default requirejs:integrated min:integrated');
+    grunt.registerTask('integrated', 'bom default requirejs:integrated min:integrated');
 
     // min task
     //grunt.registerTask('min', 'requirejs:thrust-util requirejs:thrust-util.min requirejs:thrust-min requirejs:thrust-mediator-min');

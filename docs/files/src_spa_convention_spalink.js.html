@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>thrust.spa.SinglePageApp - Thrust JS Framework</title>
+    <title>src\spa\convention\spalink.js - Thrust JS Framework</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -206,475 +206,64 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>thrust.spa.SinglePageApp Class</h1>
-<div class="box meta">
-    
-
-    
-
-    
-        <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;src_spa_main.js.html#l51"><code>src\spa\main.js:51</code></a>
-        </div>
-    
-
-    
-        
-            Module: <a href="../modules/thrust.spa.html">thrust.spa</a>
-        
-    
-
-    
-</div>
-
-
-
-<div class="box intro">
-    
-</div>
-
-
-    <div class="constructor">
-        <h2>Constructor</h2>
-        <div id="method_thrust.spa.SinglePageApp" class="method item">
-    <h3 class="name"><code>thrust.spa.SinglePageApp</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>config</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>instanceName</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>mediator</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;src_spa_main.js.html#l51"><code>src\spa\main.js:51</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">config</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The thrust instance configuration</p>
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">instanceName</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The thrust instance name</p>
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">mediator</code>
-                        <span class="type">thrust.mediatorMediator</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The thrust instance mediator</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-    </div>
-
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-        
-            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-        
-        
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-                <div class="index-section methods">
-                    <h3>Methods</h3>
-
-                    <ul class="index-list methods">
-                        
-                            <li class="index-item method private">
-                                <a href="#method___moduleStartCallback">__moduleStartCallback</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_configureRoutes">configureRoutes</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_start">start</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-
-            
-        </div>
-
-        
-            <div id="methods" class="api-class-tabpanel">
-                <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method___moduleStartCallback" class="method item private">
-    <h3 class="name"><code>__moduleStartCallback</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>modules</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;src_spa_main.js.html#l162"><code>src\spa\main.js:162</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">modules</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>String to start a single module, Array to start many modules, Object to start a module with specific arguments.</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_configureRoutes" class="method item">
-    <h3 class="name"><code>configureRoutes</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>routes</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;src_spa_main.js.html#l112"><code>src\spa\main.js:112</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Configures the route object for the spa instance</p>
-
-<p>Routes can be in 4 forms</p>
-
-<pre class="code"><code class="prettyprint">{
-    '/path/to/:foo': 'path/to/module',
-    '/path/to/:bar': ['path/to/module1', 'path/to/module2'],
-    '/path/to/:fb': { path: 'path/to/module', args: ['args', 'to', 'hand off to start'] }
-    '/path/to/:foo/:bar': function(foo, bar){  custom handler }
-}
-</code></pre>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">routes</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Object of routes.</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_start" class="method item">
-    <h3 class="name"><code>start</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;src_spa_main.js.html#l98"><code>src\spa\main.js:98</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Start the single page app router.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-
-        
-    </div>
+                        <h1 class="file-heading">File: src\spa\convention\spalink.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+define([&#x27;thrust&#x2F;convention&#x27;],
+function (Convention)
+{
+    var parseFullHref = function (href)
+    {
+        var baseUrl = location.pathname.substring(0, location.pathname.lastIndexOf(&#x27;&#x2F;&#x27;));
+
+        if (href.indexOf(&#x27;&#x2F;&#x27;) != -1)
+        {
+            href = href.substring(href.lastIndexOf(&#x27;&#x2F;&#x27;));
+        }
+        else
+        {
+            href = &#x27;&#x2F;&#x27; + href;
+        }
+
+        return baseUrl + href;
+    };
+    &#x2F;**
+    @module thrust.dom
+    @submodule thrust.dom.convention
+    **&#x2F;
+
+    &#x2F;**
+    * # __thrust&#x2F;dom__ Convention - Single Page App Link
+    *
+    * Requires thrust&#x2F;dom
+    *
+    * @for thrust.dom.convention
+    * @property spa;ink
+    **&#x2F;
+    return new Convention({
+        orbit: function (thrust)
+        {
+            var config = thrust.config,
+                spa = thrust.spa,
+                $ = thrust.dom.$;
+
+            $().on(&#x27;click&#x27;, &#x27;a&#x27;, function (e)
+            {
+                var link = parseFullHref(this.getAttribute(&#x27;href&#x27;));
+                if (link.indexOf(config.url.path) === 0)
+                {
+                    spa.router.setRoute(link);
+
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    return false;
+                }
+            });
+        }
+    });
+});
+    </pre>
 </div>
 
                     </div>

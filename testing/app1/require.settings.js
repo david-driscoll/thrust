@@ -20,7 +20,7 @@
             'sizzle': '../../lib/sizzle/sizzle',
             'jquery': '../../lib/jquery/jquery-1.8.1',
             'doT': '../../lib/doT/doT',
-            'davis': '../../lib/davis/davis',
+            'flatiron/director': '../../lib/director/build/director-1.1.6',
             'has': '../../lib/has/has',
             'backbone': '../../lib/backbone/backbone'
             //#endregion
@@ -39,10 +39,7 @@
             { name: 'kob-model/complex', location: '../../lib/kob-model/src/complex' }
 ],
         shim: {
-            'davis': {
-                deps: ['jquery'],
-                exports: 'Davis'
-            }
+            'flatiron/director': { exports: 'Router' }
         },
         config: {
             'thrust': {

@@ -8,17 +8,17 @@ function (util)
         dependantModules: ['module/alert'],
         container: 'main',
         context: '#main-content',
-        templates: ['module/home/content'],
+        templates: ['module/index/content'],
         init: function ()
         {
-            dataPromise = this.data.get('module/home/alert.json');
+            dataPromise = this.data.get('module/index/alert.json');
         },
         destroy: util.noop,
         ready: function()
         {
             var that = this;
 
-            this.$().html(this.templates['module/home/content']());
+            this.$().html(this.templates['module/index/content']());
 
             return dataPromise.then(wapply(function (data)
             {

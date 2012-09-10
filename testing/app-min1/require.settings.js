@@ -18,7 +18,7 @@
             'jquery': '../../lib/jquery/jquery-1.8.1',
             'has': '../../lib/has/has',
             'knockout': '../../lib/knockout/build/output/knockout-latest.debug',
-            'davis': '../../lib/davis/davis',
+            'flatiron/director': '../../lib/director/build/director-1.1.6',
             //#endregion
         },
         packages: [

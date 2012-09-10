@@ -86,7 +86,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
                     {
                         that.createModule(moduleDefn.name || name, moduleDefn);
 
-                        var result = runRunnerFactory(method).apply(that, [name].concat(args));
+                        var result = runRunnerFactory(method).apply(that, [moduleDefn.name].concat(args));
                         when.chain(when.all(util.flatten(result)), loaderDefer);
                     }, function ()
                     {
@@ -116,7 +116,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
                 }
             });
 
-            return results;
+            return results.length && results;
         };
     });
 
@@ -436,18 +436,22 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             when.all(util.flatten(items)).then(function ()
             {
                 var results = [];
-                results.push(runRunnerFactory(method).apply(that, args));
+                var result = runRunnerFactory(method).apply(that, args);
+                //if (result)
+                //{
+                    results.push(result);
 
-                var resultsDefer = when.all(util.flatten(results));
-                if (that.started)
-                {
-                    var runReady = function () { when.chain(that.ready.apply(that, args), startDefer); };
-                    resultsDefer.then(runReady);
-                }
-                else
-                {
-                    when.chain(resultsDefer, startDefer);
-                }
+                    var resultsDefer = when.all(util.flatten(results));
+                    if (that.started)
+                    {
+                        var runReady = function () { when.chain(that.ready.apply(that, args), startDefer); };
+                        resultsDefer.then(runReady);
+                    }
+                    else
+                    {
+                        when.chain(resultsDefer, startDefer);
+                    }
+                //}
             });
 
             return startDefer.promise;

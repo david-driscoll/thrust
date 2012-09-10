@@ -63,6 +63,7 @@ function (jQuery, util, log, config, tConfig, eventFactory, ResponseQueue, event
         this.initEvents();
 
         this.defaults = parent.defaults;
+        this.appPath = parent.appPath;
     });
     util.extend(DataFacade.fn, events);
     //#endregion
@@ -108,6 +109,8 @@ function (jQuery, util, log, config, tConfig, eventFactory, ResponseQueue, event
             __mediator_data_fired__: true,
             silent: false
         };
+
+        this.appPath = config.url.path + '/';
     };
 
     var DataMethods = {
@@ -319,7 +322,7 @@ function (jQuery, util, log, config, tConfig, eventFactory, ResponseQueue, event
                 url = settings.url;
 
 
-            url = util.fixupUrl(url);
+            url = util.fixupUrl(url, that.appPath);
 
             var module = (that.module && that.module.module);
             if (settings.silent)

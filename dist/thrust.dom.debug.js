@@ -1,4 +1,4 @@
-/*! Thrust JS Framework - v0.1.0 - 2012-09-03
+/*! Thrust JS Framework - v0.1.0 - 2012-09-09
 * thrust-home
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 
@@ -79,9 +79,10 @@ define('thrust/dom/main',[
     './jquery.interface',
     'thrust/facade',
     'thrust/events',
-    'has'
+    'has',
+    'thrust/instance'
 ],
-function (jQuery, util, log, jQueryInterface, facade, events, has)
+function (jQuery, util, log, jQueryInterface, facade, events, has, instance)
 {
     
     //#region Variable declaration
@@ -91,22 +92,24 @@ function (jQuery, util, log, jQueryInterface, facade, events, has)
         bind                     = util.bind,
         proxy                    = util.proxy,
         hasOwn                   = Object.prototype.hasOwnProperty,
-        isObject                 = util.isSimpleObject,
+        isObject                 = util.isObject,
         slice                    = Array.prototype.slice,
         when                     = util.when,
         initalizeContext         = jQueryInterface.initalizeContext,
         updatejQueryInternals    = jQueryInterface.updatejQueryInternals,
         updateThrustDomPrototype = jQueryInterface.updateThrustDomPrototype,
+        GLOBAL                   = '.global',
         Dom, DomMethods, DomPrototype;
     //#endregion
 
-    //#region DataFacade
+    //#region DomFacade
     var DomFacade = facade.createFacade(function (module, parent, context, fake)
     {
         this.name = parent.name;
         //this.module = module;
         //this.parent = parent;
         this.__conventions = parent.__conventions;
+        this.namespace = parent.namespace;
         //this._callbacks = parent._callbacks;
         //this.initEvents();
 
@@ -210,31 +213,31 @@ function (jQuery, util, log, jQueryInterface, facade, events, has)
     DomPrototype = {
         changeContext: function (selector)
         {
-            has('DEBUG') && log.info(format('Dom[{0}]: Changing Dom context', this.namespace));
+            has('DEBUG') && log.info(format('Dom[{0}]: Changing Dom context', this.namespace || GLOBAL));
             updatejQueryInternals.call(this, selector);
             return this;
         },
         on: function (events)
         {
-            has('DEBUG') && log.debug(format('Dom[{0}]: Binding events...', this.namespace));
+            has('DEBUG') && log.debug(format('Dom[{0}]: Binding events...', this.namespace || GLOBAL));
             var args = slice.call(arguments);
-            args[0] = normalizeEvents(events, this.namespace);
+            args[0] = normalizeEvents(events, this.namespace || GLOBAL);
             this._context.on.apply(this._context, args);
             return this;
         },
         one: function (events)
         {
-            has('DEBUG') && log.debug(format('Dom[{0}]: Binding one events...', this.namespace));
+            has('DEBUG') && log.debug(format('Dom[{0}]: Binding one events...', this.namespace || GLOBAL));
             var args = slice.call(arguments);
-            args[0] = normalizeEvents(events, this.namespace);
+            args[0] = normalizeEvents(events, this.namespace || GLOBAL);
             this._context.one.apply(this._context, args);
             return this;
         },
         off: function (events)
         {
-            has('DEBUG') && log.debug(format('Dom[{0}]: Unbinding events...', this.namespace));
+            has('DEBUG') && log.debug(format('Dom[{0}]: Unbinding events...', this.namespace || GLOBAL));
             var args = slice.call(arguments);
-            args[0] = normalizeEvents(events, this.namespace);
+            args[0] = normalizeEvents(events, this.namespace || GLOBAL);
             this._context.on.apply(this._context, args);
             return this;
         }
@@ -261,6 +264,15 @@ function (jQuery, util, log, jQueryInterface, facade, events, has)
         this._callbacks = this.mediator._callbacks;
         this.initEvents();
         this.name = name;
+
+        var that = this;
+        instance.fetchInstance(name).then(function (thrust)
+        {
+            var module = {},
+                facade = that.createFacade(thrust, module, {});
+
+            that.query = that.$ = that.find = module.$;
+        });
     };
 
     Dom.prototype = Dom.fn = util.extend({}, DomPrototype,

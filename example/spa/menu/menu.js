@@ -13,7 +13,7 @@ function (KnockoutBackbone, util)
         context: '#main-menu',
         autoStart: true,
         subscriptions: {
-            'thrust/spa/route/run': function (request, route)
+            'thrust/spa/route/run': function (path)
             {
                 var that = this;
                 menuReadyPromise.then(function ()
@@ -21,7 +21,7 @@ function (KnockoutBackbone, util)
                     that.$().$('ul')
                         .children()
                             .removeClass('active')
-                        .find('[href$="' + request.params.path + '"]')
+                        .find('[href$="' + (path || 'index') + '"]')
                         .parent().addClass('active');
                 });
             }

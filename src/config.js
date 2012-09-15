@@ -31,6 +31,7 @@ function (thrustInstance)
         @default true
         **/
         async: true,
+        exposeGlobals: true,
         url: {
             /**
             This property, gives the framework it's default path, if different than '/'
@@ -86,10 +87,10 @@ function (thrustInstance)
         @type {Array}
         **/
         plugins: [
-            'thrust/data',
+            /*'thrust/data',
             'thrust/dom',
             'thrust/template',
-            'thrust/spa',
+            'thrust/spa',*/
         ],
         /**
         The set of modules to preload with the inital wireup of the Thrust instance.

@@ -48,7 +48,6 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
         this.name = name;
         this.modules = {};
         this.failedModules = {};
-        has('DEBUG') && log.info(name);
     };
 
     //#region Runner Factories
@@ -344,7 +343,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             ]))
                 .then(function () { that.mediator.fire('thrust/stop'); })
                 .then(function () { has('DEBUG') && log.debug(format('Thrust instance "{0}" is now stopped.', that.name)); })
-                .then(bind(that.orbit, that));
+                .then(bind(that.splashdown, that));
         },
         /**
             Begins the splashdown as thrust shutdown.
@@ -363,7 +362,8 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
                 util.safeInvoke(that.__conventions, SPLASHDOWN, that)
             ]))
                 .then(function () { that.mediator.fire('thrust/destroy'); })
-                .then(function () { has('DEBUG') && log.debug(format('Thrust instance "{0}" is now being destroyed', that.name)); });
+                .then(function () { has('DEBUG') && log.debug(format('Thrust instance "{0}" is now being destroyed', that.name)); })
+                .then(function () { that.started = false; });
             // do destroy
         },
         //#endregion
@@ -615,11 +615,17 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             thrust.countdown();
 
             return context;
-        })
-        .then(function (context)
-        {
-            window.thrust = context.thrust;
         });
+
+        // We're only going to expose globals if requested.  This is a potential usecase that may be needed for some teams.
+        if (tConfig.exposeGlobals)
+        {
+            if (!window.Thrust) window.Thrust = Thrust;
+            setupDefer.then(function (context)
+            {
+                window[settings.name] = context.thrust;
+            });
+        }
 
         when.chain(igniteSpec.stageOne(settings), setupDefer);
 

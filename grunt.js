@@ -29,9 +29,9 @@ module.exports = function (grunt)
 
     var packages = [
         { name: 'when', main: 'when', location: 'lib/when' },
-        { name: 'kob-model', location: 'lib/kob-model/src' },
+        /*{ name: 'kob-model', location: 'lib/kob-model/src' },
         { name: 'kob-model/simple', location: 'lib/kob-model/src/simple' },
-        { name: 'kob-model/complex', location: 'lib/kob-model/src/complex' }
+        { name: 'kob-model/complex', location: 'lib/kob-model/src/complex' }*/
     ];
 
     var overallPackages = packages.concat([

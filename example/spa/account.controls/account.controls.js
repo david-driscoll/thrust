@@ -1,5 +1,5 @@
-define(['kob-model', 'thrust/util'],
-function(KnockoutBackbone, util)
+define(['knockout', 'thrust/util', 'knockout.mapping'],
+function(ko, util, koMapping)
 {
     var accountDataPromise,
         when = util.when;
@@ -19,7 +19,7 @@ function(KnockoutBackbone, util)
         },
         buildModel: function(data)
         {
-            this.model = new KnockoutBackbone.SimpleKnockoutModel(data);
+            this.viewModel = koMapping.fromJS(data);
         },
         destroy: util.noop,
         start: function ()
@@ -34,7 +34,7 @@ function(KnockoutBackbone, util)
         },
         applyBindings: function ()
         {
-            this.model.getViewModel().applyBindings(this.$()[0]);
+            ko.applyBindings(this.viewModel, this.$()[0]);
         },
         stop: function ()
         {

@@ -16,6 +16,7 @@ function (util, ko)
         setContent: function (text)
         {
             this.viewModel.text(text);
+            this.viewModel.visible(true);
         },
         hideContent: function ()
         {

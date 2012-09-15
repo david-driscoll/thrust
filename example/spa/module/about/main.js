@@ -11,7 +11,7 @@ function (util)
         templates: ['module/about/content'],
         init: function ()
         {
-            dataPromise = this.data.get('module/about/alert.json');
+            //dataPromise = this.data.get('module/about/alert.json');
         },
         destroy: util.noop,
         ready: function()
@@ -20,10 +20,7 @@ function (util)
 
             this.$().html(this.templates['module/about/content']());
 
-            return dataPromise.then(wapply(function (data)
-            {
-                that.mediator.fire('module/alert/content', data.text);
-            }));
+            that.mediator.fire('module/alert/content/hide');
         }
     };
 });

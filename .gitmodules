@@ -43,3 +43,6 @@
 [submodule "lib/director"]
 	path = lib/director
 	url = git://github.com/flatiron/director.git
+[submodule "lib/knockout.mapping"]
+	path = lib/knockout.mapping
+	url = git://github.com/SteveSanderson/knockout.mapping.git

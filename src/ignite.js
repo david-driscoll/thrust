@@ -1,5 +1,5 @@
 define(['require', 'thrust/config', 'thrust/util', 'module'],
-function(require, config, util, module)
+function (require, config, util, module)
 {
     var slice = Array.prototype.slice,
         isArray = util.isArray,
@@ -14,21 +14,31 @@ function(require, config, util, module)
         pluck = util.pluck,
         isObject = util.isObject,
 
-        reconcileArrays = function (from, to)
+        reconcileArrays = function (config, settings, to)
         {
-            each(from, function (x, i)
+            var keys = util.keys(config);
+            if (settings)
             {
+                keys = util.union(util.keys(settings), keys);
+            }
+            else
+            {
+                settings = {};
+            }
+            each(keys, function (i)
+            {
+                var x = settings[i] || config[i];
                 if (isArray(x))
                 {
-                    to[i] = toArray(to[i]);
+                    to[i] = toArray(settings[i] || to[i]);
                 }
                 else if (isObject(x))
                 {
-                    reconcileArrays(x, to[i]);
+                    reconcileArrays(x, null, to[i]);
                 }
             });
         },
-        stageOneComplete = false;
+        stageOneComplete = {};
 
     /**
     Contructs a wire spec for thrust to launch from.
@@ -36,24 +46,26 @@ function(require, config, util, module)
     @module thrust
     **/
     return {
-         /**
-        Merges a all the plugins configurations, with the default config, and then finally with
-        any customized config from requirejs
+        /**
+       Merges a all the plugins configurations, with the default config, and then finally with
+       any customized config from requirejs
 
-        @method stageOne
-        @param {Object} settings The settints to pass onto the thrust instance being created.
-        **/
+       @method stageOne
+       @param {Object} settings The settints to pass onto the thrust instance being created.
+       **/
         stageOne: function (settings)
         {
             var that = this;
 
-            if (stageOneComplete)
+            if (stageOneComplete[settings.name])
             {
                 return that.stateTwo(settings);
             }
-            
+
             var plugins = ['thrust/mediator'].concat(settings.plugins || module.config().plugins || config.plugins || []),
                 defer = when.defer();
+
+            settings.plugins = plugins;
 
             require(plugins.map(function (x) { return x + '/config'; }), function ()
             {
@@ -68,7 +80,7 @@ function(require, config, util, module)
 
                 when.chain(that.stateTwo(settings), defer);
             });
-            stageOneComplete = true;
+            stageOneComplete[settings.name] = true;
 
             return defer;
         },
@@ -79,17 +91,17 @@ function(require, config, util, module)
         @method stateTwo
         @param {Object} settings The settints to pass onto the thrust instance being created.
         **/
-        stateTwo: function(settings)
+        stateTwo: function (settings)
         {
             /*jshint loopfunc:true*/
             // Get the configuration
             var localConfig = util.deepCopy({}, config, settings),
-                defer       = when.defer();
+                defer = when.defer();
             // Reconicle the arrays so they are properly arrays
-            reconcileArrays(config, localConfig);
+            reconcileArrays(config, settings, localConfig);
 
             // Mediator is a required plugin, include all the others in addition to it.
-            var plugins = ['thrust/mediator'].concat(localConfig.plugins || []),
+            var plugins = localConfig.plugins,
                 // The modules to load
                 modulesToLoad = [],
                 // The module configuration object
@@ -127,12 +139,12 @@ function(require, config, util, module)
                 // Check if the plugin has to resolve anything.
                 if (pluginConfig.resolve && pluginConfig.resolve.length > 0 && !all(pluginConfig.resolve,
                     function (x)
-                    {
+                {
                         return any(orderedPlugins, function (z)
-                        {
+                {
                         return x === z || x === z;
-                        });
-                    })
+                });
+                })
                 )
                 {
                     // The modules to load.
@@ -146,7 +158,7 @@ function(require, config, util, module)
                     orderedPlugins.push(name);
                 }
             }
-            
+
             // The modules config
             var modules = localConfig.modules || [];
             // Thrust and thrust/module also need to be loaded.
@@ -167,7 +179,7 @@ function(require, config, util, module)
                 var currentPlugin = null, allConventions = [];
 
                 // Loop through all the modules being loaded
-                for (var i = 0, iLen = modulesToLoad.length - (modules.length + 1); i < iLen; i++)
+                for (var i = 0, iLen = modulesToLoad.length - (modules.length + 1) ; i < iLen; i++)
                 {
                     // Get plugin and configuration
                     var plugin = modulesToLoad[i],
@@ -181,14 +193,14 @@ function(require, config, util, module)
                             // Get the plugin name
                             name = plugin.substring(plugin.lastIndexOf('/') + 1),
                             // Resolve all the required items.
-                            resolveItems = map(mConfig.resolve, function(x) { return spec[x]; });
+                            resolveItems = map(mConfig.resolve, function (x) { return spec[x]; });
 
                         // Instantiate the plugin
                         currentPlugin = spec[name] = util.instantiate(pluginClass, resolveItems);
                         // Setup the conventions
                         currentPlugin.__conventions = [];
                     }
-                    // Load all the conventions
+                        // Load all the conventions
                     else if (currentPlugin)
                     {
                         // Load the convention into the plugin

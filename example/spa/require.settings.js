@@ -14,6 +14,7 @@
             'underscore': '../../lib/lodash/lodash',
             'aop': '../../lib/aop/aop',
             'knockout': '../../lib/knockout/build/output/knockout-latest.debug',
+            'knockout.mapping': '../../lib/knockout.mapping/build/output/knockout.mapping-latest.debug',
             //#endregion
             //#region References for RequireJs
             'text': '../../lib/text/text',
@@ -37,9 +38,9 @@
             { name: 'thrust/template', location: '../../src/template' },
             { name: 'thrust/spa', location: '../../src/spa' },
             { name: 'when', main: 'when', location: '../../lib/when' },
-            { name: 'kob-model', location: '../../lib/kob-model/src' },
+            /*{ name: 'kob-model', location: '../../lib/kob-model/src' },
             { name: 'kob-model/simple', location: '../../lib/kob-model/src/simple' },
-            { name: 'kob-model/complex', location: '../../lib/kob-model/src/complex' }
+            { name: 'kob-model/complex', location: '../../lib/kob-model/src/complex' }*/
         ],
         shim: {
             'flatiron/director': { exports: 'Router' },
@@ -62,6 +63,12 @@
                 data: {
                     startTimeout: 0
                 },
+                plugins: [
+                    'thrust/data',
+                    'thrust/dom',
+                    'thrust/template',
+                    'thrust/spa'
+                ],
                 modules: [
                     'account.controls/account.controls',
                     'menu/menu',

@@ -23,7 +23,7 @@
         },
         packages: [
             { name: 'when', main: 'when', location: '../../lib/when' },
-            { name: 'kob-model', location: '../../lib/kob-model/src' }
+            //{ name: 'kob-model', location: '../../lib/kob-model/src' }
         ],
         config: {
             'thrust': {

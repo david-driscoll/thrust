@@ -3,8 +3,10 @@
     'use strict';
     define.unordered = true;
 
+    var debug = true;
+
     require.config({
-        //baseUrl: '../../',
+        //baseUrl: 'example/spa',
         paths: {
             //#region lib References
             'require': '../../lib/requirejs/require',         // Quick reference for requirejs
@@ -12,6 +14,7 @@
             'underscore': '../../lib/lodash/lodash',
             'aop': '../../lib/aop/aop',
             'knockout': '../../lib/knockout/build/output/knockout-latest.debug',
+            'knockout.mapping': '../../lib/knockout.mapping/build/output/knockout.mapping-latest.debug',
             //#endregion
             //#region References for RequireJs
             'text': '../../lib/text/text',
@@ -22,7 +25,8 @@
             'doT': '../../lib/doT/doT',
             'flatiron/director': '../../lib/director/build/director-1.1.6',
             'has': '../../lib/has/has',
-            'backbone': '../../lib/backbone/backbone'
+            'backbone': '../../lib/backbone/backbone',
+            'showdown': '../../lib/showdown/compressed/showdown'
             //#endregion
         },
         packages: [
@@ -37,20 +41,41 @@
             /*{ name: 'kob-model', location: '../../lib/kob-model/src' },
             { name: 'kob-model/simple', location: '../../lib/kob-model/src/simple' },
             { name: 'kob-model/complex', location: '../../lib/kob-model/src/complex' }*/
-],
+        ],
         shim: {
-            'flatiron/director': { exports: 'Router' }
+            'flatiron/director': { exports: 'Router' },
+            'showdown': {
+                exports: 'Showdown'
+            },
+            'backbone': {
+                deps: ['lodash', 'jquery'],
+                exports: 'Backbone'
+            }
+        },
+        has: {
+            DEBUG: true
         },
         config: {
-            'thrust': {
-                'test': 1,
-                spa: {
-                    routes: {
-                        'local': 'body-module-1',
-                        'home': 'body-module-2'
-                    }
-                }
+            'thrust/ignite': {
+                url: {
+                    path: '/example/multipleinstances'
+                },
+                plugins: [
+                    'thrust/dom'
+                ],
+                data: {
+                    startTimeout: 0
+                },
+                modules: []
             }
         }
     });
+
+    require(['has'], function (has)
+    {
+        has.add('DEBUG', true);
+
+        require(['main']);
+    });
+    //require(['spa.example.compiled'], function () { require(['main']); });
 })(require);

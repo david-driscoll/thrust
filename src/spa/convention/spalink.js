@@ -1,4 +1,4 @@
-﻿define(['thrust/convention'],
+define(['thrust/convention'],
 function (Convention)
 {
     var parseFullHref = function (href)

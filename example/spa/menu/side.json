@@ -4,24 +4,24 @@
             "title": "Home",
             "items": [
                 { "url": "index.html", "text": "Link 1" },
-                { "url": "about.html", "text": "Link 2" },
-                { "url": "contact.html", "text": "Link 3" }
+                { "url": "index.html", "text": "Link 2" },
+                { "url": "index.html", "text": "Link 3" }
             ]
         },
         {
             "title": "About",
             "items": [
-                { "url": "index.html", "text": "Link 4" },
-                { "url": "about.html", "text": "Link 5" },
-                { "url": "contact.html", "text": "Link 6" }
+                { "url": "about.html", "text": "Link 1" },
+                { "url": "about.html", "text": "Link 2" },
+                { "url": "about.html", "text": "Link 3" }
             ]
         },
         {
             "title": "Contact",
             "items": [
-                { "url": "index.html", "text": "Link 7" },
-                { "url": "about.html", "text": "Link 8" },
-                { "url": "contact.html", "text": "Link 9" }
+                { "url": "contact.html", "text": "Link 1" },
+                { "url": "contact.html", "text": "Link 2" },
+                { "url": "contact.html", "text": "Link 3" }
             ]
         }
     ]

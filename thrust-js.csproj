@@ -60,6 +60,14 @@
     <Content Include="build-test-runners\thrust-build.html" />
     <Content Include="build-test\require.test.settings.js" />
     <Content Include="build-test\thrust-build.js" />
+    <Content Include="example\multipleinstances\global\g1.js" />
+    <Content Include="example\multipleinstances\grunt.js" />
+    <Content Include="example\multipleinstances\index.html" />
+    <Content Include="example\multipleinstances\instance2\i2.js" />
+    <Content Include="example\multipleinstances\instance3\i3.js" />
+    <Content Include="example\multipleinstances\loader.gif" />
+    <Content Include="example\multipleinstances\main.js" />
+    <Content Include="example\multipleinstances\require.settings.js" />
     <Content Include="example\spa\about.html" />
     <Content Include="example\spa\account.controls\account.controls.js" />
     <Content Include="example\spa\contact.html" />
@@ -178,9 +186,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="example\dataheavy\" />
+    <Folder Include="example\dom\" />
+    <Folder Include="example\noplugins\" />
     <Folder Include="src\spa\router\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="example\multipleinstances\package.json" />
     <None Include="example\spa\account.controls\account.controls.dot.tmpl" />
     <Content Include="example\spa\actionlink.dot.tmpl" />
     <Content Include="example\spa\menu\menu.json" />

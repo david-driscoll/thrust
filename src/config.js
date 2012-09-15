@@ -100,6 +100,22 @@ function (thrustInstance)
         @type {Array}
         **/
         modules: [],
+        /**
+        Used internally by thrust to determine if the life-cycle is controlled by thrust, or a parent instance.
+
+        @property childInstance
+        @readOnly
+        @type {Boolean}
+        **/
+        childInstance: false,
+        /**
+        Used internally by thrust to determine if thrust should control the life-cycle, or the consumer
+
+        @property automaticLifecylce
+        @readOnly
+        @type {Boolean}
+        **/
+        automaticLifecylce: true
     };
 
     /**

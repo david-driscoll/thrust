@@ -31,6 +31,15 @@ function (thrustInstance)
         @default true
         **/
         async: true,
+        /**
+        Tells thrust to expose each instance as a global, this allows legacy components to utilize parts of thrust, or easily
+        get at your thrust instance during debugging.
+
+        @property exposeGlobals
+        @readOnly
+        @type {Boolean}
+        @default true
+        **/
         exposeGlobals: true,
         url: {
             /**
@@ -111,11 +120,11 @@ function (thrustInstance)
         /**
         Used internally by thrust to determine if thrust should control the life-cycle, or the consumer
 
-        @property automaticLifecylce
+        @property automaticLifecycle
         @readOnly
         @type {Boolean}
         **/
-        automaticLifecylce: true
+        automaticLifecycle: true
     };
 
     /**

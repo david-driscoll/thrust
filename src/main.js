@@ -25,6 +25,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
         memoize = util.memoize,
         each = util.each,
         map = util.map,
+        extend = util.extend,
         when = util.when,
         bind = util.bind,
         type = util.type,
@@ -85,7 +86,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
                     require([name], function (moduleDefn)
                     {
-                        that.createModule(moduleDefn.name || name, moduleDefn);
+                        that.createModule(moduleDefn && moduleDefn.name || name, moduleDefn);
 
                         var result = runRunnerFactory(method).apply(that, [moduleDefn.name].concat(args));
                         when.chain(when.all(util.flatten(result)), loaderDefer);
@@ -134,7 +135,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             has('DEBUG') && log.debug(format(conventionName, name));
             return mod.thrustCall(method, compAfter, args).then(function ()
             {
-                that.mediator.fire(eventName, name);
+                that.mediator && that.mediator.fire(eventName, name);
                 mod.convention(conventionName, conventionValue);
                 if (unsetReady) mod.convention(READY + '-status', false);
             });
@@ -149,7 +150,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
         return function (that)
         {
-            that.mediator.fire(pluralName);
+            that.mediator && that.mediator.fire(pluralName);
             var modules = that.modules,
                 results = [];
 
@@ -174,21 +175,25 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
     {
         return function ()
         {
-            that.mediator.fire(event);
+            that.mediator && that.mediator.fire(event);
         };
     },
-    childrenCallMethod = function (that, method)
+    childrenCallMethod = function (that, method, stopping)
     {
         var items = [];
-        for (var i = 0, iLen = that.children.length; i < iLen; i++)
+        each(that.children, function(child)
         {
-            items.push(that.children[i][method]());
-        }
-        return when.all(items);
+            if (stopping)
+                child.__previousState = child.started;
+            if (child.cfg.autoStart || (!stopping && child.__previousState) || (stopping && child.started))
+                items.push(child[method](true, true));
+        });
+        if (items.length)
+            return when.all(items);
     },
     flattenWithAsync = function (that, arr)
     {
-        return util.flatten(arr.concat(that.cfg.async && [when.delay(0)] || []));
+        return util.flattenToPromises(arr.concat(that.cfg.async && [when.delay(0)] || []));
     };
 
     var thrustLogEvent;
@@ -198,7 +203,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
         {
             return function ()
             {
-                log.debug(format(message, name));
+                log.debug(format.apply(format, [message].concat(toArray(arguments))));
             };
         };
     }
@@ -209,6 +214,21 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             return util.noop;
         };
     }
+
+    var thrustShouldExecute = function (that, calledByParent, stopping)
+    {
+        if (that.parent && that.cfg.childInstance && !that.parent.started && !calledByParent)
+        {
+            throw new Error(format('Cannot execute on child instance "{0}" parent instance "{1}" must be started first.', that.name, that.parent.name));
+        }
+
+        if (!stopping && that.started || stopping && !that.started)
+        {
+            throw new Error(format('Cannot start thrust instance "{0}" since it already started', that.name));
+        }
+
+        return true;
+    };
     //#endregion
 
     Thrust.prototype = Thrust.fn = {
@@ -223,7 +243,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             'destroy'
         ],
         __conventions: [],
-        cfg: { async: false, childInstance: false, automaticLifecylce: true },
+        cfg: { async: false, childInstance: false, automaticLifecycle: true },
         /**
             Creates a new thrust module.
 
@@ -237,7 +257,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
         {
             has('DEBUG') && log.debug(format('Thrust: Creating new instance of "{0}"', name));
 
-            var oldModule;
+            var oldModule, that = this;
             if (preBuilt)
             {
                 oldModule = module;
@@ -245,23 +265,23 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             }
 
             if (!preBuilt)
-                module = new Module(this, module, name);
+                module = new Module(that, module, name);
             else
                 module = oldModule;
 
             // Modules cannot have duplicate names, choose a new one.
-            if (this.modules[module.name])
+            if (that.modules[module.name])
                 throw new Error(format('Duplicate module name "{0}".', name));
 
             // m is the mediators internal module.
-            this.modules[module.name] = module;
+            that.modules[module.name] = module;
 
             has('DEBUG') && log.info(format('Thrust: Created module "{0}"', name));
             // Notify the mediator that a module has been created.
-            this.mediator.fire('thrust/module/create', name);
+            that.mediator.fire('thrust/module/create', name);
 
-            if (this.mediator.started && module.convention('autoStart'))
-                this.mediator.start(module.name);
+            if (that && that.started && module.convention('autoStart'))
+                that.start(module.name);
 
             return module;
         },
@@ -272,11 +292,15 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
         @method countdown
         @async
+        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
         @returns {Promise} The promise of when the countdown is completed.
         **/
-        countdown: function ()
+        countdown: function (ignoreChild, calledByParent)
         {
             var that = this;
+            if (!thrustShouldExecute(that, calledByParent))
+                return;
+
             has('DEBUG') && thrustLogEvent('Launch instance "{0}" in 5... 4... 3... 2... 1...', that.name);
 
             var stageOne = when.all(flattenWithAsync(that, [
@@ -285,9 +309,9 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
                 childrenCallMethod(that, COUNTDOWN)
             ])).then(fireThrustEvent(that, 'thrust/init'));
 
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" has been initalized.'));
+            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" has been initalized.', that.name));
 
-            that.cfg.automaticLifecylce && !that.cfg.childInstance && stageOne.then(bind(that.ignite, that));
+            that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild) && stageOne.then(bind(that.ignite, that, ignoreChild, calledByParent));
 
             return stageOne;
         },
@@ -297,11 +321,15 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
         @method ignite
         @async
+        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
         @returns {Promise} The promise of when the ingition is completed.
         **/
-        ignite: function ()
+        ignite: function (ignoreChild, calledByParent)
         {
             var that = this;
+            if (!thrustShouldExecute(that, calledByParent))
+                return;
+
             has('DEBUG') && thrustLogEvent('Firing rockets for thurst instance "{0}".', that.name);
 
             var stageOne = when.all(flattenWithAsync(that, [
@@ -312,7 +340,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
             has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" has been started.', that.name));
 
-            that.cfg.automaticLifecylce && !that.cfg.childInstance && stageOne.then(bind(that.orbit, that));
+            that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild) && stageOne.then(bind(that.orbit, that, ignoreChild, calledByParent));
 
             return stageOne;
         },
@@ -322,11 +350,15 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
         @method orbit
         @async
+        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
         @returns {Promise} The promise of when thrust is in orbit.
         **/
-        orbit: function ()
+        orbit: function (ignoreChild, calledByParent)
         {
             var that = this;
+            if (!thrustShouldExecute(that, calledByParent))
+                return;
+
             has('DEBUG') && thrustLogEvent('Firing stage two thrusters for thrust instance "{0}".', that.name)();
 
             var domReadyDefer = when.defer();
@@ -341,31 +373,9 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
             has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is almost ready.', that.name));
 
-            that.cfg.automaticLifecylce && !that.cfg.childInstance && stageOne.then(bind(that.deploy, that));
+            that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild) && stageOne.then(bind(that.deploy, that, ignoreChild, calledByParent));
 
             return stageOne;
-
-            return when.all(flattenWithAsync(that, [
-                domReadyDefer.promise,
-                util.safeInvoke(that.__conventions, ORBIT, that)
-            ])).then(function ()
-            {
-                if (has('DEBUG'))
-                {
-                    var timeStart = that.config.debug.timeStart,
-                    timeEnd = new Date().getTime(),
-                    startTime = (timeEnd - timeStart),
-                    ttoDiv = document.getElementById('tto');
-
-                    if (ttoDiv)
-                        ttoDiv.innerHTML = startTime + 'ms';
-                }
-
-                when.all(flattenWithAsync(that, [that.ready()]))
-                    .then(fireThrustEvent(that, 'thrust/ready'))
-                    .then(thrustLogEvent('Thrust instance "{0}" is now ready.', that.name))
-                    .then(bind(that.inOrbit, that));
-            });
         },
         /**
             Thrust deploys components in orbit
@@ -373,11 +383,15 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
         @method deploy
         @async
+        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
         @returns {Promise} The promise of when thrust has fully deployed.
         **/
-        deploy: function ()
+        deploy: function (ignoreChild, calledByParent)
         {
             var that = this;
+            if (!thrustShouldExecute(that, calledByParent))
+                return;
+
             if (has('DEBUG'))
             {
                 var timeStart = that.config.debug.timeStart,
@@ -424,22 +438,26 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
         @method deorbit
         @async
+        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
         @returns {Promise} The promise of when the ingition is completed.
         **/
-        deorbit: function ()
+        deorbit: function (ignoreChild, calledByParent)
         {
             var that = this;
+            if (!thrustShouldExecute(that, calledByParent, true))
+                return;
+
             has('DEBUG') && thrustLogEvent('Reentering earths atmosphere for thrust instance "{0}".', that.name);
 
             var stageOne = when.all(flattenWithAsync(that, [
-                childrenCallMethod(that, DEORBIT),
+                childrenCallMethod(that, DEORBIT, true),
                 that.stop(),
                 util.safeInvoke(that.__conventions, DEORBIT, that)
             ])).then(fireThrustEvent(that, 'thrust/stop'));
 
             has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is now stopped.', that.name));
 
-            that.cfg.automaticLifecylce && !that.cfg.childInstance && stageOne.then(bind(that.splashdown, that));
+            that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild) && stageOne.then(bind(that.splashdown, that, ignoreChild, calledByParent));
 
             return stageOne;
         },
@@ -449,15 +467,19 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
         @method splashdown
         @async
+        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
         @returns {Promise} The promise of when the ingition is completed.
         **/
-        splashdown: function ()
+        splashdown: function (ignoreChild, calledByParent)
         {
             var that = this;
+            if (!thrustShouldExecute(that, calledByParent, true))
+                return;
+
             has('DEBUG') && thrustLogEvent('Landing in the middle of the atlantic for thrust instance "{0}".', that.name);
 
             var stageOne = when.all(flattenWithAsync(that, [
-                childrenCallMethod(that, SPLASHDOWN),
+                childrenCallMethod(that, SPLASHDOWN, true),
                 that.destroy(),
                 util.safeInvoke(that.__conventions, SPLASHDOWN, that)
             ])).then(fireThrustEvent(that, 'thrust/destroy'));
@@ -480,7 +502,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             that return the property autoStart will be inited.
         @returns {Promise} The promise of when the init is completed.
         **/
-        init: memoize(function (name)
+        init: function (name)
         {
             var that = this, method = INIT;
 
@@ -495,7 +517,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
                 result = runRunnerFactory(method).apply(that, arguments);
 
             return when.all(util.flatten(result));
-        }),
+        },
         /**
             Begins the startup process for a module.  This runs as part of the
                 ignite phase, during start up, or in order, when creating modules.
@@ -645,7 +667,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
                 var n = name[i],
                     mod = that.modules[n];
 
-                if (!mod.convention(STOP + '-status'))
+                if (mod.convention(START + '-status'))
                 {
                     items.push(that.stop.call(that, [n].concat(slice.call(arguments, 1))));
                 }
@@ -684,16 +706,27 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
             return module;
         },
+        /**
+        Launches another child module for thrust.
+
+        @method spawn
+        @param {Object} settings
+        @returns {Promise} The promise that resolves once the child instance has fully loaded.  Resolves with the context that contains the thrust instance and all plugins that were loaded.
+        **/
         spawn: function (settings)
         {
             var that = this;
-            Thrust.launch(settings).then(function (context)
+            return Thrust.launch(extend({}, { childInstance: true }, settings)).then(function (context)
             {
                 var thrust = context.thrust;
                 that.children.push(thrust);
+                thrust.parent = that;
+                return context;
             });
         }
     };
+
+    Thrust.prototype.createChild = Thrust.prototype.spawn;
 
     /**
         Initalizes a new Thrust instance based on the given settings.
@@ -716,14 +749,22 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
         }
 
         var setupDefer = Thrust.__fetchInstance(settings.name);
-
+        
         setupDefer.then(function (context)
         {
             var thrust = context.thrust;
             thrust.startingModules = context.cfg.modules;
-            thrust.config = thrust.cfg;
+            var config = thrust.config = thrust.cfg;
             instances[thrust.name] = thrust;
-            thrust.countdown();
+
+            if (config.modules && config.modules.length)
+            {
+                igniteSpec.stageThree(context).then(bind(thrust.countdown, thrust));
+            }
+            else
+            {
+                thrust.countdown();
+            }
 
             return context;
         });
@@ -737,7 +778,6 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
                 window[settings.name] = context.thrust;
             });
         }
-
         when.chain(igniteSpec.stageOne(settings), setupDefer);
 
         return setupDefer.promise;

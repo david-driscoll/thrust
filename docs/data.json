@@ -214,7 +214,8 @@
                 "thrust.spa.SinglePageApp": 1
             },
             "fors": {
-                "thrust.spa": 1
+                "thrust.spa": 1,
+                "thrust.spa.SinglePageApp": 1
             },
             "namespaces": {}
         },
@@ -626,7 +627,8 @@
             "fors": {
                 "thrust.spa.convention": 1,
                 "thrust.spa.config": 1,
-                "thrust.spa": 1
+                "thrust.spa": 1,
+                "thrust.spa.SinglePageApp": 1
             },
             "namespaces": {},
             "file": "src\\spa\\main.js",
@@ -1511,7 +1513,7 @@
             "module": "thrust",
             "namespace": "",
             "file": "src\\main.js",
-            "line": 38,
+            "line": 40,
             "description": "The primary thrust class.",
             "is_constructor": 1,
             "params": [
@@ -2443,7 +2445,7 @@
         },
         {
             "file": "src\\mediator\\main.js",
-            "line": 120,
+            "line": 113,
             "description": "Creates a new MediatorFacade, based on the given module.",
             "itemtype": "method",
             "name": "createFacade",
@@ -2560,7 +2562,49 @@
         },
         {
             "file": "src\\spa\\main.js",
-            "line": 112,
+            "line": 114,
+            "description": "Hands the navigate method off to the module, so any module can trigger a navigation event.",
+            "itemtype": "method",
+            "name": "createFacade",
+            "params": [
+                {
+                    "name": "thrust",
+                    "description": "The thrust instance",
+                    "type": "thrust.Thrust"
+                },
+                {
+                    "name": "module",
+                    "description": "The module to create the facade for",
+                    "type": "thrust.Module"
+                },
+                {
+                    "name": "facades",
+                    "description": "The facades already added for this module.",
+                    "type": "Object"
+                }
+            ],
+            "class": "thrust.spa.SinglePageApp",
+            "module": "thrust.spa"
+        },
+        {
+            "file": "src\\spa\\main.js",
+            "line": 131,
+            "description": "Navigates to the given url.",
+            "itemtype": "method",
+            "name": "navigate",
+            "params": [
+                {
+                    "name": "location",
+                    "description": "The location to navigate to.",
+                    "type": "String"
+                }
+            ],
+            "class": "thrust.spa.SinglePageApp",
+            "module": "thrust.spa"
+        },
+        {
+            "file": "src\\spa\\main.js",
+            "line": 143,
             "description": "Configures the route object for the spa instance\n\nRoutes can be in 4 forms\n\n    {\n        '/path/to/:foo': 'path/to/module',\n        '/path/to/:bar': ['path/to/module1', 'path/to/module2'],\n        '/path/to/:fb': { path: 'path/to/module', args: ['args', 'to', 'hand off to start'] }\n        '/path/to/:foo/:bar': function(foo, bar){  custom handler }\n    }",
             "itemtype": "method",
             "name": "configureRoutes",
@@ -2576,7 +2620,7 @@
         },
         {
             "file": "src\\spa\\main.js",
-            "line": 162,
+            "line": 193,
             "itemtype": "method",
             "name": "__moduleStartCallback",
             "access": "private",
@@ -4188,7 +4232,7 @@
         },
         {
             "file": "src\\util\\when.js",
-            "line": 9,
+            "line": 14,
             "description": "when.apply, used to apply when results over a function, similar to jQuerys Deferred.\nSee for more information: [https://github.com/cujojs/when/wiki/when-apply](https://github.com/cujojs/when/wiki/when-apply)",
             "itemtype": "method",
             "name": "when.apply",
@@ -4198,7 +4242,7 @@
         },
         {
             "file": "src\\util\\when.js",
-            "line": 17,
+            "line": 22,
             "description": "when.delay, creates a promise that resolves in x ms, using setTimeout.\nSee for more information: [https://github.com/cujojs/when/wiki/when-delay](https://github.com/cujojs/when/wiki/when-delay)",
             "itemtype": "method",
             "name": "when.delay",
@@ -4208,7 +4252,7 @@
         },
         {
             "file": "src\\util\\when.js",
-            "line": 24,
+            "line": 29,
             "description": "when.timeout, creates a promise that will timeout if x ms if not resolved.\nSee for more information: [https://github.com/cujojs/when/wiki/when-timeout](https://github.com/cujojs/when/wiki/when-timeout)",
             "itemtype": "method",
             "name": "when.timeout",
@@ -4218,7 +4262,7 @@
         },
         {
             "file": "src\\util\\when.js",
-            "line": 33,
+            "line": 51,
             "description": "Access to whenjs, the main library for promises.",
             "itemtype": "method",
             "name": "when",
@@ -4228,7 +4272,7 @@
         },
         {
             "file": "src\\util\\when.js",
-            "line": 39,
+            "line": 57,
             "description": "Flatten and filter arrays down to just the existing promises.",
             "itemtype": "method",
             "name": "flattenToPromises",
@@ -4275,7 +4319,20 @@
         },
         {
             "file": "src\\config.js",
-            "line": 35,
+            "line": 34,
+            "description": "Tells thrust to expose each instance as a global, this allows legacy components to utilize parts of thrust, or easily\nget at your thrust instance during debugging.",
+            "itemtype": "property",
+            "name": "exposeGlobals",
+            "readonly": "",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "thrust.config",
+            "module": "thrust",
+            "submodule": "thrust.config"
+        },
+        {
+            "file": "src\\config.js",
+            "line": 45,
             "description": "This property, gives the framework it's default path, if different than '/'",
             "itemtype": "property",
             "name": "url.path",
@@ -4288,7 +4345,7 @@
         },
         {
             "file": "src\\config.js",
-            "line": 44,
+            "line": 54,
             "description": "This property, tells the framework how it should encode array form data.\nIn general, for ASP.NET based applications, traditional should be true.\nFor Ruby/Python based applications, this should be false.",
             "itemtype": "property",
             "name": "url.traditionalEncoding",
@@ -4301,7 +4358,7 @@
         },
         {
             "file": "src\\config.js",
-            "line": 57,
+            "line": 67,
             "description": "This lends to the log level of thrust.\n\n    ERROR: 1\n    WARN: 2\n    INFO: 3\n    DEBUG: 4",
             "itemtype": "property",
             "name": "log.level",
@@ -4314,7 +4371,7 @@
         },
         {
             "file": "src\\config.js",
-            "line": 71,
+            "line": 81,
             "description": "This toggles enabling on or off.",
             "itemtype": "property",
             "name": "log.enabled",
@@ -4327,7 +4384,7 @@
         },
         {
             "file": "src\\config.js",
-            "line": 81,
+            "line": 91,
             "description": "Plugins for thrust to load, override with your own set if you have a different set.",
             "itemtype": "property",
             "name": "plugins",
@@ -4339,7 +4396,7 @@
         },
         {
             "file": "src\\config.js",
-            "line": 94,
+            "line": 104,
             "description": "The set of modules to preload with the inital wireup of the Thrust instance.",
             "itemtype": "property",
             "name": "modules",
@@ -4351,7 +4408,31 @@
         },
         {
             "file": "src\\config.js",
-            "line": 104,
+            "line": 112,
+            "description": "Used internally by thrust to determine if the life-cycle is controlled by thrust, or a parent instance.",
+            "itemtype": "property",
+            "name": "childInstance",
+            "readonly": "",
+            "type": "{Boolean}",
+            "class": "thrust.config",
+            "module": "thrust",
+            "submodule": "thrust.config"
+        },
+        {
+            "file": "src\\config.js",
+            "line": 120,
+            "description": "Used internally by thrust to determine if thrust should control the life-cycle, or the consumer",
+            "itemtype": "property",
+            "name": "automaticLifecycle",
+            "readonly": "",
+            "type": "{Boolean}",
+            "class": "thrust.config",
+            "module": "thrust",
+            "submodule": "thrust.config"
+        },
+        {
+            "file": "src\\config.js",
+            "line": 130,
             "description": "AMD API\nload\n\nHandles fetching of a current config for the current thrust instance, or the config of the given plugin.\nAdding the : character requests a specific config plugin.\nthrust/config!global = thrust!global:config = Thrust instance config from the instance named global.",
             "itemtype": "method",
             "name": "load",
@@ -5145,10 +5226,11 @@
         {
             "file": "src\\facade.js",
             "line": 107,
-            "description": "AMD API\nload\n\nHandles fetching of a module instance",
+            "description": "AMD API\nload\n\nHandles fetching of a module instance\n\nFormat:\nthrust/module!{instance}:{pluginName}:{hashKey}\n\nhasKey: is a unique key, that the module shares with the facade, allows for defining dependencies\n            in your define block, and get access to the modules facade.",
             "itemtype": "method",
             "name": "load",
             "static": 1,
+            "obsolete": "",
             "params": [
                 {
                     "name": "name",
@@ -5176,7 +5258,7 @@
         },
         {
             "file": "src\\ignite.js",
-            "line": 39,
+            "line": 49,
             "description": "Merges a all the plugins configurations, with the default config, and then finally with\nany customized config from requirejs",
             "itemtype": "method",
             "name": "stageOne",
@@ -5192,14 +5274,30 @@
         },
         {
             "file": "src\\ignite.js",
-            "line": 75,
-            "description": "Creates a thrust instance, from the given settings.\nIncluding the plugins, and given default modules.",
+            "line": 87,
+            "description": "Creates a thrust instance, from the given settings.\nIncluding the plugins.",
             "itemtype": "method",
             "name": "stateTwo",
             "params": [
                 {
                     "name": "settings",
                     "description": "The settints to pass onto the thrust instance being created.",
+                    "type": "Object"
+                }
+            ],
+            "class": "thrust.instance",
+            "module": "thrust"
+        },
+        {
+            "file": "src\\ignite.js",
+            "line": 224,
+            "description": "Loads up the default modules as indicated to thrust.",
+            "itemtype": "method",
+            "name": "stageThree",
+            "params": [
+                {
+                    "name": "context",
+                    "description": "The context to use to load the modules.",
                     "type": "Object"
                 }
             ],
@@ -5328,7 +5426,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 179,
+            "line": 235,
             "description": "Required methods, that every module must implement.",
             "itemtype": "property",
             "name": "__requiredMethods",
@@ -5339,7 +5437,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 191,
+            "line": 247,
             "description": "Creates a new thrust module.",
             "itemtype": "method",
             "name": "create",
@@ -5369,11 +5467,18 @@
         },
         {
             "file": "src\\main.js",
-            "line": 233,
+            "line": 289,
             "description": "Begins the countdown to thrusts start.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "countdown",
             "async": 1,
+            "params": [
+                {
+                    "name": "ignoreChild",
+                    "description": "Ignores the child instance flag, allows children to be controlled.",
+                    "type": "Boolean"
+                }
+            ],
             "return": {
                 "description": "The promise of when the countdown is completed.",
                 "type": "Promise"
@@ -5383,11 +5488,18 @@
         },
         {
             "file": "src\\main.js",
-            "line": 253,
+            "line": 318,
             "description": "Begins the ingition as thrust starts up.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "ignite",
             "async": 1,
+            "params": [
+                {
+                    "name": "ignoreChild",
+                    "description": "Ignores the child instance flag, allows children to be controlled.",
+                    "type": "Boolean"
+                }
+            ],
             "return": {
                 "description": "The promise of when the ingition is completed.",
                 "type": "Promise"
@@ -5397,11 +5509,18 @@
         },
         {
             "file": "src\\main.js",
-            "line": 273,
+            "line": 347,
             "description": "Thrust prepares for orbit.\nLoading can be deferred by returning a promise from any convention.",
             "itemtype": "method",
             "name": "orbit",
             "async": 1,
+            "params": [
+                {
+                    "name": "ignoreChild",
+                    "description": "Ignores the child instance flag, allows children to be controlled.",
+                    "type": "Boolean"
+                }
+            ],
             "return": {
                 "description": "The promise of when thrust is in orbit.",
                 "type": "Promise"
@@ -5411,11 +5530,39 @@
         },
         {
             "file": "src\\main.js",
-            "line": 329,
+            "line": 380,
+            "description": "Thrust deploys components in orbit\nLoading can be deferred by returning a promise from any module method.",
+            "itemtype": "method",
+            "name": "deploy",
+            "async": 1,
+            "params": [
+                {
+                    "name": "ignoreChild",
+                    "description": "Ignores the child instance flag, allows children to be controlled.",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "The promise of when thrust has fully deployed.",
+                "type": "Promise"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 435,
             "description": "Begins the deorbit as thrust shutdown.\nShutdown can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "deorbit",
             "async": 1,
+            "params": [
+                {
+                    "name": "ignoreChild",
+                    "description": "Ignores the child instance flag, allows children to be controlled.",
+                    "type": "Boolean"
+                }
+            ],
             "return": {
                 "description": "The promise of when the ingition is completed.",
                 "type": "Promise"
@@ -5425,11 +5572,18 @@
         },
         {
             "file": "src\\main.js",
-            "line": 349,
+            "line": 464,
             "description": "Begins the splashdown as thrust shutdown.\nShutdown can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "splashdown",
             "async": 1,
+            "params": [
+                {
+                    "name": "ignoreChild",
+                    "description": "Ignores the child instance flag, allows children to be controlled.",
+                    "type": "Boolean"
+                }
+            ],
             "return": {
                 "description": "The promise of when the ingition is completed.",
                 "type": "Promise"
@@ -5439,7 +5593,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 371,
+            "line": 495,
             "description": "Begins the initalization process for a module.  This runs as part of the\n    countdown phase, during start up, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "init",
@@ -5460,7 +5614,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 397,
+            "line": 521,
             "description": "Begins the startup process for a module.  This runs as part of the\n    ignite phase, during start up, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "start",
@@ -5481,7 +5635,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 459,
+            "line": 583,
             "description": "Begins the ready process for a module.  This runs as part of the\n    orbit phase, during ready, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "ready",
@@ -5502,7 +5656,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 495,
+            "line": 619,
             "description": "Begins the stop process for a module.  This runs as part of the\n    deorbit phase, during stop, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "stop",
@@ -5523,7 +5677,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 519,
+            "line": 643,
             "description": "Begins the destroy process for a module.  This runs as part of the\n    slashdown phase, during destroy, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "destroy",
@@ -5544,7 +5698,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 556,
+            "line": 680,
             "description": "Injects a preconstructed module into the thrust instance.",
             "itemtype": "method",
             "name": "__injectModule",
@@ -5562,7 +5716,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 567,
+            "line": 691,
             "description": "Creates a module from the given definition object, with the given name.",
             "itemtype": "method",
             "name": "createModule",
@@ -5583,7 +5737,27 @@
         },
         {
             "file": "src\\main.js",
-            "line": 587,
+            "line": 709,
+            "description": "Launches another child module for thrust.",
+            "itemtype": "method",
+            "name": "spawn",
+            "params": [
+                {
+                    "name": "settings",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The promise that resolves once the child instance has fully loaded.  Resolves with the context that contains the thrust instance and all plugins that were loaded.",
+                "type": "Promise"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 731,
             "description": "Initalizes a new Thrust instance based on the given settings.",
             "itemtype": "method",
             "name": "launch",
@@ -5600,7 +5774,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 629,
+            "line": 786,
             "description": "Gets a named thrust stance if it exists.",
             "itemtype": "method",
             "name": "getInstance",
@@ -5621,7 +5795,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 642,
+            "line": 799,
             "description": "Fetchs a named thrust stance if it exists.\nThis loads asyncronously, as the instance may not be loaded",
             "itemtype": "method",
             "name": "__fetchInstance",
@@ -5644,7 +5818,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 657,
+            "line": 814,
             "description": "Creates a new module and hands it off to the given instance, if that instance exists.",
             "itemtype": "method",
             "name": "createModule",
@@ -5671,7 +5845,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 677,
+            "line": 834,
             "description": "AMD API\nload\n\nHandles fetching of a current thurst instance, by expected name.\nAdding the : character requests a specific plugin.\nthrust!global = Thrust instance\nthrust!global:dom = The thrust dom plugin instance",
             "itemtype": "method",
             "name": "load",
@@ -5731,7 +5905,7 @@
         },
         {
             "file": "src\\module.js",
-            "line": 106,
+            "line": 111,
             "description": "Getter/Setter for convention methods.\nGets the value convention property (defined in the properties array of a facade).\nSets the value of a convention property (for storing convention configuration)",
             "params": [
                 {
@@ -5757,7 +5931,7 @@
         },
         {
             "file": "src\\module.js",
-            "line": 125,
+            "line": 130,
             "description": "Injects this module into the given thrust instance.",
             "itemtype": "method",
             "name": "thrustCreate",
@@ -5773,7 +5947,7 @@
         },
         {
             "file": "src\\module.js",
-            "line": 135,
+            "line": 140,
             "description": "Makes a call to all the modules facades\nThe order of the call depends on the order required.\nDuring the startup stage (init, start, ready) facades are called first.\nDuring the shutdown state (stop, destroy) facades are called last.\nThis allows modules to startup and shutdown will all the tools it had to begin with.",
             "itemtype": "method",
             "name": "thrustCall",
@@ -5801,7 +5975,7 @@
         },
         {
             "file": "src\\module.js",
-            "line": 206,
+            "line": 211,
             "description": "Start the module, inside the thrust container it was created on.",
             "itemtype": "method",
             "name": "start",
@@ -5810,7 +5984,7 @@
         },
         {
             "file": "src\\module.js",
-            "line": 216,
+            "line": 221,
             "description": "Stop the module, inside the thrust container it was created on.",
             "itemtype": "method",
             "name": "start",
@@ -5819,8 +5993,8 @@
         },
         {
             "file": "src\\module.js",
-            "line": 228,
-            "description": "AMD API\nload\n\nHandles fetching of a module instance",
+            "line": 233,
+            "description": "AMD API\nload\n\nHandles fetching of a module instance.\nFormat:\nthrust/module!{instance}:{moduleName}",
             "itemtype": "method",
             "name": "load",
             "static": 1,

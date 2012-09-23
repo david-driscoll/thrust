@@ -1,0 +1,29 @@
+﻿body.loading .container-fluid > .pull-right
+{
+    visibility: hidden;
+}
+
+body.loading #user-controls
+{
+    visibility: hidden;
+}
+
+body.loading > .container-fluid
+{
+    visibility: hidden;
+}
+
+body > .page-loading
+{
+    display: none;
+}
+
+body.loading > .page-loading
+{
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -64px;
+    margin-left: -64px;
+}

@@ -318,9 +318,40 @@ function (require, Thrust, util, log, has, Router, domReady, instance)
             that.router.init();
             mediator.fire.async(&#x27;thrust&#x2F;spa&#x2F;start&#x27;);
         };
+
+        that.navigate = that.navigate.bind(that);
     };
 
     SinglePageApp.prototype = {
+        &#x2F;**
+        Hands the navigate method off to the module, so any module can trigger a navigation event.
+
+        @for thrust.spa.SinglePageApp
+        @method createFacade
+        @param {thrust.Thrust} thrust The thrust instance
+        @param {thrust.Module} module The module to create the facade for
+        @param {Object} facades The facades already added for this module.
+        **&#x2F;
+        createFacade: function (thrust, module, facades)
+        {
+            var that = this;
+            if (module.navigate) throw new Error(&#x27;&quot;navigate&quot; is a reserved property&#x27;);
+
+            &#x2F;&#x2F; Already pre bound, so we only pass around 1 function per instance.
+            module.navigate = that.navigate;
+        },
+        &#x2F;**
+        Navigates to the given url.
+
+        @method navigate
+        @param {String} location The location to navigate to.
+        **&#x2F;
+        navigate: function(location)
+        {
+            var that = this;
+            var url = util.fixupUrl(location, that.baseUrl);
+            that.router.setRoute(url);
+        },
         &#x2F;**
         Configures the route object for the spa instance
 

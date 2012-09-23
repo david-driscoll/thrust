@@ -1,4 +1,4 @@
-/*! Thrust JS Framework - v0.1.0 - 2012-09-09
+/*! Thrust JS Framework - v0.1.0 - 2012-09-23
 * thrust-home
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 
@@ -801,9 +801,40 @@ function (require, Thrust, util, log, has, Router, domReady, instance)
             that.router.init();
             mediator.fire.async('thrust/spa/start');
         };
+
+        that.navigate = that.navigate.bind(that);
     };
 
     SinglePageApp.prototype = {
+        /**
+        Hands the navigate method off to the module, so any module can trigger a navigation event.
+
+        @for thrust.spa.SinglePageApp
+        @method createFacade
+        @param {thrust.Thrust} thrust The thrust instance
+        @param {thrust.Module} module The module to create the facade for
+        @param {Object} facades The facades already added for this module.
+        **/
+        createFacade: function (thrust, module, facades)
+        {
+            var that = this;
+            if (module.navigate) throw new Error('"navigate" is a reserved property');
+
+            // Already pre bound, so we only pass around 1 function per instance.
+            module.navigate = that.navigate;
+        },
+        /**
+        Navigates to the given url.
+
+        @method navigate
+        @param {String} location The location to navigate to.
+        **/
+        navigate: function(location)
+        {
+            var that = this;
+            var url = util.fixupUrl(location, that.baseUrl);
+            that.router.setRoute(url);
+        },
         /**
         Configures the route object for the spa instance
 

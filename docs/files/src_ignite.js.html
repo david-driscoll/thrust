@@ -211,7 +211,7 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 define([&#x27;require&#x27;, &#x27;thrust&#x2F;config&#x27;, &#x27;thrust&#x2F;util&#x27;, &#x27;module&#x27;],
-function(require, config, util, module)
+function (require, config, util, module)
 {
     var slice = Array.prototype.slice,
         isArray = util.isArray,
@@ -226,21 +226,31 @@ function(require, config, util, module)
         pluck = util.pluck,
         isObject = util.isObject,
 
-        reconcileArrays = function (from, to)
+        reconcileArrays = function (config, settings, to)
         {
-            each(from, function (x, i)
+            var keys = util.keys(config);
+            if (settings)
             {
+                keys = util.union(util.keys(settings), keys);
+            }
+            else
+            {
+                settings = {};
+            }
+            each(keys, function (i)
+            {
+                var x = settings[i] || config[i];
                 if (isArray(x))
                 {
-                    to[i] = toArray(to[i]);
+                    to[i] = toArray(settings[i] || to[i]);
                 }
                 else if (isObject(x))
                 {
-                    reconcileArrays(x, to[i]);
+                    reconcileArrays(x, null, to[i]);
                 }
             });
         },
-        stageOneComplete = false;
+        stageOneComplete = {};
 
     &#x2F;**
     Contructs a wire spec for thrust to launch from.
@@ -248,24 +258,26 @@ function(require, config, util, module)
     @module thrust
     **&#x2F;
     return {
-         &#x2F;**
-        Merges a all the plugins configurations, with the default config, and then finally with
-        any customized config from requirejs
+        &#x2F;**
+       Merges a all the plugins configurations, with the default config, and then finally with
+       any customized config from requirejs
 
-        @method stageOne
-        @param {Object} settings The settints to pass onto the thrust instance being created.
-        **&#x2F;
+       @method stageOne
+       @param {Object} settings The settints to pass onto the thrust instance being created.
+       **&#x2F;
         stageOne: function (settings)
         {
             var that = this;
 
-            if (stageOneComplete)
+            if (stageOneComplete[settings.name])
             {
                 return that.stateTwo(settings);
             }
-            
+
             var plugins = [&#x27;thrust&#x2F;mediator&#x27;].concat(settings.plugins || module.config().plugins || config.plugins || []),
                 defer = when.defer();
+
+            settings.plugins = plugins;
 
             require(plugins.map(function (x) { return x + &#x27;&#x2F;config&#x27;; }), function ()
             {
@@ -280,28 +292,28 @@ function(require, config, util, module)
 
                 when.chain(that.stateTwo(settings), defer);
             });
-            stageOneComplete = true;
+            stageOneComplete[settings.name] = true;
 
             return defer;
         },
         &#x2F;**
         Creates a thrust instance, from the given settings.
-        Including the plugins, and given default modules.
+        Including the plugins.
 
         @method stateTwo
         @param {Object} settings The settints to pass onto the thrust instance being created.
         **&#x2F;
-        stateTwo: function(settings)
+        stateTwo: function (settings)
         {
             &#x2F;*jshint loopfunc:true*&#x2F;
             &#x2F;&#x2F; Get the configuration
             var localConfig = util.deepCopy({}, config, settings),
-                defer       = when.defer();
+                defer = when.defer();
             &#x2F;&#x2F; Reconicle the arrays so they are properly arrays
-            reconcileArrays(config, localConfig);
+            reconcileArrays(config, settings, localConfig);
 
             &#x2F;&#x2F; Mediator is a required plugin, include all the others in addition to it.
-            var plugins = [&#x27;thrust&#x2F;mediator&#x27;].concat(localConfig.plugins || []),
+            var plugins = localConfig.plugins,
                 &#x2F;&#x2F; The modules to load
                 modulesToLoad = [],
                 &#x2F;&#x2F; The module configuration object
@@ -339,12 +351,12 @@ function(require, config, util, module)
                 &#x2F;&#x2F; Check if the plugin has to resolve anything.
                 if (pluginConfig.resolve &amp;&amp; pluginConfig.resolve.length &gt; 0 &amp;&amp; !all(pluginConfig.resolve,
                     function (x)
-                    {
+                {
                         return any(orderedPlugins, function (z)
-                        {
+                {
                         return x === z || x === z;
-                        });
-                    })
+                });
+                })
                 )
                 {
                     &#x2F;&#x2F; The modules to load.
@@ -358,11 +370,11 @@ function(require, config, util, module)
                     orderedPlugins.push(name);
                 }
             }
-            
+
             &#x2F;&#x2F; The modules config
             var modules = localConfig.modules || [];
             &#x2F;&#x2F; Thrust and thrust&#x2F;module also need to be loaded.
-            modulesToLoad.push.apply(modulesToLoad, [&#x27;thrust&#x27;, &#x27;thrust&#x2F;module&#x27;].concat(modules || []));
+            modulesToLoad.push.apply(modulesToLoad, [&#x27;thrust&#x27;]);
             &#x2F;&#x2F; Flatten the resultant array
             modulesToLoad = flatten(modulesToLoad);
 
@@ -379,7 +391,7 @@ function(require, config, util, module)
                 var currentPlugin = null, allConventions = [];
 
                 &#x2F;&#x2F; Loop through all the modules being loaded
-                for (var i = 0, iLen = modulesToLoad.length - (modules.length + 1); i &lt; iLen; i++)
+                for (var i = 0, iLen = modulesToLoad.length ; i &lt; iLen; i++)
                 {
                     &#x2F;&#x2F; Get plugin and configuration
                     var plugin = modulesToLoad[i],
@@ -393,14 +405,14 @@ function(require, config, util, module)
                             &#x2F;&#x2F; Get the plugin name
                             name = plugin.substring(plugin.lastIndexOf(&#x27;&#x2F;&#x27;) + 1),
                             &#x2F;&#x2F; Resolve all the required items.
-                            resolveItems = map(mConfig.resolve, function(x) { return spec[x]; });
+                            resolveItems = map(mConfig.resolve, function (x) { return spec[x]; });
 
                         &#x2F;&#x2F; Instantiate the plugin
                         currentPlugin = spec[name] = util.instantiate(pluginClass, resolveItems);
                         &#x2F;&#x2F; Setup the conventions
                         currentPlugin.__conventions = [];
                     }
-                    &#x2F;&#x2F; Load all the conventions
+                        &#x2F;&#x2F; Load all the conventions
                     else if (currentPlugin)
                     {
                         &#x2F;&#x2F; Load the convention into the plugin
@@ -416,14 +428,27 @@ function(require, config, util, module)
                 &#x2F;&#x2F; Extend thrust with the spec
                 extend(currentPlugin, spec);
 
-                &#x2F;&#x2F; Get the index of the given modules.
-                var moduleIndex = arguments.length - (modules.length + 1),
-                    &#x2F;&#x2F; The module creater function
-                    Module = arguments[moduleIndex],
-                    &#x2F;&#x2F; Get the definitions
-                    moduleDefinitions = slice.call(arguments, moduleIndex + 1),
-                    &#x2F;&#x2F; Assign thrust
-                    thrust = currentPlugin;
+                defer.resolve(spec);
+            }, defer.reject);
+
+            return defer.promise;
+        },
+        &#x2F;**
+        Loads up the default modules as indicated to thrust.
+
+        @method stageThree
+        @param {Object} context The context to use to load the modules.
+        **&#x2F;
+        stageThree: function (context)
+        {
+            var thrust = context.thrust,
+                defer = when.defer(),
+                modules = context.cfg.modules;
+
+            require([&#x27;thrust&#x2F;module&#x27;].concat(modules), function (Module)
+            {
+                &#x2F;&#x2F; Get the definitions
+                var moduleDefinitions = slice.call(arguments, 1);
 
                 &#x2F;&#x2F; Loop over all the modules
                 for (var i = 0, iLen = modules.length; i &lt; iLen; i++)
@@ -438,8 +463,7 @@ function(require, config, util, module)
                     &#x2F;&#x2F; Inject it into the thrust instance
                     moduleInstance.thrustCreate(thrust);
                 }
-
-                defer.resolve(spec);
+                defer.resolve();
             }, defer.reject);
 
             return defer.promise;

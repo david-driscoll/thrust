@@ -218,6 +218,11 @@ function (when, apply, delay, timeout, util)
     @submodule thrust.util.when
     **&#x2F;
 
+    var whenWrapper = function ()
+    {
+        return when.apply(when, arguments);
+    };
+
     &#x2F;**
     when.apply, used to apply when results over a function, similar to jQuerys Deferred.
     See for more information: [https:&#x2F;&#x2F;github.com&#x2F;cujojs&#x2F;when&#x2F;wiki&#x2F;when-apply](https:&#x2F;&#x2F;github.com&#x2F;cujojs&#x2F;when&#x2F;wiki&#x2F;when-apply)
@@ -225,21 +230,34 @@ function (when, apply, delay, timeout, util)
     @for thrust.util.when
     @method when.apply
     **&#x2F;
-    when.apply = apply,
+    whenWrapper.apply = apply,
     &#x2F;**
     when.delay, creates a promise that resolves in x ms, using setTimeout.
     See for more information: [https:&#x2F;&#x2F;github.com&#x2F;cujojs&#x2F;when&#x2F;wiki&#x2F;when-delay](https:&#x2F;&#x2F;github.com&#x2F;cujojs&#x2F;when&#x2F;wiki&#x2F;when-delay)
 
     @method when.delay
     **&#x2F;
-    when.delay = delay;
+    whenWrapper.delay = delay;
     &#x2F;**
     when.timeout, creates a promise that will timeout if x ms if not resolved.
     See for more information: [https:&#x2F;&#x2F;github.com&#x2F;cujojs&#x2F;when&#x2F;wiki&#x2F;when-timeout](https:&#x2F;&#x2F;github.com&#x2F;cujojs&#x2F;when&#x2F;wiki&#x2F;when-timeout)
 
     @method when.timeout
     **&#x2F;
-    when.timeout = timeout;
+    whenWrapper.timeout = timeout;
+
+    whenWrapper.all = when.all;
+    whenWrapper.any = when.any;
+    whenWrapper.all = when.all;
+    whenWrapper.any = when.any;
+    whenWrapper.chain = when.chain;
+    whenWrapper.defer = when.defer;
+    whenWrapper.isPromise = when.isPromise;
+    whenWrapper.map = when.map;
+    whenWrapper.reduce = when.reduce;
+    whenWrapper.some = when.some;
+    whenWrapper.resolve = when.resolve;
+    whenWrapper.reject = when.reject;
 
     return {
         &#x2F;**
@@ -247,7 +265,7 @@ function (when, apply, delay, timeout, util)
 
         @method when
         **&#x2F;
-        when: when,
+        when: whenWrapper,
         &#x2F;**
         Flatten and filter arrays down to just the existing promises.
 

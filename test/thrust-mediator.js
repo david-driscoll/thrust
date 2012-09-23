@@ -26,7 +26,6 @@
             it('should bind to default events', function ()
             {
                 expect(c._callbacks['thrust/ready']).toBeDefined();
-                expect(c._callbacks['thrust/navigate']).toBeDefined();
             });
 
             it('should initEvents', function ()

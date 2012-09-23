@@ -253,7 +253,7 @@ function (Convention)
                 var link = parseFullHref(this.getAttribute(&#x27;href&#x27;));
                 if (link.indexOf(config.url.path) === 0)
                 {
-                    spa.router.setRoute(link);
+                    spa.navigate(link);
 
                     e.preventDefault();
                     e.stopImmediatePropagation();

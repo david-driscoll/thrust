@@ -46,6 +46,11 @@ function (util, log, has)
     var Module = function (thrust, def, name)
     {
         name = this.name = (name || def.name);
+        if (typeof def === 'function')
+        {
+            def = def(name);
+            def.name = name;
+        }
         var mid = this.mid = thrust.name + ':' + name;
         var tCache = thrustCache[def.hash || mid];
 
@@ -229,7 +234,9 @@ function (util, log, has)
     AMD API
     load
 
-    Handles fetching of a module instance
+    Handles fetching of a module instance.
+    Format:
+    thrust/module!{instance}:{moduleName}
 
     @method load
     @static

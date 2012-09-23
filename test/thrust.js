@@ -172,7 +172,7 @@
                 });
             });
 
-            describe('deorbit', function ()
+            xdescribe('deorbit', function ()
             {
                 it('begins deorbit', function ()
                 {
@@ -211,7 +211,7 @@
                 });
             });
 
-            describe('splashdown', function ()
+            xdescribe('splashdown', function ()
             {
                 it('begins splashdown', function ()
                 {
@@ -256,6 +256,82 @@
             //ready
             //stop
             //destroy
+
+            /*describe('child instances', function ()
+            {
+                var started, t, childStarted;
+                beforeEach(function()
+                {
+                    started = false;
+                    childStarted = false;
+                    t = Thrust.launch({
+                        })
+                        .then(function (context)
+                        {
+                            context.thrust.spawn({ name: 'child' })
+                            .then(function(childContext)
+                            {
+                                childStarted = true;
+
+                                childContext.mediator.subscribe('thrust/destroy', function ()
+                                {
+                                    childStarted = false;
+                                });
+                            });
+
+                            context.mediator.subscribe('thrust/destroy', function ()
+                            {
+                                started = false;
+                            });
+                        });
+                });
+
+                afterEach(function ()
+                {
+                    t.deorbit();
+                });
+                it('must spawn child instances', function ()
+                {
+                    runs(function(){});
+
+                    waitsFor(function ()
+                    {
+                        return started;
+                    }, 300);
+
+                    runs(function ()
+                    {
+                        expect(started).toBe(true);
+                        expect(childStarted).toBe(true);
+                    });
+                });
+
+                it('controls child instances', function ()
+                {
+                    runs(function () { });
+
+                    waitsFor(function ()
+                    {
+                        return started && childStarted;
+                    }, 300);
+
+                    runs(function ()
+                    {
+                        t.deorbit();
+                    });
+
+                    waitsFor(function ()
+                    {
+                        return (!started && !childStarted);
+                    }, 300);
+
+                    runs(function ()
+                    {
+                        expect(started).toBe(false);
+                        expect(childStarted).toBe(false);
+                    });
+                });
+            });*/
         });
 
         jasmine.getEnv().execute();

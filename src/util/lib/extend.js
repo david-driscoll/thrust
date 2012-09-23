@@ -65,7 +65,7 @@ function (uCollection, uType)
                     }
 
                     // Recurse if we're merging plain objects or arrays
-                    if (deep && copy && (uType.isObject(copy) || (copyIsArray = uType.isArray(copy))))
+                    if (deep && copy && ((copyIsArray = uType.isArray(copy)) || (uType.isObject(copy) && !uType.isFunction(copy) )))
                     {
                         if (copyIsArray)
                         {

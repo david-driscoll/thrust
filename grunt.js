@@ -47,6 +47,7 @@ module.exports = function (grunt)
     var includedThrustModules = [
         'thrust/config',
         'thrust/convention',
+        'thrust/define',
         'thrust/events',
         'thrust/facade',
         'thrust/ignite',
@@ -284,6 +285,10 @@ module.exports = function (grunt)
             all: {
                 src: ['test-runners/**/*.html'],
                 errorReporting: true,
+            },
+            build: {
+                src: ['build-test-runners/**/*.html'],
+                errorReporting: true,
             }
         },
         concat: extend({
@@ -310,7 +315,7 @@ module.exports = function (grunt)
         }, minSettings),
         watch: {
             files: '<config:lint.files>',
-            tasks: 'bom lint jasmine'
+            tasks: 'bom lint jasmine:all'
         },
         requirejs: requireJsSettings,
         jshint: {
@@ -389,9 +394,9 @@ module.exports = function (grunt)
     });
 
     // Default task.
-    grunt.registerTask('debug', 'bom lint jasmine thrust_debug thrust_data_debug thrust_dom_debug thrust_template_debug thrust_spa_debug');
+    grunt.registerTask('debug', 'bom lint jasmine:all thrust_debug thrust_data_debug thrust_dom_debug thrust_template_debug thrust_spa_debug');
 
-    grunt.registerTask('default', 'bom lint jasmine thrust thrust_data thrust_dom thrust_template thrust_spa concat:all min:all shell:yuidoc');
+    grunt.registerTask('default', 'bom lint jasmine:all thrust thrust_data thrust_dom thrust_template thrust_spa concat:all min:all jasmine:build shell:yuidoc');
 
     grunt.registerTask('integrated', 'bom default requirejs:integrated min:integrated');
 

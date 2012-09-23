@@ -86,7 +86,7 @@ function (require, config, util, module)
         },
         /**
         Creates a thrust instance, from the given settings.
-        Including the plugins, and given default modules.
+        Including the plugins.
 
         @method stateTwo
         @param {Object} settings The settints to pass onto the thrust instance being created.
@@ -162,7 +162,7 @@ function (require, config, util, module)
             // The modules config
             var modules = localConfig.modules || [];
             // Thrust and thrust/module also need to be loaded.
-            modulesToLoad.push.apply(modulesToLoad, ['thrust', 'thrust/module'].concat(modules || []));
+            modulesToLoad.push.apply(modulesToLoad, ['thrust']);
             // Flatten the resultant array
             modulesToLoad = flatten(modulesToLoad);
 
@@ -179,7 +179,7 @@ function (require, config, util, module)
                 var currentPlugin = null, allConventions = [];
 
                 // Loop through all the modules being loaded
-                for (var i = 0, iLen = modulesToLoad.length - (modules.length + 1) ; i < iLen; i++)
+                for (var i = 0, iLen = modulesToLoad.length ; i < iLen; i++)
                 {
                     // Get plugin and configuration
                     var plugin = modulesToLoad[i],
@@ -216,14 +216,27 @@ function (require, config, util, module)
                 // Extend thrust with the spec
                 extend(currentPlugin, spec);
 
-                // Get the index of the given modules.
-                var moduleIndex = arguments.length - (modules.length + 1),
-                    // The module creater function
-                    Module = arguments[moduleIndex],
-                    // Get the definitions
-                    moduleDefinitions = slice.call(arguments, moduleIndex + 1),
-                    // Assign thrust
-                    thrust = currentPlugin;
+                defer.resolve(spec);
+            }, defer.reject);
+
+            return defer.promise;
+        },
+        /**
+        Loads up the default modules as indicated to thrust.
+
+        @method stageThree
+        @param {Object} context The context to use to load the modules.
+        **/
+        stageThree: function (context)
+        {
+            var thrust = context.thrust,
+                defer = when.defer(),
+                modules = context.cfg.modules;
+
+            require(['thrust/module'].concat(modules), function (Module)
+            {
+                // Get the definitions
+                var moduleDefinitions = slice.call(arguments, 1);
 
                 // Loop over all the modules
                 for (var i = 0, iLen = modules.length; i < iLen; i++)
@@ -238,8 +251,7 @@ function (require, config, util, module)
                     // Inject it into the thrust instance
                     moduleInstance.thrustCreate(thrust);
                 }
-
-                defer.resolve(spec);
+                defer.resolve();
             }, defer.reject);
 
             return defer.promise;

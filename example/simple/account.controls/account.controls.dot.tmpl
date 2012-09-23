@@ -1,0 +1,9 @@
+﻿<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    <i class="icon-user"></i> <span data-bind="text: username">Username</span>
+    <span class="caret"></span>
+</a>
+<ul class="dropdown-menu">
+    <!-- ko template: { foreach: actions, name: 'actionlink' } -->    <!-- /ko -->
+    <li class="divider"></li>
+    <!-- ko template: { foreach: context_actions, name: 'actionlink' } -->    <!-- /ko -->
+</ul>

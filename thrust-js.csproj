@@ -62,16 +62,29 @@
     <Content Include="build-test\thrust-build.js" />
     <Content Include="example\multipleinstances\global\g1.js" />
     <Content Include="example\multipleinstances\grunt.js" />
+    <Content Include="example\multipleinstances\ie.js" />
     <Content Include="example\multipleinstances\index.html" />
     <Content Include="example\multipleinstances\instance2\i2.js" />
     <Content Include="example\multipleinstances\instance3\i3.js" />
     <Content Include="example\multipleinstances\loader.gif" />
     <Content Include="example\multipleinstances\main.js" />
     <Content Include="example\multipleinstances\require.settings.js" />
+    <Content Include="example\simple\account.controls\account.controls.js" />
+    <Content Include="example\simple\grunt.js" />
+    <Content Include="example\simple\ie.js" />
+    <Content Include="example\simple\index.html" />
+    <Content Include="example\simple\loader.gif" />
+    <Content Include="example\simple\main.js" />
+    <Content Include="example\simple\menu\menu.js" />
+    <Content Include="example\simple\menu\side.js" />
+    <Content Include="example\simple\ready.js" />
+    <Content Include="example\simple\require.settings.js" />
+    <Content Include="example\simple\spa.css" />
     <Content Include="example\spa\about.html" />
     <Content Include="example\spa\account.controls\account.controls.js" />
     <Content Include="example\spa\contact.html" />
     <Content Include="example\spa\grunt.js" />
+    <Content Include="example\spa\ie.js" />
     <Content Include="example\spa\index.html" />
     <Content Include="example\spa\loader.gif" />
     <Content Include="example\spa\main.js" />
@@ -89,6 +102,7 @@
     <Content Include="src\config.js" />
     <Content Include="src\data\config.js" />
     <Content Include="src\data\event.types.js" />
+    <Content Include="src\define.js" />
     <Content Include="src\dom\config.js" />
     <Content Include="src\spa\convention\spalink.js" />
     <Content Include="src\mediator\config.js" />
@@ -117,7 +131,6 @@
     <Content Include="src\log.js" />
     <Content Include="src\main.js" />
     <Content Include="src\module.js" />
-    <Content Include="src\moduledefine.js" />
     <Content Include="src\template\main.js" />
     <Content Include="src\convention.js" />
     <Content Include="src\util\array.js" />
@@ -192,6 +205,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="example\multipleinstances\package.json" />
+    <Content Include="example\simple\package.json" />
+    <Content Include="example\simple\menu\menu.dot.tmpl" />
+    <Content Include="example\simple\menu\menu.json" />
+    <Content Include="example\simple\menu\side.dot.tmpl" />
+    <Content Include="example\simple\menu\side.header.dot.tmpl" />
+    <Content Include="example\simple\menu\side.json" />
+    <Content Include="example\simple\account.controls\account.controls.dot.tmpl" />
+    <Content Include="example\simple\account.controls\account.controls.json" />
+    <Content Include="example\simple\actionlink.dot.tmpl" />
     <None Include="example\spa\account.controls\account.controls.dot.tmpl" />
     <Content Include="example\spa\actionlink.dot.tmpl" />
     <Content Include="example\spa\menu\menu.json" />

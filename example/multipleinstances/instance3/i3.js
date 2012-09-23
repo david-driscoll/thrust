@@ -6,20 +6,18 @@ function (util)
         start: function ()
         {
         },
-        context: '#i3',
+        context: '#i3active',
         ready: function ()
         {
             var that = this;
-            this.$().append('i3 loaded!');
-
-            this.$('#i3active').on('click', '.btn', function ()
+            this.$().show().on('click', '.btn', function ()
             {
-                window.instance3.deorbit();
+                window.instance3.deorbit(true);
             });
         },
         stop: function ()
         {
-            this.$().empty();
+            this.$().hide();
         },
         destroy: util.noop
     };

@@ -29,9 +29,14 @@ In addition module methods and plugins themselves create facades, that (to a C# 
 ### Asyncronous Life Cycle
 Each thrust module goes through a life cycle from `Initalization` to `Start` to `Ready`, and then from `Stop` to `Destroy`, depending on the current requirements.
 
-The thrust instance, also goes through a life cycle, named after phases a rocket goes through.  The instance will first begin a `Countdown` to `Ignition` to `Orbit`. When it's work is done it will `Deorbit` and finally `Splasdown`.
+The thrust instance, also goes through a life cycle, named after phases a rocket goes through.  The instance will first begin a `Countdown` to `Ignition` to `Orbit`. When it's work is done it will `Deorbit` and finally `Splashdown`.
 
-In addition thrust was designed with an Asyncronous Life Cycle, at any point during a modules life cycle, or application lifecycle, the next step can be delayed, using [Promises/A](http://wiki.commonjs.org/wiki/Promises/A) implemented by the [when.js](https://github.com/cujojs/when) library.  This gives you total control of when you say your application is "ready" or when your application is ready to "stop".
+In addition thrust was designed so that at any point during a modules life cycle, or application lifecycle, the next step can be delayed. Using [Promises/A](http://wiki.commonjs.org/wiki/Promises/A) implemented by the [when.js](https://github.com/cujojs/when) library.  This gives you total control of when you say your application is "ready" or when your application is ready to "stop".
+
+Why is that important?  With the life-cycle, you can delay the ready event from happening, until all your data has been preloaded from the server or maybe across servers. You and your development team, will not need to know about any special conditions before they start manipulating the DOM, they can do what they need to in code, and let thrust handle the big decisions.
 
 ## YAJSF????
-Yet Another JavaScript Framework? There are plenty of frameworks out there, but where thrust makes it nieche is in its deep extensibility, that was at the heart of it's design.
+Yet Another JavaScript Framework? There are plenty of frameworks out there, but thrust is more like those old build your own adventure books, just in this case you pick and choose the componnents you need, and Build Your Own Framework.  Thrust gives you the tools to make a framework that meets your (or your company's) needs.  The Thrust core is all about module management, and facade creation.  The real bulk of the framework features live as plugins, that can be swapped in and out as needed.
+
+## TODO
+* More examples - There are an infinite amount of possible examples that can be done, I would like to work on a TODO app and more! Ideas are welcomed!  I may also do examples based on other frameworks like Ember or Angular as time permits.

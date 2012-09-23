@@ -319,13 +319,6 @@ function (util, log, Events, facade, has)
         {
             has(&#x27;DEBUG&#x27;) &amp;&amp; log.info(&#x27;Mediator: Ready!&#x27;);
         });
-
-        that.subscribe(&#x27;thrust&#x2F;navigate&#x27;, function (path)
-        {
-            if (path === window.location.pathname)
-                window.location.reload();
-            window.location = util.fixupUrl(path, appPath);
-        });
     };
 
     var MediatorPrototype = {

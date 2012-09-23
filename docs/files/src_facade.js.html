@@ -322,8 +322,15 @@ function (util, Module)
 
         Handles fetching of a module instance
 
+        Format:
+        thrust&#x2F;module!{instance}:{pluginName}:{hashKey}
+
+        hasKey: is a unique key, that the module shares with the facade, allows for defining dependencies
+                    in your define block, and get access to the modules facade.
+
         @method load
         @static
+        @obsolete
         @param {String} name The name of the instance that is being fetched
         @param {Function} parentRequire the require method to be loaded
         @param {Function} load Allows the load to inform that AMD for the value to hand off

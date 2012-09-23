@@ -9,3 +9,5 @@ test-results/
 *.userprefs
 *.dotCover
 build/
+*.sln
+*.csproj

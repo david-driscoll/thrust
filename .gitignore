@@ -11,3 +11,6 @@ test-results/
 build/
 *.sln
 *.csproj
+/Web.Release.config
+/Web.config
+/Web.Debug.config

@@ -1,7 +1,7 @@
 {
     "project": {
         "name": "Thrust JS Framework",
-        "description": "Ignite into a new world with thrust-js getting your application upto speed.",
+        "description": "Launch into a new world with thrust-js getting your application upto speed.",
         "version": "0.1.0",
         "url": "thrust-home"
     },
@@ -632,7 +632,7 @@
             },
             "namespaces": {},
             "file": "src\\spa\\main.js",
-            "line": 51
+            "line": 52
         },
         "thrust.spa.convention": {
             "name": "thrust.spa.convention",
@@ -686,7 +686,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\template\\main.js",
-            "line": 295,
+            "line": 296,
             "requires": [
                 "thrust.data"
             ]
@@ -1197,7 +1197,7 @@
             "module": "thrust.spa",
             "namespace": "",
             "file": "src\\spa\\main.js",
-            "line": 51,
+            "line": 52,
             "is_constructor": 1,
             "params": [
                 {
@@ -1263,7 +1263,7 @@
             "module": "thrust.template",
             "namespace": "",
             "file": "src\\template\\main.js",
-            "line": 46,
+            "line": 47,
             "description": "The template plugin consturctor.",
             "params": [
                 {
@@ -1293,7 +1293,7 @@
             "module": "thrust.template",
             "namespace": "",
             "file": "src\\template\\main.js",
-            "line": 295,
+            "line": 296,
             "is_constructor": 1,
             "params": [
                 {
@@ -2553,7 +2553,7 @@
         },
         {
             "file": "src\\spa\\main.js",
-            "line": 98,
+            "line": 99,
             "description": "Start the single page app router.",
             "itemtype": "method",
             "name": "start",
@@ -2562,7 +2562,7 @@
         },
         {
             "file": "src\\spa\\main.js",
-            "line": 114,
+            "line": 115,
             "description": "Hands the navigate method off to the module, so any module can trigger a navigation event.",
             "itemtype": "method",
             "name": "createFacade",
@@ -2588,7 +2588,7 @@
         },
         {
             "file": "src\\spa\\main.js",
-            "line": 131,
+            "line": 132,
             "description": "Navigates to the given url.",
             "itemtype": "method",
             "name": "navigate",
@@ -2604,7 +2604,7 @@
         },
         {
             "file": "src\\spa\\main.js",
-            "line": 143,
+            "line": 144,
             "description": "Configures the route object for the spa instance\n\nRoutes can be in 4 forms\n\n    {\n        '/path/to/:foo': 'path/to/module',\n        '/path/to/:bar': ['path/to/module1', 'path/to/module2'],\n        '/path/to/:fb': { path: 'path/to/module', args: ['args', 'to', 'hand off to start'] }\n        '/path/to/:foo/:bar': function(foo, bar){  custom handler }\n    }",
             "itemtype": "method",
             "name": "configureRoutes",
@@ -2620,7 +2620,7 @@
         },
         {
             "file": "src\\spa\\main.js",
-            "line": 193,
+            "line": 194,
             "itemtype": "method",
             "name": "__moduleStartCallback",
             "access": "private",
@@ -2746,7 +2746,7 @@
         },
         {
             "file": "src\\template\\main.js",
-            "line": 87,
+            "line": 88,
             "description": "Gets a template from the cache if it has been fetched. False otherwise.",
             "itemtype": "method",
             "name": "get",
@@ -2766,7 +2766,7 @@
         },
         {
             "file": "src\\template\\main.js",
-            "line": 95,
+            "line": 96,
             "description": "Gets a template from the cache if it has been fetched. False otherwise.",
             "itemtype": "method",
             "name": "get",
@@ -2786,7 +2786,7 @@
         },
         {
             "file": "src\\template\\main.js",
-            "line": 114,
+            "line": 115,
             "description": "Sets a template to the cache, with the given information",
             "itemtype": "method",
             "name": "set",
@@ -2817,7 +2817,7 @@
         },
         {
             "file": "src\\template\\main.js",
-            "line": 141,
+            "line": 142,
             "description": "Checks if the template exists in the cache.",
             "itemtype": "method",
             "name": "has",
@@ -2837,7 +2837,7 @@
         },
         {
             "file": "src\\template\\main.js",
-            "line": 149,
+            "line": 150,
             "description": "Checks if the template exists in the cache.",
             "itemtype": "method",
             "name": "has",
@@ -2857,7 +2857,7 @@
         },
         {
             "file": "src\\template\\main.js",
-            "line": 162,
+            "line": 163,
             "description": "Creates a new template given the information",
             "itemtype": "method",
             "name": "newTemplate",
@@ -2892,7 +2892,7 @@
         },
         {
             "file": "src\\template\\main.js",
-            "line": 192,
+            "line": 193,
             "description": "Compiles a template given the html and the engine type.",
             "itemtype": "method",
             "name": "compile",
@@ -2917,7 +2917,7 @@
         },
         {
             "file": "src\\template\\main.js",
-            "line": 214,
+            "line": 215,
             "description": "Fetchs a template from the server, or template store.",
             "itemtype": "method",
             "name": "fetch",
@@ -2943,7 +2943,7 @@
         },
         {
             "file": "src\\template\\main.js",
-            "line": 223,
+            "line": 224,
             "description": "Fetchs a template from the server, or template store.",
             "itemtype": "method",
             "name": "fetch",
@@ -2969,7 +2969,7 @@
         },
         {
             "file": "src\\template\\main.js",
-            "line": 276,
+            "line": 277,
             "description": "Creates a new template from the given DOM Node",
             "itemtype": "method",
             "name": "createFromDomNode",
@@ -2987,7 +2987,7 @@
         },
         {
             "file": "src\\template\\main.js",
-            "line": 317,
+            "line": 318,
             "itemtype": "method",
             "name": "createFacade",
             "params": [

@@ -6,9 +6,10 @@ define([
     'has',
     'flatiron/director',
     'domReady',
-    'thrust/instance'
+    'thrust/instance',
+    './config'
 ],
-function (require, Thrust, util, log, has, Router, domReady, instance)
+function (require, Thrust, util, log, has, Router, domReady, instance, config)
 {
     var each       = util.each,
         isString   = util.isString,
@@ -237,6 +238,8 @@ function (require, Thrust, util, log, has, Router, domReady, instance)
             };
         }
     };
+
+    SinglePageApp.config = config;
 
     return SinglePageApp;
 });

@@ -2343,13 +2343,13 @@ function (require, config, util, module)
 
             settings.plugins = plugins;
 
-            require(plugins.map(function (x) { return x + '/config'; }), function ()
+            require(plugins.map(function (x) { return x; }), function ()
             {
                 var args = arguments;
                 plugins.forEach(function (plugin, i)
                 {
                     var name = plugin.substring(plugin.lastIndexOf('/') + 1);
-                    config[name] = args[i];
+                    config[name] = args[i].config;
                 });
 
                 util.deepCopy(config, module.config());
@@ -4799,10 +4799,52 @@ function (util, Module)
         }
     };
 });
+define('thrust/mediator/config',['require'],function (thrustInstance)
+{
+    /**
+    Provides thrust configuration
+    
+    @module thrust.mediator
+    @submodule thrust.mediator.config
+    **/
+    
+
+    var config = {
+
+        /**
+        Resolves the given properties when creating an instance of the plugin.
+
+        This is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed
+        to the plugin constructor method.
+
+        @for thrust.mediator.config
+        @private
+        @property resolve
+        @readOnly
+        @type {Array}
+        **/
+        resolve: ['name', 'cfg'],
+        /**
+        The set of conventions to load into thrust/mediator.
+
+        @property conventions
+        @readOnly
+        @type {Array}
+        **/
+        conventions: [
+            'thrust/mediator/convention/container',
+            'thrust/mediator/convention/subscription',
+            'thrust/mediator/convention/autostart',
+            'thrust/mediator/convention/dependant.modules'
+        ]
+    };
+
+    return config;
+});
 define('thrust/mediator/main',[
-    'thrust/util', 'thrust/log', 'thrust/events', 'thrust/facade', 'has'
+    'thrust/util', 'thrust/log', 'thrust/events', 'thrust/facade', 'has', './config'
 ],
-function (util, log, Events, facade, has)
+function (util, log, Events, facade, has, config)
 {
     
     // Variable declaration.
@@ -4942,6 +4984,8 @@ function (util, log, Events, facade, has)
 
     // Extend our prototype to include the prototype generated above.
     Mediator.prototype = Mediator.fn = MediatorPrototype;
+
+    Mediator.config = config;
 
     return Mediator;
 });

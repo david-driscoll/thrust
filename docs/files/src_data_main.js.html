@@ -214,7 +214,7 @@ define([
     &#x27;jquery&#x27;,
     &#x27;thrust&#x2F;util&#x27;,
     &#x27;thrust&#x2F;log&#x27;,
-    &#x27;thrust&#x2F;data&#x2F;config&#x27;,
+    &#x27;.&#x2F;config&#x27;,
     &#x27;thrust&#x2F;config&#x27;,
     &#x27;.&#x2F;event.factory&#x27;,
     &#x27;.&#x2F;response.queue&#x27;,
@@ -564,6 +564,8 @@ function (jQuery, util, log, config, tConfig, eventFactory, ResponseQueue, event
 
     &#x2F;&#x2F; Take a hold of jQuery... this is sure to be contravesial
     jQuery.ajax = Data.ajax;
+
+    Data.config = config;
 
     return Data;
 });

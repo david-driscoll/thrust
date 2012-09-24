@@ -67,13 +67,13 @@ function (require, config, util, module)
 
             settings.plugins = plugins;
 
-            require(plugins.map(function (x) { return x + '/config'; }), function ()
+            require(plugins.map(function (x) { return x; }), function ()
             {
                 var args = arguments;
                 plugins.forEach(function (plugin, i)
                 {
                     var name = plugin.substring(plugin.lastIndexOf('/') + 1);
-                    config[name] = args[i];
+                    config[name] = args[i].config;
                 });
 
                 util.deepCopy(config, module.config());

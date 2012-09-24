@@ -6,9 +6,10 @@ define([
     'thrust/config',
     'domReady',
     'lodash',
-    'thrust/facade'
+    'thrust/facade',
+    './config'
 ],
-    function (require, util, tData, log, config, domReady, _, facade)
+    function (require, util, tData, log, config, domReady, _, facade, config)
     {
         var LONG        = 'long',
             SHORT       = 'short',
@@ -333,6 +334,8 @@ define([
                 has: bind(templateInstance.has, templateInstance)
             };
         };
+
+        Template.config = config;
 
         return Template;
     });

@@ -761,7 +761,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             {
                 igniteSpec.stageThree(context).then(bind(thrust.countdown, thrust));
             }
-            else
+            else if (config.automaticLifecycle)
             {
                 thrust.countdown();
             }

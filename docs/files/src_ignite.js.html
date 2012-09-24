@@ -279,13 +279,13 @@ function (require, config, util, module)
 
             settings.plugins = plugins;
 
-            require(plugins.map(function (x) { return x + &#x27;&#x2F;config&#x27;; }), function ()
+            require(plugins.map(function (x) { return x; }), function ()
             {
                 var args = arguments;
                 plugins.forEach(function (plugin, i)
                 {
                     var name = plugin.substring(plugin.lastIndexOf(&#x27;&#x2F;&#x27;) + 1);
-                    config[name] = args[i];
+                    config[name] = args[i].config;
                 });
 
                 util.deepCopy(config, module.config());

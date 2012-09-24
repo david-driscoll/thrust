@@ -6,9 +6,10 @@ define([
     'thrust/facade',
     'thrust/events',
     'has',
-    'thrust/instance'
+    'thrust/instance',
+    './config'
 ],
-function (jQuery, util, log, jQueryInterface, facade, events, has, instance)
+function (jQuery, util, log, jQueryInterface, facade, events, has, instance, config)
 {
     'use strict';
     //#region Variable declaration
@@ -227,6 +228,8 @@ function (jQuery, util, log, jQueryInterface, facade, events, has, instance)
     }, events);
 
     //#endregion
+
+    Dom.config = config;
 
     return Dom;
 });

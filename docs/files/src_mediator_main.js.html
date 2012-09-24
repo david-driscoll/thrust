@@ -211,9 +211,9 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 define([
-    &#x27;thrust&#x2F;util&#x27;, &#x27;thrust&#x2F;log&#x27;, &#x27;thrust&#x2F;events&#x27;, &#x27;thrust&#x2F;facade&#x27;, &#x27;has&#x27;
+    &#x27;thrust&#x2F;util&#x27;, &#x27;thrust&#x2F;log&#x27;, &#x27;thrust&#x2F;events&#x27;, &#x27;thrust&#x2F;facade&#x27;, &#x27;has&#x27;, &#x27;.&#x2F;config&#x27;
 ],
-function (util, log, Events, facade, has)
+function (util, log, Events, facade, has, config)
 {
     &#x27;use strict&#x27;;
     &#x2F;&#x2F; Variable declaration.
@@ -353,6 +353,8 @@ function (util, log, Events, facade, has)
 
     &#x2F;&#x2F; Extend our prototype to include the prototype generated above.
     Mediator.prototype = Mediator.fn = MediatorPrototype;
+
+    Mediator.config = config;
 
     return Mediator;
 });

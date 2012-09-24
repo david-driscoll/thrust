@@ -2343,13 +2343,13 @@ function (require, config, util, module)
 
             settings.plugins = plugins;
 
-            require(plugins.map(function (x) { return x + '/config'; }), function ()
+            require(plugins.map(function (x) { return x; }), function ()
             {
                 var args = arguments;
                 plugins.forEach(function (plugin, i)
                 {
                     var name = plugin.substring(plugin.lastIndexOf('/') + 1);
-                    config[name] = args[i];
+                    config[name] = args[i].config;
                 });
 
                 util.deepCopy(config, module.config());
@@ -4799,10 +4799,52 @@ function (util, Module)
         }
     };
 });
+define('thrust/mediator/config',['require'],function (thrustInstance)
+{
+    /**
+    Provides thrust configuration
+    
+    @module thrust.mediator
+    @submodule thrust.mediator.config
+    **/
+    
+
+    var config = {
+
+        /**
+        Resolves the given properties when creating an instance of the plugin.
+
+        This is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed
+        to the plugin constructor method.
+
+        @for thrust.mediator.config
+        @private
+        @property resolve
+        @readOnly
+        @type {Array}
+        **/
+        resolve: ['name', 'cfg'],
+        /**
+        The set of conventions to load into thrust/mediator.
+
+        @property conventions
+        @readOnly
+        @type {Array}
+        **/
+        conventions: [
+            'thrust/mediator/convention/container',
+            'thrust/mediator/convention/subscription',
+            'thrust/mediator/convention/autostart',
+            'thrust/mediator/convention/dependant.modules'
+        ]
+    };
+
+    return config;
+});
 define('thrust/mediator/main',[
-    'thrust/util', 'thrust/log', 'thrust/events', 'thrust/facade', 'has'
+    'thrust/util', 'thrust/log', 'thrust/events', 'thrust/facade', 'has', './config'
 ],
-function (util, log, Events, facade, has)
+function (util, log, Events, facade, has, config)
 {
     
     // Variable declaration.
@@ -4942,6 +4984,8 @@ function (util, log, Events, facade, has)
 
     // Extend our prototype to include the prototype generated above.
     Mediator.prototype = Mediator.fn = MediatorPrototype;
+
+    Mediator.config = config;
 
     return Mediator;
 });
@@ -5725,7 +5769,7 @@ define('thrust/data/main',[
     'jquery',
     'thrust/util',
     'thrust/log',
-    'thrust/data/config',
+    './config',
     'thrust/config',
     './event.factory',
     './response.queue',
@@ -6076,6 +6120,8 @@ function (jQuery, util, log, config, tConfig, eventFactory, ResponseQueue, event
     // Take a hold of jQuery... this is sure to be contravesial
     jQuery.ajax = Data.ajax;
 
+    Data.config = config;
+
     return Data;
 });
 
@@ -6240,6 +6286,46 @@ function (jQuery)
         initalizeContext: initalizeContext
     };
 });
+define('thrust/dom/config',['require'],function (thrustInstance)
+{
+    /**
+    Provides thrust configuration
+    
+    @module thrust.dom
+    @submodule thrust.dom.config
+    **/
+    
+
+    var config = {
+        /**
+        Resolves the given properties when creating an instance of the plugin.
+
+        This is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed
+        to the plugin constructor method.
+
+        @for thrust.dom.config
+        @private
+        @property resolve
+        @readOnly
+        @type {Array}
+        **/
+        resolve: ['name', 'mediator'],
+        /**
+        The set of conventions to load into thrust/dom.
+
+        @property conventions
+        @readOnly
+        @type {Array}
+        **/
+        conventions: [
+            'thrust/dom/convention/action',
+            'thrust/dom/convention/context',
+            'thrust/dom/convention/event'
+            //'thrust/dom/convention/page.ready'
+        ]
+    };
+    return config;
+});
 define('thrust/dom/main',[
     'jquery',
     'thrust/util',
@@ -6248,9 +6334,10 @@ define('thrust/dom/main',[
     'thrust/facade',
     'thrust/events',
     'has',
-    'thrust/instance'
+    'thrust/instance',
+    './config'
 ],
-function (jQuery, util, log, jQueryInterface, facade, events, has, instance)
+function (jQuery, util, log, jQueryInterface, facade, events, has, instance, config)
 {
     
     //#region Variable declaration
@@ -6469,6 +6556,8 @@ function (jQuery, util, log, jQueryInterface, facade, events, has, instance)
     }, events);
 
     //#endregion
+
+    Dom.config = config;
 
     return Dom;
 });
@@ -6819,6 +6908,95 @@ function (Convention, util)
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 
 
+define('thrust/template/config',['require'],function (thrustInstance)
+{
+    /**
+    Provides thrust configuration
+    
+    @module thrust.template
+    @submodule thrust.template.config
+    **/
+    
+
+    var config = {
+        /**
+        Resolves the given properties when creating an instance of the plugin.
+
+        This is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed
+        to the plugin constructor method.
+
+        @for thrust.template.config
+        @private
+        @property resolve
+        @readOnly
+        @type {Array}
+        **/
+        resolve: ['cfg', 'data'],
+        /**
+        The set of conventions to load into thrust/template.
+
+        @property conventions
+        @readOnly
+        @type {Array}
+        **/
+        conventions: [
+            'thrust/template/convention/template',
+            //'thrust/template/convention/knockout.engine'
+        ],
+        /**
+        Maps the available templates, to their appropriate module name.
+
+        **precompiled is a special case, and those methods are expected to be code built functions.
+
+        @property types
+        @readOnly
+        @type {Object}
+        **/
+        types: {
+            'doT': 'doT',
+            'precompiled': true
+        },
+        /**
+        Maps the template evaluators, so that when creating a template for knockout, it knows how to properly output the information.
+
+        @property evaluators
+        @readOnly
+        @type {Object}
+        **/
+        evaluators: {
+            'doT': { left: '{{= ', right: '}}' }
+        },
+        /**
+        The default template type, used when extension isn't given.
+
+        @property defaultType
+        @readOnly
+        @type {String}
+        @default 'doT'
+        **/
+        defaultType: 'doT',
+        /**
+        The base location, relative to the application path for template location.
+        If template paths are given relative to application path, this can be left empty.
+
+        @property baseUrl
+        @readOnly
+        @type {String}
+        @default ''
+        **/
+        baseUrl: '',
+        /**
+        Defines the extension used for templates stored on the server.
+
+        @property extension
+        @readOnly
+        @type {String}
+        @default '.tmpl'
+        **/
+        extension: '.tmpl'
+    };
+    return config;
+});
 define('thrust/template/main',[
     'require',
     'thrust/util',
@@ -6827,9 +7005,10 @@ define('thrust/template/main',[
     'thrust/config',
     'domReady',
     'lodash',
-    'thrust/facade'
+    'thrust/facade',
+    './config'
 ],
-    function (require, util, tData, log, config, domReady, _, facade)
+    function (require, util, tData, log, config, domReady, _, facade, config)
     {
         var LONG        = 'long',
             SHORT       = 'short',
@@ -7154,6 +7333,8 @@ define('thrust/template/main',[
                 has: bind(templateInstance.has, templateInstance)
             };
         };
+
+        Template.config = config;
 
         return Template;
     });
@@ -8049,6 +8230,70 @@ define("flatiron/director", (function (global) {
     }
 }(this)));
 
+define('thrust/spa/config',['require'],function (thrustInstance)
+{
+    /**
+    Provides thrust configuration
+    
+    @module thrust.spa
+    @submodule thrust.spa.config
+    **/
+    
+
+    var config = {
+        /**
+        Resolves the given properties when creating an instance of the plugin.
+
+        This is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed
+        to the plugin constructor method.
+
+        @for thrust.spa.config
+        @private
+        @property resolve
+        @readOnly
+        @type {Array}
+        **/
+        resolve: ['cfg', 'name', 'mediator'],
+        /**
+        The set of conventions to load into thrust/mediator.
+
+        @property conventions
+        @readOnly
+        @type {Array}
+        **/
+        conventions: [
+            'thrust/spa/convention/start',
+            'thrust/spa/convention/spalink'
+        ],
+        /**
+        Defines the value of custom parameters.
+        You can also define custom parameters to be a regular expression, and then use them in your routes
+
+        @property params
+        @readOnly
+        @type {Object}
+        **/
+        params: {},
+        /**
+        The predfined routes to be used by spa.
+
+        @property routes
+        @readOnly
+        @type {Object}
+        **/
+        routes: {},
+        /**
+        The file exstenion that should be removed when resolving routes and starting modules.
+
+        @property fileExtension
+        @readOnly
+        @type {String}
+        **/
+        fileExtension: '.html'
+    };
+
+    return config;
+});
 define('thrust/spa/main',[
     'require',
     'thrust',
@@ -8057,9 +8302,10 @@ define('thrust/spa/main',[
     'has',
     'flatiron/director',
     'domReady',
-    'thrust/instance'
+    'thrust/instance',
+    './config'
 ],
-function (require, Thrust, util, log, has, Router, domReady, instance)
+function (require, Thrust, util, log, has, Router, domReady, instance, config)
 {
     var each       = util.each,
         isString   = util.isString,
@@ -8288,6 +8534,8 @@ function (require, Thrust, util, log, has, Router, domReady, instance)
             };
         }
     };
+
+    SinglePageApp.config = config;
 
     return SinglePageApp;
 });

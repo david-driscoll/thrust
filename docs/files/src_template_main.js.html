@@ -218,9 +218,10 @@ define([
     &#x27;thrust&#x2F;config&#x27;,
     &#x27;domReady&#x27;,
     &#x27;lodash&#x27;,
-    &#x27;thrust&#x2F;facade&#x27;
+    &#x27;thrust&#x2F;facade&#x27;,
+    &#x27;.&#x2F;config&#x27;
 ],
-    function (require, util, tData, log, config, domReady, _, facade)
+    function (require, util, tData, log, config, domReady, _, facade, config)
     {
         var LONG        = &#x27;long&#x27;,
             SHORT       = &#x27;short&#x27;,
@@ -545,6 +546,8 @@ define([
                 has: bind(templateInstance.has, templateInstance)
             };
         };
+
+        Template.config = config;
 
         return Template;
     });

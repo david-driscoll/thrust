@@ -36,7 +36,14 @@ In addition thrust was designed so that at any point during a modules life cycle
 Why is that important?  With the life-cycle, you can delay the ready event from happening, until all your data has been preloaded from the server or maybe across servers. You and your development team, will not need to know about any special conditions before they start manipulating the DOM, they can do what they need to in code, and let thrust handle the big decisions.
 
 ## YAJSF????
-Yet Another JavaScript Framework? There are plenty of frameworks out there, but thrust is more like those old build your own adventure books, just in this case you pick and choose the componnents you need, and Build Your Own Framework.  Thrust gives you the tools to make a framework that meets your (or your company's) needs.  The Thrust core is all about module management, and facade creation.  The real bulk of the framework features live as plugins, that can be swapped in and out as needed.
+Yet Another JavaScript Framework? There are plenty of frameworks out there, but thrust is more like those old create your own adventure books, just in this case you pick and choose the componnents you need, and Create Your Own Framework.  Thrust gives you the tools to make a framework that meets your (or your company's) needs.  The Thrust core is all about module management, and facade creation.  The real bulk of the framework features live as plugins, that can be swapped in and out as needed.
 
 ## TODO
-* More examples - There are an infinite amount of possible examples that can be done, I would like to work on a TODO app and more! Ideas are welcomed!  I may also do examples based on other frameworks like Ember or Angular as time permits.
+* More examples
+	* Todos MVC
+	* Ember
+	* Angular
+	* Other various frameworks...
+* How-tos for...
+	* Creating a thrust based application
+	* Creating a thrust plugin

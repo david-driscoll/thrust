@@ -1,7 +1,7 @@
 define([
-    'thrust/util', 'thrust/log', 'thrust/events', 'thrust/facade', 'has'
+    'thrust/util', 'thrust/log', 'thrust/events', 'thrust/facade', 'has', './config'
 ],
-function (util, log, Events, facade, has)
+function (util, log, Events, facade, has, config)
 {
     'use strict';
     // Variable declaration.
@@ -141,6 +141,8 @@ function (util, log, Events, facade, has)
 
     // Extend our prototype to include the prototype generated above.
     Mediator.prototype = Mediator.fn = MediatorPrototype;
+
+    Mediator.config = config;
 
     return Mediator;
 });

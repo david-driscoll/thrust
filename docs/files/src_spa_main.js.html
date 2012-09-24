@@ -218,9 +218,10 @@ define([
     &#x27;has&#x27;,
     &#x27;flatiron&#x2F;director&#x27;,
     &#x27;domReady&#x27;,
-    &#x27;thrust&#x2F;instance&#x27;
+    &#x27;thrust&#x2F;instance&#x27;,
+    &#x27;.&#x2F;config&#x27;
 ],
-function (require, Thrust, util, log, has, Router, domReady, instance)
+function (require, Thrust, util, log, has, Router, domReady, instance, config)
 {
     var each       = util.each,
         isString   = util.isString,
@@ -449,6 +450,8 @@ function (require, Thrust, util, log, has, Router, domReady, instance)
             };
         }
     };
+
+    SinglePageApp.config = config;
 
     return SinglePageApp;
 });

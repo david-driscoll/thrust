@@ -2,7 +2,7 @@ define([
     'jquery',
     'thrust/util',
     'thrust/log',
-    'thrust/data/config',
+    './config',
     'thrust/config',
     './event.factory',
     './response.queue',
@@ -352,6 +352,8 @@ function (jQuery, util, log, config, tConfig, eventFactory, ResponseQueue, event
 
     // Take a hold of jQuery... this is sure to be contravesial
     jQuery.ajax = Data.ajax;
+
+    Data.config = config;
 
     return Data;
 });

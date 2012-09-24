@@ -160,6 +160,7 @@ module.exports = function (grunt)
         ],
         include: includedThrustModules.concat([
             'thrust/mediator',
+            'thrust/mediator/config',
             'thrust/mediator/convention/autostart',
             'thrust/mediator/convention/container',
             'thrust/mediator/convention/dependant.modules',
@@ -173,6 +174,7 @@ module.exports = function (grunt)
             { name: 'thrust/data', location: 'src/data' },
         ],
         include: [
+            'thrust/data/config',
             'thrust/data/convention/start',
         ],
         exclude: ['jquery'].concat(thrustModules),
@@ -184,6 +186,7 @@ module.exports = function (grunt)
             { name: 'thrust/dom', location: 'src/dom' },
         ],
         include: [
+            'thrust/dom/config',
             'thrust/dom/convention/action',
             'thrust/dom/convention/context',
             'thrust/dom/convention/event',
@@ -198,6 +201,7 @@ module.exports = function (grunt)
             { name: 'thrust/template', location: 'src/template' },
         ],
         include: [
+            'thrust/template/config',
             'thrust/template/convention/template',
             'thrust/template/convention/knockout.engine',
         ],
@@ -210,6 +214,7 @@ module.exports = function (grunt)
             { name: 'thrust/spa', location: 'src/spa' },
         ],
         include: [
+            'thrust/spa/config',
             'thrust/spa/convention/start',
         ],
         exclude: [].concat(thrustModules),

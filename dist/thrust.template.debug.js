@@ -1,4 +1,4 @@
-/*! Thrust JS Framework - v0.1.0 - 2012-09-23
+/*! Thrust JS Framework - v0.1.0 - 2012-10-27
 * thrust-home
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 
@@ -36,7 +36,7 @@ define('thrust/template/config',['require'],function (thrustInstance)
         **/
         conventions: [
             'thrust/template/convention/template',
-            //'thrust/template/convention/knockout.engine'
+            'thrust/template/convention/knockout.engine'
         ],
         /**
         Maps the available templates, to their appropriate module name.

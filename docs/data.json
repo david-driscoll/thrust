@@ -4396,8 +4396,8 @@
         },
         {
             "file": "src\\config.js",
-            "line": 104,
-            "description": "The set of modules to preload with the inital wireup of the Thrust instance.",
+            "line": 99,
+            "description": "The set of modules to preload with the inital wireup of the Thrust instance.\n\nAccepts the module path a string or the module as an object in the following format.\n  Where args will be handed off to the module life cycle methods.\n\n   {\n       path: '',\n       args: []\n   }",
             "itemtype": "property",
             "name": "modules",
             "readonly": "",
@@ -4408,7 +4408,7 @@
         },
         {
             "file": "src\\config.js",
-            "line": 112,
+            "line": 115,
             "description": "Used internally by thrust to determine if the life-cycle is controlled by thrust, or a parent instance.",
             "itemtype": "property",
             "name": "childInstance",
@@ -4420,7 +4420,7 @@
         },
         {
             "file": "src\\config.js",
-            "line": 120,
+            "line": 123,
             "description": "Used internally by thrust to determine if thrust should control the life-cycle, or the consumer",
             "itemtype": "property",
             "name": "automaticLifecycle",
@@ -4432,7 +4432,7 @@
         },
         {
             "file": "src\\config.js",
-            "line": 130,
+            "line": 133,
             "description": "AMD API\nload\n\nHandles fetching of a current config for the current thrust instance, or the config of the given plugin.\nAdding the : character requests a specific config plugin.\nthrust/config!global = thrust!global:config = Thrust instance config from the instance named global.",
             "itemtype": "method",
             "name": "load",
@@ -5656,7 +5656,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 619,
+            "line": 620,
             "description": "Begins the stop process for a module.  This runs as part of the\n    deorbit phase, during stop, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "stop",
@@ -5677,7 +5677,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 643,
+            "line": 644,
             "description": "Begins the destroy process for a module.  This runs as part of the\n    slashdown phase, during destroy, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "destroy",
@@ -5698,7 +5698,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 680,
+            "line": 682,
             "description": "Injects a preconstructed module into the thrust instance.",
             "itemtype": "method",
             "name": "__injectModule",
@@ -5716,7 +5716,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 691,
+            "line": 693,
             "description": "Creates a module from the given definition object, with the given name.",
             "itemtype": "method",
             "name": "createModule",
@@ -5737,7 +5737,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 709,
+            "line": 711,
             "description": "Launches another child module for thrust.",
             "itemtype": "method",
             "name": "spawn",
@@ -5757,7 +5757,28 @@
         },
         {
             "file": "src\\main.js",
-            "line": 731,
+            "line": 729,
+            "description": "Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.",
+            "itemtype": "method",
+            "name": "registerModule",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The module name to assign the arguments with.",
+                    "type": "String"
+                },
+                {
+                    "name": "arguments,",
+                    "description": "additional arguments that will be passed onto the moudle",
+                    "type": "Object*"
+                }
+            ],
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 745,
             "description": "Initalizes a new Thrust instance based on the given settings.",
             "itemtype": "method",
             "name": "launch",
@@ -5774,7 +5795,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 786,
+            "line": 809,
             "description": "Gets a named thrust stance if it exists.",
             "itemtype": "method",
             "name": "getInstance",
@@ -5795,7 +5816,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 799,
+            "line": 822,
             "description": "Fetchs a named thrust stance if it exists.\nThis loads asyncronously, as the instance may not be loaded",
             "itemtype": "method",
             "name": "__fetchInstance",
@@ -5818,7 +5839,7 @@
         },
         {
             "file": "src\\main.js",
-            "line": 814,
+            "line": 837,
             "description": "Creates a new module and hands it off to the given instance, if that instance exists.",
             "itemtype": "method",
             "name": "createModule",
@@ -5845,7 +5866,75 @@
         },
         {
             "file": "src\\main.js",
-            "line": 834,
+            "line": 857,
+            "description": "Lists the module registrations.",
+            "itemtype": "property",
+            "name": "__moduleRegistrations",
+            "static": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 866,
+            "description": "Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.",
+            "itemtype": "method",
+            "name": "registerModule",
+            "static": 1,
+            "params": [
+                {
+                    "name": "instanceName",
+                    "description": "The thrust instance the module is to be associated with.",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "The module name to assign the arguments with.",
+                    "type": "String"
+                },
+                {
+                    "name": "arguments,",
+                    "description": "additional arguments that will be passed onto the moudle",
+                    "type": "Object*"
+                }
+            ],
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 891,
+            "description": "Gets the modules arguments from the registrations.\n\nIf original args contains anything it is passed instead of the registrations.\nIf the registrations are in place it will return them.",
+            "itemtype": "method",
+            "name": "__getModuleArgs",
+            "static": 1,
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "instanceName",
+                    "description": "The thrust instance",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "The module name",
+                    "type": "String"
+                },
+                {
+                    "name": "originalArgs",
+                    "description": "The original arguments passed into the calling method.",
+                    "type": "Array"
+                }
+            ],
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 917,
             "description": "AMD API\nload\n\nHandles fetching of a current thurst instance, by expected name.\nAdding the : character requests a specific plugin.\nthrust!global = Thrust instance\nthrust!global:dom = The thrust dom plugin instance",
             "itemtype": "method",
             "name": "load",

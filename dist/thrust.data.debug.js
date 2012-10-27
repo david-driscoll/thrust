@@ -1,4 +1,4 @@
-/*! Thrust JS Framework - v0.1.0 - 2012-09-23
+/*! Thrust JS Framework - v0.1.0 - 2012-10-27
 * thrust-home
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 

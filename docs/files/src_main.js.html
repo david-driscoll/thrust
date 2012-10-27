@@ -345,7 +345,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
         {
             has(&#x27;DEBUG&#x27;) &amp;&amp; log.info(format(infoFormat, name));
             has(&#x27;DEBUG&#x27;) &amp;&amp; log.debug(format(conventionName, name));
-            return mod.thrustCall(method, compAfter, args).then(function ()
+            return mod.thrustCall(method, compAfter, getModuleArgs(that.name, name, args)).then(function ()
             {
                 that.mediator &amp;&amp; that.mediator.fire(eventName, name);
                 mod.convention(conventionName, conventionValue);
@@ -722,9 +722,9 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             if (result)
                 return result;
 
-            var args = arguments;
+            var args = toArray(arguments).slice(1);
             if (isArray(name))
-                result = map(name, function (x) { return that.init(x); });
+                result = map(name, function (x) { return that.init.apply(that, [x].concat(args)); });
             else
                 result = runRunnerFactory(method).apply(that, arguments);
 
@@ -751,7 +751,10 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             if (!isArray(name))
                 name = [name];
 
-            var items = [];
+            var items = [],
+                origionalArgs = arguments,
+                args = toArray(arguments).slice(1);
+
             for (var i = 0, iLen = name.length; i &lt; iLen; i++)
             {
                 var n = name[i],
@@ -759,35 +762,32 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
                 if (!mod)
                 {
-                    items.push(that.init.call(that, [n].concat(slice.call(arguments, 1))));
+                    items.push(that.init.call(that, [n].concat(args)));
                 }
                 else if (!mod.convention(INIT + &#x27;-status&#x27;))
                 {
-                    items.push(that.init.call(that, [n].concat(slice.call(arguments, 1))));
+                    items.push(that.init.call(that, [n].concat(args)));
                 }
             }
 
-            var startDefer = when.defer(),
-                args = util.toArray(arguments);
+            var startDefer = when.defer();
             when.all(util.flatten(items)).then(function ()
             {
                 var results = [];
-                var result = runRunnerFactory(method).apply(that, args);
-                &#x2F;&#x2F;if (result)
-                &#x2F;&#x2F;{
+                var result = runRunnerFactory(method).apply(that, origionalArgs);
+
                 results.push(result);
 
                 var resultsDefer = when.all(util.flatten(results));
                 if (that.started)
                 {
-                    var runReady = function () { when.chain(that.ready.apply(that, args), startDefer); };
+                    var runReady = function () { when.chain(that.ready.apply(that, origionalArgs), startDefer); };
                     resultsDefer.then(runReady);
                 }
                 else
                 {
                     when.chain(resultsDefer, startDefer);
                 }
-                &#x2F;&#x2F;}
             });
 
             return startDefer.promise;
@@ -813,14 +813,15 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             if (!isArray(name))
                 name = [name];
 
-            var items = [];
+            var items = [],
+                args = toArray(arguments).slice(1);
             for (var i = 0, iLen = name.length; i &lt; iLen; i++)
             {
                 var n = name[i],
                     mod = that.modules[n];
                 if (!mod.convention(START + &#x27;-status&#x27;) &amp;&amp; !that.started)
                 {
-                    items.push(that.start.apply(that, [n].concat(slice.call(arguments, 1))));
+                    items.push(that.start.apply(that, [n].concat(args)));
                 }
             }
 
@@ -873,7 +874,8 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             if (!isArray(name))
                 name = [name];
 
-            var items = [];
+            var items = [],
+                args = toArray(arguments).slice(1);
             for (var i = 0, iLen = name.length; i &lt; iLen; i++)
             {
                 var n = name[i],
@@ -881,7 +883,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
                 if (mod.convention(START + &#x27;-status&#x27;))
                 {
-                    items.push(that.stop.call(that, [n].concat(slice.call(arguments, 1))));
+                    items.push(that.stop.call(that, [n].concat(args)));
                 }
             }
 
@@ -928,13 +930,25 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
         spawn: function (settings)
         {
             var that = this;
-            return Thrust.launch(extend({}, { childInstance: true }, settings)).then(function (context)
+            return Thrust.launch(extend({}, { childInstance: true }, settings), true).then(function (context)
             {
                 var thrust = context.thrust;
                 that.children.push(thrust);
                 thrust.parent = that;
                 return context;
             });
+        },
+        &#x2F;**
+        Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.
+        
+        @method registerModule
+        @param {String} name The module name to assign the arguments with.
+        @param {Object*} arguments, additional arguments that will be passed onto the moudle
+        **&#x2F;
+        registerModule: function (name)
+        {
+            var that = this;
+            Thrust.registerModule.apply(Thrust, [that.name].concat(toArray(arguments)));
         }
     };
 
@@ -947,7 +961,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
     @static
     @param {Object} settings The module to inject
     **&#x2F;
-    Thrust.launch = function (settings)
+    Thrust.launch = function (settings, calledByParent)
     {
         if (!settings)
             settings = { name: &#x27;global&#x27; };
@@ -964,18 +978,27 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
         
         setupDefer.then(function (context)
         {
-            var thrust = context.thrust;
-            thrust.startingModules = context.cfg.modules;
-            var config = thrust.config = thrust.cfg;
+            var thrust = context.thrust,
+                modules = thrust.startingModules = context.cfg.modules,
+                config = thrust.config = thrust.cfg;
             instances[thrust.name] = thrust;
 
             if (config.modules &amp;&amp; config.modules.length)
             {
-                igniteSpec.stageThree(context).then(bind(thrust.countdown, thrust));
+                var newModules = modules.map(function (x)
+                {
+                    if (typeof x === &#x27;string&#x27;)
+                    {
+                        return x;
+                    }
+                });
+                var stage3 = igniteSpec.stageThree(context);
+                if (config.automaticLifecycle)
+                    stage3.then(bind(thrust.countdown, thrust, null, calledByParent));
             }
-            else
+            else if (config.automaticLifecycle)
             {
-                thrust.countdown();
+                thrust.countdown(null, calledByParent);
             }
 
             return context;
@@ -1041,6 +1064,66 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             instance.__injectModule(module);
             return module;
         }
+    };
+
+    &#x2F;**
+    Lists the module registrations.
+
+    @property __moduleRegistrations
+    @static
+    @private
+    **&#x2F;
+    Thrust.__moduleRegistrations = {};
+
+    &#x2F;**
+    Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.
+
+    @method registerModule
+    @static
+    @param {String} instanceName The thrust instance the module is to be associated with.
+    @param {String} name The module name to assign the arguments with.
+    @param {Object*} arguments, additional arguments that will be passed onto the moudle
+    **&#x2F;
+    Thrust.registerModule = function (instanceName, name)
+    {
+        if (!instanceName) throw new Error(&#x27;instanceName is required!&#x27;);
+        if (!name) throw new Error(&#x27;name is required!&#x27;);
+
+        if (!Thrust.__moduleRegistrations[instanceName])
+            Thrust.__moduleRegistrations[instanceName] = {};
+
+        var args = toArray(arguments).slice(2);
+
+        if (Thrust.__moduleRegistrations[instanceName][name])
+            throw new Error(format(&#x27;Module &quot;{0}&quot; already registered to instance &quot;{1}&quot;&#x27;, name, instanceName));
+
+        Thrust.__moduleRegistrations[instanceName][name] = args || [];
+    };
+
+    &#x2F;**
+    Gets the modules arguments from the registrations.
+
+    If original args contains anything it is passed instead of the registrations.
+    If the registrations are in place it will return them.
+
+    @method __getModuleArgs
+    @static
+    @private
+    @param {String} instanceName The thrust instance
+    @param {String} name The module name
+    @param {Array} originalArgs The original arguments passed into the calling method.
+    **&#x2F;
+    var getModuleArgs = Thrust.__getModuleArgs = function (instanceName, name, originalArgs)
+    {
+        var args = toArray(originalArgs);
+        if (args.length)
+            return args;
+
+        var instanceRegistrations = Thrust.__moduleRegistrations[instanceName];
+        if (instanceRegistrations &amp;&amp; instanceRegistrations[name])
+            return instanceRegistrations[name];
+
+        return args;
     };
 
     &#x2F;**

@@ -307,18 +307,21 @@ function (thrustInstance)
         @readOnly
         @type {Array}
         **&#x2F;
-        plugins: [
-            &#x2F;*&#x27;thrust&#x2F;data&#x27;,
-            &#x27;thrust&#x2F;dom&#x27;,
-            &#x27;thrust&#x2F;template&#x27;,
-            &#x27;thrust&#x2F;spa&#x27;,*&#x2F;
-        ],
+        plugins: [],
         &#x2F;**
-        The set of modules to preload with the inital wireup of the Thrust instance.
-
-        @property modules
-        @readOnly
-        @type {Array}
+        * The set of modules to preload with the inital wireup of the Thrust instance.
+        *
+        * Accepts the module path a string or the module as an object in the following format.
+        *   Where args will be handed off to the module life cycle methods.
+        *
+        *    {
+        *        path: &#x27;&#x27;,
+        *        args: []
+        *    }
+        *
+        * @property modules
+        * @readOnly
+        * @type {Array}
         **&#x2F;
         modules: [],
         &#x2F;**

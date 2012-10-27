@@ -1,4 +1,4 @@
-/*! Thrust JS Framework - v0.1.0 - 2012-09-23
+/*! Thrust JS Framework - v0.1.0 - 2012-10-27
 * thrust-home
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 
@@ -2033,18 +2033,21 @@ function (thrustInstance)
         @readOnly
         @type {Array}
         **/
-        plugins: [
-            /*'thrust/data',
-            'thrust/dom',
-            'thrust/template',
-            'thrust/spa',*/
-        ],
+        plugins: [],
         /**
-        The set of modules to preload with the inital wireup of the Thrust instance.
-
-        @property modules
-        @readOnly
-        @type {Array}
+        * The set of modules to preload with the inital wireup of the Thrust instance.
+        *
+        * Accepts the module path a string or the module as an object in the following format.
+        *   Where args will be handed off to the module life cycle methods.
+        *
+        *    {
+        *        path: '',
+        *        args: []
+        *    }
+        *
+        * @property modules
+        * @readOnly
+        * @type {Array}
         **/
         modules: [],
         /**
@@ -3222,7 +3225,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
         {
             false && log.info(format(infoFormat, name));
             false && log.debug(format(conventionName, name));
-            return mod.thrustCall(method, compAfter, args).then(function ()
+            return mod.thrustCall(method, compAfter, getModuleArgs(that.name, name, args)).then(function ()
             {
                 that.mediator && that.mediator.fire(eventName, name);
                 mod.convention(conventionName, conventionValue);
@@ -3599,9 +3602,9 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             if (result)
                 return result;
 
-            var args = arguments;
+            var args = toArray(arguments).slice(1);
             if (isArray(name))
-                result = map(name, function (x) { return that.init(x); });
+                result = map(name, function (x) { return that.init.apply(that, [x].concat(args)); });
             else
                 result = runRunnerFactory(method).apply(that, arguments);
 
@@ -3628,7 +3631,10 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             if (!isArray(name))
                 name = [name];
 
-            var items = [];
+            var items = [],
+                origionalArgs = arguments,
+                args = toArray(arguments).slice(1);
+
             for (var i = 0, iLen = name.length; i < iLen; i++)
             {
                 var n = name[i],
@@ -3636,35 +3642,32 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
                 if (!mod)
                 {
-                    items.push(that.init.call(that, [n].concat(slice.call(arguments, 1))));
+                    items.push(that.init.call(that, [n].concat(args)));
                 }
                 else if (!mod.convention(INIT + '-status'))
                 {
-                    items.push(that.init.call(that, [n].concat(slice.call(arguments, 1))));
+                    items.push(that.init.call(that, [n].concat(args)));
                 }
             }
 
-            var startDefer = when.defer(),
-                args = util.toArray(arguments);
+            var startDefer = when.defer();
             when.all(util.flatten(items)).then(function ()
             {
                 var results = [];
-                var result = runRunnerFactory(method).apply(that, args);
-                //if (result)
-                //{
+                var result = runRunnerFactory(method).apply(that, origionalArgs);
+
                 results.push(result);
 
                 var resultsDefer = when.all(util.flatten(results));
                 if (that.started)
                 {
-                    var runReady = function () { when.chain(that.ready.apply(that, args), startDefer); };
+                    var runReady = function () { when.chain(that.ready.apply(that, origionalArgs), startDefer); };
                     resultsDefer.then(runReady);
                 }
                 else
                 {
                     when.chain(resultsDefer, startDefer);
                 }
-                //}
             });
 
             return startDefer.promise;
@@ -3690,14 +3693,15 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             if (!isArray(name))
                 name = [name];
 
-            var items = [];
+            var items = [],
+                args = toArray(arguments).slice(1);
             for (var i = 0, iLen = name.length; i < iLen; i++)
             {
                 var n = name[i],
                     mod = that.modules[n];
                 if (!mod.convention(START + '-status') && !that.started)
                 {
-                    items.push(that.start.apply(that, [n].concat(slice.call(arguments, 1))));
+                    items.push(that.start.apply(that, [n].concat(args)));
                 }
             }
 
@@ -3750,7 +3754,8 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             if (!isArray(name))
                 name = [name];
 
-            var items = [];
+            var items = [],
+                args = toArray(arguments).slice(1);
             for (var i = 0, iLen = name.length; i < iLen; i++)
             {
                 var n = name[i],
@@ -3758,7 +3763,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
 
                 if (mod.convention(START + '-status'))
                 {
-                    items.push(that.stop.call(that, [n].concat(slice.call(arguments, 1))));
+                    items.push(that.stop.call(that, [n].concat(args)));
                 }
             }
 
@@ -3805,13 +3810,25 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
         spawn: function (settings)
         {
             var that = this;
-            return Thrust.launch(extend({}, { childInstance: true }, settings)).then(function (context)
+            return Thrust.launch(extend({}, { childInstance: true }, settings), true).then(function (context)
             {
                 var thrust = context.thrust;
                 that.children.push(thrust);
                 thrust.parent = that;
                 return context;
             });
+        },
+        /**
+        Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.
+        
+        @method registerModule
+        @param {String} name The module name to assign the arguments with.
+        @param {Object*} arguments, additional arguments that will be passed onto the moudle
+        **/
+        registerModule: function (name)
+        {
+            var that = this;
+            Thrust.registerModule.apply(Thrust, [that.name].concat(toArray(arguments)));
         }
     };
 
@@ -3824,7 +3841,7 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
     @static
     @param {Object} settings The module to inject
     **/
-    Thrust.launch = function (settings)
+    Thrust.launch = function (settings, calledByParent)
     {
         if (!settings)
             settings = { name: 'global' };
@@ -3841,18 +3858,27 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
         
         setupDefer.then(function (context)
         {
-            var thrust = context.thrust;
-            thrust.startingModules = context.cfg.modules;
-            var config = thrust.config = thrust.cfg;
+            var thrust = context.thrust,
+                modules = thrust.startingModules = context.cfg.modules,
+                config = thrust.config = thrust.cfg;
             instances[thrust.name] = thrust;
 
             if (config.modules && config.modules.length)
             {
-                igniteSpec.stageThree(context).then(bind(thrust.countdown, thrust));
+                var newModules = modules.map(function (x)
+                {
+                    if (typeof x === 'string')
+                    {
+                        return x;
+                    }
+                });
+                var stage3 = igniteSpec.stageThree(context);
+                if (config.automaticLifecycle)
+                    stage3.then(bind(thrust.countdown, thrust, null, calledByParent));
             }
-            else
+            else if (config.automaticLifecycle)
             {
-                thrust.countdown();
+                thrust.countdown(null, calledByParent);
             }
 
             return context;
@@ -3918,6 +3944,66 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
             instance.__injectModule(module);
             return module;
         }
+    };
+
+    /**
+    Lists the module registrations.
+
+    @property __moduleRegistrations
+    @static
+    @private
+    **/
+    Thrust.__moduleRegistrations = {};
+
+    /**
+    Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.
+
+    @method registerModule
+    @static
+    @param {String} instanceName The thrust instance the module is to be associated with.
+    @param {String} name The module name to assign the arguments with.
+    @param {Object*} arguments, additional arguments that will be passed onto the moudle
+    **/
+    Thrust.registerModule = function (instanceName, name)
+    {
+        if (!instanceName) throw new Error('instanceName is required!');
+        if (!name) throw new Error('name is required!');
+
+        if (!Thrust.__moduleRegistrations[instanceName])
+            Thrust.__moduleRegistrations[instanceName] = {};
+
+        var args = toArray(arguments).slice(2);
+
+        if (Thrust.__moduleRegistrations[instanceName][name])
+            throw new Error(format('Module "{0}" already registered to instance "{1}"', name, instanceName));
+
+        Thrust.__moduleRegistrations[instanceName][name] = args || [];
+    };
+
+    /**
+    Gets the modules arguments from the registrations.
+
+    If original args contains anything it is passed instead of the registrations.
+    If the registrations are in place it will return them.
+
+    @method __getModuleArgs
+    @static
+    @private
+    @param {String} instanceName The thrust instance
+    @param {String} name The module name
+    @param {Array} originalArgs The original arguments passed into the calling method.
+    **/
+    var getModuleArgs = Thrust.__getModuleArgs = function (instanceName, name, originalArgs)
+    {
+        var args = toArray(originalArgs);
+        if (args.length)
+            return args;
+
+        var instanceRegistrations = Thrust.__moduleRegistrations[instanceName];
+        if (instanceRegistrations && instanceRegistrations[name])
+            return instanceRegistrations[name];
+
+        return args;
     };
 
     /**
@@ -5253,7 +5339,7 @@ function (Convention, util, Events)
         }
     });
 });
-/*! Thrust JS Framework - v0.1.0 - 2012-09-23
+/*! Thrust JS Framework - v0.1.0 - 2012-10-27
 * thrust-home
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 
@@ -6212,7 +6298,7 @@ function (Convention, util)
         }
     });
 });
-/*! Thrust JS Framework - v0.1.0 - 2012-09-23
+/*! Thrust JS Framework - v0.1.0 - 2012-10-27
 * thrust-home
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 
@@ -6903,7 +6989,7 @@ function (Convention, util)
         }
     });
 });
-/*! Thrust JS Framework - v0.1.0 - 2012-09-23
+/*! Thrust JS Framework - v0.1.0 - 2012-10-27
 * thrust-home
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 
@@ -6941,7 +7027,7 @@ define('thrust/template/config',['require'],function (thrustInstance)
         **/
         conventions: [
             'thrust/template/convention/template',
-            //'thrust/template/convention/knockout.engine'
+            'thrust/template/convention/knockout.engine'
         ],
         /**
         Maps the available templates, to their appropriate module name.
@@ -7535,7 +7621,7 @@ function (Convention, util, ko)
         }
     });
 });
-/*! Thrust JS Framework - v0.1.0 - 2012-09-23
+/*! Thrust JS Framework - v0.1.0 - 2012-10-27
 * thrust-home
 * Copyright (c) 2012 David Driscoll; Licensed MIT */
 

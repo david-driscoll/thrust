@@ -250,6 +250,38 @@
                 });
             });
 
+            describe('registerModule', function ()
+            {
+                it('must require an instance name', function ()
+                {
+                    expect(function () { Thrust.registerModule(); }).toThrow('instanceName is required!');
+                });
+
+                it('must require a module name', function ()
+                {
+                    expect(function () { Thrust.registerModule('global'); }).toThrow('name is required!');
+                    expect(function () { t.registerModule(); }).toThrow('name is required!');
+                });
+
+                it('retrieves registered arguments properly', function ()
+                {
+                    var emptyArray = [],
+                        registrationArgs1 = [1, 'two', ['three']],
+                        registrationArgs2 = ['arg1', { item: 'arg2' }],
+                        startArgs = [4, 'five', ['six']];
+                    
+                    Thrust.registerModule.apply(Thrust, ['test', 'my/test/module1'].concat(registrationArgs1));
+                    Thrust.registerModule.apply(Thrust, ['test', 'my/test/module2'].concat(registrationArgs2));
+
+
+                    expect(Thrust.__getModuleArgs('test', 'my/test/module1', emptyArray)).toEqual(registrationArgs1);
+                    expect(Thrust.__getModuleArgs('test', 'my/test/module2', emptyArray)).toEqual(registrationArgs2);
+
+                    expect(Thrust.__getModuleArgs('test', 'my/test/module1', startArgs)).toEqual(startArgs);
+                    expect(Thrust.__getModuleArgs('test', 'my/test/module2', startArgs)).toEqual(startArgs);
+                });
+            });
+
             //TODO:
             //init
             //start

@@ -31,7 +31,7 @@ define(function (thrustInstance)
         **/
         conventions: [
             'thrust/template/convention/template',
-            //'thrust/template/convention/knockout.engine'
+            'thrust/template/convention/knockout.engine'
         ],
         /**
         Maps the available templates, to their appropriate module name.

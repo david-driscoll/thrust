@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Thrust by david-driscoll</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Thrust</h1>
+        <h2>Launch into a new world with thrust-js getting your application upto speed.</h2>
+        <a href="https://github.com/david-driscoll/thrust" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>Thrust.js</h1>
+
+<p>Thrust.js is a library designed to help meet the goals of a decoupled large scale application.  The work is inspired by the many <a href="https://speakerdeck.com/u/addyosmani/p/building-decoupled-large-scale-applications-using-javascript-and-jquery">talks and presentations</a> of <a href="http://addyosmani.com">Addy Osmani</a>.</p>
+
+<h2>Patterns</h2>
+
+<p>Thrust implements several patterns that help with the concept of large scale applications.</p>
+
+<h3>Decoupling</h3>
+
+<p>A JavaScript application that uses thrust, creates up modules, that are all loaded an managed by the central thrust instance.  This brings Decoupling, or Separation of Concerns, into the application, as each module should have a definite purpose.</p>
+
+<h3>Mediator</h3>
+
+<p>Otherwise known as Pub/Sub, thrust comes with a mediator, that is based on the Backbone events model.  This mediator allows modules to communicate with the central thrust instance, which other modules can listen for information on.</p>
+
+<h3>Plugins and Conventions</h3>
+
+<p>Thrust has been constructed from the ground up to be based on plugins.</p>
+
+<p>What this means is if thrust is missing some functionality you want, or requrie, you can easily extend the thrust library with any kind of functionality.</p>
+
+<ul>
+<li>If you don't need or want a dependancy on jQuery, why not create a dom plugin that uses Dojo or MooTools?</li>
+<li>Maybe you don't need Ajax based data in your application, create a local storage plugin to drop in place.</li>
+</ul><p>Thrust also supports conventions, these are configurable pieces that can be used to extend a plugins functionality, with extension points along the entire thrust lifecycle.</p>
+
+<h3>Sandboxed Facades</h3>
+
+<p>Each thrust plugin is allowed to generate a facade for a given module.  What each facade does depends on the requirements of the module.  Some like dom and data add properties onto the module, which allow for DOM or data operations. Another plugin might insert an object of items that the module can then use and manipulate.</p>
+
+<p>In addition module methods and plugins themselves create facades, that (to a C# developer) creates an interface, that hides the underlying implemntation.</p>
+
+<h3>Asyncronous Life Cycle</h3>
+
+<p>Each thrust module goes through a life cycle from <code>Initalization</code> to <code>Start</code> to <code>Ready</code>, and then from <code>Stop</code> to <code>Destroy</code>, depending on the current requirements.</p>
+
+<p>The thrust instance, also goes through a life cycle, named after phases a rocket goes through.  The instance will first begin a <code>Countdown</code> to <code>Ignition</code> to <code>Orbit</code>. When it's work is done it will <code>Deorbit</code> and finally <code>Splashdown</code>.</p>
+
+<p>In addition thrust was designed so that at any point during a modules life cycle, or application lifecycle, the next step can be delayed. Using <a href="http://wiki.commonjs.org/wiki/Promises/A">Promises/A</a> implemented by the <a href="https://github.com/cujojs/when">when.js</a> library.  This gives you total control of when you say your application is "ready" or when your application is ready to "stop".</p>
+
+<p>Why is that important?  With the life-cycle, you can delay the ready event from happening, until all your data has been preloaded from the server or maybe across servers. You and your development team, will not need to know about any special conditions before they start manipulating the DOM, they can do what they need to in code, and let thrust handle the big decisions.</p>
+
+<h2>YAJSF????</h2>
+
+<p>Yet Another JavaScript Framework? There are plenty of frameworks out there, but thrust is more like those old create your own adventure books, just in this case you pick and choose the componnents you need, and Create Your Own Framework.  Thrust gives you the tools to make a framework that meets your (or your company's) needs.  The Thrust core is all about module management, and facade creation.  The real bulk of the framework features live as plugins, that can be swapped in and out as needed.</p>
+
+<h2>TODO</h2>
+
+<ul>
+<li>More examples
+
+<ul>
+<li>Todos MVC</li>
+<li>Ember</li>
+<li>Angular</li>
+<li>Other various frameworks...</li>
+</ul>
+</li>
+<li>How-tos for...
+
+<ul>
+<li>Creating a thrust based application</li>
+<li>Creating a thrust plugin</li>
+</ul>
+</li>
+</ul>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/david-driscoll/thrust/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/david-driscoll/thrust/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/david-driscoll/thrust"></a> is maintained by <a href="https://github.com/david-driscoll">david-driscoll</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>

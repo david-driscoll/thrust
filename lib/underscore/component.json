@@ -1,0 +1,25 @@
+{
+  "name": "underscore",
+  "description": "JavaScript's functional programming helper library.",
+  "homepage": "http://underscorejs.org",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": {
+    "name": "Jeremy Ashkenas",
+    "email": "jeremy@documentcloud.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/documentcloud/underscore.git"
+  },
+  "main": "underscore.js",
+  "version": "1.4.3",
+  "readme": "                       __\r\n                      /\\ \\                                                         __\r\n     __  __    ___    \\_\\ \\     __   _ __   ____    ___    ___   _ __    __       /\\_\\    ____\r\n    /\\ \\/\\ \\ /' _ `\\  /'_  \\  /'__`\\/\\  __\\/ ,__\\  / ___\\ / __`\\/\\  __\\/'__`\\     \\/\\ \\  /',__\\\r\n    \\ \\ \\_\\ \\/\\ \\/\\ \\/\\ \\ \\ \\/\\  __/\\ \\ \\//\\__, `\\/\\ \\__//\\ \\ \\ \\ \\ \\//\\  __/  __  \\ \\ \\/\\__, `\\\r\n     \\ \\____/\\ \\_\\ \\_\\ \\___,_\\ \\____\\\\ \\_\\\\/\\____/\\ \\____\\ \\____/\\ \\_\\\\ \\____\\/\\_\\ _\\ \\ \\/\\____/\r\n      \\/___/  \\/_/\\/_/\\/__,_ /\\/____/ \\/_/ \\/___/  \\/____/\\/___/  \\/_/ \\/____/\\/_//\\ \\_\\ \\/___/\r\n                                                                                  \\ \\____/\r\n                                                                                   \\/___/\r\n\r\nUnderscore.js is a utility-belt library for JavaScript that provides\r\nsupport for the usual functional suspects (each, map, reduce, filter...)\r\nwithout extending any core JavaScript objects.\r\n\r\nFor Docs, License, Tests, and pre-packed downloads, see:\r\nhttp://underscorejs.org\r\n\r\nMany thanks to our contributors:\r\nhttps://github.com/documentcloud/underscore/contributors\r\n",
+  "readmeFilename": "README.md",
+  "_id": "underscore@1.4.3"
+}

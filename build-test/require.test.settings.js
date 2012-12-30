@@ -16,10 +16,10 @@
             'i18n': '../lib/i18n/i18n',
             'domReady': '../lib/domReady/domReady',
             'doT': '../lib/doT/doT',
-            'jquery': '../lib/jquery/jquery-1.8.1',
+            'jquery': '../lib/jquery/jquery',
             'has': '../lib/has/has',
             'knockout': '../lib/knockout/build/output/knockout-latest.debug',
-            'flatiron/director': '../lib/director/build/director-1.1.6',
+            'flatiron/director': '../lib/director/build/director',
             //#endregion
             'thrust': '../build/thrust.debug',
             'thrust/util': '../build/thrust.debug',

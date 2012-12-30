@@ -1,6 +1,7 @@
 define(['thrust', 'knockout'],
-function (Thrust, ko)
+function (thrust, ko)
 {
+    var Thrust = thrust.Thrust;
     var instanceRunMethod = function (name, method, stop)
     {
         return function ()

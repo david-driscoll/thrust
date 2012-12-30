@@ -1,1117 +1,5 @@
-/*! Thrust JS Framework - v0.1.0 - 2012-10-27
-* thrust-home
-* Copyright (c) 2012 David Driscoll; Licensed MIT */
 
 
-define('thrust/util/array',['lodash'], function (_)
-{
-    
-    /**
-    @module thrust.util
-    @submodule thrust.util.array
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#first](http://underscorejs.org/#first)
-
-    @for thrust.util.array
-    @method first
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#first](http://underscorejs.org/#first)
-
-    @method head
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#initial](http://underscorejs.org/#initial)
-
-    @method initial
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#last](http://underscorejs.org/#last)
-
-    @method last
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#rest](http://underscorejs.org/#rest)
-
-    @method tail
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#rest](http://underscorejs.org/#rest)
-
-    @method rest
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#compact](http://underscorejs.org/#compact)
-
-    @method compact
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#flatten](http://underscorejs.org/#flatten)
-
-    @method flatten
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#without](http://underscorejs.org/#without)
-
-    @method without
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#union](http://underscorejs.org/#union)
-
-    @method union
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#intersection](http://underscorejs.org/#intersection)
-
-    @method intersection
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#difference](http://underscorejs.org/#difference)
-
-    @method difference
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#uniq](http://underscorejs.org/#uniq)
-
-    @method uniq
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#uniq](http://underscorejs.org/#uniq)
-
-    @method unique
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#zip](http://underscorejs.org/#zip)
-
-    @method zip
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#indexOf](http://underscorejs.org/#indexOf)
-
-    @method indexOf
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#lastIndexOf](http://underscorejs.org/#lastIndexOf)
-
-    @method lastIndexOf
-    **/
-
-    /**
-        This method is an underscore/lodash helper.
-        For documentation please see [http://underscorejs.org/#range](http://underscorejs.org/#range)
-
-    @method range
-    **/
-
-    var exports = _.pick(_, 'first', 'head', 'initial', 'last', 'tail', 'rest', 'compact', 'flatten', 'without', 'union', 'intersection', 'difference', 'uniq', 'unique', 'zip', 'indexOf', 'lastIndexOf', 'range');
-    return exports;
-});
-/// <reference path="collection.js" />
-define('thrust/util/collection',['lodash'], function (_)
-{
-    
-    /**
-    @module thrust.util
-    @submodule thrust.util.collection
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#each](http://underscorejs.org/#each)
-
-    @for thrust.util.collection
-    @method each
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#each](http://underscorejs.org/#each)
-
-    @method forEach
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#map](http://underscorejs.org/#map)
-
-    @method map
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#map](http://underscorejs.org/#map)
-
-    @method collect
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#reduce](http://underscorejs.org/#reduce)
-
-    @method reduce
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#reduce](http://underscorejs.org/#reduce)
-
-    @method inject
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#reduce](http://underscorejs.org/#reduce)
-
-    @method foldl
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#reduceRight](http://underscorejs.org/#reduceRight)
-
-    @method foldr
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#reduceRight](http://underscorejs.org/#reduceRight)
-
-    @method reduceRight
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#find](http://underscorejs.org/#find)
-
-    @method find
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#find](http://underscorejs.org/#find)
-
-    @method detect
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#filter](http://underscorejs.org/#filter)
-
-    @method filter
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#filter](http://underscorejs.org/#filter)
-
-    @method select
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#reject](http://underscorejs.org/#reject)
-
-    @method reject
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#all](http://underscorejs.org/#all)
-
-    @method all
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#all](http://underscorejs.org/#all)
-
-    @method every
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#any](http://underscorejs.org/#any)
-
-    @method any
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#any](http://underscorejs.org/#any)
-
-    @method some
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#include](http://underscorejs.org/#include)
-
-    @method include
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#include](http://underscorejs.org/#include)
-
-    @method contains
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#invoke](http://underscorejs.org/#invoke)
-
-    @method invoke
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#pluck](http://underscorejs.org/#pluck)
-
-    @method pluck
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#max](http://underscorejs.org/#max)
-
-    @method max
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#min](http://underscorejs.org/#min)
-
-    @method min
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#sortBy](http://underscorejs.org/#sortBy)
-
-    @method sortBy
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#groupBy](http://underscorejs.org/#groupBy)
-
-    @method groupBy
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#sortedIndex](http://underscorejs.org/#sortedIndex)
-
-    @method sortedIndex
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#shuffle](http://underscorejs.org/#shuffle)
-
-    @method shuffle
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#toArray](http://underscorejs.org/#toArray)
-
-    @method toArray
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#size](http://underscorejs.org/#size)
-
-    @method size
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#extend](http://underscorejs.org/#extend)
-
-    @method extend
-    **/
-
-    var exports = _.pick(_, 'each', 'forEach', 'map', 'collect', 'reduce', 'inject', 'foldl', 'reduceRight', 'foldr', 'find', 'detect', 'filter', 'select', 'reject', 'all', 'every', 'any', 'some', 'include',
-        'contains', 'invoke', 'pluck', 'max', 'min', 'sortBy', 'groupBy', 'sortedIndex', 'shuffle', 'toArray', 'size', 'extend');
-    return exports;
-});
-define('thrust/util/function',['lodash'], function (_)
-{
-    
-    /**
-    @module thrust.util
-    @submodule thrust.util.func
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#bind](http://underscorejs.org/#bind)
-
-    @for thrust.util.func
-    @method bind
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#bindAll](http://underscorejs.org/#bindAll)
-
-    @method bindAll
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#memoize](http://underscorejs.org/#memoize)
-
-    @method memoize
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#delay](http://underscorejs.org/#delay)
-
-    @method delay
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#defer](http://underscorejs.org/#defer)
-
-    @method defer
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#throttle](http://underscorejs.org/#throttle)
-
-    @method throttle
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#debounce](http://underscorejs.org/#debounce)
-
-    @method debounce
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#once](http://underscorejs.org/#once)
-
-    @method once
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#after](http://underscorejs.org/#after)
-
-    @method after
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#wrap](http://underscorejs.org/#wrap)
-
-    @method wrap
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#compose](http://underscorejs.org/#compose)
-
-    @method compose
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#uniqueId](http://underscorejs.org/#uniqueId)
-
-    @method uniqueId
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#escape](http://underscorejs.org/#escape)
-
-    @method escape
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#result](http://underscorejs.org/#result)
-
-    @method result
-    **/
-
-    var slice = Array.prototype.slice;
-    var exports = _.pick(_, 'bind', 'bindAll', 'memoize', 'delay', 'defer', 'throttle', 'debounce', 'once', 'after', 'wrap', 'compose', 'uniqueId', 'escape', 'result');
-
-    /**
-    A function that does nothing, or no operation.  Hence the name noop.
-
-    @method noop
-    **/
-    var noop = exports.noop = function () { };
-
-    /**
-    Attempts to invoke, similar to _.invoke, but in this case it verifies that the property exist,
-        and also verifies that it is a function, and not the noop method available in thrust.
-
-        The intent is a method that allows override of functions, without creating custom code.
-
-    @method saveInvoke
-    @param {Array|Object} collection The container that has the items
-    @param {String|Function} method The method name on every item, or the method to invoke against each item.
-    @param {Object} [args]* The additional arguments to pass onto the method.
-    **/
-    exports.safeInvoke = function (collection, methodName)
-    {
-        var index, iteratee = collection, result;
-        if (!collection) return [];
-        var args = slice.call(arguments, 2),
-            isFunc = typeof methodName == 'function',
-            methodExists;
-        var length = iteratee.length; index = -1;
-        if (length === length >>> 0)
-        {
-            result = Array(length);
-            while (++index < length)
-            {
-                methodExists = (isFunc ? methodName : iteratee[index][methodName]);
-                methodExists && methodExists !== noop && (result[index] = methodExists.apply(iteratee[index], args));
-            }
-        }
-        else
-        {
-            var skipProto = typeof iteratee == 'function' &&
-              propertyIsEnumerable.call(iteratee, 'prototype');
-
-            var props = _.keys(iteratee),
-                propIndex = -1,
-                length = props.length;
-
-            result = Array(length);
-            while (++propIndex < length)
-            {
-                index = props[propIndex];
-                if (!(skipProto && index == 'prototype'))
-                {
-                    methodExists = (isFunc ? methodName : iteratee[index][methodName]);
-                    methodExists && methodExists !== noop && (result[propIndex] = ((isFunc ? methodName : iteratee[index][methodName]).apply(iteratee[index], args)));
-                }
-            }
-        };
-        return result;
-    };
-
-    /**
-	 * Constructor used to beget objects that wire needs to create using new.
-	 * @param ctor {Function} real constructor to be invoked
-	 * @param args {Array} arguments to be supplied to ctor
-	 */
-    function Begetter(ctor, args)
-    {
-        return ctor.apply(this, args);
-    }
-
-    /**
-	 * Creates an object by either invoking ctor as a function and returning the result,
-	 * or by calling new ctor().  It uses a simple heuristic to try to guess which approach
-	 * is the "right" one.
-	 *
-	 * @param ctor {Function} function or constructor to invoke
-	 * @param args {Array} array of arguments to pass to ctor in either case
-	 *
-	 * @returns The result of invoking ctor with args, with or without new, depending on
-	 * the strategy selected.
-	 */
-    exports.instantiate = function (ctor, args)
-    {
-        Begetter.prototype = ctor.prototype;
-        Begetter.prototype.constructor = ctor;
-        var begotten = new Begetter(ctor, args);
-        Begetter.prototype = void 0;
-        return begotten;
-    };
-
-    return exports;
-});
-define('thrust/util/object',['lodash'], function (_)
-{
-    
-    /**
-    @module thrust.util
-    @submodule thrust.util.obj
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#keys](http://underscorejs.org/#keys)
-
-    @for thrust.util.obj
-    @method keys
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#values](http://underscorejs.org/#values)
-
-    @method values
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#functions](http://underscorejs.org/#functions)
-
-    @method functions
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#functions](http://underscorejs.org/#functions)
-
-    @method methods
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#pick](http://underscorejs.org/#pick)
-
-    @method pick
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#defaults](http://underscorejs.org/#defaults)
-
-    @method defaults
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#clone](http://underscorejs.org/#clone)
-
-    @method clone
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#tap](http://underscorejs.org/#tap)
-
-    @method tap
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#has](http://underscorejs.org/#has)
-
-    @method has
-    **/
-
-    var exports = _.pick(_, 'keys', 'methods', 'functions', 'methods', 'pick', 'defaults', 'clone', 'tap', 'has');
-
-    /**
-    Inverts an object.  The keys become values, and the values become keys.
-    Does not do any copying.
-
-    @method invert
-    @param {Object} obj The object to invert.
-    @returns {Object} The inverted object.
-    **/
-
-    var hasOwn = Object.prototype.hasOwnProperty;
-    exports.invert = function (obj)
-    {
-        var result = {};
-        for (var i in obj)
-            if (hasOwn.call(obj, i))
-                result[obj[i]] = i;
-        return result;
-    };
-    
-    return exports;
-});
-/*!
- * jQuery JavaScript lib v1.7.2
- * http://jquery.com/
- *
- * Copyright 2011, John Resig
- * Dual licensed under the MIT or GPL Version 2 licenses.
- * http://jquery.org/license
- *
- * Includes Sizzle.js
- * http://sizzlejs.com/
- * Copyright 2011, The Dojo Foundation
- * Released under the MIT, BSD, and GPL Licenses.
- *
- * Date: Wed Mar 21 12:46:34 2012 -0700
- */
-define('thrust/util/lib/type',['thrust/util/collection'],
-function (uCollection)
-{
-    
-    var toString = Object.prototype.toString,
-        class2type = {};
-    
-    var type = function (obj)
-    {
-        return obj == null ?
-            String(obj) :
-            class2type[toString.call(obj)] || "object";
-    };
-
-    uCollection.each("Boolean Number String Function Array Date RegExp Object".split(" "), function (name, i)
-    {
-        class2type["[object " + name + "]"] = name.toLowerCase();
-    });
-
-    return { type: type };
-});
-define('thrust/util/type',['lodash', './lib/type'],
-function (_, type)
-{
-    
-    /**
-    @module thrust.util
-    @submodule thrust.util.type
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isEqual](http://underscorejs.org/#isEqual)
-
-    @for thrust.util.type
-    @method isEqual
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isEmpty](http://underscorejs.org/#isEmpty)
-
-    @method isEmpty
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isElement](http://underscorejs.org/#isElement)
-
-    @method isElement
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isArray](http://underscorejs.org/#isArray)
-
-    @method isArray
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isObject](http://underscorejs.org/#isObject)
-
-    @method isObject
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isArguments](http://underscorejs.org/#isArguments)
-
-    @method isArguments
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isFunction](http://underscorejs.org/#isFunction)
-
-    @method isFunction
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isString](http://underscorejs.org/#isString)
-
-    @method isString
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isNumber](http://underscorejs.org/#isNumber)
-
-    @method isNumber
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isFinite](http://underscorejs.org/#isFinite)
-
-    @method isFinite
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isBoolean](http://underscorejs.org/#isBoolean)
-
-    @method isBoolean
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isDate](http://underscorejs.org/#isDate)
-
-    @method isDate
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isRegExp](http://underscorejs.org/#isRegExp)
-
-    @method isRegExp
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isNaN](http://underscorejs.org/#isNaN)
-
-    @method isNaN
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isNull](http://underscorejs.org/#isNull)
-
-    @method isNull
-    **/
-
-    /**
-    This method is an underscore/lodash helper.
-    For documentation please see [http://underscorejs.org/#isUndefined](http://underscorejs.org/#isUndefined)
-
-    @method isUndefined
-    **/
-
-    var exports = _.pick(_, 'isEqual', 'isEmpty', 'isElement', 'isArray', 'isObject', 'isArguments', 'isFunction', 'isString', 'isNumber', 'isFinite', 'isBoolean', 'isDate', 'isRegExp', 'isNaN', 'isNull', 'isUndefined');
-
-    _.extend(exports, {
-        /**
-        Returns the type of the given Object
-
-        NOTE: currently this type has been loaded from jQuery source code.
-
-        @method type
-        **/
-        type: type.type,
-        /**
-        Checks is the object is array like, like the aruguments object, but not a string, oe array.
-        jQuery objects for example would report as array like.
-        As well as knockout observable arrays report as array like.
-
-        @method isArrayLike
-        @param {Object} o The object to check
-        @returns {Boolean} Is it true or false.
-        **/
-        isArrayLike: function (o)
-        {
-            return (o && !exports.isString(o) && o.length !== undefined) || false;
-        },
-        /**
-        Checks if the given object is array or array like.
-
-        @method isArrayOrArrayLike
-        @param {Object} o The object to check
-        @returns {Boolean} Is it true or false.
-        **/
-        isArrayOrArrayLike: function (o)
-        {
-            return exports.isArray(o) || (exports.isArrayLike(o));
-        }
-    });
-
-    return exports;
-});
-
-define('thrust/util/guid',['./type'],
-function (type)
-{
-    
-    /**
-    @module thrust.util
-    @submodule thrust.util
-    **/
-
-    var S4 = function ()
-    {
-        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    },
-    guidRegex = /^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$/,
-    emtptyGuid = '00000000-0000-0000-0000-000000000000';
-
-    var exports = {
-        /**
-        Returns a new sudo guid, limiations in JavaScript make must more reliable guids fairly difficult to create.
-
-        @for thrust.util
-        @method newGuid
-        @returns {Guid} The new guid.
-        **/
-        newGuid: function () { return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4()); },
-        /**
-        Returns an empty guid.
-
-        @method emptyGuid
-        @returns {Guid} The emtpty guid.
-        **/
-        emptyGuid: function () { return emtptyGuid; },
-        /**
-        Checks if the given string is a guid.
-
-        @method isGuid
-        @param {Guid} guid
-        @returns {Boolean} If the guid is a guid or not.
-        **/
-        isGuid: function (guid)
-        {
-            return type.isString(guid) ? guidRegex.test(guid) : false;
-        },
-        /**
-        Checks if the Guid is an Empty Guid
-
-        @method isGuidEmpty
-        @param {Guid} guid
-        @returns {Boolean} If the guid is a guid or not.
-        **/
-        isGuidEmpty: function (guid) { return guid === emtptyGuid; }
-    };
-    return exports;
-});
-/*!
- * jQuery JavaScript lib v1.7.2
- * http://jquery.com/
- *
- * Copyright 2011, John Resig
- * Dual licensed under the MIT or GPL Version 2 licenses.
- * http://jquery.org/license
- *
- * Includes Sizzle.js
- * http://sizzlejs.com/
- * Copyright 2011, The Dojo Foundation
- * Released under the MIT, BSD, and GPL Licenses.
- *
- * Date: Wed Mar 21 12:46:34 2012 -0700
- */
-define('thrust/util/lib/param',['thrust/util/collection', 'thrust/util/type', 'module'],
-function (uCollection, uType, module)
-{
-    
-    var r20 = /%20/g,
-        rbracket = /\[\]$/;
-    var param = function (a, traditional)
-    {
-        var prefix,
-            s   = [],
-            add = function (key, value)
-            {
-                // If value is a function, invoke it and return its value
-                value = uType.isFunction(value) ? value() : (value == null ? "" : value);
-                s[s.length] = encodeURIComponent(key) + "=" + encodeURIComponent(value);
-            };
-
-        // Set traditional to true for jQuery <= 1.3.2 behavior.
-        if (traditional === undefined)
-        {
-            traditional = !!module.config().traditionalEncoding;
-        }
-
-        // If an array was passed in, assume that it is an array of form elements.
-        if (uType.isArrayOrArrayLike(a))
-        {
-            // Serialize the form elements
-            uCollection.each(a, function (x)
-            {
-                add(x.name, x.value);
-            });
-        }
-        else
-        {
-            // If traditional, encode the "old" way (the way 1.3.2 or older
-            // did it), otherwise encode params recursively.
-            for (prefix in a)
-            {
-                buildParams(prefix, a[prefix], traditional, add);
-            }
-        }
-
-        // Return the resulting serialization
-        return s.join("&").replace(r20, "+");
-    };
-
-    function buildParams(prefix, obj, traditional, add)
-    {
-        if (jQuery.isArray(obj))
-        {
-            // Serialize array item.
-            jQuery.each(obj, function (i, v)
-            {
-                if (traditional || rbracket.test(prefix))
-                {
-                    // Treat each array item as a scalar.
-                    add(prefix, v);
-
-                } else
-                {
-                    // If array item is non-scalar (array or object), encode its
-                    // numeric index to resolve deserialization ambiguity issues.
-                    // Note that rack (as of 1.0.0) can't currently deserialize
-                    // nested arrays properly, and attempting to do so may cause
-                    // a server error. Possible fixes are to modify rack's
-                    // deserialization algorithm or to provide an option or flag
-                    // to force array serialization to be shallow.
-                    buildParams(prefix + "[" + (typeof v === "object" || jQuery.isArray(v) ? i : "") + "]", v, traditional, add);
-                }
-            });
-
-        }
-        else if (!traditional && obj != null && typeof obj === "object")
-        {
-            // Serialize object item.
-            for (var name in obj)
-            {
-                buildParams(prefix + "[" + name + "]", obj[name], traditional, add);
-            }
-
-        } else
-        {
-            // Serialize scalar item.
-            add(prefix, obj);
-        }
-    }
-    return { param: param };
-});
-define('thrust/util/url',['./lib/param', 'module'],
-function (param, module)
-{
-    /**
-    @module thrust.util
-    @submodule thrust.util.url
-    **/
-    
-    var urlPath          = (module.config && module.config().path || ''),
-        path             = urlPath.lastIndexOf('/') === urlPath.length - 1 ? urlPath.substring(0, -1) : urlPath,
-        doubleSlashRegex = /\/\//g;
-
-    var exports = {
-        /**
-        jQuery param method to encode form parameters.
-
-        @for thrust.util.url
-        @method param
-        **/
-        param: param,
-        /**
-        Cleans up double slashs in a url, used by thrust/data
-
-        @method cleanUrl
-        @param {String} url The url to clean
-        @retrusn {String} The cleaned url
-        **/
-        cleanUrl: function (url) { return url.replace(doubleSlashRegex, '/'); },
-        /**
-        Checks for existance of application path in the url, or http if the url is supposed to go to another location.
-
-        @method fixupUrl
-        @param {String} url The url to fixup
-        @retrusn {String} The fixed url
-        **/
-        fixupUrl: function (url, urlPath)
-        {
-            if (url.indexOf('http') === -1)
-            {
-                var path = urlPath.lastIndexOf('/') === urlPath.length - 1 ? urlPath.substring(0, -1) : urlPath;
-                if (url.indexOf(urlPath) === -1)
-                {
-                    url = urlPath + url;
-                }
-                url = exports.cleanUrl(url);
-            }
-            return url;
-        }
-    };
-    return exports;
-});
-define('thrust/util/string',[],function ()
-{
-    var objectCurlyRegex = /\{\{|\}\}|\{(.*?)\}/g,
-        numberCurlyRegex = /\{\{|\}\}|\{(\d+)\}/g,
-        slice            = Array.prototype.slice,
-        format           = function (str)
-        {
-            var args = slice.call(arguments, 1);
-            if (typeof args[0] === 'object')
-            {
-                var a = args[0];
-                return str.replace(objectCurlyRegex, function (m, n)
-                {
-                    if (m == '{{') { return '{'; }
-                    if (m == '}}') { return '}'; }
-                    return a && a[n] || '';
-                });
-            }
-            return str.replace(numberCurlyRegex, function (m, n)
-            {
-                if (m == '{{') { return '{'; }
-                if (m == '}}') { return '}'; }
-                return args[n] || '';
-            });
-        };
-
-    String.prototype.format = function () { return format.apply(null, [this].concat(slice.call(arguments))); };
-
-    return {
-        /**
-        C# style string format.
-
-        @for thrust.util
-        @method format
-        **/
-        format: format,
-        getModuleNameForPath: function (name) { return (name.lastIndexOf('/') > -1 ? name.substring(name.lastIndexOf('/') + 1) : name).replace(/\./g, '-'); }
-    };
-});
 /** @license MIT License (c) copyright B Cavalier & J Hann */
 
 /*jshint devel: true*/
@@ -1125,14 +13,7 @@ define('thrust/util/string',[],function ()
  * WARNING: This module **should never** be use this in a production environment.
  * It exposes details of the promise
  *
- * In an AMD environment, you can simply change your path or package mappings:
- *
- * paths: {
- *   // 'when': 'path/to/when/when'
- *   'when': 'path/to/when/debug'
- * }
- *
- * or
+ * In an AMD environment, you can simply change your package mappings:
  *
  * packages: [
  *   // { name: 'when', location: 'path/to/when', main: 'when' }
@@ -1157,11 +38,15 @@ define('thrust/util/string',[],function ()
 (function(define) {
 define('when/debug',['./when'], function(when) {
 
-	var promiseId, freeze, pending, exceptionsToRethrow, undef;
+	var promiseId, pending, exceptionsToRethrow, own, warn, undef;
 
 	promiseId = 0;
-	freeze = Object.freeze || function(o) { return o; };
 	pending = {};
+	own = Object.prototype.hasOwnProperty;
+
+	warn = (typeof console !== 'undefined' && typeof console.warn === 'function')
+		? function(x) { console.warn(x); }
+		: function() {};
 
 	exceptionsToRethrow = {
 		RangeError: 1,
@@ -1171,111 +56,89 @@ define('when/debug',['./when'], function(when) {
 	};
 
 	/**
-	 * Setup debug output handlers for the supplied promise.
-	 * @param p {Promise} A trusted (when.js) promise
-	 * @return p
-	 */
-	function debugPromise(p) {
-		// TODO: Need to find a way for promises returned by .then()
-		// to also be debug promises.
-		p.then(
-			undef,
-			function(err) {
-				if(p.id) {
-					console.error(p.toString());
-				} else {
-					console.error('[object Promise] REJECTED:', err);
-				}
-
-				return when.reject(err);
-			}
-		);
-
-		return p;
-	}
-
-	function wrapCallback(cb) {
-		if(typeof cb != 'function') {
-			return cb;
-		}
-
-		return function(v) {
-			try {
-				return cb(v);
-			} catch(err) {
-				if(err) {
-					if (err.name in exceptionsToRethrow) {
-						setTimeout(function() {
-							throw err;
-						}, 0);
-					} else if (err.stack) {
-						console.error(err.stack);
-					}
-				}
-
-				throw err;
-			}
-		};
-	}
-
-	function wrapCallbacks(callbacks) {
-		var cb, args, len, i;
-
-		args = [];
-
-		for(i = 0, len = callbacks.length; i < len; i++) {
-			args[i] = typeof (cb = callbacks[i]) == 'function'
-				? wrapCallback(cb)
-				: cb;
-		}
-
-		return args;
-	}
-
-	/**
-	 * Helper to form debug string for promises depending on their
-	 * current state
-	 * @param name
-	 * @param id
-	 * @param status
-	 * @param value
-	 */
-	function toString(name, id, status, value) {
-		var s = '[object ' + name + ' ' + id + '] ' + status;
-
-		if(value !== pending) {
-			s += ': ' + value;
-		}
-
-		return s;
-	}
-
-	function F() {}
-	function beget(o) {
-		F.prototype = o;
-		o = new F();
-		F.prototype = undef;
-
-		return o;
-	}
-
-	/**
 	 * Replacement for when() that sets up debug logging on the
 	 * returned promise.
 	 */
-	function whenDebug() {
-		return debugPromise(when.apply(null, wrapCallbacks(arguments)));
+	function whenDebug(promise, cb, eb, pb) {
+		var args = [promise].concat(wrapCallbacks(promise, [cb, eb, pb]));
+		return debugPromise(when.apply(null, args), when.resolve(promise));
+	}
+
+	/**
+	 * Setup debug output handlers for the supplied promise.
+	 * @param {Promise} p A trusted (when.js) promise
+	 * @param {Promise?} parent promise from which p was created (e.g. via then())
+	 * @return {Promise} a new promise that outputs debug info and
+	 * has a useful toString
+	 */
+	function debugPromise(p, parent) {
+		var id, origThen, newPromise, logReject;
+
+		if(own.call(p, 'parent')) {
+			return p;
+		}
+
+		promiseId++;
+		id = (parent && 'id' in parent) ? (parent.id + '.' + promiseId) : promiseId;
+
+		origThen = p.then;
+		newPromise = beget(p);
+		newPromise.id = id;
+		newPromise.parent = parent;
+
+		newPromise.toString = function() {
+			return toString('Promise', id);
+		};
+
+		newPromise.then = function(cb, eb, pb) {
+			checkCallbacks(cb, eb, pb);
+
+			if(typeof eb === 'function') {
+				var promise = newPromise;
+				do {
+					promise.handled = true;
+				} while((promise = promise.parent) && !promise.handled);
+			}
+
+			return debugPromise(origThen.apply(p, wrapCallbacks(newPromise, arguments)), newPromise);
+		};
+
+		logReject = function() {
+			console.error(newPromise.toString());
+		};
+
+		p.then(
+			function(val) {
+				newPromise.toString = function() {
+					return toString('Promise', id, 'resolved', val);
+				};
+				return val;
+			},
+			wrapCallback(newPromise, function(err) {
+				newPromise.toString = function() {
+					return toString('Promise', id, 'REJECTED', err);
+				};
+
+				callGlobalHandler('reject', newPromise, err);
+
+				if(!newPromise.handled) {
+					logReject();
+				}
+
+				throw err;
+			})
+		);
+
+		return newPromise;
 	}
 
 	/**
 	 * Replacement for when.defer() that sets up debug logging
 	 * on the created Deferred, its resolver, and its promise.
-	 * @param [id] anything optional identifier for this Deferred that will show
-	 * up in debug output
 	 * @return {Deferred} a Deferred with debug logging
 	 */
-	function deferDebug() {
-		var d, status, value, origResolve, origReject, origThen, id;
+	function deferDebug(/* id */) {
+		var d, status, value, origResolve, origReject, origProgress, origThen, id;
 
 		// Delegate to create a Deferred;
 		d = when.defer();
@@ -1293,20 +156,31 @@ define('when/debug',['./when'], function(when) {
 		// Promise and resolver are frozen, so have to delegate
 		// in order to setup toString() on promise, resolver,
 		// and deferred
-		d.promise = beget(d.promise);
-		d.promise.toString = function() {
-			return toString('Promise', id, status, value);
-		};
+		origThen = d.promise.then;
+		d.id = id;
+		d.promise = debugPromise(d.promise, d);
 
 		d.resolver = beget(d.resolver);
 		d.resolver.toString = function() {
 			return toString('Resolver', id, status, value);
 		};
 
+		origProgress = d.resolver.progress;
+		d.progress = d.resolver.progress = function(update) {
+			// Notify global debug handler, if set
+			callGlobalHandler('progress', d, update);
+
+			return origProgress(update);
+		};
+
 		origResolve = d.resolver.resolve;
 		d.resolve = d.resolver.resolve = function(val) {
 			value = val;
 			status = 'resolving';
+
+			// Notify global debug handler, if set
+			callGlobalHandler('resolve', d, val);
+
 			return origResolve.apply(undef, arguments);
 		};
 
@@ -1322,57 +196,22 @@ define('when/debug',['./when'], function(when) {
 		};
 
 		// Setup final state change handlers
-		d.then(
+		origThen(
 			function(v) { status = 'resolved'; return v; },
 			function(e) { status = 'REJECTED'; return when.reject(e); }
 		);
 
-		// Experimenting with setting up ways to also debug promises returned
-		// by .then().  Also need to find a way to extend the id in a way that
-		// makes it obvious the returned promise is NOT the original, but is
-		// related to it--it's downstream in the promise chain.
-		origThen = d.promise.then;
-		d.then = d.promise.then = function(cb, eb, pb) {
-
-			var id = d.id + '>' + (++promiseId);
-
-			var p = origThen.apply(null, wrapCallbacks(arguments));
-
-			p.id = id;
-			p = beget(p);
-			p.toString = function() {
-				return toString('Promise', p.id, status, value);
-			};
-			
-			// See below. Not sure if debug promises should be frozen
-			return freeze(p);
-		};
+		d.then = deprecated('deferred.then', 'deferred.promise.then', d.promise.then, d);
 
 		// Add an id to all directly created promises.  It'd be great
 		// to find a way to propagate this id to promise created by .then()
-		d.id = d.promise.id = d.resolver.id = id;
-
-		// Attach debug handlers after the substitute promise
-		// has been setup, so the id can be logged.
-		//debugPromise(d.promise);
-
-		// TODO: Should we still freeze these?
-		// Seems safer for now to err on the side of caution and freeze them,
-		// but it could be useful to all them to be modified during debugging.
-		freeze(d.promise);
-		freeze(d.resolver);
+		d.resolver.id = id;
 
 		return d;
 	}
 
 	whenDebug.defer = deferDebug;
 	whenDebug.isPromise = when.isPromise;
-
-	function makeDebug(name, func) {
-		whenDebug[name] = function() {
-			return debugPromise(func.apply(when, arguments));
-		};
-	}
 
 	// For each method we haven't already replaced, replace it with
 	// one that sets up debug logging on the returned promise
@@ -1383,6 +222,125 @@ define('when/debug',['./when'], function(when) {
 	}
 
 	return whenDebug;
+
+	// Wrap result of when[name] in a debug promise
+	function makeDebug(name, func) {
+		whenDebug[name] = function() {
+			return debugPromise(func.apply(when, arguments));
+		};
+	}
+
+	// Wrap a promise callback to catch exceptions and log or
+	// rethrow as uncatchable
+	function wrapCallback(promise, cb) {
+		return function(v) {
+			try {
+				return cb(v);
+			} catch(err) {
+				if(err) {
+					var toRethrow = (whenDebug.debug && whenDebug.debug.exceptionsToRethrow) || exceptionsToRethrow;
+
+					if (err.name in toRethrow) {
+						throwUncatchable(err);
+					}
+
+					callGlobalHandler('reject', promise, err);
+				}
+
+				throw err;
+			}
+		};
+	}
+
+	// Wrap a callback, errback, progressback tuple
+	function wrapCallbacks(promise, callbacks) {
+		var cb, args, len, i;
+
+		args = [];
+
+		for(i = 0, len = callbacks.length; i < len; i++) {
+			args[i] = typeof (cb = callbacks[i]) == 'function'
+				? wrapCallback(promise, cb)
+				: cb;
+		}
+
+		return args;
+	}
+
+	function callGlobalHandler(handler, promise, triggeringValue, auxValue) {
+		/*jshint maxcomplexity:5*/
+		var globalHandlers = whenDebug.debug;
+
+		if(!(globalHandlers && typeof globalHandlers[handler] === 'function')) {
+			return;
+		}
+
+		if(arguments.length < 4 && handler == 'reject') {
+			try {
+				throw new Error(promise.toString());
+			} catch(e) {
+				auxValue = e;
+			}
+		}
+
+		try {
+			globalHandlers[handler](promise, triggeringValue, auxValue);
+		} catch(handlerError) {
+			throwUncatchable(new Error('when.js global debug handler threw: ' + String(handlerError)));
+		}
+	}
+
+	// Stringify a promise, deferred, or resolver
+	function toString(name, id, status, value) {
+		var s = '[object ' + name + ' ' + id + ']';
+
+		if(arguments.length > 2) {
+			s += ' ' + status;
+			if(value !== pending) {
+				s += ': ' + value;
+			}
+		}
+
+		return s;
+	}
+
+	function throwUncatchable(err) {
+		setTimeout(function() {
+			throw err;
+		}, 0);
+	}
+
+	function deprecated(name, preferred, f, context) {
+		return function() {
+			warn(new Error(name + ' is deprecated, use ' + preferred).stack);
+
+			return f.apply(context, arguments);
+		};
+	}
+
+	function checkCallbacks() {
+		var i, len, a;
+		for(i = 0, len = arguments.length; i < len; i++) {
+			a = arguments[i];
+			if(!checkFunction(a)) {
+				warn(new Error('arg ' + i + ' must be a function, null, or undefined, but was a ' + typeof a).stack);
+			}
+		}
+	}
+
+	function checkFunction(f) {
+		return typeof f === 'function' || f == null;
+	}
+
+	// The usual Crockford
+	function F() {}
+	function beget(o) {
+		F.prototype = o;
+		o = new F();
+		F.prototype = undef;
+
+		return o;
+	}
 
 });
 })(typeof define == 'function'
@@ -1603,479 +561,2036 @@ define('when/timeout',['./when'], function(when) {
 
 
 
-define('thrust/util/when',['when/debug', 'when/apply', 'when/delay', 'when/timeout', 'thrust/util/array'],
-function (when, apply, delay, timeout, util)
-{
+/** @license MIT License (c) copyright B Cavalier & J Hann */
+
+/**
+ * parallel.js
+ *
+ * Run a set of task functions in parallel.  All tasks will
+ * receive the same args
+ *
+ * @author brian@hovercraftstudios.com
+ */
+
+(function(define) {
+define('when/parallel',['./when'], function(when) {
+
+	/**
+	 * Run array of tasks in parallel
+	 * @param tasks {Array|Promise} array or promiseForArray of task functions
+	 * @param [args] {*} arguments to be passed to all tasks
+	 * @return {Promise} promise for array containing the
+	 * result of each task in the array position corresponding
+	 * to position of the task in the tasks array
+	 */
+	return function parallel(tasks /*, args... */) {
+		var args = Array.prototype.slice.call(arguments, 1);
+		return when.map(tasks, function(task) {
+			return task.apply(null, args);
+		});
+	};
+
+});
+})(typeof define == 'function' && define.amd
+	? define
+	: function (deps, factory) { typeof exports == 'object'
+		? (module.exports = factory(require('./when')))
+		: (this.when_parallel = factory(this.when));
+	}
+	// Boilerplate for AMD, Node, and browser global
+);
+
+
+
+/** @license MIT License (c) copyright B Cavalier & J Hann */
+
+/**
+ * pipeline.js
+ *
+ * Run a set of task functions in sequence, passing the result
+ * of the previous as an argument to the next.  Like a shell
+ * pipeline, e.g. `cat file.txt | grep 'foo' | sed -e 's/foo/bar/g'
+ *
+ * @author brian@hovercraftstudios.com
+ */
+
+(function(define) {
+define('when/pipeline',['./when'], function(when) {
+
+	/**
+	 * Run array of tasks in a pipeline where the next
+	 * tasks receives the result of the previous.  The first task
+	 * will receive the initialArgs as its argument list.
+	 * @param tasks {Array|Promise} array or promise for array of task functions
+	 * @param [initialArgs...] {*} arguments to be passed to the first task
+	 * @return {Promise} promise for return value of the final task
+	 */
+	return function pipeline(tasks /* initialArgs... */) {
+		var initialArgs, runTask;
+
+		initialArgs = Array.prototype.slice.call(arguments, 1);
+
+		// Self-optimizing function to run first task with multiple
+		// args using apply, but subsequence tasks via direct invocation
+		runTask = function(task, args) {
+			runTask = function(task, arg) {
+				return task(arg);
+			};
+			
+			return task.apply(null, args);
+		};
+
+		return when.reduce(tasks,
+			function(args, task) {
+				return runTask(task, args);
+			},
+			initialArgs
+		);
+	};
+
+});
+})(typeof define == 'function' && define.amd
+	? define
+	: function (deps, factory) { typeof exports == 'object'
+		? (module.exports = factory(require('./when')))
+		: (this.when_pipeline = factory(this.when));
+	}
+	// Boilerplate for AMD, Node, and browser global
+);
+
+
+
+/** @license MIT License (c) copyright B Cavalier & J Hann */
+
+/**
+ * sequence.js
+ *
+ * Run a set of task functions in sequence.  All tasks will
+ * receive the same args.
+ *
+ * @author brian@hovercraftstudios.com
+ */
+
+(function(define) {
+define('when/sequence',['./when'], function(when) {
+
+	/**
+	 * Run array of tasks in sequence with no overlap
+	 * @param tasks {Array|Promise} array or promiseForArray of task functions
+	 * @param [args] {*} arguments to be passed to all tasks
+	 * @return {Promise} promise for an array containing
+	 * the result of each task in the array position corresponding
+	 * to position of the task in the tasks array
+	 */
+	return function sequence(tasks /*, args... */) {
+		var args = Array.prototype.slice.call(arguments, 1);
+		return when.reduce(tasks, function(results, task) {
+			return when(task.apply(null, args), function(result) {
+				results.push(result);
+				return results;
+			});
+		}, []);
+	};
+
+});
+})(typeof define == 'function' && define.amd
+	? define
+	: function (deps, factory) { typeof exports == 'object'
+		? (module.exports = factory(require('./when')))
+		: (this.when_sequence = factory(this.when));
+	}
+	// Boilerplate for AMD, Node, and browser global
+);
+
+
+
+/** @license MIT License (c) copyright B Cavalier & J Hann */
+
+/**
+ * cancelable.js
+ *
+ * Decorator that makes a deferred "cancelable".  It adds a cancel() method that
+ * will call a special cancel handler function and then reject the deferred.  The
+ * cancel handler can be used to do resource cleanup, or anything else that should
+ * be done before any other rejection handlers are executed.
+ *
+ * Usage:
+ *
+ * var cancelableDeferred = cancelable(when.defer(), myCancelHandler);
+ *
+ * @author brian@hovercraftstudios.com
+ */
+
+(function(define) {
+define('when/cancelable',['./when'], function(when) {
+
+    /**
+     * Makes deferred cancelable, adding a cancel() method.
+     *
+     * @param deferred {Deferred} the {@link Deferred} to make cancelable
+     * @param canceler {Function} cancel handler function to execute when this deferred is canceled.  This
+     * is guaranteed to run before all other rejection handlers.  The canceler will NOT be executed if the
+     * deferred is rejected in the standard way, i.e. deferred.reject().  It ONLY executes if the deferred
+     * is canceled, i.e. deferred.cancel()
+     *
+     * @returns deferred, with an added cancel() method.
+     */
+    return function(deferred, canceler) {
+
+        var delegate = when.defer();
+
+        // Add a cancel method to the deferred to reject the delegate
+        // with the special canceled indicator.
+        deferred.cancel = function() {
+            return delegate.reject(canceler(deferred));
+        };
+
+        // Ensure that the original resolve, reject, and progress all forward
+        // to the delegate
+        deferred.promise.then(delegate.resolve, delegate.reject, delegate.progress);
+
+        // Replace deferred's promise with the delegate promise
+        deferred.promise = delegate.promise;
+
+        // Also replace deferred.then to allow it to be called safely and
+        // observe the cancellation
+		// TODO: Remove once deferred.then is removed
+        deferred.then = delegate.promise.then;
+
+        return deferred;
+    };
+
+});
+})(typeof define == 'function'
+    ? define
+    : function (deps, factory) { typeof module != 'undefined'
+        ? (module.exports = factory(require('./when')))
+        : (this.when_cancelable = factory(this.when));
+    }
+    // Boilerplate for AMD, Node, and browser global
+);
+
+
+
+define('thrust/util/when',["require", "exports", 'when/debug', 'when/apply', 'when/delay', 'when/timeout', 'when/parallel', 'when/pipeline', 'when/sequence', 'when/cancelable'], function(require, exports, __w__, __whenApply__, __whenDelay__, __whenTimeout__, __whenParallel__, __whenPipeline__, __whenSequence__, __whenCancelable__) {
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    //export module guid {
+    
+    
+    //import when = module('when');
+    var w = __w__;
+
+    var whenApply = __whenApply__;
+
+    var whenDelay = __whenDelay__;
+
+    var whenTimeout = __whenTimeout__;
+
+    var whenParallel = __whenParallel__;
+
+    var whenPipeline = __whenPipeline__;
+
+    var whenSequence = __whenSequence__;
+
+    var whenCancelable = __whenCancelable__;
+
     /**
     @module thrust.util
     @submodule thrust.util.when
     **/
-
-    var whenWrapper = function ()
-    {
-        return when.apply(when, arguments);
-    };
-
+    exports.when = w;
     /**
     when.apply, used to apply when results over a function, similar to jQuerys Deferred.
     See for more information: [https://github.com/cujojs/when/wiki/when-apply](https://github.com/cujojs/when/wiki/when-apply)
-
+    
     @for thrust.util.when
     @method when.apply
     **/
-    whenWrapper.apply = apply,
+    exports.apply = whenApply;
     /**
     when.delay, creates a promise that resolves in x ms, using setTimeout.
     See for more information: [https://github.com/cujojs/when/wiki/when-delay](https://github.com/cujojs/when/wiki/when-delay)
-
+    
     @method when.delay
     **/
-    whenWrapper.delay = delay;
+    exports.delay = whenDelay;
     /**
     when.timeout, creates a promise that will timeout if x ms if not resolved.
     See for more information: [https://github.com/cujojs/when/wiki/when-timeout](https://github.com/cujojs/when/wiki/when-timeout)
-
+    
     @method when.timeout
     **/
-    whenWrapper.timeout = timeout;
-
-    whenWrapper.all = when.all;
-    whenWrapper.any = when.any;
-    whenWrapper.all = when.all;
-    whenWrapper.any = when.any;
-    whenWrapper.chain = when.chain;
-    whenWrapper.defer = when.defer;
-    whenWrapper.isPromise = when.isPromise;
-    whenWrapper.map = when.map;
-    whenWrapper.reduce = when.reduce;
-    whenWrapper.some = when.some;
-    whenWrapper.resolve = when.resolve;
-    whenWrapper.reject = when.reject;
-
-    return {
-        /**
-        Access to whenjs, the main library for promises.
-
-        @method when
-        **/
-        when: whenWrapper,
-        /**
-        Flatten and filter arrays down to just the existing promises.
-
-        @method flattenToPromises 
-        @param {Array} Array to flatten, and filter.
-        @returns {Array of Promises} 
-        **/
-        flattenToPromises: function (array)
-        {
-            return util.flatten(array).filter(function (x)
-            {
-                return when.isPromise(x);
-            })
-        }
-    };
-});
-/*!
- * jQuery JavaScript lib v1.7.2
- * http://jquery.com/
- *
- * Copyright 2011, John Resig
- * Dual licensed under the MIT or GPL Version 2 licenses.
- * http://jquery.org/license
- *
- * Includes Sizzle.js
- * http://sizzlejs.com/
- * Copyright 2011, The Dojo Foundation
- * Released under the MIT, BSD, and GPL Licenses.
- *
- * Date: Wed Mar 21 12:46:34 2012 -0700
- */
-define('thrust/util/lib/extend',['thrust/util/collection', 'thrust/util/type'],
-function (uCollection, uType)
-{
+    exports.timeout = whenTimeout;
+    /**
+    when.parallel
+    See for more information: [https://github.com/cujojs/when/wiki/when-parallel](https://github.com/cujojs/when/wiki/when-parallel)
     
-    var extend = function ()
-    {
-        var options, name, src, copy, copyIsArray, clone,
-            target = arguments[0] || {},
-            i      = 1,
-            length = arguments.length,
-            deep   = false;
+    @method when.parallel
+    **/
+    exports.parallel = whenParallel;
+    /**
+    when.pipeline
+    See for more information: [https://github.com/cujojs/when/wiki/when-pipeline](https://github.com/cujojs/when/wiki/when-pipeline)
+    
+    @method when.pipeline
+    **/
+    exports.pipeline = whenPipeline;
+    /**
+    when.sequence
+    See for more information: [https://github.com/cujojs/when/wiki/when-sequence](https://github.com/cujojs/when/wiki/when-sequence)
+    
+    @method when.sequence
+    **/
+    exports.sequence = whenSequence;
+    /**
+    when.cancelable
+    See for more information: [https://github.com/cujojs/when/wiki/when-cancelable](https://github.com/cujojs/when/wiki/when-cancelable)
+    
+    @method when.cancelable
+    **/
+    exports.cancelable = whenCancelable;
+    exports.all = exports.when.any;
+    exports.any = exports.when.all;
+    exports.chain = exports.when.chain;
+    exports.defer = exports.when.defer;
+    exports.isPromise = exports.when.isPromise;
+    exports.map = exports.when.map;
+    exports.reduce = exports.when.reduce;
+    exports.some = exports.when.some;
+    exports.resolve = exports.when.resolve;
+    exports.reject = exports.when.reject;
+    exports.join = exports.when.join;
+})
+//@ sourceMappingURL=when.js.map
+;
+define('thrust/util/function',["require", "exports", 'lodash', './when'], function(require, exports, _____, __when__) {
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    //export module function {
+    
+    var _ = _____;
 
-        // Handle a deep copy situation
-        if (typeof target === "boolean")
-        {
-            deep = target;
-            target = arguments[1] || {};
-            // skip the boolean and the target
-            i = 2;
+    var when = __when__;
+
+    /**
+    @module thrust.util
+    @submodule thrust.util.func
+    **/
+    var slice = Array.prototype.slice;
+    /**
+    A function that does nothing, or no operation.  Hence the name noop.
+    
+    @method noop
+    **/
+    function noop() {
+    }
+    exports.noop = noop;
+    var propertyIsEnumerable = noop.propertyIsEnumerable;
+    /**
+    Attempts to invoke, similar to _.invoke, but in this case it verifies that the property exist,
+    and also verifies that it is a function, and not the noop method available in thrust.
+    
+    The intent is a method that allows override of functions, without creating custom code.
+    
+    @method saveInvoke
+    @param {Array|Object} collection The container that has the items
+    @param {String|Function} method The method name on every item, or the method to invoke against each item.
+    @param {Object} [args]* The additional arguments to pass onto the method.
+    **/
+    function safeInvoke(collection, methodName) {
+        var args = [];
+        for (var _i = 0; _i < (arguments.length - 2); _i++) {
+            args[_i] = arguments[_i + 2];
         }
-
-        // Handle case when target is a string or something (possible in deep copy)
-        if (typeof target !== "object" && !uType.isFunction(target))
-        {
-            target = {};
+        /*jshint bitwise:false */
+                var index, iteratee = collection, result;
+        if(!collection) {
+            return [];
         }
-
-        // extend jQuery itself if only one argument is passed
-        if (length === i)
-        {
-            target = this;
-            --i;
-        }
-
-        for (; i < length; i++)
-        {
-            // Only deal with non-null/undefined values
-            if ((options = arguments[i]) != null)
-            {
-                // Extend the base object
-                for (name in options)
-                {
-                    src = target[name];
-                    copy = options[name];
-
-                    // Prevent never-ending loop
-                    if (target === copy)
-                    {
-                        continue;
-                    }
-
-                    // Recurse if we're merging plain objects or arrays
-                    if (deep && copy && ((copyIsArray = uType.isArray(copy)) || (uType.isObject(copy) && !uType.isFunction(copy) )))
-                    {
-                        if (copyIsArray)
-                        {
-                            copyIsArray = false;
-                            clone = src && uType.isArray(src) ? src : [];
-
-                        } else
-                        {
-                            clone = src && uType.isObject(src) ? src : {};
-                        }
-
-                        // Never move original objects, clone them
-                        target[name] = extend(deep, clone, copy);
-
-                        // Don't bring in undefined values
-                    } else if (copy !== undefined)
-                    {
-                        target[name] = copy;
-                    }
+        var args = slice.call(arguments, 2), isFunc = typeof methodName == 'function', methodExists;
+        var length = iteratee.length;
+        index = -1;
+        if(length === length >>> 0) {
+            result = Array(length);
+            while(++index < length) {
+                methodExists = (isFunc ? methodName : iteratee[index][methodName]);
+                methodExists && methodExists !== noop && (result[index] = methodExists.apply(iteratee[index], args));
+            }
+        } else {
+            var skipProto = typeof iteratee == 'function' && propertyIsEnumerable.call(iteratee, 'prototype');
+            var props = _.keys(iteratee), propIndex = -1, length = props.length;
+            result = Array(length);
+            while(++propIndex < length) {
+                index = props[propIndex];
+                if(!(skipProto && index == 'prototype')) {
+                    methodExists = (isFunc ? methodName : iteratee[index][methodName]);
+                    methodExists && methodExists !== noop && (result[propIndex] = ((isFunc ? methodName : iteratee[index][methodName]).apply(iteratee[index], args)));
                 }
             }
         }
-
-        // Return the modified object
-        return target;
-    };
-    return {
-        altExtend: extend,
-        deepCopy: function ()
-        {
-            var args = Array.prototype.slice.call(arguments);
-            return extend.apply(null, [true].concat(args));
+        return result;
+    }
+    exports.safeInvoke = safeInvoke;
+    /**
+    * Constructor used to beget objects that wire needs to create using new.
+    * @param ctor {Function} real constructor to be invoked
+    * @param args {Array} arguments to be supplied to ctor
+    */
+    function Begetter(ctor, args) {
+        return ctor.apply(this, args);
+    }
+    /**
+    * Creates an object by either invoking ctor as a function and returning the result,
+    * or by calling new ctor().  It uses a simple heuristic to try to guess which approach
+    * is the "right" one.
+    *
+    * @param ctor {Function} function or constructor to invoke
+    * @param args {Array} array of arguments to pass to ctor in either case
+    *
+    * @returns The result of invoking ctor with args, with or without new, depending on
+    * the strategy selected.
+    */
+    function instantiate(ctor, args) {
+        Begetter.prototype = ctor.prototype;
+        Begetter.prototype.constructor = ctor;
+        var begotten = new Begetter(ctor, args);
+        Begetter.prototype = void 0;
+        return begotten;
+    }
+    exports.instantiate = instantiate;
+    /**
+    Flatten and filter arrays down to just the existing promises.
+    
+    @method flattenToPromises
+    @param {Array} Array to flatten, and filter.
+    @returns {Array of Promises}
+    **/
+    function flattenToPromises(array) {
+        return _.flatten(array).filter(function (x) {
+            return when.isPromise(x);
+        });
+    }
+    exports.flattenToPromises = flattenToPromises;
+})
+//@ sourceMappingURL=function.js.map
+;
+define('thrust/util/object',["require", "exports"], function(require, exports) {
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    //export module guid {
+    
+    
+    var hasOwn = Object.prototype.hasOwnProperty;
+    function invert(obj) {
+        var result = {
+        };
+        for(var i in obj) {
+            if(hasOwn.call(obj, i)) {
+                result[obj[i]] = i;
+            }
         }
+        return result;
+    }
+    exports.invert = invert;
+})
+//@ sourceMappingURL=object.js.map
+;
+define('thrust/util/lib/type',["require", "exports", 'lodash'], function(require, exports, _____) {
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    //export module libType {
+    
+    var _ = _____;
+
+    var toString = Object.prototype.toString, class2type = {
     };
-});
-define('thrust/util/lib/camelcase',[],function()
-{
+    var _type = function (obj) {
+        return obj == null ? String(obj) : class2type[toString.call(obj)] || "object";
+    };
+    _.each("Boolean Number String Function Array Date RegExp Object".split(" "), function (name) {
+        class2type["[object " + name + "]"] = name.toLowerCase();
+    });
+    exports.type = _type;
+})
+//@ sourceMappingURL=type.js.map
+;
+define('thrust/util/type',["require", "exports", 'lodash', './lib/type'], function(require, exports, _____, __libType__) {
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    //export module function {
+    
+    var _ = _____;
+
+    var libType = __libType__;
+    /**
+    @module thrust.util
+    @submodule thrust.util.type
+    **/
+    /**
+    Returns the type of the given Object
+    
+    NOTE: currently this type has been loaded from jQuery source code.
+    
+    @method type
+    **/
+    
+    exports.type = libType.type;
+    /**
+    Checks is the object is array like, like the aruguments object, but not a string, oe array.
+    jQuery objects for example would report as array like.
+    As well as knockout observable arrays report as array like.
+    
+    @method isArrayLike
+    @param {Object} o The object to check
+    @returns {Boolean} Is it true or false.
+    **/
+    function isArrayLike(o) {
+        return (o && !_.isString(o) && o.length !== undefined) || false;
+    }
+    exports.isArrayLike = isArrayLike;
+    /**
+    Checks if the given object is array or array like.
+    
+    @method isArrayOrArrayLike
+    @param {Object} o The object to check
+    @returns {Boolean} Is it true or false.
+    **/
+    function isArrayOrArrayLike(o) {
+        return _.isArray(o) || (isArrayLike(o));
+    }
+    exports.isArrayOrArrayLike = isArrayOrArrayLike;
+})
+//@ sourceMappingURL=type.js.map
+;
+define('thrust/util/guid',["require", "exports", 'lodash'], function(require, exports, _____) {
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    //export module guid {
+    
+    var _ = _____;
+
+    
+    /**
+    @module thrust.util
+    @submodule thrust.util
+    **/
+        var S4 = function () {
+        /*jshint bitwise:false */
+        return (((1 + Math.random()) * 65536) | 0).toString(16).substring(1);    }, guidRegex = /^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$/, emtptyGuid = '00000000-0000-0000-0000-000000000000';
+    /**
+    Returns a new sudo guid, limiations in JavaScript make must more reliable guids fairly difficult to create.
+    
+    @for thrust.util
+    @method newGuid
+    @returns {Guid} The new guid.
+    **/
+    function newGuid() {
+        return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+    }
+    exports.newGuid = newGuid;
+    /**
+    Returns an empty guid.
+    
+    @method emptyGuid
+    @returns {Guid} The emtpty guid.
+    **/
+    function emptyGuid() {
+        return emtptyGuid;
+    }
+    exports.emptyGuid = emptyGuid;
+    /**
+    Checks if the given string is a guid.
+    
+    @method isGuid
+    @param {Guid} guid
+    @returns {Boolean} If the guid is a guid or not.
+    **/
+    function isGuid(guid) {
+        return _.isString(guid) ? guidRegex.test(guid) : false;
+    }
+    exports.isGuid = isGuid;
+    /**
+    Checks if the Guid is an Empty Guid
+    
+    @method isGuidEmpty
+    @param {Guid} guid
+    @returns {Boolean} If the guid is a guid or not.
+    **/
+    function isGuidEmpty(guid) {
+        return guid === emtptyGuid;
+    }
+    exports.isGuidEmpty = isGuidEmpty;
+})
+//@ sourceMappingURL=guid.js.map
+;
+define('thrust/util/lib/param',["require", "exports", 'lodash', '../type', 'module'], function(require, exports, _____, __uType__, __m__) {
+    /*!
+    * jQuery JavaScript lib v1.7.2
+    * http://jquery.com/
+    *
+    * Copyright 2011, John Resig
+    * Dual licensed under the MIT or GPL Version 2 licenses.
+    * http://jquery.org/license
+    *
+    * Includes Sizzle.js
+    * http://sizzlejs.com/
+    * Copyright 2011, The Dojo Foundation
+    * Released under the MIT, BSD, and GPL Licenses.
+    *
+    * Date: Wed Mar 21 12:46:34 2012 -0700
+    */
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    //export module guid {
+    
+    var _ = _____;
+
+    var uType = __uType__;
+
+    var m = __m__;
+
+    var r20 = /%20/g, rbracket = /\[\]$/;
+    function param(a, traditional) {
+        var prefix, s = [], add = function (key, value) {
+            // If value is a function, invoke it and return its value
+            value = _.isFunction(value) ? value() : (value == null ? "" : value);s[s.length] = encodeURIComponent(key) + "=" + encodeURIComponent(value);        };
+        // Set traditional to true for jQuery <= 1.3.2 behavior.
+        if(traditional === undefined) {
+            traditional = !!m.config().traditionalEncoding;
+        }
+        // If an array was passed in, assume that it is an array of form elements.
+        if(uType.isArrayOrArrayLike(a)) {
+            // Serialize the form elements
+            _.each(a, function (x) {
+                add(x.name, x.value);
+            });
+        } else {
+            // If traditional, encode the "old" way (the way 1.3.2 or older
+            // did it), otherwise encode params recursively.
+            for(prefix in a) {
+                buildParams(prefix, a[prefix], traditional, add);
+            }
+        }
+        // Return the resulting serialization
+        return s.join("&").replace(r20, "+");
+    }
+    exports.param = param;
+    function buildParams(prefix, obj, traditional, add) {
+        if(_.isArray(obj)) {
+            // Serialize array item.
+            _.each(obj, function (i, v) {
+                if(traditional || rbracket.test(prefix)) {
+                    // Treat each array item as a scalar.
+                    add(prefix, v);
+                } else {
+                    // If array item is non-scalar (array or object), encode its
+                    // numeric index to resolve deserialization ambiguity issues.
+                    // Note that rack (as of 1.0.0) can't currently deserialize
+                    // nested arrays properly, and attempting to do so may cause
+                    // a server error. Possible fixes are to modify rack's
+                    // deserialization algorithm or to provide an option or flag
+                    // to force array serialization to be shallow.
+                    buildParams(prefix + "[" + (typeof v === "object" || _.isArray(v) ? i : "") + "]", v, traditional, add);
+                }
+            });
+        } else {
+            if(!traditional && obj != null && typeof obj === "object") {
+                // Serialize object item.
+                for(var name in obj) {
+                    buildParams(prefix + "[" + name + "]", obj[name], traditional, add);
+                }
+            } else {
+                // Serialize scalar item.
+                add(prefix, obj);
+            }
+        }
+    }
+})
+//@ sourceMappingURL=param.js.map
+;
+define('thrust/util/url',["require", "exports", './lib/param'], function(require, exports, __libParam__) {
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    //export module guid {
+    
+    
+    var libParam = __libParam__;
+
+    
+    /**
+    @module thrust.util
+    @submodule thrust.util.url
+    **/
+    
+    var doubleSlashRegex = /\/\//g;
+    /**
+    jQuery param method to encode form parameters.
+    
+    @for thrust.util.url
+    @method param
+    **/
+    exports.param = libParam;
+    /**
+    Cleans up double slashs in a url, used by thrust/data
+    
+    @method cleanUrl
+    @param {String} url The url to clean
+    @retrusn {String} The cleaned url
+    **/
+    function cleanUrl(url) {
+        return url.replace(doubleSlashRegex, '/');
+    }
+    exports.cleanUrl = cleanUrl;
+    /**
+    Checks for existance of application path in the url, or http if the url is supposed to go to another location.
+    
+    @method fixupUrl
+    @param {String} url The url to fixup
+    @retrusn {String} The fixed url
+    **/
+    function fixupUrl(url, urlPath) {
+        if(url.indexOf('http') === -1) {
+            var path = urlPath.lastIndexOf('/') === urlPath.length - 1 ? urlPath.substring(0, -1) : urlPath;
+            if(url.indexOf(path) === -1) {
+                url = path + url;
+            }
+            url = cleanUrl(url);
+        }
+        return url;
+    }
+    exports.fixupUrl = fixupUrl;
+})
+//@ sourceMappingURL=url.js.map
+;
+define('thrust/util/string',["require", "exports"], function(require, exports) {
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    //export module guid {
+    
+    
+    var objectCurlyRegex = /\{\{|\}\}|\{(.*?)\}/g, numberCurlyRegex = /\{\{|\}\}|\{(\d+)\}/g, slice = Array.prototype.slice;
+    /**
+    C# style string format.
+    
+    @for thrust.util
+    @method format
+    **/
+    function format(str) {
+        var args = [];
+        for (var _i = 0; _i < (arguments.length - 1); _i++) {
+            args[_i] = arguments[_i + 1];
+        }
+        var args = slice.call(arguments, 1);
+        if(typeof args[0] === 'object') {
+            var a = args[0];
+            return str.replace(objectCurlyRegex, function (m, n) {
+                if(m == '{{') {
+                    return '{';
+                }
+                if(m == '}}') {
+                    return '}';
+                }
+                return a && a[n] || '';
+            });
+        }
+        return str.replace(numberCurlyRegex, function (m, n) {
+            if(m == '{{') {
+                return '{';
+            }
+            if(m == '}}') {
+                return '}';
+            }
+            return args[n] || '';
+        });
+    }
+    exports.format = format;
+    function getModuleNameForPath(name) {
+        return (name.lastIndexOf('/') > -1 ? name.substring(name.lastIndexOf('/') + 1) : name).replace(/\./g, '-');
+    }
+    exports.getModuleNameForPath = getModuleNameForPath;
+})
+//@ sourceMappingURL=string.js.map
+;
+define('thrust/util/lib/camelcase',["require", "exports"], function(require, exports) {
     
     /// <summary>
     /// Import jQuerys camelcase method.
     /// </summary>
     /// <returns></returns>
-    var rmsPrefix  = /^-ms-/,
-        rdashAlpha = /-([\da-z])/gi,
-        fcamelCase = function (all, letter)
-        {
-            return (letter + "").toUpperCase();
-        };
-
-    var exports = {
-        camelCase: function (string)
-        {
-            return string.replace(rmsPrefix, "ms-").replace(rdashAlpha, fcamelCase);
-        },
-        unCamelCase: function (str)
-        {
-            return str.replace(/([A-Z])/g, function (all, s) { return '-' + s.toLowerCase(); });
-        }
-    };
-
-    return exports;
-});
-define('thrust/util/main',[
-    'lodash',
-    //#region Our Methods
-    './array',
-    './collection',
-    './function',
-    './object',
-    './type',
-    './guid',
-    './url',
-    './string',
-    './when',
-    //#endregion
-    //#region Third Party Methods
-    './lib/extend',
-    './lib/camelcase'
-    //#endregion
-],
-function (_, uArray, uCollection, uFunction, uObject, uType)
-{
+        var rmsPrefix = /^-ms-/, rdashAlpha = /-([\da-z])/gi, fcamelCase = function (all, letter) {
+return (letter + "").toUpperCase();    };
+    function camelCase(string) {
+        return string.replace(rmsPrefix, "ms-").replace(rdashAlpha, fcamelCase);
+    }
+    exports.camelCase = camelCase;
+    function unCamelCase(str) {
+        return str.replace(/([A-Z])/g, function (all, s) {
+            return '-' + s.toLowerCase();
+        });
+    }
+    exports.unCamelCase = unCamelCase;
+})
+//@ sourceMappingURL=camelcase.js.map
+;
+var __extends = this.__extends || function (d, b) {
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+define('thrust/util/l2o',["require", "exports"], function(require, exports) {
+    /*
     
-    /**
-    @class thrust.util
-    @uses thrust-util.array
-    @uses thrust-util.collection
-    @uses thrust-util.func
-    @uses thrust-util.obj
-    @uses thrust-util.type
-    @uses thrust-util.url
-    @uses thrust-util.when
-    **/
+    Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.
+    Microsoft Open Technologies would like to thank its contributors, a list
+    of whom are at http://aspnetwebstack.codeplex.com/wikipage?title=Contributors.
+    
+    Licensed under the Apache License, Version 2.0 (the "License"); you
+    may not use this file except in compliance with the License. You may
+    obtain a copy of the License at
+    
+    http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+    implied. See the License for the specific language governing permissions
+    and limitations under the License.
+    */
+    function noop() {
+    }
+    function identity(x) {
+        return x;
+    }
+    function defaultComparer(x, y) {
+        return x > y ? 1 : x < y ? -1 : 0;
+    }
+    function defaultEqualityComparer(x, y) {
+        return x === y;
+    }
+    function defaultSerializer(x) {
+        return x.toString();
+    }
+    var slice = Array.prototype.slice;
+    var seqNoElements = 'Sequence contains no elements.';
+    var invalidOperation = 'Invalid operation';
+    var Enumerator = (function () {
+        function Enumerator(moveNext, getCurrent, dispose) {
+            this.moveNext = moveNext;
+            this.getCurrent = getCurrent;
+            this.dispose = dispose;
+        }
+        Enumerator.create = function create(moveNext, getCurrent, dispose) {
+            var done = false;
+            if(!dispose) {
+                dispose = noop;
+            }
+            return new Enumerator(function () {
+                if(done) {
+                    return false;
+                }
+                var result = moveNext();
+                if(!result) {
+                    done = true;
+                    dispose();
+                }
+                return result;
+            }, function () {
+                return getCurrent();
+            }, function () {
+                if(!done) {
+                    dispose();
+                    done = true;
+                }
+            });
+        }
+        return Enumerator;
+    })();
+    exports.Enumerator = Enumerator;    
+    function arrayIndexOf(item, comparer) {
+        comparer || (comparer = defaultComparer);
+        var idx = this.length;
+        while(idx--) {
+            if(comparer(this[idx], item)) {
+                return idx;
+            }
+        }
+        return -1;
+    }
+    function arrayRemove(item, comparer) {
+        var idx = arrayIndexOf.call(this, item, comparer);
+        if(idx === -1) {
+            return false;
+        }
+        this.splice(idx, 1);
+        return true;
+    }
+    var Enumerable = (function () {
+        function Enumerable(getEnumerator) {
+            this.getEnumerator = getEnumerator;
+        }
+        Enumerable.prototype.__aggregate = function (func, seed, resultSelector) {
+            resultSelector || (resultSelector = identity);
+            var accumulate = seed, enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    accumulate = func(accumulate, enumerator.getCurrent());
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            return resultSelector ? resultSelector(accumulate) : accumulate;
+        };
+        Enumerable.prototype.__aggregate1 = function (func) {
+            var accumulate, enumerator = this.getEnumerator();
+            try  {
+                if(!enumerator.moveNext()) {
+                    throw new Error(seqNoElements);
+                }
+                accumulate = enumerator.getCurrent();
+                while(enumerator.moveNext()) {
+                    accumulate = func(accumulate, enumerator.getCurrent());
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            return accumulate;
+        };
+        Enumerable.prototype.aggregate = function (func, seed, resultSelector) {
+            /*jshint unused:false */
+            var f = arguments.length === 1 ? this.__aggregate1 : this.__aggregate;
+            return f.apply(this, arguments);
+        };
+        Enumerable.prototype.all = function (predicate) {
+            var enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    if(!predicate(enumerator.getCurrent())) {
+                        return false;
+                    }
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            return true;
+        };
+        Enumerable.prototype.any = function (predicate) {
+            var enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    if(!predicate || predicate(enumerator.getCurrent())) {
+                        return true;
+                    }
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            return false;
+        };
+        Enumerable.prototype.average = function (selector) {
+            if(selector) {
+                return this.select(selector).average();
+            }
+            var enumerator = this.getEnumerator(), count = 0, sum = 0;
+            try  {
+                while(enumerator.moveNext()) {
+                    count++;
+                    sum += enumerator.getCurrent();
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            if(count === 0) {
+                throw new Error(seqNoElements);
+            }
+            return sum / count;
+        };
+        Enumerable.prototype.concat = function () {
+            var args = [];
+            for (var _i = 0; _i < (arguments.length - 0); _i++) {
+                args[_i] = arguments[_i + 0];
+            }
+            var args = slice.call(arguments, 0);
+            args.unshift(this);
+            return Enumerable.concat.apply(null, args);
+        };
+        Enumerable.prototype.contains = function (value, comparer) {
+            comparer || (comparer = defaultEqualityComparer);
+            var enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    if(comparer(value, enumerator.getCurrent())) {
+                        return true;
+                    }
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            return false;
+        };
+        Enumerable.prototype.count = function (predicate) {
+            var c = 0, enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    if(!predicate || predicate(enumerator.getCurrent())) {
+                        c++;
+                    }
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            return c;
+        };
+        Enumerable.prototype.defaultIfEmpty = function (defaultValue) {
+            var parent = this;
+            return new Enumerable(function () {
+                var current, hasValue = false, enumerator;
+                return Enumerator.create(function () {
+                    enumerator || (enumerator = parent.getEnumerator());
+                    if(!enumerator.moveNext()) {
+                        return false;
+                    }
+                    hasValue = true;
+                    current = enumerator.getCurrent();
+                    return true;
+                }, function () {
+                    if(!hasValue) {
+                        return defaultValue;
+                    }
+                    return current;
+                }, function () {
+                    enumerator.dispose();
+                });
+            });
+        };
+        Enumerable.prototype.distinct = function (comparer) {
+            comparer || (comparer = defaultEqualityComparer);
+            var parent = this;
+            return new Enumerable(function () {
+                var current, map = [], enumerator;
+                return Enumerator.create(function () {
+                    enumerator || (enumerator = parent.getEnumerator());
+                    while(true) {
+                        if(!enumerator.moveNext()) {
+                            return false;
+                        }
+                        current = enumerator.getCurrent();
+                        if(arrayIndexOf.call(map, current, comparer) === -1) {
+                            map.push(current);
+                            return true;
+                        }
+                    }
+                }, function () {
+                    return current;
+                }, function () {
+                    enumerator.dispose();
+                });
+            });
+        };
+        Enumerable.prototype.elementAt = function (index) {
+            return this.skip(index).first();
+        };
+        Enumerable.prototype.elementAtOrDefault = function (index) {
+            return this.skip(index).firstOrDefault();
+        };
+        Enumerable.prototype.except = function (second, comparer) {
+            comparer || (comparer = defaultEqualityComparer);
+            var parent = this;
+            return new Enumerable(function () {
+                var current, map = [], firstEnumerator = parent.getEnumerator(), secondEnumerator;
+                while(firstEnumerator.moveNext()) {
+                    map.push(firstEnumerator.getCurrent());
+                }
+                return Enumerator.create(function () {
+                    secondEnumerator || (secondEnumerator = second.getEnumerator());
+                    while(true) {
+                        if(!secondEnumerator.moveNext()) {
+                            return false;
+                        }
+                        current = secondEnumerator.getCurrent();
+                        if(this.arrayIndexOf.call(map, current, comparer) === -1) {
+                            map.push(current);
+                            return true;
+                        }
+                    }
+                }, function () {
+                    return current;
+                }, function () {
+                    /*enumerator.dispose();*/                 });
+            });
+        };
+        Enumerable.prototype.first = function (predicate) {
+            var enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    var current = enumerator.getCurrent();
+                    if(!predicate || predicate(current)) {
+                        return current;
+                    }
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            throw new Error(seqNoElements);
+        };
+        Enumerable.prototype.firstOrDefault = function (predicate) {
+            var enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    var current = enumerator.getCurrent();
+                    if(!predicate || predicate(current)) {
+                        return current;
+                    }
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            return null;
+        };
+        Enumerable.prototype.forEach = function (action) {
+            var e = this.getEnumerator(), i = 0;
+            try  {
+                while(e.moveNext()) {
+                    action(e.getCurrent(), i++);
+                }
+            }finally {
+                e.dispose();
+            }
+        };
+        Enumerable.prototype.groupBy = function (keySelector, elementSelector, resultSelector, keySerializer) {
+            elementSelector || (elementSelector = identity);
+            keySerializer || (keySerializer = defaultSerializer);
+            var parent = this;
+            return new Enumerable(function () {
+                var map = {
+                }, keys = [], index = 0, value, key, parentEnumerator = parent.getEnumerator(), parentCurrent, parentKey, parentSerialized, parentElement;
+                while(parentEnumerator.moveNext()) {
+                    parentCurrent = parentEnumerator.getCurrent();
+                    parentKey = keySelector(parentCurrent);
+                    parentSerialized = keySerializer(parentKey);
+                    if(!map[parentSerialized]) {
+                        map[parentSerialized] = [];
+                        keys.push(parentSerialized);
+                    }
+                    parentElement = elementSelector(parentCurrent);
+                    map[parentSerialized].push(parentElement);
+                }
+                return Enumerator.create(function () {
+                    var values;
+                    if(index < keys.length) {
+                        key = keys[index++];
+                        values = Enumerable.fromArray(map[key]);
+                        if(!resultSelector) {
+                            values.key = key;
+                            value = values;
+                        } else {
+                            value = resultSelector(key, values);
+                        }
+                        return true;
+                    }
+                    return false;
+                }, function () {
+                    return value;
+                });
+            });
+        };
+        Enumerable.prototype.intersect = function (second, comparer) {
+            comparer || (comparer = defaultEqualityComparer);
+            var parent = this;
+            return new Enumerable(function () {
+                var current, map = [], firstEnumerator = parent.getEnumerator(), secondEnumerator;
+                while(firstEnumerator.moveNext()) {
+                    map.push(firstEnumerator.getCurrent());
+                }
+                return Enumerator.create(function () {
+                    secondEnumerator || (secondEnumerator = second.getEnumerator());
+                    while(true) {
+                        if(!secondEnumerator.moveNext()) {
+                            return false;
+                        }
+                        current = secondEnumerator.getCurrent();
+                        if(arrayRemove.call(map, current, comparer)) {
+                            return true;
+                        }
+                    }
+                }, function () {
+                    return current;
+                }, function () {
+                    /*enumerator.dispose();*/
+                                    });
+            });
+        };
+        Enumerable.prototype.last = function (predicate) {
+            var hasValue = false, value, enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    var current = enumerator.getCurrent();
+                    if(!predicate || predicate(current)) {
+                        hasValue = true;
+                        value = current;
+                    }
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            if(hasValue) {
+                return value;
+            }
+            throw new Error(seqNoElements);
+        };
+        Enumerable.prototype.lastOrDefault = function (predicate) {
+            var hasValue = false, value, enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    var current = enumerator.getCurrent();
+                    if(!predicate || predicate(current)) {
+                        hasValue = true;
+                        value = current;
+                    }
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            return hasValue ? value : null;
+        };
+        Enumerable.prototype.max = function (selector) {
+            if(selector) {
+                return this.select(selector).max();
+            }
+            var m, hasElement = false, enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    var x = enumerator.getCurrent();
+                    if(!hasElement) {
+                        m = x;
+                        hasElement = true;
+                    } else {
+                        if(x > m) {
+                            m = x;
+                        }
+                    }
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            if(!hasElement) {
+                throw new Error(seqNoElements);
+            }
+            return m;
+        };
+        Enumerable.prototype.min = function (selector) {
+            if(selector) {
+                return this.select(selector).min();
+            }
+            var m, hasElement = false, enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    var x = enumerator.getCurrent();
+                    if(!hasElement) {
+                        m = x;
+                        hasElement = true;
+                    } else {
+                        if(x < m) {
+                            m = x;
+                        }
+                    }
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            if(!hasElement) {
+                throw new Error(seqNoElements);
+            }
+            return m;
+        };
+        Enumerable.prototype.orderBy = function (keySelector, comparer) {
+            return new OrderedEnumerable(this, keySelector, comparer, false);
+        };
+        Enumerable.prototype.orderByDescending = function (keySelector, comparer) {
+            return new OrderedEnumerable(this, keySelector, comparer, true);
+        };
+        Enumerable.prototype.reverse = function () {
+            var arr = [], enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    arr.unshift(enumerator.getCurrent());
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            return Enumerable.fromArray(arr);
+        };
+        Enumerable.prototype.select = function (selector) {
+            var parent = this;
+            return new Enumerable(function () {
+                var current, index = 0, enumerator;
+                return Enumerator.create(function () {
+                    enumerator || (enumerator = parent.getEnumerator());
+                    if(!enumerator.moveNext()) {
+                        return false;
+                    }
+                    current = selector(enumerator.getCurrent(), index++);
+                    return true;
+                }, function () {
+                    return current;
+                }, function () {
+                    enumerator.dispose();
+                });
+            });
+        };
+        Enumerable.prototype.selectMany = function (collectionSelector, resultSelector) {
+            var parent = this;
+            return new Enumerable(function () {
+                var current, index = 0, outerEnumerator, innerEnumerator;
+                return Enumerator.create(function () {
+                    outerEnumerator || (outerEnumerator = parent.getEnumerator());
+                    while(true) {
+                        if(!innerEnumerator) {
+                            if(!outerEnumerator.moveNext()) {
+                                return false;
+                            }
+                            innerEnumerator = collectionSelector(outerEnumerator.getCurrent()).getEnumerator();
+                        }
+                        if(innerEnumerator.moveNext()) {
+                            current = innerEnumerator.getCurrent();
+                            if(resultSelector) {
+                                var o = outerEnumerator.getCurrent();
+                                current = resultSelector(o, current);
+                            }
+                            return true;
+                        } else {
+                            innerEnumerator.dispose();
+                            innerEnumerator = null;
+                        }
+                    }
+                }, function () {
+                    return current;
+                }, function () {
+                    if(innerEnumerator) {
+                        innerEnumerator.dispose();
+                    }
+                    outerEnumerator.dispose();
+                });
+            });
+        };
+        Enumerable.prototype.sequenceEqual = function (second, comparer) {
+            comparer || (comparer = defaultEqualityComparer);
+            var e1 = this.getEnumerator(), e2 = second.getEnumerator();
+            try  {
+                while(e1.moveNext()) {
+                    if(!e2.moveNext() || !comparer(e1.getCurrent(), e2.getCurrent())) {
+                        return false;
+                    }
+                }
+                if(e2.moveNext()) {
+                    return false;
+                }
+                return true;
+            }finally {
+                e1.dispose();
+                e2.dispose();
+            }
+        };
+        Enumerable.prototype.single = function (predicate) {
+            if(predicate) {
+                return this.where(predicate).single();
+            }
+            var enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    var current = enumerator.getCurrent();
+                    if(enumerator.moveNext()) {
+                        throw new Error(invalidOperation);
+                    }
+                    return current;
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            throw new Error(seqNoElements);
+        };
+        Enumerable.prototype.singleOrDefault = function (predicate) {
+            if(predicate) {
+                return this.where(predicate).singleOrDefault();
+            }
+            var enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    var current = enumerator.getCurrent();
+                    if(enumerator.moveNext()) {
+                        throw new Error(invalidOperation);
+                    }
+                    return current;
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            return null;
+        };
+        Enumerable.prototype.skip = function (count) {
+            var parent = this;
+            return new Enumerable(function () {
+                var current, skipped = false, enumerator;
+                return Enumerator.create(function () {
+                    enumerator || (enumerator = parent.getEnumerator());
+                    if(!skipped) {
+                        for(var i = 0; i < count; i++) {
+                            if(!enumerator.moveNext()) {
+                                return false;
+                            }
+                        }
+                        skipped = true;
+                    }
+                    if(!enumerator.moveNext()) {
+                        return false;
+                    }
+                    current = enumerator.getCurrent();
+                    return true;
+                }, function () {
+                    return current;
+                }, function () {
+                    enumerator.dispose();
+                });
+            });
+        };
+        Enumerable.prototype.skipWhile = function (selector) {
+            var parent = this;
+            return new Enumerable(function () {
+                var current, skipped = false, enumerator;
+                return Enumerator.create(function () {
+                    enumerator || (enumerator = parent.getEnumerator());
+                    if(!skipped) {
+                        while(true) {
+                            if(!enumerator.moveNext()) {
+                                return false;
+                            }
+                            if(!selector(enumerator.getCurrent())) {
+                                current = enumerator.getCurrent();
+                                return true;
+                            }
+                        }
+                        skipped = true;
+                    }
+                    if(!enumerator.moveNext()) {
+                        return false;
+                    }
+                    current = enumerator.getCurrent();
+                    return true;
+                }, function () {
+                    return current;
+                }, function () {
+                    enumerator.dispose();
+                });
+            });
+        };
+        Enumerable.prototype.sum = function (selector) {
+            if(selector) {
+                return this.select(selector).sum();
+            }
+            var s = 0, enumerator = this.getEnumerator();
+            try  {
+                while(enumerator.moveNext()) {
+                    s += enumerator.getCurrent();
+                }
+            }finally {
+                enumerator.dispose();
+            }
+            return s;
+        };
+        Enumerable.prototype.take = function (count) {
+            var parent = this;
+            return new Enumerable(function () {
+                var current, enumerator, myCount = count;
+                return Enumerator.create(function () {
+                    enumerator || (enumerator = parent.getEnumerator());
+                    if(myCount === 0) {
+                        return false;
+                    }
+                    if(!enumerator.moveNext()) {
+                        myCount = 0;
+                        return false;
+                    }
+                    myCount--;
+                    current = enumerator.getCurrent();
+                    return true;
+                }, function () {
+                    return current;
+                }, function () {
+                    enumerator.dispose();
+                });
+            });
+        };
+        Enumerable.prototype.takeWhile = function (selector) {
+            var parent = this;
+            return new Enumerable(function () {
+                var current, index = 0, enumerator;
+                return Enumerator.create(function () {
+                    enumerator || (enumerator = parent.getEnumerator());
+                    if(!enumerator.moveNext()) {
+                        return false;
+                    }
+                    current = enumerator.getCurrent();
+                    if(!selector(current, index++)) {
+                        return false;
+                    }
+                    return true;
+                }, function () {
+                    return current;
+                }, function () {
+                    enumerator.dispose();
+                });
+            });
+        };
+        Enumerable.prototype.toArray = function () {
+            var results = [], e = this.getEnumerator();
+            try  {
+                while(e.moveNext()) {
+                    results.push(e.getCurrent());
+                }
+                return results;
+            }finally {
+                e.dispose();
+            }
+        };
+        Enumerable.prototype.where = function (selector) {
+            var parent = this;
+            return new Enumerable(function () {
+                var current, index = 0, enumerator;
+                return Enumerator.create(function () {
+                    enumerator || (enumerator = parent.getEnumerator());
+                    while(true) {
+                        if(!enumerator.moveNext()) {
+                            return false;
+                        }
+                        current = enumerator.getCurrent();
+                        if(selector(current, index++)) {
+                            return true;
+                        }
+                    }
+                }, function () {
+                    return current;
+                }, function () {
+                    enumerator.dispose();
+                });
+            });
+        };
+        Enumerable.prototype.union = function (second, comparer) {
+            comparer || (comparer = defaultEqualityComparer);
+            var parent = this;
+            return Enumerable.create(function () {
+                var current, enumerator, map = [], firstDone = false, secondDone = false;
+                return Enumerator.create(function () {
+                    while(true) {
+                        if(!enumerator) {
+                            if(secondDone) {
+                                return false;
+                            }
+                            if(!firstDone) {
+                                enumerator = parent.getEnumerator();
+                                firstDone = true;
+                            } else {
+                                enumerator = second.getEnumerator();
+                                secondDone = true;
+                            }
+                        }
+                        if(enumerator.moveNext()) {
+                            current = enumerator.getCurrent();
+                            if(this.arrayIndexOf.call(map, current, comparer) === -1) {
+                                map.push(current);
+                                return true;
+                            }
+                        } else {
+                            enumerator.dispose();
+                            enumerator = null;
+                        }
+                    }
+                }, function () {
+                    return current;
+                }, function () {
+                    if(enumerator) {
+                        enumerator.dispose();
+                    }
+                });
+            });
+        };
+        Enumerable.prototype.zip = function (right, selector) {
+            var parent = this;
+            return new Enumerable(function () {
+                var e1, e2, current;
+                return Enumerator.create(function () {
+                    if(!e1 && !e2) {
+                        e1 = parent.getEnumerator();
+                        e2 = right.getEnumerator();
+                    }
+                    if(e1.moveNext() && e2.moveNext()) {
+                        current = selector(e1.getCurrent(), e2.getCurrent());
+                        return true;
+                    }
+                    return false;
+                }, function () {
+                    return current;
+                }, function () {
+                    e1.dispose();
+                    e2.dispose();
+                });
+            });
+        };
+        Enumerable.concat = function concat() {
+            var args = [];
+            for (var _i = 0; _i < (arguments.length - 0); _i++) {
+                args[_i] = arguments[_i + 0];
+            }
+            return Enumerable.fromArray(args).selectMany(identity);
+        }
+        Enumerable.create = function create(getEnumerator) {
+            return new Enumerable(getEnumerator);
+        }
+        Enumerable.empty = function empty() {
+            return new Enumerable(function () {
+                return Enumerator.create(function () {
+                    return false;
+                }, function () {
+                    throw new Error(seqNoElements);
+                });
+            });
+        }
+        Enumerable.fromArray = function fromArray(array) {
+            return new Enumerable(function () {
+                var index = 0, value;
+                return Enumerator.create(function () {
+                    if(index < array.length) {
+                        value = array[index++];
+                        return true;
+                    }
+                    return false;
+                }, function () {
+                    return value;
+                });
+            });
+        }
+        Enumerable.returnValue = function returnValue(value) {
+            return new Enumerable(function () {
+                var done = false;
+                return Enumerator.create(function () {
+                    if(done) {
+                        return false;
+                    }
+                    done = true;
+                    return true;
+                }, function () {
+                    return value;
+                });
+            });
+        }
+        Enumerable.range = function range(start, count) {
+            return new Enumerable(function () {
+                var current = start - 1, end = start + count - 1;
+                return Enumerator.create(function () {
+                    if(current < end) {
+                        current++;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }, function () {
+                    return current;
+                });
+            });
+        }
+        Enumerable.repeat = function repeat(value, count) {
+            return new Enumerable(function () {
+                var myCount = count;
+                if(myCount === undefined) {
+                    myCount = -1;
+                }
+                return Enumerator.create(function () {
+                    if(myCount !== 0) {
+                        myCount--;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }, function () {
+                    return value;
+                });
+            });
+        }
+        return Enumerable;
+    })();
+    exports.Enumerable = Enumerable;    
+    function swap(arr, idx1, idx2) {
+        var temp = arr[idx1];
+        arr[idx1] = arr[idx2];
+        arr[idx2] = temp;
+    }
+    function quickSort(array, start, end) {
+        if(start === undefined && end === undefined) {
+            start = 0;
+            end = array.length - 1;
+        }
+        var i = start, k = end;
+        if(end - start >= 1) {
+            var pivot = array[start];
+            while(k > i) {
+                while(this.compareKeys(array[i], pivot) <= 0 && i <= end && k > i) {
+                    i++;
+                }
+                while(this.compareKeys(array[k], pivot) > 0 && k >= start && k >= i) {
+                    k--;
+                }
+                if(k > i) {
+                    swap(array, i, k);
+                }
+            }
+            swap(array, start, k);
+            quickSort.call(this, array, start, k - 1);
+            quickSort.call(this, array, k + 1, end);
+        }
+    }
+    var EnumerableSorter = (function () {
+        function EnumerableSorter(keySelector, comparer, descending, next) {
+            this.keySelector = keySelector;
+            this.comparer = comparer;
+            this.descending = descending;
+            this.next = next;
+        }
+        EnumerableSorter.prototype.computeKeys = function (elements, count) {
+            this.keys = new Array(count);
+            for(var i = 0; i < count; i++) {
+                this.keys[i] = this.keySelector(elements[i]);
+            }
+            if(this.next) {
+                this.next.computeKeys(elements, count);
+            }
+        };
+        EnumerableSorter.prototype.compareKeys = function (idx1, idx2) {
+            var n = this.comparer(this.keys[idx1], this.keys[idx2]);
+            if(n === 0) {
+                return !this.next ? idx1 - idx2 : this.next.compareKeys(idx1, idx2);
+            }
+            return this.descending ? -n : n;
+        };
+        EnumerableSorter.prototype.sort = function (elements, count) {
+            this.computeKeys(elements, count);
+            var map = new Array(count);
+            for(var i = 0; i < count; i++) {
+                map[i] = i;
+            }
+            quickSort.call(this, map, 0, count - 1);
+            return map;
+        };
+        return EnumerableSorter;
+    })();
+    exports.EnumerableSorter = EnumerableSorter;    
+    var OrderedEnumerable = (function (_super) {
+        __extends(OrderedEnumerable, _super);
+        function OrderedEnumerable(source, keySelector, comparer, descending) {
+                _super.call(this, function () {
+        return source.getEnumerator();
+    });
+            this.getEnumerator = this.__getEnumerator;
+            this.source = source;
+            this.keySelector = keySelector || identity;
+            this.comparer = comparer || defaultComparer;
+            this.descending = descending;
+        }
+        OrderedEnumerable.prototype.getEnumerableSorter = function (next) {
+            var next1 = new EnumerableSorter(this.keySelector, this.comparer, this.descending, next);
+            if(this.parent) {
+                next1 = this.parent.getEnumerableSorter(next1);
+            }
+            return next1;
+        };
+        OrderedEnumerable.prototype.createOrderedEnumerable = function (keySelector, comparer, descending) {
+            var e = new OrderedEnumerable(this.source, keySelector, comparer, descending);
+            e.parent = this;
+            return e;
+        };
+        OrderedEnumerable.prototype.__getEnumerator = function () {
+            var buffer = this.source.toArray(), length = buffer.length, sorter = this.getEnumerableSorter(), map = sorter.sort(buffer, length), index = 0, current;
+            return Enumerator.create(function () {
+                if(index < length) {
+                    current = buffer[map[index++]];
+                    return true;
+                }
+                return false;
+            }, function () {
+                return current;
+            });
+        };
+        OrderedEnumerable.prototype.thenBy = function (keySelector, comparer) {
+            return new OrderedEnumerable(this, keySelector, comparer, false);
+        };
+        OrderedEnumerable.prototype.thenByDescending = function (keySelector, comparer) {
+            return new OrderedEnumerable(this, keySelector, comparer, true);
+        };
+        return OrderedEnumerable;
+    })(Enumerable);
+    exports.OrderedEnumerable = OrderedEnumerable;    
+})
+//@ sourceMappingURL=l2o.js.map
+;
+define('thrust/util/main',["require", "exports", 'lodash', './function', './object', './type', './guid', './url', './string', './when', './lib/camelcase', './l2o'], function(require, exports, ______, __uFunction__, __uObject__, __uType__, __uGuid__, __uUrl__, __uString__, __uWhen__, __uLibCamelCase__, __ul2o__) {
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module util {*/
+    var __ = ______;
 
-    var args = Array.prototype.slice.call(arguments, 1);
-    // Bring everything together.
-    var exports = uCollection.extend.apply({
-        /**
-        Reference to lodash
-        @property _
-        @type {_}
-        **/
-        _: _,
-        /**
-        Reference to array methods
-        @property array
-        @type {Object}
-        **/
-        array: uArray,
-        /**
-        Reference to collection methods
-        @property collection
-        @type {Object}
-        **/
-        collection: uCollection,
-        /**
-        Reference to function methods
-        @property function
-        @type {Object}
-        **/
-        func: uFunction,
-        /**
-        Reference to object methods
-        @property obj
-        @type {Object}
-        **/
-        obj: uObject,
-        /**
-        Reference to type methods
-        @property type
-        @type {Object}
-        **/
-        type: uType
-    }, args);
-    return exports;
-});
+    var uFunction = __uFunction__;
+
+    var uObject = __uObject__;
+
+    var uType = __uType__;
+
+    var uGuid = __uGuid__;
+
+    var uUrl = __uUrl__;
+
+    var uString = __uString__;
+
+    var uWhen = __uWhen__;
+
+    var uLibCamelCase = __uLibCamelCase__;
+
+    var ul2o = __ul2o__;
+
+    
+    exports._ = __;
+    exports.linq = ul2o;
+    exports.instantiate = uFunction.instantiate;
+    exports.noop = uFunction.noop;
+    exports.safeInvoke = uFunction.safeInvoke;
+    exports.invert = uObject.invert;
+    exports.type = uType.type;
+    exports.isArrayLike = uType.isArrayLike;
+    exports.isArrayOrArrayLike = uType.isArrayOrArrayLike;
+    exports.emptyGuid = uGuid.emptyGuid;
+    exports.isGuid = uGuid.isGuid;
+    exports.isGuidEmpty = uGuid.isGuidEmpty;
+    exports.newGuid = uGuid.newGuid;
+    exports.getModuleNameForPath = uString.getModuleNameForPath;
+    exports.format = uString.format;
+    exports.param = uUrl.param;
+    exports.cleanUrl = uUrl.cleanUrl;
+    exports.fixupUrl = uUrl.fixupUrl;
+    exports.when = uWhen;
+    exports.flattenToPromises = uFunction.flattenToPromises;
+    exports.camelCase = uLibCamelCase.camelCase;
+    exports.unCamelCase = uLibCamelCase.unCamelCase;
+})
+//@ sourceMappingURL=main.js.map
+;
 define('thrust/util', ['thrust/util/main'], function (main) { return main; });
 
-define('thrust/instance',['thrust/util'],
-function(util)
-{
+define('thrust/instance',["require", "exports", 'thrust/util'], function(require, exports, __util__) {
+    /// <reference path="interfaces/thrust.d.ts" />
+    /// <reference path="../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
     /**
     Gets the thrust instances.
-
+    
     @module thrust
     **/
+    var util = __util__;
+
     var when = util.when;
-    return {
-        /**
-        The available thrust instances
-        index by name
-
-        @for thrust.instance
-        @property instances
-        @private
-        **/
-        instances: {},
-        /**
-        The loading thurst instances.
-        index by name
-
-        @property loadingInstances
-        @private
-        **/
-        loadingInstances: {},
-        /**
-        Gets a named thrust stance if it exists.
+    /**
+    The available thrust instances
+    index by name
     
-        @method getInstance
-        @static
-        @param {String} name The instance name
-        @returns {Thrust} The thrust instance
-        **/
-        getInstance: function (name)
-        {
-            return this.instances[name] || false;
-        },
-        /**
-        Fetchs a named thrust stance if it exists.
-        This loads asyncronously, as the instance may not be loaded
-    
-        @method __fetchInstance
-        @static
-        @private
-        @param {String} name The instance name
-        @returns {Promise} To a thrust instance spec
-        **/
-        fetchInstance: function (name)
-        {
-            return this.loadingInstances[name] || (this.loadingInstances[name] = when.defer());
-        }
+    @for thrust.instance
+    @property instances
+    @private
+    **/
+    exports.instances = {
     };
-});
-define('thrust/config',['./instance'],
-function (thrustInstance)
-{
+    /**
+    The loading thurst instances.
+    index by name
+    
+    @property loadingInstances
+    @private
+    **/
+    exports.loadingInstances = {
+    };
+    /**
+    Gets a named thrust stance if it exists.
+    
+    @method getInstance
+    @static
+    @param {String} name The instance name
+    @returns {Thrust} The thrust instance
+    **/
+    function getInstance(name) {
+        return exports.instances[name] || null;
+    }
+    exports.getInstance = getInstance;
+    /**
+    Fetchs a named thrust stance if it exists.
+    This loads asyncronously, as the instance may not be loaded
+    
+    @method __fetchInstance
+    @static
+    @private
+    @param {String} name The instance name
+    @returns {Promise} To a thrust instance spec
+    **/
+    function fetchInstance(name) {
+        var defer = exports.loadingInstances[name] || (exports.loadingInstances[name] = when.defer());
+        return defer;
+    }
+    exports.fetchInstance = fetchInstance;
+    /*}*/ })
+//@ sourceMappingURL=instance.js.map
+;
+define('thrust/config',["require", "exports", './instance'], function(require, exports, __thrustInstance__) {
+    /// <reference path="../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module config {*/
+    
+    var thrustInstance = __thrustInstance__;
+
     /**
     Provides thrust configuration
     
     @module thrust
     @submodule thrust.config
     **/
+    /**
+    This property, tells the framework if it should throw errors or not.
+    In production it's recommended not to throw errors, that way if a component fails
+    there is a chance the application can still recover.
     
-
-    var config = {
-        /**
-        This property, tells the framework if it should throw errors or not.
-        In production it's recommended not to throw errors, that way if a component fails
-        there is a chance the application can still recover.
-
-        @for thrust.config
-        @property throwErrors
+    @for thrust.config
+    @property throwErrors
+    @readOnly
+    @type {Boolean}
+    @default false
+    **/
+    exports.throwErrors = true;
+    /**
+    Tells the framework to run in async mode, this may delay start up, but will make image loading and inital running appear faster.
+    
+    @property async
+    @readOnly
+    @type {Boolean}
+    @default true
+    **/
+    exports.async = true;
+    /**
+    Tells thrust to expose each instance as a global, this allows legacy components to utilize parts of thrust, or easily
+    get at your thrust instance during debugging.
+    
+    @property exposeGlobals
+    @readOnly
+    @type {Boolean}
+    @default true
+    **/
+    exports.exposeGlobals = true;
+    exports.url = {
+        path: /**
+        This property, gives the framework it's default path, if different than '/'
+        
+        @property url.path
+        @readOnly
+        @type {String}
+        @default "/"
+        **/
+        '/',
+        traditionalEncoding: /**
+        This property, tells the framework how it should encode array form data.
+        In general, for ASP.NET based applications, traditional should be true.
+        For Ruby/Python based applications, this should be false.
+        
+        @property url.traditionalEncoding
         @readOnly
         @type {Boolean}
         @default false
         **/
-        throwErrors: true,
-        /**
-        Tells the framework to run in async mode, this may delay start up, but will make image loading and inital running appear faster.
-
-        @property async
-        @readOnly
-        @type {Boolean}
-        @default true
-        **/
-        async: true,
-        /**
-        Tells thrust to expose each instance as a global, this allows legacy components to utilize parts of thrust, or easily
-        get at your thrust instance during debugging.
-
-        @property exposeGlobals
-        @readOnly
-        @type {Boolean}
-        @default true
-        **/
-        exposeGlobals: true,
-        url: {
-            /**
-            This property, gives the framework it's default path, if different than '/'
-            
-            @property url.path
-            @readOnly
-            @type {String}
-            @default "/"
-            **/
-            path: '/',
-            /**
-            This property, tells the framework how it should encode array form data.
-            In general, for ASP.NET based applications, traditional should be true.
-            For Ruby/Python based applications, this should be false.
-            
-            @property url.traditionalEncoding
-            @readOnly
-            @type {Boolean}
-            @default false
-            **/
-            traditionalEncoding: true
-        },
-        log: {
-            /**
-            This lends to the log level of thrust.
-
-                ERROR: 1
-                WARN: 2
-                INFO: 3
-                DEBUG: 4
-            
-            @property log.level
-            @readOnly
-            @type {String}
-            @default 1
-            **/
-            level: 4,
-            /**
-            This toggles enabling on or off.
-            
-            @property log.enabled
-            @readOnly
-            @type {Boolean}
-            @default false
-            **/
-            enabled: true
-        },
-        /**
-        Plugins for thrust to load, override with your own set if you have a different set.
-
-        @property plugins
-        @readOnly
-        @type {Array}
-        **/
-        plugins: [],
-        /**
-        * The set of modules to preload with the inital wireup of the Thrust instance.
-        *
-        * Accepts the module path a string or the module as an object in the following format.
-        *   Where args will be handed off to the module life cycle methods.
-        *
-        *    {
-        *        path: '',
-        *        args: []
-        *    }
-        *
-        * @property modules
-        * @readOnly
-        * @type {Array}
-        **/
-        modules: [],
-        /**
-        Used internally by thrust to determine if the life-cycle is controlled by thrust, or a parent instance.
-
-        @property childInstance
-        @readOnly
-        @type {Boolean}
-        **/
-        childInstance: false,
-        /**
-        Used internally by thrust to determine if thrust should control the life-cycle, or the consumer
-
-        @property automaticLifecycle
-        @readOnly
-        @type {Boolean}
-        **/
-        automaticLifecycle: true
+        true
     };
-
+    exports.log = {
+        level: /**
+        This lends to the log level of thrust.
+        
+        ERROR: 1
+        WARN: 2
+        INFO: 3
+        DEBUG: 4
+        
+        @property log.level
+        @readOnly
+        @type {String}
+        @default 1
+        **/
+        4,
+        enabled: /**
+        This toggles enabling on or off.
+        
+        @property log.enabled
+        @readOnly
+        @type {Boolean}
+        @default false
+        **/
+        true
+    };
+    /**
+    Plugins for thrust to load, override with your own set if you have a different set.
+    
+    @property plugins
+    @readOnly
+    @type {Array}
+    **/
+    exports.plugins = [];
+    /**
+    * The set of modules to preload with the inital wireup of the Thrust instance.
+    *
+    * Accepts the module path a string or the module as an object in the following format.
+    *   Where args will be handed off to the module life cycle methods.
+    *
+    *    {
+    *        path: '',
+    *        args: []
+    *    }
+    *
+    * @property modules
+    * @readOnly
+    * @type {Array}
+    **/
+    exports.modules = [];
+    /**
+    Used internally by thrust to determine if the life-cycle is controlled by thrust, or a parent instance.
+    
+    @property childInstance
+    @readOnly
+    @type {Boolean}
+    **/
+    exports.childInstance = false;
+    /**
+    Used internally by thrust to determine if thrust should control the life-cycle, or the consumer
+    
+    @property automaticLifecycle
+    @readOnly
+    @type {Boolean}
+    **/
+    exports.automaticLifecycle = true;
+    /**
+    Used internally by thrust to determin if the thrust instance should automatically start upon creation.
+    
+    @property autoStart
+    @readOnly
+    @type {Boolean}
+    **/
+    exports.autoStart = false;
     /**
     AMD API
     load
-
+    
     Handles fetching of a current config for the current thrust instance, or the config of the given plugin.
     Adding the : character requests a specific config plugin.
     thrust/config!global = thrust!global:config = Thrust instance config from the instance named global.
-
+    
     @method load
     @static
     @param {String} name The name of the instance that is being fetched
@@ -2083,34 +2598,35 @@ function (thrustInstance)
     @param {Function} load Allows the load to inform that AMD for the value to hand off
     @param {Object} config The custom configuration.
     **/
-    config.load = function (name, parentRequire, load, config)
-    {
-        var parts = name.split(':'),
-            realName = parts[0],
-            pluginName = parts[1] || false;
-
-        var instancePromise = thrustInstance.fetchInstance(realName);
-        instancePromise.then(function (context)
-        {
+    function load(name, parentRequire, load, config) {
+        var parts = name.split(':'), realName = parts[0], pluginName = parts[1] || false;
+        var instanceDeferred = thrustInstance.fetchInstance(realName);
+        instanceDeferred.promise.then(function (context) {
             var plugin = pluginName && context.cfg[pluginName] || context.config;
-            if (!plugin)
+            if(!plugin) {
                 throw new Error('Plugin "' + pluginName + '" does not exist on thrust instance "' + realName + '".');
-
+            }
             load(plugin);
         });
-    };
+    }
+    exports.load = load;
+    /*}*/ })
+//@ sourceMappingURL=config.js.map
+;
+define('thrust/log',["require", "exports", './config', 'thrust/util'], function(require, exports, __tConfig__, __util__) {
+    /// <reference path="../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    var tConfig = __tConfig__;
 
-    return config;
-});
-define('thrust/log',['thrust/config', 'thrust/util'],
-function (tConfig, util)
-{
+    var util = __util__;
+
     /**
-        A basic logger for the thrust framework.
-        Disables debug logging when thrust is not in debug mode.
-
+    A basic logger for the thrust framework.
+    Disables debug logging when thrust is not in debug mode.
+    
     @module thrust
-
+    
     **/
     
     // Log levels
@@ -2120,423 +2636,172 @@ function (tConfig, util)
         WARN: 2,
         ERROR: 1
     };
-
     // Declare our variables
-    var console     = window.console,
-        timers      = {},
-        log         = (console && console.log) || false,
-        warn        = (console && console.warn) || false,
-        info        = (console && console.info) || false,
-        error       = (console && console.error) || false,
-        time        = (console && console.time) || false,
-        timeEnd     = (console && console.timeEnd) || false,
-        slice       = Array.prototype.slice,
-        configLevel = tConfig.log.level || LEVEL.ERROR,
-        logLevel    = LEVEL[configLevel] || (typeof configLevel === 'string' && LEVEL[configLevel.toUpperCase()]) || (typeof configLevel  === 'number' && configLevel) || LEVEL.ERROR;
-
+        var console = window.console, timers = {
+    }, cLog = (console && console.log) || false, cWarn = (console && console.warn) || false, cInfo = (console && console.info) || false, cError = (console && console.error) || false, cTime = (console && console['time']) || false, cTimeEnd = (console && console['timeEnd']) || false, slice = Array.prototype.slice, configLevel = tConfig.log.level || LEVEL.ERROR, logLevel = LEVEL[configLevel] || (typeof configLevel === 'string' && LEVEL[configLevel.toUpperCase()]) || (typeof configLevel === 'number' && configLevel) || LEVEL.ERROR;
     // Various loggers to handle IE8/9 support.
-    var logRunner = function (consoleMethod, logType)
-    {
+    var logRunner = function (consoleMethod, logType) {
         // Show logs when enabled or if they are errors
         var args = slice.call(arguments, 1);
-        if (consoleMethod)
-        {
-            if (consoleMethod.apply)
+        if(consoleMethod) {
+            if(consoleMethod.apply) {
                 consoleMethod.apply(console, args);
-            else
+            } else {
                 consoleMethod(args);
-        }
-        else if (!consoleMethod && log)
-        {
-            if (log.apply)
-                log.apply(console, args);
-            else
-                log(args);
+            }
+        } else {
+            if(!consoleMethod && cLog) {
+                if(cLog.apply) {
+                    cLog.apply(console, args);
+                } else {
+                    cLog(args);
+                }
+            }
         }
     };
-
     /**
     A basic logger for the thrust framework.
-        Disables debug logging when thrust is not in debug mode.
-
+    Disables debug logging when thrust is not in debug mode.
+    
     @class thrust.Log
     **/
-    var Log = {
-        /**
-        Logs a debug type message using the console log method
-        
-        @method debug
-        **/
-        debug: function ()
-        {
-            // Short circuit if logging is disabled.  This is as close to noop as we can get, incase there is a direct reference to this method.
-            if (!tConfig.log.enabled) return;
-            if (logLevel >= LEVEL.DEBUG)
-            {
-                var args = slice.call(arguments);
-                args.unshift(log);
-
-                logRunner.apply(this, args, 'log');
-            }
-        },
-        /**
-        Logs a info type message using the console info method if available, otherwise it uses the console log method.
-
-        @method info
-        **/
-        info: function ()
-        {
-            // Short circuit if logging is disabled.  This is as close to noop as we can get, incase there is a direct reference to this method.
-            if (!tConfig.log.enabled) return;
-            if (logLevel >= LEVEL.INFO)
-            {
-                var args = slice.call(arguments);
-                args.unshift(info);
-
-                logRunner.apply(this, args, 'info');
-            }
-        },
-        /**
-        Logs a warn type message using the console warn method if available, otherwise it uses the console log method.
-
-        @method warn
-        **/
-        warn: function ()
-        {
-            // Short circuit if logging is disabled.  This is as close to noop as we can get, incase there is a direct reference to this method.
-            if (!tConfig.log.enabled) return;
-            if (logLevel >= LEVEL.WARN)
-            {
-                var args = slice.call(arguments);
-                args.unshift(warn);
-
-                logRunner.apply(this, args, 'warn');
-            }
-        },
-        /**
-        Logs a error type message using the console error method if available, otherwise it uses the console log method.
-
-        @method error
-        **/
-        error: function ()
-        {
-            // Short circuit if logging is disabled.  This is as close to noop as we can get, incase there is a direct reference to this method.
-            if (!tConfig.log.enabled) return;
-            if (logLevel >= LEVEL.ERROR)
-            {
-                var args = slice.call(arguments);
-                args.unshift(error);
-
-                logRunner.apply(this, args, 'error');
-            }
-        },
-        /**
-        Logs a time type message using the console time method if available, otherwise it uses the console log method.
-
-        @method time
-        **/
-        time: function (message)
-        {
-            // Short circuit if logging is disabled.  This is as close to noop as we can get, incase there is a direct reference to this method.
-            if (!tConfig.log.enabled) return;
-            if (logLevel >= LEVEL.DEBUG)
-            {
-                timers[message] = { start: new Date().getTime() };
-                var msg = util.format('{0}: timer started', message),
-                    args = slice.call(arguments, 1);
-                args.unshift(msg);
-                args.unshift(time);
-
-                logRunner.apply(this, args);
-            }
-        },
-        /**
-        Logs a timeEnd type message using the console timeEnd method if available, otherwise it uses the console log method.
-        Causes the timer to end, for the given message.
-
-        @method timeEnd
-        **/
-        timeEnd: function (message)
-        {
-            // Short circuit if logging is disabled.  This is as close to noop as we can get, incase there is a direct reference to this method.
-            if (!tConfig.log.enabled) return;
-            if (logLevel >= LEVEL.DEBUG)
-            {
-                timers[message].end = new Date.getTime();
-                var time = timers[message].end - timers[message].start,
-                    msg = util.format('{0}: {1}ms', message, time);
-                var args = slice.call(arguments, 1);
-                args.unshift(msg);
-                args.unshift(timeEnd);
-
-                logRunner.apply(this, args);
-            }
-        }
-    };
-
-    return Log;
-});
-
-define('thrust/ignite',['require', 'thrust/config', 'thrust/util', 'module'],
-function (require, config, util, module)
-{
-    var slice = Array.prototype.slice,
-        isArray = util.isArray,
-        toArray = util.toArray,
-        each = util.each,
-        map = util.map,
-        any = util.any,
-        all = util.all,
-        when = util.when,
-        extend = util.extend,
-        flatten = util.flatten,
-        pluck = util.pluck,
-        isObject = util.isObject,
-
-        reconcileArrays = function (config, settings, to)
-        {
-            var keys = util.keys(config);
-            if (settings)
-            {
-                keys = util.union(util.keys(settings), keys);
-            }
-            else
-            {
-                settings = {};
-            }
-            each(keys, function (i)
-            {
-                var x = settings[i] || config[i];
-                if (isArray(x))
-                {
-                    to[i] = toArray(settings[i] || to[i]);
-                }
-                else if (isObject(x))
-                {
-                    reconcileArrays(x, null, to[i]);
-                }
-            });
-        },
-        stageOneComplete = {};
-
     /**
-    Contructs a wire spec for thrust to launch from.
-
-    @module thrust
+    Logs a debug type message using the console log method
+    
+    @method debug
     **/
-    return {
-        /**
-       Merges a all the plugins configurations, with the default config, and then finally with
-       any customized config from requirejs
-
-       @method stageOne
-       @param {Object} settings The settints to pass onto the thrust instance being created.
-       **/
-        stageOne: function (settings)
-        {
-            var that = this;
-
-            if (stageOneComplete[settings.name])
-            {
-                return that.stateTwo(settings);
-            }
-
-            var plugins = ['thrust/mediator'].concat(settings.plugins || module.config().plugins || config.plugins || []),
-                defer = when.defer();
-
-            settings.plugins = plugins;
-
-            require(plugins.map(function (x) { return x; }), function ()
-            {
-                var args = arguments;
-                plugins.forEach(function (plugin, i)
-                {
-                    var name = plugin.substring(plugin.lastIndexOf('/') + 1);
-                    config[name] = args[i].config;
-                });
-
-                util.deepCopy(config, module.config());
-
-                when.chain(that.stateTwo(settings), defer);
-            });
-            stageOneComplete[settings.name] = true;
-
-            return defer;
-        },
-        /**
-        Creates a thrust instance, from the given settings.
-        Including the plugins.
-
-        @method stateTwo
-        @param {Object} settings The settints to pass onto the thrust instance being created.
-        **/
-        stateTwo: function (settings)
-        {
-            /*jshint loopfunc:true*/
-            // Get the configuration
-            var localConfig = util.deepCopy({}, config, settings),
-                defer = when.defer();
-            // Reconicle the arrays so they are properly arrays
-            reconcileArrays(config, settings, localConfig);
-
-            // Mediator is a required plugin, include all the others in addition to it.
-            var plugins = localConfig.plugins,
-                // The modules to load
-                modulesToLoad = [],
-                // The module configuration object
-                modulesConfigurations = { thrust: 'thrust' };
-
-            // Loop through all the plugins, creating a proper dependancy list.
-            for (var i = 0, iLen = plugins.length; i < iLen; i++)
-            {
-                var plugin = plugins[i],
-                    name = plugin.substring(plugin.lastIndexOf('/') + 1),
-                    pluginConfig = localConfig[name];
-
-                modulesToLoad.push(plugin);
-                modulesToLoad.push(pluginConfig.conventions || []);
-                modulesConfigurations[plugin] = pluginConfig;
-            }
-
-            // Name and cfg are default properties of the configuration context
-            var orderedPlugins = ['name', 'cfg'],
-                // We loop through until all the plugins are in proper order.
-                reloop = true,
-                iLen = modulesToLoad.length,
-                i = 0;
-
-            // Loop through all the plugins until we have a set that will load in proper order.
-            while (i < iLen)
-            {
-                // The plugin
-                var plugin = modulesToLoad[i],
-                    // The implied plugin name
-                    name = plugin.substring(plugin.lastIndexOf('/') + 1),
-                    // The plugins configuration
-                    pluginConfig = localConfig[name];
-
-                // Check if the plugin has to resolve anything.
-                if (pluginConfig.resolve && pluginConfig.resolve.length > 0 && !all(pluginConfig.resolve,
-                    function (x)
-                {
-                        return any(orderedPlugins, function (z)
-                {
-                        return x === z || x === z;
-                });
-                })
-                )
-                {
-                    // The modules to load.
-                    // Also includes any conventions.
-                    modulesToLoad.push.apply(modulesToLoad, modulesToLoad.splice(i, 2));
-                }
-                else
-                {
-                    // reorder the plugin
-                    i += 2;
-                    orderedPlugins.push(name);
-                }
-            }
-
-            // The modules config
-            var modules = localConfig.modules || [];
-            // Thrust and thrust/module also need to be loaded.
-            modulesToLoad.push.apply(modulesToLoad, ['thrust']);
-            // Flatten the resultant array
-            modulesToLoad = flatten(modulesToLoad);
-
-            // Create the configuration spec
-            var spec = {
-                name: localConfig.name || 'global',
-                cfg: localConfig
-            };
-
-            // Load everything
-            require(modulesToLoad, function ()
-            {
-                // Get ready to loop
-                var currentPlugin = null, allConventions = [];
-
-                // Loop through all the modules being loaded
-                for (var i = 0, iLen = modulesToLoad.length ; i < iLen; i++)
-                {
-                    // Get plugin and configuration
-                    var plugin = modulesToLoad[i],
-                        mConfig = modulesConfigurations[plugin];
-
-                    // Check if we have a configuration object
-                    if (mConfig)
-                    {
-                        // Load a new plugin.
-                        var pluginClass = arguments[i],
-                            // Get the plugin name
-                            name = plugin.substring(plugin.lastIndexOf('/') + 1),
-                            // Resolve all the required items.
-                            resolveItems = map(mConfig.resolve, function (x) { return spec[x]; });
-
-                        // Instantiate the plugin
-                        currentPlugin = spec[name] = util.instantiate(pluginClass, resolveItems);
-                        // Setup the conventions
-                        currentPlugin.__conventions = [];
-                    }
-                        // Load all the conventions
-                    else if (currentPlugin)
-                    {
-                        // Load the convention into the plugin
-                        currentPlugin.__conventions.push(arguments[i]);
-                        // Load the convention into the thrust instance.
-                        allConventions.push(arguments[i]);
-                    }
-                }
-
-                // The last current plugin, will always be thrust.
-                currentPlugin.__conventions = allConventions;
-
-                // Extend thrust with the spec
-                extend(currentPlugin, spec);
-
-                defer.resolve(spec);
-            }, defer.reject);
-
-            return defer.promise;
-        },
-        /**
-        Loads up the default modules as indicated to thrust.
-
-        @method stageThree
-        @param {Object} context The context to use to load the modules.
-        **/
-        stageThree: function (context)
-        {
-            var thrust = context.thrust,
-                defer = when.defer(),
-                modules = context.cfg.modules;
-
-            require(['thrust/module'].concat(modules), function (Module)
-            {
-                // Get the definitions
-                var moduleDefinitions = slice.call(arguments, 1);
-
-                // Loop over all the modules
-                for (var i = 0, iLen = modules.length; i < iLen; i++)
-                {
-                    // Get the module name
-                    var module = modules[i],
-                        // Get the definition
-                        definition = moduleDefinitions[i];
-
-                    // Create the instance
-                    var moduleInstance = new Module(thrust, definition, module);
-                    // Inject it into the thrust instance
-                    moduleInstance.thrustCreate(thrust);
-                }
-                defer.resolve();
-            }, defer.reject);
-
-            return defer.promise;
+    function debug() {
+        var args = [];
+        for (var _i = 0; _i < (arguments.length - 0); _i++) {
+            args[_i] = arguments[_i + 0];
         }
-    };
-});
+        // Short circuit if logging is disabled.  This is as close to noop as we can get, incase there is a direct reference to this method.
+        if(!tConfig.log.enabled) {
+            return;
+        }
+        if(logLevel >= LEVEL.DEBUG) {
+            var args = slice.call(arguments);
+            args.unshift(cLog);
+            logRunner.apply(this, args, 'log');
+        }
+    }
+    exports.debug = debug;
+    /**
+    Logs a info type message using the console info method if available, otherwise it uses the console log method.
+    
+    @method info
+    **/
+    function info() {
+        var args = [];
+        for (var _i = 0; _i < (arguments.length - 0); _i++) {
+            args[_i] = arguments[_i + 0];
+        }
+        // Short circuit if logging is disabled.  This is as close to noop as we can get, incase there is a direct reference to this method.
+        if(!tConfig.log.enabled) {
+            return;
+        }
+        if(logLevel >= LEVEL.INFO) {
+            var args = slice.call(arguments);
+            args.unshift(cInfo);
+            logRunner.apply(this, args, 'info');
+        }
+    }
+    exports.info = info;
+    /**
+    Logs a warn type message using the console warn method if available, otherwise it uses the console log method.
+    
+    @method warn
+    **/
+    function warn() {
+        var args = [];
+        for (var _i = 0; _i < (arguments.length - 0); _i++) {
+            args[_i] = arguments[_i + 0];
+        }
+        // Short circuit if logging is disabled.  This is as close to noop as we can get, incase there is a direct reference to this method.
+        if(!tConfig.log.enabled) {
+            return;
+        }
+        if(logLevel >= LEVEL.WARN) {
+            var args = slice.call(arguments);
+            args.unshift(cWarn);
+            logRunner.apply(this, args, 'warn');
+        }
+    }
+    exports.warn = warn;
+    /**
+    Logs a error type message using the console error method if available, otherwise it uses the console log method.
+    
+    @method error
+    **/
+    function error() {
+        var args = [];
+        for (var _i = 0; _i < (arguments.length - 0); _i++) {
+            args[_i] = arguments[_i + 0];
+        }
+        // Short circuit if logging is disabled.  This is as close to noop as we can get, incase there is a direct reference to this method.
+        if(!tConfig.log.enabled) {
+            return;
+        }
+        if(logLevel >= LEVEL.ERROR) {
+            var args = slice.call(arguments);
+            args.unshift(cError);
+            logRunner.apply(this, args, 'error');
+        }
+    }
+    exports.error = error;
+    /**
+    Logs a time type message using the console time method if available, otherwise it uses the console log method.
+    
+    @method time
+    **/
+    function time(message) {
+        var args = [];
+        for (var _i = 0; _i < (arguments.length - 1); _i++) {
+            args[_i] = arguments[_i + 1];
+        }
+        // Short circuit if logging is disabled.  This is as close to noop as we can get, incase there is a direct reference to this method.
+        if(!tConfig.log.enabled) {
+            return;
+        }
+        if(logLevel >= LEVEL.DEBUG) {
+            timers[message] = {
+                start: new Date().getTime()
+            };
+            var msg = util.format('{0}: timer started', message), args = slice.call(arguments, 1);
+            args.unshift(msg);
+            args.unshift(cTime);
+            logRunner.apply(this, args);
+        }
+    }
+    exports.time = time;
+    /**
+    Logs a timeEnd type message using the console timeEnd method if available, otherwise it uses the console log method.
+    Causes the timer to end, for the given message.
+    
+    @method timeEnd
+    **/
+    function timeEnd(message) {
+        var args = [];
+        for (var _i = 0; _i < (arguments.length - 1); _i++) {
+            args[_i] = arguments[_i + 1];
+        }
+        // Short circuit if logging is disabled.  This is as close to noop as we can get, incase there is a direct reference to this method.
+        if(!tConfig.log.enabled) {
+            return;
+        }
+        if(logLevel >= LEVEL.DEBUG) {
+            timers[message].end = (new Date()).getTime();
+            var time = timers[message].end - timers[message].start, msg = util.format('{0}: {1}ms', message, time);
+            var args = slice.call(arguments, 1);
+            args.unshift(msg);
+            args.unshift(cTimeEnd);
+            logRunner.apply(this, args);
+        }
+    }
+    exports.timeEnd = timeEnd;
+})
+//@ sourceMappingURL=log.js.map
+;
 ;(function(g){
 
     // summary: A simple feature detection function/framework.
@@ -2693,246 +2958,234 @@ function (require, config, util, module)
     }
 })(this);
 
-define('thrust/module',['thrust/util', 'thrust/log', 'has'],
-function (util, log, has)
-{
-    var type = util.type,
-        format = util.format,
-        isObject = util.isObject,
-        extend = util.extend,
-        when = util.when,
-        thrustCache = {},
-        /**
-        Moves all properties, that should exist outside of the module, into a private object for holding.
+define('thrust/capsule',["require", "exports", 'thrust/util', './log', 'has'], function(require, exports, __util__, __log__, __has__) {
+    /// <reference path="../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
+    var util = __util__;
 
-        @method moveToThrustCache
-        @private
-        @param {Object} from Object to extract items from
-        @param {Object} to Object to place items on
-        @param {Array} list Items to move from to the other object
-        **/
-        moveToThrustCache = function (from, to, list)
-        {
-            for (var i = 0, iLen = list.length; i < iLen; i++)
-            {
-                to[list[i]] = from[list[i]];
-                delete from[list[i]];
+    var _ = util._;
+    var log = __log__;
+
+    var has = __has__;
+
+    var type = util.type, format = util.format, isObject = _.isObject, extend = _.extend, when = util.when, flatten = _.flatten, pluck = _.pluck, flattenToPromises = util.flattenToPromises, thrustCache = {
+    }, __optionalMethods = [
+        // Optional methods that may be on a module
+        'start', 
+'stop', 
+'ready'    ];
+    var __requiredMethods = [
+        // Required methods that must be on every module
+        'init', 
+        'destroy'
+    ];
+    /**
+    Moves all properties, that should exist outside of the module, into a private object for holding.
+    
+    @method moveToThrustCache
+    @private
+    @param {Object} from Object to extract items from
+    @param {Object} to Object to place items on
+    @param {Array} list Items to move from to the other object
+    **/
+    function moveToThrustCache(from, to, list) {
+        for(var i = 0, iLen = list.length; i < iLen; i++) {
+            to[list[i]] = from[list[i]];
+            delete from[list[i]];
+        }
+    }
+    function getEventNamespace(name, prefix) {
+        if(!prefix) {
+            prefix = 'module-';
+        }
+        return '.' + (name === 'global' ? 'global' : prefix + name.replace(/\./g, '-'));
+    }
+    function callFacadeMethods(method, mid) {
+        var results = [];
+        for(var i in thrustCache[mid].facades) {
+            var moduleCache = thrustCache[mid], facade = moduleCache.facades[i];
+            has('DEBUG') && log.debug(format('thrust/capsule: Calling facade "{0}" {1}()', i, method));
+            if(facade[method] && isObject(facade)) {
+                results.push(facade[method].call(facade, thrustCache[mid].module));
             }
-        },
-        getEventNamespace = function (name, prefix)
-        {
-            if (!prefix) prefix = 'module-'; return '.' + (name === 'global' ? 'global' : prefix + name.replace(/\./g, '-'));
-        },
-        __optionalMethods = [     // Optional methods that may be on a module
-            'start',
-            'stop',
-            'ready'
-        ];
-
+        }
+        return results;
+    }
     /**
     The module is the heart of the thrust, every module gets one facade per module.
-
+    
     @module thrust
     @class thrust.Module
     @param {Thrust} thrust The thrust instance
     @param {Object} def The module definition
     @param {String} [name] The module name.
     **/
-    var Module = function (thrust, def, name)
-    {
-        name = this.name = (name || def.name);
-        if (typeof def === 'function')
-        {
-            def = def(name);
-            def.name = name;
+    var Module = (function () {
+        //var Module =
+        function Module(thrust, def, name) {
+            name = this.name = (name || def.name);
+            if(typeof def === 'function') {
+                def = def(name);
+                def.name = name;
+            }
+            var mid = this.mid = thrust.name + ':' + name;
+            var tCache = thrustCache[def.hash || mid];
+            this.instance = extend(def, tCache && tCache.instance || {
+            });
+            this.instance.name = (this.instance.name || name);
+            this.instance.mid = mid;
+            if(!this.instance.name) {
+                throw new Error('All Modules must have a name!');
+            }
+            // Modules must have an init method and a destroy method, it's up to the module developer to populate these methods.
+            for(var i = 0, iLen = __requiredMethods.length; i < iLen; i++) {
+                if(!def[__requiredMethods[i]]) {
+                    throw new Error(format('Required "{0}" method not found on module "{1}"!', __requiredMethods[i], name));
+                }
+            }
+            // If the module name is undefined, bring the name into the module.
+            if(typeof def.name === 'undefined') {
+                def.name = name;
+            }
+            var thrustModuleCacheItem = thrustCache[mid] = extend(tCache || {
+            }, {
+                _started: false,
+                name: util.getModuleNameForPath(name),
+                module: this
+            });
+            delete thrustCache[def.hash];
+            var facades = thrustModuleCacheItem.facades || (thrustModuleCacheItem.facades = {
+            });
+            if(!thrust.__conventionPluckPropertiesCache) {
+                thrust.__conventionPluckPropertiesCache = flatten(pluck(thrust.__conventions || [], 'properties'));
+            }
+            // Move all special properties off to the thrust's internal method.
+            moveToThrustCache(this.instance, thrustModuleCacheItem, __requiredMethods);
+            moveToThrustCache(this.instance, thrustModuleCacheItem, __optionalMethods);
+            moveToThrustCache(this.instance, thrustModuleCacheItem, thrust.__conventionPluckPropertiesCache);
+            util.safeInvoke(thrust, 'createFacade', thrust, this.instance, facades);
+            this.__namespace = getEventNamespace(this.instance.name);
+            this.thrust = thrust;
         }
-        var mid = this.mid = thrust.name + ':' + name;
-        var tCache = thrustCache[def.hash || mid];
-
-        this.instance = extend(def, tCache && tCache.instance || {});
-        this.instance.name = (this.instance.name || name);
-        this.instance.mid = mid;
-
-        if (!this.instance.name)
-            throw new Error('All Modules must have a name!');
-
-        // Modules must have an init method and a destroy method, it's up to the module developer to populate these methods.
-        for (var i = 0, iLen = thrust.__requiredMethods.length; i < iLen; i++)
-            if (!def[thrust.__requiredMethods[i]])
-                throw new Error(format('Required "{0}" method not found on module "{1}"!', thrust.__requiredMethods[i], name));
-
-        // If the module name is undefined, bring the name into the module.
-        if (typeof def.name === 'undefined')
-            def.name = name;
-
-        var thrustModule = thrustCache[mid] = extend(tCache || {}, {
-            _started: false,
-            name: util.getModuleNameForPath(name),
-            module: this
-        });
-
-        delete thrustCache[def.hash];
-
-        var facades = thrustModule.facades || (thrustModule.facades = {});
-        if (!thrust.__conventionPluckPropertiesCache) thrust.__conventionPluckPropertiesCache = util.flatten(util.pluck(thrust.__conventions || [], 'properties'));
-
-        // Move all special properties off to the thrust's internal method.
-        moveToThrustCache(this.instance, thrustModule, thrust.__requiredMethods);
-        moveToThrustCache(this.instance, thrustModule, __optionalMethods);
-        moveToThrustCache(this.instance, thrustModule, thrust.__conventionPluckPropertiesCache);
-
-        util.safeInvoke(thrust, 'createFacade', thrust, this.instance, facades);
-
-        this.__namespace = getEventNamespace(this.instance.name);
-
-        this.thrust = thrust;
-    };
-
-    var callFacadeMethods = function (method, mid)
-    {
-        var results = [];
-        for (var i in thrustCache[mid].facades)
-        {
-            var moduleCache = thrustCache[mid],
-                facade = moduleCache.facades[i];
-            has('DEBUG') && log.debug(format('thrust/module: Calling facade "{0}" {1}()', i, method));
-            if (facade[method] && isObject(facade))
-                results.push(facade[method].call(facade, thrustCache[mid].module));
-        }
-        return results;
-    };
-
-    Module.prototype = {
         /**
         Getter/Setter for convention methods.
         Gets the value convention property (defined in the properties array of a facade).
         Sets the value of a convention property (for storing convention configuration)
-
+        
         @param {String} property The property to get or set
         @param {object} [value] The value to set
         @method convention
         @returns {Object} The valaue.
         **/
-        convention: function (property, value)
-        {
-            if (typeof value !== 'undefined')
-            {
+                Module.thrustCache = thrustCache;
+        Module.prototype.convention = function (property, value) {
+            if(typeof value !== 'undefined') {
                 thrustCache[this.mid][property] = value;
                 return;
             }
             return thrustCache[this.mid][property];
-        },
-        /**
+        }/**
         Injects this module into the given thrust instance.
-
+        
         @method thrustCreate
         @param {Thrust} thrust The thrust instance.
         **/
-        thrustCreate: function (thrust)
-        {
+        ;
+        Module.prototype.thrustCreate = function (thrust) {
             thrust.__injectModule(this);
-        },
-        /**
+        }/**
         Makes a call to all the modules facades
         The order of the call depends on the order required.
         During the startup stage (init, start, ready) facades are called first.
         During the shutdown state (stop, destroy) facades are called last.
         This allows modules to startup and shutdown will all the tools it had to begin with.
-
+        
         @method thrustCall
         @protected
         @param {String} method the method to call
         @param {Boolean} facadeAfter calls facade methods before or after module method.
         @param {Array} args Args to be passed onto the module method.
         **/
-        thrustCall: function (method, facadeAfter, args)
-        {
-            var defer = when.defer(),
-                results,
-                that = this;
-
-            has('DEBUG') && log.debug(format('thrust/module: Calling facades for "{0}"', that.name));
+        ;
+        Module.prototype.thrustCall = function (method, facadeAfter, args) {
+            var defer = when.defer(), results, that = this;
+            has('DEBUG') && log.debug(format('thrust/capsule: Calling facades for "{0}"', that.name));
             var m = thrustCache[that.mid][method];
-            if (!facadeAfter)
-            {
+            if(!facadeAfter) {
                 results = callFacadeMethods(method, that.mid);
-                if (results)
-                    when.chain(when.all(util.flattenToPromises(results)), defer);
-                else
+                if(results) {
+                    when.chain(when.all(flattenToPromises(results)), defer);
+                } else {
                     defer.resolve();
-
-                if (m)
-                {
+                }
+                if(m) {
                     var newDefer = when.defer();
-                    defer.then(function ()
-                    {
+                    defer.promise.then(function () {
                         var result = m.apply(that.instance, args);
-                        if (result)
-                            when.chain(when.all(util.flattenToPromises(result)), newDefer);
-                        else
+                        if(result) {
+                            when.chain(when.all(flattenToPromises(result)), newDefer);
+                        } else {
                             newDefer.resolve();
+                        }
                     });
                     defer = newDefer;
                 }
-            }
-            else
-            {
+            } else {
                 var m = thrustCache[that.mid][method];
-                if (m)
-                {
+                if(m) {
                     results = m.apply(that.instance, args);
-                    if (results)
-                        when.chain(when.all(util.flattenToPromises(results)), defer);
-                    else
+                    if(results) {
+                        when.chain(when.all(flattenToPromises(results)), defer);
+                    } else {
                         defer.resolve();
-                }
-                else
+                    }
+                } else {
                     defer.resolve();
-
+                }
                 var newDefer = when.defer();
-                defer.then(function ()
-                {
+                defer.promise.then(function () {
                     var result = callFacadeMethods(method, that.mid);
-                    if (result)
-                        when.chain(when.all(util.flattenToPromises(result)), newDefer);
-                    else
+                    if(result) {
+                        when.chain(when.all(flattenToPromises(result)), newDefer);
+                    } else {
                         newDefer.resolve();
+                    }
                 });
                 defer = newDefer;
             }
-
             return defer.promise;
-        },
-        /**
+        }/**
         Start the module, inside the thrust container it was created on.
-
+        
         @method start
         **/
-        start: function ()
-        {
+        ;
+        Module.prototype.start = function () {
             var that = this;
             that.thrust.start(that.name);
-        },
-        /**
+        }/**
         Stop the module, inside the thrust container it was created on.
-
+        
         @method start
         **/
-        stop: function ()
-        {
+        ;
+        Module.prototype.stop = function () {
             var that = this;
             that.thrust.stop(that.name);
-        }
-    };
-
+        };
+        return Module;
+    })();
+    exports.Module = Module;    
     /**
     AMD API
     load
-
+    
     Handles fetching of a module instance.
     Format:
-    thrust/module!{instance}:{moduleName}
-
+    thrust/capsule!{instance}:{moduleName}
+    
     @method load
     @static
     @param {String} name The name of the instance that is being fetched
@@ -2940,26 +3193,238 @@ function (util, log, has)
     @param {Function} load Allows the load to inform that AMD for the value to hand off
     @param {Object} config The custom configuration.
     **/
-    Module.load = function (name, parentRequire, load, config)
-    {
-        var parts = name.split(':'),
-            instanceName = parts[0],
-            moduleName = parts[1];
-
-        require(['thrust!' + instanceName], function (thrust)
-        {
+    function load(name, parentRequire, load, config) {
+        var parts = name.split(':'), instanceName = parts[0], moduleName = parts[1];
+        require([
+            'thrust!' + instanceName
+        ], function (thrust) {
             var module = thrust.modules[moduleName];
-            if (!module)
+            if(!module) {
                 throw new Error(format('Module "{0}" does not exist on thrust instance "{1}".', moduleName, instanceName));
-
+            }
             load(module);
         });
+    }
+    exports.load = load;
+})
+//@ sourceMappingURL=capsule.js.map
+;
+define('thrust/ignite',["require", "exports", 'module', 'thrust/util', './config', './capsule'], function(require, exports, __requireModule__, __util__, __config__, __tm__) {
+    /// <reference path="interfaces/thrust.d.ts" />
+    /// <reference path="../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
+    var requireModule = __requireModule__;
+
+    var util = __util__;
+
+    var _ = util._;
+    
+    var config = __config__;
+
+    var tm = __tm__;
+
+    var slice = Array.prototype.slice, isArray = _.isArray, toArray = _.toArray, isFunction = _.isFunction, each = _.each, map = _.map, any = _.any, all = _.all, when = util.when, extend = _.extend, flatten = _.flatten, pluck = _.pluck, isObject = _.isObject, keys = _.keys, union = _.union, stageOneComplete = {
     };
-
-    Module.thrustCache = thrustCache;
-
-    return Module;
-});
+    function reconcileArrays(config, settings, to) {
+        var keys = _.keys(config);
+        if(settings) {
+            keys = union(_.keys(settings), keys);
+        } else {
+            settings = {
+            };
+        }
+        each(keys, function (i) {
+            var x = settings[i] || config[i];
+            if(isArray(x)) {
+                to[i] = toArray(settings[i] || to[i]);
+            } else {
+                if(isObject(x) && !isFunction(x)) {
+                    reconcileArrays(x, null, to[i]);
+                }
+            }
+        });
+    }
+    /**
+    Contructs a wire spec for thrust to launch from.
+    
+    @module thrust
+    **/
+    /**
+    Merges a all the plugins configurations, with the default config, and then finally with
+    any customized config from requirejs
+    
+    @method stageOne
+    @param {Object} settings The settints to pass onto the thrust instance being created.
+    **/
+    function stageOne(settings) {
+        /*jshint validthis:true */
+        var that = this;
+        if(stageOneComplete[settings.name]) {
+            return that.stateTwo(settings);
+        }
+        var plugins = [
+'thrust/mediator'        ].concat(settings.plugins || requireModule.config().plugins || config.plugins || []), defer = when.defer();
+        settings.plugins = plugins;
+        require(plugins.map(function (x) {
+            return x;
+        }), function () {
+            var args = arguments;
+            plugins.forEach(function (plugin, i) {
+                var name = plugin.substring(plugin.lastIndexOf('/') + 1);
+                var pluginClass = args[i][args[i].className];
+                config[name] = pluginClass.config;
+            });
+            _.merge(config, requireModule.config());
+            when.chain(that.stateTwo(settings), defer);
+        });
+        stageOneComplete[settings.name] = true;
+        return defer.promise;
+    }
+    exports.stageOne = stageOne;
+    /**
+    Creates a thrust instance, from the given settings.
+    Including the plugins.
+    
+    @method stateTwo
+    @param {Object} settings The settints to pass onto the thrust instance being created.
+    **/
+    function stateTwo(settings) {
+        /*jshint loopfunc:true */
+        // Get the configuration
+                var localConfig = _.merge({
+        }, config, settings), defer = when.defer();
+        // Reconicle the arrays so they are properly arrays
+        reconcileArrays(config, settings, localConfig);
+        // Mediator is a required plugin, include all the others in addition to it.
+                var plugins = localConfig.plugins, modulesToLoad = // The modules to load
+        [], modulesConfigurations = // The module configuration object
+        {
+thrust: 'thrust'        };
+        // Loop through all the plugins, creating a proper dependancy list.
+        for(var i = 0, iLen = plugins.length; i < iLen; i++) {
+            var plugin = plugins[i], name = plugin.substring(plugin.lastIndexOf('/') + 1), pluginConfig = localConfig[name];
+            modulesToLoad.push(plugin);
+            modulesToLoad.push(pluginConfig && pluginConfig.conventions || []);
+            modulesConfigurations[plugin] = pluginConfig;
+        }
+        // Name and cfg are default properties of the configuration context
+                var orderedPlugins = [
+'name', 
+'cfg'        ], reloop = // We loop through until all the plugins are in proper order.
+        true, iLen = modulesToLoad.length, i = 0;
+        // Loop through all the plugins until we have a set that will load in proper order.
+        while(i < iLen) {
+            // The plugin
+                        var plugin = modulesToLoad[i], name = // The implied plugin name
+            plugin.substring(plugin.lastIndexOf('/') + 1), pluginConfig = // The plugins configuration
+            localConfig[name];
+            // Check if the plugin has to resolve anything.
+            if(pluginConfig && pluginConfig.resolve && pluginConfig.resolve.length > 0 && !all(pluginConfig.resolve, function (x) {
+                return any(orderedPlugins, function (z) {
+                    return x === z || x === z;
+                });
+            })) {
+                // The modules to load.
+                // Also includes any conventions.
+                modulesToLoad.push.apply(modulesToLoad, modulesToLoad.splice(i, 2));
+            } else {
+                // reorder the plugin
+                i += 2;
+                orderedPlugins.push(name);
+            }
+        }
+        // The modules config
+        var modules = localConfig.modules || [];
+        // Thrust and thrust/capsule also need to be loaded.
+        modulesToLoad.push.apply(modulesToLoad, [
+            'thrust'
+        ]);
+        // Flatten the resultant array
+        modulesToLoad = flatten(modulesToLoad);
+        // Create the configuration spec
+        var spec = {
+            name: localConfig.name || 'global',
+            cfg: localConfig
+        };
+        // Load everything
+        require(modulesToLoad, function () {
+            // Get ready to loop
+                        var currentPlugin = null, allConventions = [];
+            // Loop through all the modules being loaded
+            for(var i = 0, iLen = modulesToLoad.length; i < iLen; i++) {
+                // Get plugin and configuration
+                                var plugin = modulesToLoad[i], mConfig = modulesConfigurations[plugin];
+                // Check if we have a configuration object
+                if(mConfig) {
+                    // Load a new plugin.
+                                        var pluginObject = arguments[i], name = // Get the plugin name
+                    plugin.substring(plugin.lastIndexOf('/') + 1), resolveItems = // Resolve all the required items.
+                    map(mConfig.resolve, function (x) {
+return spec[x];                    });
+                    var pluginClass = pluginObject[pluginObject.className];
+                    // Instantiate the plugin
+                    currentPlugin = spec[name] = util.instantiate(pluginClass, resolveItems);
+                    // Setup the conventions
+                    currentPlugin.__conventions = [];
+                } else {
+                    // Load all the conventions
+                    if(currentPlugin) {
+                        // Load the conventions into the plugin
+                        _.forOwn(arguments[i], function (x) {
+                            return currentPlugin.__conventions.push(x);
+                        });
+                        // Load the conventions into the thrust instance.
+                        _.forOwn(arguments[i], function (x) {
+                            return allConventions.push(x);
+                        });
+                    }
+                }
+            }
+            // The last current plugin, will always be thrust.
+            currentPlugin.__conventions = allConventions;
+            // Extend thrust with the spec
+            extend(currentPlugin, spec);
+            defer.resolve(spec);
+        }, defer.reject);
+        return defer.promise;
+    }
+    exports.stateTwo = stateTwo;
+    /**
+    Loads up the default modules as indicated to thrust.
+    
+    @method stageThree
+    @param {Object} context The context to use to load the modules.
+    **/
+    function stageThree(context) {
+        var thrust = context.thrust, defer = when.defer(), modules = context.cfg.modules;
+        require(modules, function () {
+            var args = [];
+            for (var _i = 0; _i < (arguments.length - 0); _i++) {
+                args[_i] = arguments[_i + 0];
+            }
+            var Module = tm.Module;
+            // Get the definitions
+            var moduleDefinitions = args;
+            // Loop over all the modules
+            for(var i = 0, iLen = modules.length; i < iLen; i++) {
+                // Get the module name
+                                var mod = modules[i], definition = // Get the definition
+                moduleDefinitions[i];
+                // Create the instance
+                var moduleInstance = new Module(thrust, definition, mod);
+                // Inject it into the thrust instance
+                moduleInstance.thrustCreate(thrust);
+            }
+            defer.resolve();
+        }, defer.reject);
+        return defer.promise;
+    }
+    exports.stageThree = stageThree;
+})
+//@ sourceMappingURL=ignite.js.map
+;
 /**
  * @license RequireJS domReady 2.0.1 Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
@@ -3090,902 +3555,180 @@ define('domReady',[],function () {
     return domReady;
 });
 
-define('thrust/main',[
-    'require', 'thrust/log', 'thrust/util', 'thrust/config', './ignite', 'thrust/module', 'domReady', 'module', './instance', 'has'
-],
-function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thrustInstance, has)
-{
-    /**
-        The thrust application!
+define('thrust/main',["require", "exports", 'thrust/util', './log', './instance', './ignite', './capsule', 'domReady', 'has', 'thrust/config'], function(require, exports, __util__, __log__, __thrustInstance__, __igniteSpec__, __m__, __domReady__, __has__, __tConfig__) {
+    /// <reference path="interfaces/thrust.plugin.d.ts" />
+    /// <reference path="interfaces/thrust.d.ts" />
+    /// <reference path="../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
+    
+    var util = __util__;
 
+    var _ = util._;
+    var log = __log__;
+
+    var thrustInstance = __thrustInstance__;
+
+    var igniteSpec = __igniteSpec__;
+
+    var m = __m__;
+
+    var Module = m.Module;
+    var domReady = __domReady__;
+
+    var has = __has__;
+
+    var tConfig = __tConfig__;
+
+    exports.className = 'Thrust';
+    /**
+    The thrust application!
+    
     @module thrust
     @main thrust
     **/
-    
-
-    var INIT = 'init',
-        START = 'start',
-        READY = 'ready',
-        STOP = 'stop',
-        DESTROY = 'destroy',
-        COUNTDOWN = 'countdown',
-        IGNITE = 'ignite',
-        ORBIT = 'orbit',
-        DEPLOY = 'deploy',
-        DEORBIT = 'deorbit',
-        SPLASHDOWN = 'splashdown',
-        memoize = util.memoize,
-        each = util.each,
-        map = util.map,
-        extend = util.extend,
-        when = util.when,
-        bind = util.bind,
-        type = util.type,
-        isArray = util.isArray,
-        slice = Array.prototype.slice,
-        toArray = util.toArray,
-        format = util.format,
-        resolveMethods = [INIT, START, READY, STOP, DESTROY],
-        instances = thrustInstance.instances,
-        loadingInstances = thrustInstance.loadingInstances;
-
-    /**
-        The primary thrust class.
-    
-    @class thrust.Thrust
-    @constructor
-    @param {String} name The name of this thrust instance
-    @returns {Thrust}
-    **/
-    var Thrust = function (name)
-    {
-        this.name = name;
-        this.modules = {};
-        this.failedModules = {};
-        this.children = [];
-    };
-
+        var INIT = 'init', START = 'start', READY = 'ready', STOP = 'stop', DESTROY = 'destroy', COUNTDOWN = 'countdown', IGNITE = 'ignite', ORBIT = 'orbit', DEPLOY = 'deploy', DEORBIT = 'deorbit', SPLASHDOWN = 'splashdown', INORBIT = 'inOrbit', memoize = _.memoize, each = _.each, map = _.map, extend = _.extend, when = util.when, bind = _.bind, isArray = _.isArray, slice = Array.prototype.slice, toArray = _.toArray, merge = _.merge, flatten = _.flatten, format = util.format, resolveMethods = [
+INIT, 
+START, 
+READY, 
+STOP, 
+DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustInstance.loadingInstances, safeInvoke = util.safeInvoke;
     //#region Runner Factories
-    var runRunnerFactory, runnerFactory, allRunnerFactory;
-    runRunnerFactory = memoize(function (method)
-    {
-        var conventionMethod = (method === STOP && START) || (method === DESTROY && INIT) || method,
-            conventionValue = !(method === STOP || method === DESTROY),
-            unsetReady = method === STOP,
-            conventionCheck = conventionMethod !== method,
-            conventionName = format('{0}-status', conventionMethod),
-            runner = runnerFactory(method, conventionName, conventionValue, unsetReady),
-            logMessage = format('Thrust: {0}ing module "{{0}}" failed!', method),
-            runningMessage = format('Thrust: Running {0} for module "{{0}}".', method);
-
-        return function (names)
-        {
+    var runRunnerFactory = memoize(function (method) {
+        var conventionMethod = (method === STOP && START) || (method === DESTROY && INIT) || method, conventionValue = !(method === STOP || method === DESTROY), unsetReady = method === STOP, conventionCheck = conventionMethod !== method, conventionName = format('{0}-status', conventionMethod), runner = runnerFactory(method, conventionName, conventionValue, unsetReady), logMessage = format('Thrust: {0}ing module "{{0}}" failed!', method), runningMessage = format('Thrust: Running {0} for module "{{0}}".', method);
+        return function (names) {
             var that = this;
-            if (!isArray(names))
-                names = [names];
-            var args = slice.call(arguments, 1),
-                results = [];
-            each(names, function (name)
-            {
+            if(!isArray(names)) {
+                names = [
+                    names
+                ];
+            }
+            var args = slice.call(arguments, 1), results = [];
+            each(names, function (name) {
                 has('DEBUG') && log.debug(format(runningMessage, name));
                 var mod = that.modules[name];
-
-                if (!mod && !that.failedModules[name])
-                {
+                if(!mod && !that.failedModules[name]) {
                     // try to fetch the module.
                     // returning the proper defer in it's place
                     var loaderDefer = when.defer();
-
-                    require([name], function (moduleDefn)
-                    {
+                    require([
+                        name
+                    ], function (moduleDefn) {
                         that.createModule(moduleDefn && moduleDefn.name || name, moduleDefn);
-
-                        var result = runRunnerFactory(method).apply(that, [moduleDefn.name].concat(args));
-                        when.chain(when.all(util.flatten(result)), loaderDefer);
-                    }, function ()
-                    {
+                        var result = runRunnerFactory(method).apply(that, [
+                            moduleDefn.name
+                        ].concat(args));
+                        when.chain(when.all(flatten(result)), loaderDefer);
+                    }, function () {
                         that.failedModules[name] = true;
                         loaderDefer.resolve();
                     });
-
-                    results.push(loaderDefer);
-                }
-                else if ((conventionCheck && mod.convention(conventionName)) || !mod.convention(conventionName))
-                {
-                    if (tConfig.throwErrors)
-                    {
-                        results.push(runner(that, name, mod, args));
-                    }
-                    else
-                    {
-                        try
-                        {
+                    results.push(loaderDefer.promise);
+                } else {
+                    if((conventionCheck && mod.convention(conventionName)) || !mod.convention(conventionName)) {
+                        if(tConfig.throwErrors) {
                             results.push(runner(that, name, mod, args));
-                        }
-                        catch (e)
-                        {
-                            has('DEBUG') && log.error(format(logMessage, name), e, e.stack);
+                        } else {
+                            try  {
+                                results.push(runner(that, name, mod, args));
+                            } catch (e) {
+                                has('DEBUG') && log.error(format(logMessage, name), e, e.stack);
+                            }
                         }
                     }
                 }
             });
-
             return results.length && results;
-        };
+        }
     });
-
-    runnerFactory = memoize(function (method, conventionName, conventionValue, unsetReady)
-    {
-        var eventName = format('thrust/module/{0}', method),
-            infoFormat = format('Thrust: {0}ing module "{{0}}"', method.charAt(0).toUpperCase() + method.substring(1)),
-            debugFormat = format('Thrust: Calling module "{{0}}" {0}()', method),
-            compAfter = method === STOP || method === DESTROY || false;
-
-        return function (that, name, mod, args)
-        {
+    var runnerFactory = memoize(function (method, conventionName, conventionValue, unsetReady) {
+        var eventName = format('thrust/capsule/{0}', method), infoFormat = format('Thrust: {0}ing module "{{0}}"', method.charAt(0).toUpperCase() + method.substring(1)), debugFormat = format('Thrust: Calling module "{{0}}" {0}()', method), compAfter = method === STOP || method === DESTROY || false;
+        return function (that, name, mod, args) {
             has('DEBUG') && log.info(format(infoFormat, name));
             has('DEBUG') && log.debug(format(conventionName, name));
-            return mod.thrustCall(method, compAfter, getModuleArgs(that.name, name, args)).then(function ()
-            {
+            return mod.thrustCall(method, compAfter, __getModuleArgs(that.name, name, args)).then(function () {
                 that.mediator && that.mediator.fire(eventName, name);
                 mod.convention(conventionName, conventionValue);
-                if (unsetReady) mod.convention(READY + '-status', false);
+                if(unsetReady) {
+                    mod.convention(READY + '-status', false);
+                }
             });
-        };
+        }
     });
-
-    allRunnerFactory = memoize(function (method)
-    {
-        var infoFormat = format('Thrust: {0}ing all modules... [{{0}}]', method.charAt(0).toUpperCase() + method.substring(1)),
-            pluralName = format('thrust/module/all/{0}', method),
-            checkAutoStart = method === INIT || method === START;
-
-        return function (that)
-        {
+    var allRunnerFactory = memoize(function (method) {
+        var infoFormat = format('Thrust: {0}ing all modules... [{{0}}]', method.charAt(0).toUpperCase() + method.substring(1)), pluralName = format('thrust/capsule/all/{0}', method), checkAutoStart = method === INIT || method === START;
+        return function (that) {
             that.mediator && that.mediator.fire(pluralName);
-            var modules = that.modules,
-                results = [];
-
-            has('DEBUG') && log.info(format(infoFormat, util.map(modules, function (x, i) { return x.convention('autoStart') && i; }).join(', ')));
-            each(modules, function (x, i)
-            {
-                if (!checkAutoStart || (checkAutoStart && x.convention('autoStart')))
+            var modules = that.modules, results = [];
+            has('DEBUG') && log.info(format(infoFormat, map(modules, function (x, i) {
+                return x.convention('autoStart') && i;
+            }).join(', ')));
+            each(modules, function (x, i) {
+                if(!checkAutoStart || (checkAutoStart && x.convention('autoStart'))) {
                     results.push(that[method](i));
+                }
             });
-
-            if (that.startingModules && checkAutoStart)
-            {
+            if(that.startingModules && checkAutoStart) {
                 has('DEBUG') && log.info(format(infoFormat, that.startingModules.join(', ')));
                 that[method](that.startingModules);
             }
-
             return when.all(results);
-        };
+        }
     });
-
-    var fireThrustEvent = function (that, event)
-    {
-        return function ()
-        {
+    function fireThrustEvent(that, event) {
+        return function () {
             that.mediator && that.mediator.fire(event);
-        };
-    },
-    childrenCallMethod = function (that, method, stopping)
-    {
-        var items = [];
-        each(that.children, function(child)
-        {
-            if (stopping)
-                child.__previousState = child.started;
-            if (child.cfg.autoStart || (!stopping && child.__previousState) || (stopping && child.started))
-                items.push(child[method](true, true));
-        });
-        if (items.length)
-            return when.all(items);
-    },
-    flattenWithAsync = function (that, arr)
-    {
-        return util.flattenToPromises(arr.concat(that.cfg.async && [when.delay(0)] || []));
-    };
-
-    var thrustLogEvent;
-    if (has('DEBUG'))
-    {
-        thrustLogEvent = function (message, name)
-        {
-            return function ()
-            {
-                log.debug(format.apply(format, [message].concat(toArray(arguments))));
-            };
-        };
+        }
     }
-    else
-    {
-        thrustLogEvent = function ()
-        {
+    function childrenCallMethod(that, method, stopping) {
+        var items = [];
+        each(that.children, function (child) {
+            if(stopping) {
+                child.__previousState = child.started;
+            }
+            if(child.cfg.autoStart || (!stopping && child.__previousState) || (stopping && child.started)) {
+                items.push(child[method](false, true));
+            }
+        });
+        if(items.length) {
+            return when.all(items);
+        }
+    }
+    function flattenWithAsync(that, arr) {
+        return util.flattenToPromises(arr.concat(that.cfg.async && [
+            when.delay(0)
+        ] || []));
+    }
+    var thrustLogEvent;
+    if(has('DEBUG')) {
+        thrustLogEvent = function (message, name) {
+            return function () {
+                log.debug(format.apply(format, [
+                    message
+                ].concat(toArray(arguments))));
+            }
+        };
+    } else {
+        thrustLogEvent = function () {
             return util.noop;
         };
     }
-
-    var thrustShouldExecute = function (that, calledByParent, stopping)
-    {
-        if (that.parent && that.cfg.childInstance && !that.parent.started && !calledByParent)
-        {
-            throw new Error(format('Cannot execute on child instance "{0}" parent instance "{1}" must be started first.', that.name, that.parent.name));
+    var thrustShouldExecute = function (that, calledByParent, stopping) {
+        if(that.parent && that.cfg.childInstance && !that.parent.started && !calledByParent) {
+            log.warn(format('Cannot execute on child instance "{0}" parent instance "{1}" must be started first.', that.name, that.parent.name));
         }
-
-        if (!stopping && that.started || stopping && !that.started)
-        {
-            throw new Error(format('Cannot start thrust instance "{0}" since it already started', that.name));
+        if(!stopping && that.started || stopping && !that.started) {
+            log.warn(format('Cannot start thrust instance "{0}" since it already started', that.name));
         }
-
         return true;
     };
-    //#endregion
-
-    Thrust.prototype = Thrust.fn = {
-        /**
-            Required methods, that every module must implement.
-    
-        @property __requiredMethods
-        @protected
-        **/
-        __requiredMethods: [     // Required methods that must be on every module
-            'init',
-            'destroy'
-        ],
-        __conventions: [],
-        cfg: { async: false, childInstance: false, automaticLifecycle: true },
-        /**
-            Creates a new thrust module.
-
-        @method create
-        @param {String} name The unique module name.
-        @param {Object} module The module defintion.
-        @param {Boolean} preBuild Has this module been prebuilt, in other words has it been created, by wire.js and needs to be injected.
-        @returns {Module} The new module instance.
-        **/
-        create: function (name, module, preBuilt)
-        {
-            has('DEBUG') && log.debug(format('Thrust: Creating new instance of "{0}"', name));
-
-            var oldModule, that = this;
-            if (preBuilt)
-            {
-                oldModule = module;
-                module = module.instance;
-            }
-
-            if (!preBuilt)
-                module = new Module(that, module, name);
-            else
-                module = oldModule;
-
-            // Modules cannot have duplicate names, choose a new one.
-            if (that.modules[module.name])
-                throw new Error(format('Duplicate module name "{0}".', name));
-
-            // m is the mediators internal module.
-            that.modules[module.name] = module;
-
-            has('DEBUG') && log.info(format('Thrust: Created module "{0}"', name));
-            // Notify the mediator that a module has been created.
-            that.mediator.fire('thrust/module/create', name);
-
-            if (that && that.started && module.convention('autoStart'))
-                that.start(module.name);
-
-            return module;
-        },
-        //#region Global Runners
-        /**
-            Begins the countdown to thrusts start.
-            Loading can be deferred by returning a promise from any convention, or module method.
-
-        @method countdown
-        @async
-        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
-        @returns {Promise} The promise of when the countdown is completed.
-        **/
-        countdown: function (ignoreChild, calledByParent)
-        {
-            var that = this;
-            if (!thrustShouldExecute(that, calledByParent))
-                return;
-
-            has('DEBUG') && thrustLogEvent('Launch instance "{0}" in 5... 4... 3... 2... 1...', that.name);
-
-            var stageOne = when.all(flattenWithAsync(that, [
-                util.safeInvoke(that.__conventions, COUNTDOWN, that),
-                that.init(),
-                childrenCallMethod(that, COUNTDOWN)
-            ])).then(fireThrustEvent(that, 'thrust/init'));
-
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" has been initalized.', that.name));
-
-            that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild) && stageOne.then(bind(that.ignite, that, ignoreChild, calledByParent));
-
-            return stageOne;
-        },
-        /**
-            Begins the ingition as thrust starts up.
-            Loading can be deferred by returning a promise from any convention, or module method.
-
-        @method ignite
-        @async
-        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
-        @returns {Promise} The promise of when the ingition is completed.
-        **/
-        ignite: function (ignoreChild, calledByParent)
-        {
-            var that = this;
-            if (!thrustShouldExecute(that, calledByParent))
-                return;
-
-            has('DEBUG') && thrustLogEvent('Firing rockets for thurst instance "{0}".', that.name);
-
-            var stageOne = when.all(flattenWithAsync(that, [
-                util.safeInvoke(that.__conventions, IGNITE, that),
-                that.start(),
-                childrenCallMethod(that, IGNITE)
-            ])).then(fireThrustEvent(that, 'thrust/start'));
-
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" has been started.', that.name));
-
-            that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild) && stageOne.then(bind(that.orbit, that, ignoreChild, calledByParent));
-
-            return stageOne;
-        },
-        /**
-            Thrust prepares for orbit.
-            Loading can be deferred by returning a promise from any convention.
-
-        @method orbit
-        @async
-        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
-        @returns {Promise} The promise of when thrust is in orbit.
-        **/
-        orbit: function (ignoreChild, calledByParent)
-        {
-            var that = this;
-            if (!thrustShouldExecute(that, calledByParent))
-                return;
-
-            has('DEBUG') && thrustLogEvent('Firing stage two thrusters for thrust instance "{0}".', that.name)();
-
-            var domReadyDefer = when.defer();
-            domReadyDefer.then(fireThrustEvent(that, 'thrust/dom/ready'));
-            domReady(domReadyDefer.resolve);
-
-            var stageOne = when.all(flattenWithAsync(that, [
-                domReadyDefer.promise,
-                util.safeInvoke(that.__conventions, ORBIT, that),
-                childrenCallMethod(that, ORBIT)
-            ]));
-
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is almost ready.', that.name));
-
-            that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild) && stageOne.then(bind(that.deploy, that, ignoreChild, calledByParent));
-
-            return stageOne;
-        },
-        /**
-            Thrust deploys components in orbit
-            Loading can be deferred by returning a promise from any module method.
-
-        @method deploy
-        @async
-        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
-        @returns {Promise} The promise of when thrust has fully deployed.
-        **/
-        deploy: function (ignoreChild, calledByParent)
-        {
-            var that = this;
-            if (!thrustShouldExecute(that, calledByParent))
-                return;
-
-            if (has('DEBUG'))
-            {
-                var timeStart = that.config.debug.timeStart,
-                timeEnd = new Date().getTime(),
-                startTime = (timeEnd - timeStart),
-                ttoDiv = document.getElementById('tto');
-
-                if (ttoDiv)
-                    ttoDiv.innerHTML = startTime + 'ms';
-            }
-
-            var stageOne = when.all(flattenWithAsync(that, [
-                that.ready(),
-                childrenCallMethod(that, DEPLOY)
-            ])).then(fireThrustEvent(that, 'thrust/ready'));
-
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is now ready.', that.name));
-
-            stageOne.then(bind(that.inOrbit, that));
-
-            return stageOne;
-        },
-        inOrbit: function ()
-        {
-            var that = this;
-            that.started = true;
-
-            if (has('DEBUG'))
-            {
-                var timeStart = that.config.debug.timeStart,
-                    timeEnd = new Date().getTime(),
-                    startTime = (timeEnd - timeStart);
-
-                log.info('Started in ' + startTime + 'ms');
-
-                var ttrDiv = document.getElementById('ttr');
-                if (ttrDiv)
-                    ttrDiv.innerHTML = startTime + 'ms';
-            }
-        },
-        /**
-            Begins the deorbit as thrust shutdown.
-            Shutdown can be deferred by returning a promise from any convention, or module method.
-
-        @method deorbit
-        @async
-        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
-        @returns {Promise} The promise of when the ingition is completed.
-        **/
-        deorbit: function (ignoreChild, calledByParent)
-        {
-            var that = this;
-            if (!thrustShouldExecute(that, calledByParent, true))
-                return;
-
-            has('DEBUG') && thrustLogEvent('Reentering earths atmosphere for thrust instance "{0}".', that.name);
-
-            var stageOne = when.all(flattenWithAsync(that, [
-                childrenCallMethod(that, DEORBIT, true),
-                that.stop(),
-                util.safeInvoke(that.__conventions, DEORBIT, that)
-            ])).then(fireThrustEvent(that, 'thrust/stop'));
-
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is now stopped.', that.name));
-
-            that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild) && stageOne.then(bind(that.splashdown, that, ignoreChild, calledByParent));
-
-            return stageOne;
-        },
-        /**
-            Begins the splashdown as thrust shutdown.
-            Shutdown can be deferred by returning a promise from any convention, or module method.
-
-        @method splashdown
-        @async
-        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
-        @returns {Promise} The promise of when the ingition is completed.
-        **/
-        splashdown: function (ignoreChild, calledByParent)
-        {
-            var that = this;
-            if (!thrustShouldExecute(that, calledByParent, true))
-                return;
-
-            has('DEBUG') && thrustLogEvent('Landing in the middle of the atlantic for thrust instance "{0}".', that.name);
-
-            var stageOne = when.all(flattenWithAsync(that, [
-                childrenCallMethod(that, SPLASHDOWN, true),
-                that.destroy(),
-                util.safeInvoke(that.__conventions, SPLASHDOWN, that)
-            ])).then(fireThrustEvent(that, 'thrust/destroy'));
-
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is now being destroyed', that.name));
-
-            stageOne.then(function () { that.started = false; });
-
-            return stageOne;
-        },
-        //#endregion
-        //#region Module runners
-        /**
-            Begins the initalization process for a module.  This runs as part of the
-                countdown phase, during start up, or in order, when creating modules.
-            Loading can be deferred by returning a promise from any convention, or module method.
-
-        @method init
-        @param {String|Array of String} [name] The name of the module.  If name is null, all modules
-            that return the property autoStart will be inited.
-        @returns {Promise} The promise of when the init is completed.
-        **/
-        init: function (name)
-        {
-            var that = this, method = INIT;
-
-            var result = !name && allRunnerFactory(method)(that);
-            if (result)
-                return result;
-
-            var args = toArray(arguments).slice(1);
-            if (isArray(name))
-                result = map(name, function (x) { return that.init.apply(that, [x].concat(args)); });
-            else
-                result = runRunnerFactory(method).apply(that, arguments);
-
-            return when.all(util.flatten(result));
-        },
-        /**
-            Begins the startup process for a module.  This runs as part of the
-                ignite phase, during start up, or in order, when creating modules.
-            Loading can be deferred by returning a promise from any convention, or module method.
-
-        @method start
-        @param {String|Array of String} [name] The name of the module.  If name is null, all modules
-            that return the property autoStart will be started.
-        @returns {Promise} The promise of when the init is completed.
-        **/
-        start: function (name)
-        {
-            var that = this, method = START;
-
-            var result = !name && allRunnerFactory(method)(that);
-            if (result)
-                return result;
-
-            if (!isArray(name))
-                name = [name];
-
-            var items = [],
-                origionalArgs = arguments,
-                args = toArray(arguments).slice(1);
-
-            for (var i = 0, iLen = name.length; i < iLen; i++)
-            {
-                var n = name[i],
-                    mod = that.modules[n];
-
-                if (!mod)
-                {
-                    items.push(that.init.call(that, [n].concat(args)));
-                }
-                else if (!mod.convention(INIT + '-status'))
-                {
-                    items.push(that.init.call(that, [n].concat(args)));
-                }
-            }
-
-            var startDefer = when.defer();
-            when.all(util.flatten(items)).then(function ()
-            {
-                var results = [];
-                var result = runRunnerFactory(method).apply(that, origionalArgs);
-
-                results.push(result);
-
-                var resultsDefer = when.all(util.flatten(results));
-                if (that.started)
-                {
-                    var runReady = function () { when.chain(that.ready.apply(that, origionalArgs), startDefer); };
-                    resultsDefer.then(runReady);
-                }
-                else
-                {
-                    when.chain(resultsDefer, startDefer);
-                }
-            });
-
-            return startDefer.promise;
-        },
-        /**
-            Begins the ready process for a module.  This runs as part of the
-                orbit phase, during ready, or in order, when creating modules.
-            Loading can be deferred by returning a promise from any convention, or module method.
-
-        @method ready
-        @param {String|Array of String} [name] The name of the module.  If name is null, all modules
-            that return the property autoStart will be started.
-        @returns {Promise} The promise of when the init is completed.
-        **/
-        ready: function (name)
-        {
-            var that = this, method = READY;
-
-            var result = !name && allRunnerFactory(method)(that);
-            if (result)
-                return result;
-
-            if (!isArray(name))
-                name = [name];
-
-            var items = [],
-                args = toArray(arguments).slice(1);
-            for (var i = 0, iLen = name.length; i < iLen; i++)
-            {
-                var n = name[i],
-                    mod = that.modules[n];
-                if (!mod.convention(START + '-status') && !that.started)
-                {
-                    items.push(that.start.apply(that, [n].concat(args)));
-                }
-            }
-
-            items.push(runRunnerFactory(method).apply(that, arguments));
-
-            return when.all(util.flatten(items));
-        },
-        /**
-            Begins the stop process for a module.  This runs as part of the
-                deorbit phase, during stop, or in order, when creating modules.
-            Loading can be deferred by returning a promise from any convention, or module method.
-
-        @method stop
-        @param {String|Array of String} [name] The name of the module.  If name is null, all modules
-            will be stopped.
-        @returns {Promise} The promise of when the stop is completed.
-        **/
-        stop: function (name)
-        {
-            var that = this, method = STOP;
-
-            var result = !name && allRunnerFactory(method)(that);
-            if (result)
-                return result;
-
-            if (!isArray(name))
-                name = [name];
-
-            result = runRunnerFactory(method).apply(that, arguments);
-            return when.all(util.flatten(result));
-        },
-        /**
-            Begins the destroy process for a module.  This runs as part of the
-                slashdown phase, during destroy, or in order, when creating modules.
-            Loading can be deferred by returning a promise from any convention, or module method.
-
-        @method destroy
-        @param {String|Array of String} [name] The name of the module.  If name is null, all modules
-            will be destroyed.
-        @returns {Promise} The promise of when the destroy is completed.
-        **/
-        destroy: function (name)
-        {
-            var that = this, method = DESTROY;
-
-            var result = !name && allRunnerFactory(method)(that);
-            if (result)
-                return result;
-
-            if (!isArray(name))
-                name = [name];
-
-            var items = [],
-                args = toArray(arguments).slice(1);
-            for (var i = 0, iLen = name.length; i < iLen; i++)
-            {
-                var n = name[i],
-                    mod = that.modules[n];
-
-                if (mod.convention(START + '-status'))
-                {
-                    items.push(that.stop.call(that, [n].concat(args)));
-                }
-            }
-
-            items.push(runRunnerFactory(method).apply(that, arguments));
-            return when.all(util.flatten(items));
-        },
-        //#endregion
-        /**
-            Injects a preconstructed module into the thrust instance.
-
-        @method __injectModule
-        @private
-        @param {Module} module The module to inject.
-        **/
-        __injectModule: function (module)
-        {
-            this.create(module.name, module, true);
-        },
-        /**
-        Creates a module from the given definition object, with the given name.
-
-        @method createModule
-        @param {String} name The module name
-        @param {Object} moduleDefn The module definition
-        **/
-        createModule: function (name, moduleDefn)
-        {
-            var that = this;
-            if (that.modules[name]) return that.modules[name];
-
-            var module = new Module(that, moduleDefn, name);
-
-            that.__injectModule(module);
-
-            return module;
-        },
-        /**
-        Launches another child module for thrust.
-
-        @method spawn
-        @param {Object} settings
-        @returns {Promise} The promise that resolves once the child instance has fully loaded.  Resolves with the context that contains the thrust instance and all plugins that were loaded.
-        **/
-        spawn: function (settings)
-        {
-            var that = this;
-            return Thrust.launch(extend({}, { childInstance: true }, settings), true).then(function (context)
-            {
-                var thrust = context.thrust;
-                that.children.push(thrust);
-                thrust.parent = that;
-                return context;
-            });
-        },
-        /**
-        Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.
-        
-        @method registerModule
-        @param {String} name The module name to assign the arguments with.
-        @param {Object*} arguments, additional arguments that will be passed onto the moudle
-        **/
-        registerModule: function (name)
-        {
-            var that = this;
-            Thrust.registerModule.apply(Thrust, [that.name].concat(toArray(arguments)));
-        }
-    };
-
-    Thrust.prototype.createChild = Thrust.prototype.spawn;
-
-    /**
-        Initalizes a new Thrust instance based on the given settings.
-
-    @method launch
-    @static
-    @param {Object} settings The module to inject
-    **/
-    Thrust.launch = function (settings, calledByParent)
-    {
-        if (!settings)
-            settings = { name: 'global' };
-
-        if (!settings.name)
-            settings.name = 'global';
-
-        if (has('DEBUG'))
-        {
-            settings.debug = { timeStart: new Date().getTime() };
-        }
-
-        var setupDefer = Thrust.__fetchInstance(settings.name);
-        
-        setupDefer.then(function (context)
-        {
-            var thrust = context.thrust,
-                modules = thrust.startingModules = context.cfg.modules,
-                config = thrust.config = thrust.cfg;
-            instances[thrust.name] = thrust;
-
-            if (config.modules && config.modules.length)
-            {
-                var newModules = modules.map(function (x)
-                {
-                    if (typeof x === 'string')
-                    {
-                        return x;
-                    }
-                });
-                var stage3 = igniteSpec.stageThree(context);
-                if (config.automaticLifecycle)
-                    stage3.then(bind(thrust.countdown, thrust, null, calledByParent));
-            }
-            else if (config.automaticLifecycle)
-            {
-                thrust.countdown(null, calledByParent);
-            }
-
-            return context;
-        });
-
-        // We're only going to expose globals if requested.  This is a potential usecase that may be needed for some teams.
-        if (tConfig.exposeGlobals)
-        {
-            if (!window.Thrust) window.Thrust = Thrust;
-            setupDefer.then(function (context)
-            {
-                window[settings.name] = context.thrust;
-            });
-        }
-        when.chain(igniteSpec.stageOne(settings), setupDefer);
-
-        return setupDefer.promise;
-    };
-
-    /**
-    Gets a named thrust stance if it exists.
-
-    @method getInstance
-    @static
-    @param {String} name The instance name
-    @returns {Thrust} The thrust instance
-    **/
-    Thrust.getInstance = function (name)
-    {
-        return thrustInstance.getInstance(name);
-    };
-
-    /**
-    Fetchs a named thrust stance if it exists.
-    This loads asyncronously, as the instance may not be loaded
-
-    @method __fetchInstance
-    @static
-    @private
-    @param {String} name The instance name
-    @returns {Promise} To a thrust instance spec
-    **/
-    Thrust.__fetchInstance = function (name)
-    {
-        return thrustInstance.fetchInstance(name);
-    };
-
-    /**
-    Creates a new module and hands it off to the given instance, if that instance exists.
-
-    @method createModule
-    @static
-    @param {String} instanceName The thrust instance name
-    @param {String} name The module name
-    @param {Object} moduleDefn The module definition
-    **/
-    Thrust.createModule = function (instanceName, name, moduleDefn)
-    {
-        var instance = Thrust.getInstance(instanceName);
-        if (instance)
-        {
-            var module = new Module(instance, moduleDefn, name);
-            instance.__injectModule(module);
-            return module;
-        }
-    };
-
-    /**
-    Lists the module registrations.
-
-    @property __moduleRegistrations
-    @static
-    @private
-    **/
-    Thrust.__moduleRegistrations = {};
-
-    /**
-    Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.
-
-    @method registerModule
-    @static
-    @param {String} instanceName The thrust instance the module is to be associated with.
-    @param {String} name The module name to assign the arguments with.
-    @param {Object*} arguments, additional arguments that will be passed onto the moudle
-    **/
-    Thrust.registerModule = function (instanceName, name)
-    {
-        if (!instanceName) throw new Error('instanceName is required!');
-        if (!name) throw new Error('name is required!');
-
-        if (!Thrust.__moduleRegistrations[instanceName])
-            Thrust.__moduleRegistrations[instanceName] = {};
-
-        var args = toArray(arguments).slice(2);
-
-        if (Thrust.__moduleRegistrations[instanceName][name])
-            throw new Error(format('Module "{0}" already registered to instance "{1}"', name, instanceName));
-
-        Thrust.__moduleRegistrations[instanceName][name] = args || [];
-    };
-
     /**
     Gets the modules arguments from the registrations.
-
+    
     If original args contains anything it is passed instead of the registrations.
     If the registrations are in place it will return them.
-
+    
     @method __getModuleArgs
     @static
     @private
@@ -3993,28 +3736,655 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
     @param {String} name The module name
     @param {Array} originalArgs The original arguments passed into the calling method.
     **/
-    var getModuleArgs = Thrust.__getModuleArgs = function (instanceName, name, originalArgs)
-    {
+    function __getModuleArgs(instanceName, name, originalArgs) {
         var args = toArray(originalArgs);
-        if (args.length)
+        if(args.length) {
             return args;
-
+        }
         var instanceRegistrations = Thrust.__moduleRegistrations[instanceName];
-        if (instanceRegistrations && instanceRegistrations[name])
+        if(instanceRegistrations && instanceRegistrations[name]) {
             return instanceRegistrations[name];
-
+        }
         return args;
-    };
-
+    }
+    //#endregion
+    /**
+    The primary thrust class.
+    
+    @class thrust.Thrust
+    @constructor
+    @param {String} name The name of this thrust instance
+    @returns {Thrust}
+    **/
+    var Thrust = (function () {
+        function Thrust(name) {
+            this.__conventions = [];
+            this.__conventionPluckPropertiesCache = null;
+            this.cfg = merge(tConfig, {
+                autoStart: false,
+                async: false,
+                childInstance: false,
+                automaticLifecycle: true
+            });
+            this.config = merge(tConfig, {
+                autoStart: false,
+                async: false,
+                childInstance: false,
+                automaticLifecycle: true
+            });
+            this.name = name;
+            this.modules = {
+            };
+            this.failedModules = {
+            };
+            this.children = [];
+            this.started = false;
+        }
+        /**
+        Lists the module registrations.
+        
+        @property __moduleRegistrations
+        @static
+        @private
+        **/
+                Thrust.__moduleRegistrations = {
+        };
+        Thrust.prototype.create = /**
+        Creates a new thrust module.
+        
+        @method create
+        @param {String} name The unique module name.
+        @param {Object} module The module defintion.
+        @param {Boolean} preBuild Has this module been prebuilt, in other words has it been created, by wire.js and needs to be injected.
+        @returns {Module} The new module instance.
+        **/
+        function (name, mod, preBuilt) {
+            has('DEBUG') && log.debug(format('Thrust: Creating new instance of "{0}"', name));
+            var oldModule, that = this;
+            if(preBuilt) {
+                oldModule = mod;
+                mod = mod.instance;
+            }
+            if(!preBuilt) {
+                mod = new m.Module(that, mod, name);
+            } else {
+                mod = oldModule;
+            }
+            // Modules cannot have duplicate names, choose a new one.
+            if(that.modules[mod.name]) {
+                throw new Error(format('Duplicate module name "{0}".', name));
+            }
+            // m is the mediators internal module.
+            that.modules[mod.name] = mod;
+            has('DEBUG') && log.info(format('Thrust: Created module "{0}"', name));
+            // Notify the mediator that a module has been created.
+            that.mediator.fire('thrust/capsule/create', name);
+            if(that && that.started && mod.convention('autoStart')) {
+                that.start(mod.name);
+            }
+            return mod;
+        }//#region Global Runners
+        /**
+        Begins the countdown to thrusts start.
+        Loading can be deferred by returning a promise from any convention, or module method.
+        
+        @method countdown
+        @async
+        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
+        @returns {Promise} The promise of when the countdown is completed.
+        **/
+        ;
+        Thrust.prototype.countdown = function (ignoreChild, calledByParent) {
+            var that = this;
+            if(!thrustShouldExecute(that, calledByParent)) {
+                return;
+            }
+            has('DEBUG') && thrustLogEvent('Launch instance "{0}" in 5... 4... 3... 2... 1...', that.name);
+            var stageOne = when.all(flattenWithAsync(that, [
+                safeInvoke(that.__conventions, COUNTDOWN, that), 
+                that.init(), 
+                childrenCallMethod(that, COUNTDOWN)
+            ])).then(fireThrustEvent(that, 'thrust/init'));
+            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" has been initalized.', that.name));
+            if(that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild)) {
+                stageOne.then(bind(that.ignite, that, ignoreChild, calledByParent));
+            }
+            return stageOne;
+        }/**
+        Begins the ingition as thrust starts up.
+        Loading can be deferred by returning a promise from any convention, or module method.
+        
+        @method ignite
+        @async
+        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
+        @returns {Promise} The promise of when the ingition is completed.
+        **/
+        ;
+        Thrust.prototype.ignite = function (ignoreChild, calledByParent) {
+            var that = this;
+            if(!thrustShouldExecute(that, calledByParent)) {
+                return;
+            }
+            has('DEBUG') && thrustLogEvent('Firing rockets for thurst instance "{0}".', that.name);
+            var stageOne = when.all(flattenWithAsync(that, [
+                safeInvoke(that.__conventions, IGNITE, that), 
+                that.start(), 
+                childrenCallMethod(that, IGNITE)
+            ])).then(fireThrustEvent(that, 'thrust/start'));
+            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" has been started.', that.name));
+            if(that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild)) {
+                stageOne.then(bind(that.orbit, that, ignoreChild, calledByParent));
+            }
+            return stageOne;
+        }/**
+        Thrust prepares for orbit.
+        Loading can be deferred by returning a promise from any convention.
+        
+        @method orbit
+        @async
+        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
+        @returns {Promise} The promise of when thrust is in orbit.
+        **/
+        ;
+        Thrust.prototype.orbit = function (ignoreChild, calledByParent) {
+            var that = this;
+            if(!thrustShouldExecute(that, calledByParent)) {
+                return;
+            }
+            has('DEBUG') && thrustLogEvent('Firing stage two thrusters for thrust instance "{0}".', that.name)();
+            var domReadyDefer = when.defer();
+            domReadyDefer.promise.then(fireThrustEvent(that, 'thrust/dom/ready'));
+            domReady(domReadyDefer.resolve);
+            var stageOne = when.all(flattenWithAsync(that, [
+                domReadyDefer.promise, 
+                safeInvoke(that.__conventions, ORBIT, that), 
+                childrenCallMethod(that, ORBIT)
+            ]));
+            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is almost ready.', that.name));
+            if(that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild)) {
+                stageOne.then(bind(that.deploy, that, ignoreChild, calledByParent));
+            }
+            return stageOne;
+        }/**
+        Thrust deploys components in orbit
+        Loading can be deferred by returning a promise from any module method.
+        
+        @method deploy
+        @async
+        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
+        @returns {Promise} The promise of when thrust has fully deployed.
+        **/
+        ;
+        Thrust.prototype.deploy = function (ignoreChild, calledByParent) {
+            var that = this;
+            if(!thrustShouldExecute(that, calledByParent)) {
+                return;
+            }
+            if(has('DEBUG')) {
+                var timeStart = that.config.debug.timeStart, timeEnd = new Date().getTime(), startTime = (timeEnd - timeStart), ttoDiv = document.getElementById('tto');
+                if(ttoDiv) {
+                    ttoDiv.innerHTML = startTime + 'ms';
+                }
+            }
+            var stageOne = when.all(flattenWithAsync(that, [
+                that.ready(), 
+                childrenCallMethod(that, DEPLOY)
+            ])).then(fireThrustEvent(that, 'thrust/ready'));
+            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is now ready.', that.name));
+            if(that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild)) {
+                stageOne.then(bind(that.inOrbit, that));
+            }
+            return stageOne;
+        };
+        Thrust.prototype.inOrbit = function () {
+            var that = this;
+            that.started = true;
+            childrenCallMethod(that, INORBIT);
+            if(has('DEBUG')) {
+                var timeStart = that.config.debug.timeStart, timeEnd = new Date().getTime(), startTime = (timeEnd - timeStart);
+                log.info('Started in ' + startTime + 'ms');
+                var ttrDiv = document.getElementById('ttr');
+                if(ttrDiv) {
+                    ttrDiv.innerHTML = startTime + 'ms';
+                }
+            }
+        }/**
+        Begins the deorbit as thrust shutdown.
+        Shutdown can be deferred by returning a promise from any convention, or module method.
+        
+        @method deorbit
+        @async
+        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
+        @returns {Promise} The promise of when the ingition is completed.
+        **/
+        ;
+        Thrust.prototype.deorbit = function (ignoreChild, calledByParent) {
+            var that = this;
+            if(!thrustShouldExecute(that, calledByParent, true)) {
+                return;
+            }
+            has('DEBUG') && thrustLogEvent('Reentering earths atmosphere for thrust instance "{0}".', that.name);
+            var stageOne = when.all(flattenWithAsync(that, [
+                childrenCallMethod(that, DEORBIT, true), 
+                that.stop(), 
+                safeInvoke(that.__conventions, DEORBIT, that)
+            ])).then(fireThrustEvent(that, 'thrust/stop'));
+            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is now stopped.', that.name));
+            if(that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild)) {
+                stageOne.then(bind(that.splashdown, that, ignoreChild, calledByParent));
+            }
+            return stageOne;
+        }/**
+        Begins the splashdown as thrust shutdown.
+        Shutdown can be deferred by returning a promise from any convention, or module method.
+        
+        @method splashdown
+        @async
+        @param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
+        @returns {Promise} The promise of when the ingition is completed.
+        **/
+        ;
+        Thrust.prototype.splashdown = function (ignoreChild, calledByParent) {
+            var that = this;
+            if(!thrustShouldExecute(that, calledByParent, true)) {
+                return;
+            }
+            has('DEBUG') && thrustLogEvent('Landing in the middle of the atlantic for thrust instance "{0}".', that.name);
+            var stageOne = when.all(flattenWithAsync(that, [
+                childrenCallMethod(that, SPLASHDOWN, true), 
+                that.destroy(), 
+                safeInvoke(that.__conventions, SPLASHDOWN, that)
+            ])).then(fireThrustEvent(that, 'thrust/destroy'));
+            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is now being destroyed', that.name));
+            stageOne.then(function () {
+                that.started = false;
+            });
+            return stageOne;
+        }//#endregion
+        //#region Module runners
+        /**
+        Begins the initalization process for a module.  This runs as part of the
+        countdown phase, during start up, or in order, when creating modules.
+        Loading can be deferred by returning a promise from any convention, or module method.
+        
+        @method init
+        @param {String|Array of String} [name] The name of the module.  If name is null, all modules
+        that return the property autoStart will be inited.
+        @returns {Promise} The promise of when the init is completed.
+        **/
+        ;
+        Thrust.prototype.init = function (name) {
+            var args = [];
+            for (var _i = 0; _i < (arguments.length - 1); _i++) {
+                args[_i] = arguments[_i + 1];
+            }
+            var that = this, method = INIT;
+            var result = !name && allRunnerFactory(method)(that);
+            if(result) {
+                return result;
+            }
+            var args = toArray(arguments).slice(1);
+            if(isArray(name)) {
+                result = map(name, function (x) {
+                    return that.init.apply(that, [
+                        x
+                    ].concat(args));
+                });
+            } else {
+                result = runRunnerFactory(method).apply(that, arguments);
+            }
+            return when.all(flatten(result));
+        }/**
+        Begins the startup process for a module.  This runs as part of the
+        ignite phase, during start up, or in order, when creating modules.
+        Loading can be deferred by returning a promise from any convention, or module method.
+        
+        @method start
+        @param {String|Array of String} [name] The name of the module.  If name is null, all modules
+        that return the property autoStart will be started.
+        @returns {Promise} The promise of when the init is completed.
+        **/
+        ;
+        Thrust.prototype.start = function (name) {
+            var args = [];
+            for (var _i = 0; _i < (arguments.length - 1); _i++) {
+                args[_i] = arguments[_i + 1];
+            }
+            var that = this, method = START;
+            var result = !name && allRunnerFactory(method)(that);
+            if(result) {
+                return result;
+            }
+            var names = [];
+            if(!isArray(name)) {
+                names = [
+                    name
+                ];
+            }
+            var items = [], origionalArgs = arguments, args = toArray(arguments).slice(1);
+            for(var i = 0, iLen = names.length; i < iLen; i++) {
+                var n = names[i], mod = that.modules[n];
+                if(!mod) {
+                    items.push(that.init.call(that, [
+                        n
+                    ].concat(args)));
+                } else {
+                    if(!mod.convention(INIT + '-status')) {
+                        items.push(that.init.call(that, [
+                            n
+                        ].concat(args)));
+                    }
+                }
+            }
+            var startDefer = when.defer();
+            when.all(flatten(items)).then(function () {
+                var results = [];
+                var result = runRunnerFactory(method).apply(that, origionalArgs);
+                results.push(result);
+                var resultsDefer = when.all(flatten(results));
+                if(that.started) {
+                    var runReady = function () {
+                        when.chain(that.ready.apply(that, origionalArgs), startDefer);
+                    };
+                    resultsDefer.then(runReady);
+                } else {
+                    when.chain(resultsDefer, startDefer);
+                }
+            });
+            return startDefer.promise;
+        }/**
+        Begins the ready process for a module.  This runs as part of the
+        orbit phase, during ready, or in order, when creating modules.
+        Loading can be deferred by returning a promise from any convention, or module method.
+        
+        @method ready
+        @param {String|Array of String} [name] The name of the module.  If name is null, all modules
+        that return the property autoStart will be started.
+        @returns {Promise} The promise of when the init is completed.
+        **/
+        ;
+        Thrust.prototype.ready = function (name) {
+            var args = [];
+            for (var _i = 0; _i < (arguments.length - 1); _i++) {
+                args[_i] = arguments[_i + 1];
+            }
+            var that = this, method = READY;
+            var result = !name && allRunnerFactory(method)(that);
+            if(result) {
+                return result;
+            }
+            var names = [];
+            if(!isArray(name)) {
+                names = [
+                    name
+                ];
+            }
+            var items = [], args = toArray(arguments).slice(1);
+            for(var i = 0, iLen = names.length; i < iLen; i++) {
+                var n = names[i], mod = that.modules[n];
+                if(!mod.convention(START + '-status') && !that.started) {
+                    items.push(that.start.apply(that, [
+                        n
+                    ].concat(args)));
+                }
+            }
+            items.push(runRunnerFactory(method).apply(that, arguments));
+            return when.all(flatten(items));
+        }/**
+        Begins the stop process for a module.  This runs as part of the
+        deorbit phase, during stop, or in order, when creating modules.
+        Loading can be deferred by returning a promise from any convention, or module method.
+        
+        @method stop
+        @param {String|Array of String} [name] The name of the module.  If name is null, all modules
+        will be stopped.
+        @returns {Promise} The promise of when the stop is completed.
+        **/
+        ;
+        Thrust.prototype.stop = function (name) {
+            var args = [];
+            for (var _i = 0; _i < (arguments.length - 1); _i++) {
+                args[_i] = arguments[_i + 1];
+            }
+            var that = this, method = STOP;
+            var result = !name && allRunnerFactory(method)(that);
+            if(result) {
+                return result;
+            }
+            result = runRunnerFactory(method).apply(that, arguments);
+            return when.all(flatten(result));
+        }/**
+        Begins the destroy process for a module.  This runs as part of the
+        slashdown phase, during destroy, or in order, when creating modules.
+        Loading can be deferred by returning a promise from any convention, or module method.
+        
+        @method destroy
+        @param {String|Array of String} [name] The name of the module.  If name is null, all modules
+        will be destroyed.
+        @returns {Promise} The promise of when the destroy is completed.
+        **/
+        ;
+        Thrust.prototype.destroy = function (name) {
+            var args = [];
+            for (var _i = 0; _i < (arguments.length - 1); _i++) {
+                args[_i] = arguments[_i + 1];
+            }
+            var that = this, method = DESTROY;
+            var result = !name && allRunnerFactory(method)(that);
+            if(result) {
+                return result;
+            }
+            var names = [];
+            if(!isArray(name)) {
+                names = [
+                    name
+                ];
+            }
+            var items = [], args = toArray(arguments).slice(1);
+            for(var i = 0, iLen = names.length; i < iLen; i++) {
+                var n = names[i], mod = that.modules[n];
+                if(mod.convention(START + '-status')) {
+                    items.push(that.stop.call(that, [
+                        n
+                    ].concat(args)));
+                }
+            }
+            items.push(runRunnerFactory(method).apply(that, arguments));
+            return when.all(flatten(items));
+        }//#endregion
+        /**
+        Injects a preconstructed module into the thrust instance.
+        
+        @method __injectModule
+        @private
+        @param {Module} module The module to inject.
+        **/
+        ;
+        Thrust.prototype.__injectModule = function (module) {
+            this.create(module.name, module, true);
+        }/**
+        Creates a module from the given definition object, with the given name.
+        
+        @method createModule
+        @param {String} name The module name
+        @param {Object} moduleDefn The module definition
+        **/
+        ;
+        Thrust.prototype.createModule = function (name, moduleDefn) {
+            var that = this;
+            if(that.modules[name]) {
+                return that.modules[name];
+            }
+            var module = new Module(that, moduleDefn, name);
+            that.__injectModule(module);
+            return module;
+        }/**
+        Launches another child module for thrust.
+        
+        @method spawn
+        @param {Object} settings
+        @returns {Promise} The promise that resolves once the child instance has fully loaded.  Resolves with the context that contains the thrust instance and all plugins that were loaded.
+        **/
+        ;
+        Thrust.prototype.spawn = function (settings) {
+            var that = this;
+            return Thrust.launch(extend({
+            }, {
+                childInstance: true
+            }, settings), true).then(function (context) {
+                var thrust = context.thrust;
+                that.children.push(thrust);
+                thrust.parent = that;
+                return context;
+            });
+        }/**
+        Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.
+        
+        @method registerModule
+        @param {String} name The module name to assign the arguments with.
+        @param {Object*} arguments, additional arguments that will be passed onto the moudle
+        **/
+        ;
+        Thrust.prototype.registerModule = function (name) {
+            var that = this;
+            Thrust.registerModule.apply(Thrust, [
+                that.name
+            ].concat(toArray(arguments)));
+        }/**
+        Initalizes a new Thrust instance based on the given settings.
+        
+        @method launch
+        @static
+        @param {Object} settings The module to inject
+        **/
+        ;
+        Thrust.launch = function launch(settings, calledByParent) {
+            if(!settings) {
+                settings = {
+                    name: 'global'
+                };
+            }
+            if(!settings.name) {
+                settings.name = 'global';
+            }
+            if(has('DEBUG')) {
+                settings.debug = {
+                    timeStart: new Date().getTime()
+                };
+            }
+            var setupDefer = Thrust.__fetchInstance(settings.name);
+            setupDefer.promise.then(function (context) {
+                var thrust = context.thrust, modules = thrust.startingModules = context.cfg.modules, config = thrust.config = thrust.cfg;
+                instances[thrust.name] = thrust;
+                if(config.modules && config.modules.length) {
+                    var newModules = modules.map(function (x) {
+                        if(typeof x === 'string') {
+                            return x;
+                        }
+                    });
+                    var stage3 = igniteSpec.stageThree(context);
+                    if(config.automaticLifecycle) {
+                        stage3.then(bind(thrust.countdown, thrust, null, calledByParent));
+                    }
+                } else {
+                    if(config.automaticLifecycle) {
+                        thrust.countdown(null, calledByParent);
+                    }
+                }
+                return context;
+            });
+            // We're only going to expose globals if requested.  This is a potential usecase that may be needed for some teams.
+            if(tConfig.exposeGlobals) {
+                if(!window['Thrust']) {
+                    window['Thrust'] = Thrust;
+                }
+                setupDefer.promise.then(function (context) {
+                    window[settings.name] = context.thrust;
+                });
+            }
+            when.chain(igniteSpec.stageOne(settings), setupDefer);
+            return setupDefer.promise;
+        }
+        /**
+        Gets a named thrust stance if it exists.
+        
+        @method getInstance
+        @static
+        @param {String} name The instance name
+        @returns {Thrust} The thrust instance
+        **/
+                Thrust.getInstance = function getInstance(name) {
+            return thrustInstance.getInstance(name);
+        }
+        /**
+        Fetchs a named thrust stance if it exists.
+        This loads asyncronously, as the instance may not be loaded
+        
+        @method __fetchInstance
+        @static
+        @private
+        @param {String} name The instance name
+        @returns {Promise} To a thrust instance spec
+        **/
+                Thrust.__fetchInstance = function __fetchInstance(name) {
+            return thrustInstance.fetchInstance(name);
+        }
+        /**
+        Creates a new module and hands it off to the given instance, if that instance exists.
+        
+        @method createModule
+        @static
+        @param {String} instanceName The thrust instance name
+        @param {String} name The module name
+        @param {Object} moduleDefn The module definition
+        **/
+                Thrust.createModule = function createModule(instanceName, name, moduleDefn) {
+            var instance = Thrust.getInstance(instanceName);
+            if(instance) {
+                var module = new Module(instance, moduleDefn, name);
+                instance.__injectModule(module);
+                return module;
+            }
+        }
+        /**
+        Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.
+        
+        @method registerModule
+        @static
+        @param {String} instanceName The thrust instance the module is to be associated with.
+        @param {String} name The module name to assign the arguments with.
+        @param {Object*} arguments, additional arguments that will be passed onto the moudle
+        **/
+                Thrust.registerModule = function registerModule(instanceName, name) {
+            if(!instanceName) {
+                throw new Error('instanceName is required!');
+            }
+            if(!name) {
+                throw new Error('name is required!');
+            }
+            if(!Thrust.__moduleRegistrations[instanceName]) {
+                Thrust.__moduleRegistrations[instanceName] = {
+                };
+            }
+            var args = toArray(arguments).slice(2);
+            if(Thrust.__moduleRegistrations[instanceName][name]) {
+                throw new Error(format('Module "{0}" already registered to instance "{1}"', name, instanceName));
+            }
+            Thrust.__moduleRegistrations[instanceName][name] = args || [];
+        }
+        Thrust.__getModuleArgs = __getModuleArgs;
+        return Thrust;
+    })();
+    exports.Thrust = Thrust;    
     /**
     AMD API
     load
-
+    
     Handles fetching of a current thurst instance, by expected name.
     Adding the : character requests a specific plugin.
     thrust!global = Thrust instance
     thrust!global:dom = The thrust dom plugin instance
-
+    
     @method load
     @static
     @param {String} name The name of the instance that is being fetched
@@ -4022,160 +4392,189 @@ function (require, log, util, tConfig, igniteSpec, Module, domReady, module, thr
     @param {Function} load Allows the load to inform that AMD for the value to hand off
     @param {Object} config The custom configuration.
     **/
-    Thrust.load = function (name, parentRequire, load, config)
-    {
-        var parts = name.split(':'),
-            realName = parts[0],
-            pluginName = parts[1] || 'thrust';
-
+    function load(name, parentRequire, load, config) {
+        var parts = name.split(':'), realName = parts[0], pluginName = parts[1] || 'thrust';
         var instancePromise = Thrust.__fetchInstance(realName);
-        instancePromise.then(function (context)
-        {
+        instancePromise.promise.then(function (context) {
             var plugin = context[pluginName];
-            if (!plugin)
+            if(!plugin) {
                 throw new Error(format('Plugin "{0}" does not exist on thrust instance "{1}".', pluginName, realName));
-
+            }
             load(plugin);
         });
-    };
-
-    return Thrust;
-});
-
+    }
+    exports.load = load;
+})
+//@ sourceMappingURL=main.js.map
+;
 define('thrust', ['thrust/main'], function (main) { return main; });
 
-define('thrust/convention',[
-    'thrust/util'
-],
-function (util)
-{
-    /**
-        A Convention allows thrust to be as extendable as possible, by giving extension points at every step along the way.
+define('thrust/convention',["require", "exports", 'thrust/util'], function(require, exports, __util__) {
+    /// <reference path="interfaces/convention.d.ts" />
+    /// <reference path="../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    var util = __util__;
 
+    var _ = util._;
+    /**
+    A Convention allows thrust to be as extendable as possible, by giving extension points at every step along the way.
+    
     @module thrust
     **/
-
+    var methods = [
+        'create', 
+        'init', 
+        'start', 
+        'ready', 
+        'stop', 
+        'destroy', 
+        'countdown', 
+        'ignite', 
+        'orbit', 
+        'deorbit', 
+        'splashdown'
+    ];
     /**
-        The convention class, takes an overloaded set of methods, for any method that needs to be overloaded.
-
+    The convention class, takes an overloaded set of methods, for any method that needs to be overloaded.
+    
     @class thrust.Convention
     @constructor
     @param {Object} methods An object of applicable methods.
     **/
-    var Convention = function (methods)
-    {
-        if (!(this instanceof Convention))
-            return new Convention(methods);
-
-        util.extend(this, methods);
-    };
-
-    Convention.fn = Convention.prototype = {
-        /**
-            These properties are stripped off of any module, and held in a private space for other convention methods to use.
-        @property properties
-        @optional
-        **/
-        properties: [],
-        /**
-            This is called during create of a module, generally used to create a facade, that is then bound to the module.
+    var Convention = (function () {
+        function Convention(methodOverrides) {
+            this.emptyPromise = null;
+            _.extend(this, methodOverrides);
+            var keys = _.difference(_.keys(methodOverrides), methods);
+            _.each(keys, function (x) {
+                if(_.isFunction(this[x])) {
+                    this[x] = util.noop;
+                }
+            }, this);
+        }
+        Convention.prototype.create = /**
+        This is called during create of a module, generally used to create a facade, that is then bound to the module.
         @method create
         @optional
         @param {Thrust} thrust The thrust instance.
         @param {Module} module The module instance.
         @param {Object} facades All the facades already attached to the module.
         **/
-        create: util.noop,
-        /**
-            This method is called during the thrust init phase, or an individual module's init phase
-
+        function (thrust, mod, facades) {
+        }/**
+        This method is called during the thrust init phase, or an individual module's init phase
+        
         @method init
         @optional
         @param {Object} facades The facades for the module.
         @returns {Promise} A promise may be returned, to delay the next phase from begining.
         **/
-        init: util.noop,
-        /**
-            This method is called during the thrust start phase, or an individual module's start phase
-
+        ;
+        Convention.prototype.init = function (facades, mod) {
+            return this.emptyPromise;
+        }/**
+        This method is called during the thrust start phase, or an individual module's start phase
+        
         @method start
         @optional
         @param {Object} facades The facades for the module.
         @returns {Promise} A promise may be returned, to delay the next phase from begining.
         **/
-        start: util.noop,
-        /**
-            This method is called during the thrust ready phase, or an individual module's ready phase
-
+        ;
+        Convention.prototype.start = function (facades, mod) {
+            return this.emptyPromise;
+        }/**
+        This method is called during the thrust ready phase, or an individual module's ready phase
+        
         @method ready
         @optional
         @param {Object} facades The facades for the module.
         @returns {Promise} A promise may be returned, to delay the next phase from begining.
         **/
-        ready: util.noop,
-        /**
-            This method is called during the thrust stop phase, or an individual module's stop phase
-
+        ;
+        Convention.prototype.ready = function (facades, mod) {
+            return this.emptyPromise;
+        }/**
+        This method is called during the thrust stop phase, or an individual module's stop phase
+        
         @method stop
         @optional
         @param {Object} facades The facades for the module.
         @returns {Promise} A promise may be returned, to delay the next phase from begining.
         **/
-        stop: util.noop,
-        /**
-            This method is called during the thrust destroy phase, or an individual module's destroy phase
-
+        ;
+        Convention.prototype.stop = function (facades, mod) {
+            return this.emptyPromise;
+        }/**
+        This method is called during the thrust destroy phase, or an individual module's destroy phase
+        
         @method destroy
         @optional
         @param {Object} facades The facades for the module.
         @returns {Promise} A promise may be returned, to delay the next phase from begining.
         **/
-        destroy: util.noop,
-        /**
-            This is called during the init phase of a Thrust instance.
+        ;
+        Convention.prototype.destroy = function (facades, mod) {
+            return this.emptyPromise;
+        }/**
+        This is called during the init phase of a Thrust instance.
         @method countdown
         @optional
         @param {Thrust} thrust The thrust instance.
         @returns {Promise} A promise may be returned, to delay the next phase from begining.
         **/
-        countdown: util.noop,
-        /**
-            This is called during the start phase of a Thrust instance.
+        ;
+        Convention.prototype.countdown = function (thrust) {
+            return this.emptyPromise;
+        }/**
+        This is called during the start phase of a Thrust instance.
         @method ignite
         @optional
         @param {Thrust} thrust The thrust instance.
         @returns {Promise} A promise may be returned, to delay the next phase from begining.
         **/
-        ignite: util.noop,
-        /**
-            This is called during the ready phase of a Thrust instance.
+        ;
+        Convention.prototype.ignite = function (thrust) {
+            return this.emptyPromise;
+        }/**
+        This is called during the ready phase of a Thrust instance.
         @method orbit
         @optional
         @param {Thrust} thrust The thrust instance.
         @returns {Promise} A promise may be returned, to delay the next phase from begining.
         **/
-        orbit: util.noop,
-        /**
-            This is called during the stop phase of a Thrust instance.
+        ;
+        Convention.prototype.orbit = function (thrust) {
+            return this.emptyPromise;
+        }/**
+        This is called during the stop phase of a Thrust instance.
         @method deorbit
         @optional
         @param {Thrust} thrust The thrust instance.
         @returns {Promise} A promise may be returned, to delay the next phase from begining.
         **/
-        deorbit: util.noop,
-        /**
-            This is called during the destroy phase of a Thrust instance.
+        ;
+        Convention.prototype.deorbit = function (thrust) {
+            return this.emptyPromise;
+        }/**
+        This is called during the destroy phase of a Thrust instance.
         @method splashdown
         @optional
         @param {Thrust} thrust The thrust instance.
         @returns {Promise} A promise may be returned, to delay the next phase from begining.
         **/
-        splashdown: util.noop
-    };
-
-    return Convention;
-});
-define('thrust/define',['thrust/util', 'thrust/module'],
+        ;
+        Convention.prototype.splashdown = function (thrust) {
+            return this.emptyPromise;
+        };
+        return Convention;
+    })();
+    exports.Convention = Convention;    
+})
+//@ sourceMappingURL=convention.js.map
+;
+define('thrust/define',['thrust/util', 'thrust/capsule'],
 function (util, Module)
 {
     var regex = /[\[\]\'\"\s]/g,
@@ -4220,98 +4619,127 @@ function (util, Module)
         }
     };
 });
-define('thrust/events',[
-    'thrust/util', 'thrust/log', 'thrust/config', 'has'
-],
-function (util, log, tConfig, has)
-{
-    /**
-    Thrust Events are based off of the Backbone event model, with special additions.
-
-    * Events can be fired asyncronously.
-    * Events can be namespaced.
-
-    @module thrust
-    **/
-
+define('thrust/events',["require", "exports", './log', './config', 'has', 'thrust/util'], function(require, exports, __log__, __tConfig__, __has__, __util__) {
+    /// <reference path="interfaces/mediator/mediator.d.ts" />
+    /// <reference path="interfaces/thrust.d.ts" />
+    /// <reference path="../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
     
     //     Backbone.js 0.9.1
     //     (c) 2010-2012 Jeremy Ashkenas, DocumentCloud Inc.
     //     Backbone may be freely distributed under the MIT license.
     //     For all details and documentation:
     //     http://backbonejs.org
+    /**
+    Thrust Events are based off of the Backbone event model, with special additions.
+    
+    * Events can be fired asyncronously.
+    * Events can be namespaced.
+    
+    @module thrust
+    **/
+    var log = __log__;
 
-    var slice  = Array.prototype.slice,
-        asyncFire,
-        noop   = util.noop,
-        when   = util.when,
-        size   = util.size,
-        each   = util.each,
-        defer  = util.defer,
-        bind   = util.bind,
-        extend = util.extend,
-        format = util.format;
+    var tConfig = __tConfig__;
 
-    var eventSplitter = /\s+/, _trigger, triggerCallback, triggerAsyncCallback, triggerNodes, ALL = 'all', STARALL = '*all', normalizeEvents, getNamespaceData, _offProcessNode;
+    var has = __has__;
+
+    var util = __util__;
+
+    var _ = util._;
+    var EventNode = (function () {
+        function EventNode() {
+            this.tail = null;
+            this.next = null;
+            this.callback = null;
+            this.context = null;
+            this.namespace = '';
+            this.once = false;
+        }
+        return EventNode;
+    })();
+    exports.EventNode = EventNode;    
+    var createAsyncEvent = function (object) {
+        var f = function f(events) {
+            var args = [];
+            for (var _i = 0; _i < (arguments.length - 1); _i++) {
+                args[_i] = arguments[_i + 1];
+            }
+            _trigger.apply(object, [
+                false
+            ].concat(slice.call(arguments)));
+            return object;
+        };
+        f.async = function (events) {
+            var args = [];
+            for (var _i = 0; _i < (arguments.length - 1); _i++) {
+                args[_i] = arguments[_i + 1];
+            }
+            _trigger.apply(object, [
+                true
+            ].concat(slice.call(arguments)));
+            return object;
+        };
+        return f;
+    };
+    var slice = Array.prototype.slice, asyncFire, noop = util.noop, when = util.when, size = _.size, each = _.each, defer = _.defer, bind = _.bind, extend = _.extend, format = util.format;
+    var eventSplitter = /\s+/, ALL = 'all', STARALL = '*all';
     /**
     Normalizes the given events to the expected namespace.
-
+    
     @method normalizeEvents
     @private
     @param {String} events The events delimited by a space
     @param {String} namespace The namespace, including prefixed '.'
     **/
-    normalizeEvents = function (events, namespace)
-    {
-        events = events.split(eventSplitter);
-        for (var i = 0, iLen = events.length; i < iLen; i++)
-        {
-            events[i] = events[i] + namespace;
+    function normalizeEvents(events, namespace) {
+        var eventsArray = events.split(eventSplitter);
+        for(var i = 0, iLen = eventsArray.length; i < iLen; i++) {
+            eventsArray[i] = eventsArray[i] + namespace;
         }
-        return events.join(' ');
-    };
-
+        return eventsArray.join(' ');
+    }
     /**
     Trigger one or many events, firing all bound callbacks. Callbacks are
     passed the same arguments as `trigger` is, apart from the event name
     (unless you're listening on `"all"`, which will cause your callback to
     receive the true name of the event as the first argument).
-
+    
     @method _trigger
     @private
     @param {Boolean} async Fire event async or sync
     @param {Object} events The events to be fired.
-        delimited by a space.
+    delimited by a space.
     @param [args]* The arguments to pass onto the callback methods.
     @returns If async then returns a Promise, where the first argument contains all the returned values, as an array
-             If sync then returns an array of the return values.
-             If more than one event, returns an object of arrays or promises, with the key for each event.
+    If sync then returns an array of the return values.
+    If more than one event, returns an object of arrays or promises, with the key for each event.
     **/
-    _trigger = function (async, events)
-    {
-        var that = this, event, node, calls, tail, args, all, rest, namespace, onceNodes;
-        if (!(calls = this._callbacks)) return that;
+    function _trigger(async, events) {
+        /*jshint validthis:true */
+                var that = this, event, node, calls, tail, args, all, rest, namespace, onceNodes;
+        if(!(calls = this._callbacks)) {
+            return that;
+        }
         all = calls.all;
-        events = events.split(eventSplitter);
+        var eventsArray = events.split(eventSplitter);
         rest = slice.call(arguments, 2);
-
-        while (event = events.shift())
-        {
-            if (node = calls[event])
-            {
+        while(event = eventsArray.shift()) {
+            if(node = calls[event]) {
                 triggerNodes(that, event, async, node, rest);
             }
-            if (node = all)
-            {
-                triggerNodes(that, ALL, async, node, [event].concat(rest));
+            if(node = all) {
+                triggerNodes(that, ALL, async, node, [
+                    event
+                ].concat(rest));
             }
         }
-    };
-
+    }
     /**
     Triggers all events on a node.
     Also unbinds any node that is set to only be called once.
-
+    
     @method triggerNodes
     @private
     @param {Object} that The event container context.
@@ -4319,29 +4747,27 @@ function (util, log, tConfig, has)
     @param {Boolean} async Fire event async or sync
     @param {Object} node The node linked list.
     @param {Array} args The arguments to pass onto the triggered nodes
-
+    
     **/
-    triggerNodes = function (that, event, async, nodeList, args)
-    {
+    function triggerNodes(that, event, async, nodeList, args) {
         var tail, onceNodes = [];
-
         has('DEBUG') && log.info(format('{0}: triggering {1} event "{2}"', that.__pubSubName, async && 'async' || '', event));
-
-        each(nodeList, function (node)
-        {
+        each(nodeList, function (node) {
             tail = node.tail;
-            while ((node = node.next) !== tail)
-            {
+            while((node = node.next) !== tail) {
                 triggerCallback(async, node.callback, node.context || that, args);
                 node.once && onceNodes.push(node);
             }
         });
-        if (onceNodes.length) each(onceNodes, function (x) { that.unsubscribe(event, x.callback, x.context, x.namespace); });
-    };
-
+        if(onceNodes.length) {
+            each(onceNodes, function (x) {
+                that.unsubscribe(event, x.callback, x.context, x.namespace);
+            });
+        }
+    }
     /**
     Invokes a trigger callback
-
+    
     @method triggerCallback
     @private
     @param {Boolean} async Fire event async or sync
@@ -4349,25 +4775,25 @@ function (util, log, tConfig, has)
     @param {Object} context The calling context
     @param {Array} args The arguments to call the callback with.
     @returns {Object} The returned value.
-        For async calls, this is a promise
-        For sync calls this is the value from the method.
+    For async calls, this is a promise
+    For sync calls this is the value from the method.
     **/
-    triggerCallback = function (async, callback, context, args)
-    {
-        if (async)
-        {
+    function triggerCallback(async, callback, context, args) {
+        if(async) {
             defer(triggerAsyncCallback(callback, context, args), 0);
+        } else {
+            try  {
+                return callback.apply(context, args);
+            } catch (e) {
+                if(tConfig.throwErrors) {
+                    throw e;
+                }
+            }
         }
-        else
-        {
-            try { return callback.apply(context, args); }
-            catch (e) { if (tConfig.throwErrors) throw e; }
-        }
-    };
-
+    }
     /**
     Creates an async event handler
-
+    
     @method asyncEventFactory
     @private
     @param {Function} callback The callback method
@@ -4375,17 +4801,14 @@ function (util, log, tConfig, has)
     @param {Array} args The arguments to call the callback with.
     @returns {Function} The callback for the given arguments.
     **/
-    triggerAsyncCallback = function (callback, context, args)
-    {
-        return function ()
-        {
+    function triggerAsyncCallback(callback, context, args) {
+        return function () {
             return callback.apply(context, args);
-        };
-    };
-
+        }
+    }
     /**
     Resubscribes to the appropriate events
-
+    
     @method _offProcessNode
     @private
     @param {Object} that The event context
@@ -4395,697 +4818,632 @@ function (util, log, tConfig, has)
     @param {Object} [context] The event context to unsubscribe
     @param {String} [namespace] The namespace to unsubscribe
     **/
-    _offProcessNode = function (that, event, node, callback, context)
-    {
+    function _offProcessNode(that, event, node, callback, context) {
         var tail, cb, ctx, ns;
         tail = node.tail;
-        while ((node = node.next) !== tail)
-        {
+        while((node = node.next) !== tail) {
             cb = node.callback;
             ctx = node.context;
             ns = node.namespace;
-            if ((callback && cb !== callback) || (context && ctx !== context))
-            {
+            if((callback && cb !== callback) || (context && ctx !== context)) {
                 that.subscribe(event + (ns && ('.' + ns) || ''), cb, ctx);
             }
         }
-    };
-
+    }
     /**
     Gets the namespace information, the real event to pass back onto the methods.
-
+    
     @method getNamespaceData
     @private
     @param {String} event The event to capture namespace data from.
     @returns {Object} Containing event and namespace.
     **/
-    getNamespaceData = function(event)
-    {
-        var nsIndex = (event || '').indexOf('.'),
-            hasNs = nsIndex > -1,
-            namespace = hasNs ? event.substring(nsIndex + 1) : undefined,
-            event = hasNs ? event.substring(0, nsIndex) : event;
-
-        if (nsIndex === 0)
+    function getNamespaceData(event) {
+        var nsIndex = (event || '').indexOf('.'), hasNs = nsIndex > -1, namespace = hasNs ? event.substring(nsIndex + 1) : undefined, event = hasNs ? event.substring(0, nsIndex) : event;
+        if(nsIndex === 0) {
             event = STARALL;
-
-        return { event: event, namespace: namespace };
-    };
-
+        }
+        return {
+            event: event,
+            namespace: namespace
+        };
+    }
     /**
     Thrust Events are based off of the Backbone event model, with special additions.
-
+    
     * Events can be fired asyncronously.
     * Events can be namespaced.
-
+    
     @class thrust.Events
     **/
-    var Events = {
-        /**
-        Bind one or more space separated events, `events`, to a `callback`
-        function. Passing `"all"` will bind the callback to all events fired.
-
-        @method subscribe
-        @param {String} events Spave seperated events
-        @param {Function} callback The callback method to be called when the events are fired.
-        @param {Object} context The context to bind the calling function to.
-        @param {Boolean} once Call this event only once.
-        @chainable
-        **/
-        subscribe: function (events, callback, context, once)
-        {
-            var calls, event, node, tail, list, nd;
-            this.__namespace && (events = normalizeEvents(events, this.__namespace));
-
-            events = events.split(eventSplitter);
-            calls = this._callbacks || (this._callbacks = {});
-
-            // Create an immutable callback list, allowing traversal during
-            // modification.  The tail is an empty object that will always be used
-            // as the next node.
-            while (event = events.shift())
-            {
-                nd = getNamespaceData(event);
-                event = nd.event;
-                list = calls[event] || (calls[event] = {});
-                list = list[nd.namespace];
-                node = list ? list.tail : {};
-                node.next = tail = {};
-                node.context = context;
-                node.callback = callback;
-                node.namespace = nd.namespace;
-                node.once = once;
-                calls[event][nd.namespace] = { tail: tail, next: list ? list.next : node };
-            }
-
-            return this;
-        },
-        /**
-        Bind one or more space separated events, `events`, to a `callback`
-        function. Passing `"all"` will bind the callback to all events fired.
-
-        Each event will only be called once.
-
-        @method once
-        @param {String} events Spave seperated events
-        @param {Function} callback The callback method to be called when the events are fired.
-        @param {Object} context The context to bind the calling function to.
-        @chainable
-        **/
-        once: function (events, callback, context)
-        {
-            return this.subscribe(events, callback, context, true);
-        },
-        /**
-        Remove one or many callbacks. If `context` is null, removes all callbacks
-        with that function. If `callback` is null, removes all callbacks for the
-        event. If `event` is null, removes all bound callbacks for all events.
-
-        @method unsubscribe
-        @param {String} events Spave seperated events
-        @param {Function} callback The callback method to be called when the events are fired.
-        @param {Object} context The context to bind the calling function to.
-        @chainable
-        **/
-        unsubscribe: function (events, callback, context)
-        {
-            var event, calls, node, nd, ourNs, namespace, that = this, hasNs;
-
-            ourNs = that.__namespace; ourNs && (ourNs = ourNs.substring(1));
-            // No events, or removing *all* events.
-            if (!(calls = that._callbacks)) return;
-            if (!(events || callback || context))
-            {
-                if (!ourNs)
-                    delete that._callbacks;
-                else
-                {
-                    var cbs = that._callbacks;
-                    for (var i in cbs)
-                    {
-                        delete cbs[i][ourNs];
-                        if (size(cbs[i]) === 0) delete cbs[i];
+    exports.Events = (function () {
+        var events = {
+            subscribe: /**
+            Bind one or more space separated events, `events`, to a `callback`
+            function. Passing `"all"` will bind the callback to all events fired.
+            
+            @method subscribe
+            @param {String} events Spave seperated events
+            @param {Function} callback The callback method to be called when the events are fired.
+            @param {Object} context The context to bind the calling function to.
+            @param {Boolean} once Call this event only once.
+            @chainable
+            **/
+            function (events, callback, context, once) {
+                var calls, event, node, tail, list, nd;
+                this.__namespace && (events = normalizeEvents(events, this.__namespace));
+                var eventsArray = events.split(eventSplitter);
+                calls = this._callbacks || (this._callbacks = {
+                });
+                // Create an immutable callback list, allowing traversal during
+                // modification.  The tail is an empty object that will always be used
+                // as the next node.
+                while(event = eventsArray.shift()) {
+                    nd = getNamespaceData(event);
+                    event = nd.event;
+                    list = calls[event] || (calls[event] = {
+                    });
+                    list = list[nd.namespace];
+                    node = list ? list.tail : new EventNode();
+                    node.next = tail = new EventNode();
+                    node.context = context;
+                    node.callback = callback;
+                    if(nd.namespace) {
+                        node.namespace = nd.namespace;
                     }
+                    if(once) {
+                        node.once = once;
+                    }
+                    calls[event][nd.namespace] = {
+                        tail: tail,
+                        next: list ? list.next : node
+                    };
                 }
-                return that;
-            }
-
-            // Loop through the listed events and contexts, splicing them out of the
-            // linked list of callbacks if appropriate.
-            ourNs && (events = normalizeEvents(events, that.__namespace));
-            events = events ? events.split(eventSplitter) : util.keys(calls);
-            while (event = events.shift())
-            {
-                nd = getNamespaceData(event);
-                event = nd.event;
-                namespace = nd.namespace;
-                hasNs = !!namespace;
-                if (!ourNs)
-                {
-                    node = calls[event];
-                    delete calls[event];
+                return this;
+            },
+            once: /**
+            Bind one or more space separated events, `events`, to a `callback`
+            function. Passing `"all"` will bind the callback to all events fired.
+            
+            Each event will only be called once.
+            
+            @method once
+            @param {String} events Spave seperated events
+            @param {Function} callback The callback method to be called when the events are fired.
+            @param {Object} context The context to bind the calling function to.
+            @chainable
+            **/
+            function (events, callback, context) {
+                return this.subscribe(events, callback, context, true);
+            },
+            unsubscribe: /**
+            Remove one or many callbacks. If `context` is null, removes all callbacks
+            with that function. If `callback` is null, removes all callbacks for the
+            event. If `event` is null, removes all bound callbacks for all events.
+            
+            @method unsubscribe
+            @param {String} events Spave seperated events
+            @param {Function} callback The callback method to be called when the events are fired.
+            @param {Object} context The context to bind the calling function to.
+            @chainable
+            **/
+            function (events, callback, context) {
+                var event, calls, node, nd, ourNs, namespace, that = this, hasNs;
+                ourNs = that.__namespace;
+                ourNs && (ourNs = ourNs.substring(1));
+                // No events, or removing *all* events.
+                if(!(calls = that._callbacks)) {
+                    return;
                 }
-                else if (calls[event])
-                {
-                    node = calls[event][ourNs];
-                    delete calls[event][ourNs];
-                    if (size(calls[event]) === 0) delete calls[event];
+                if(!(events || callback || context)) {
+                    if(!ourNs) {
+                        delete that._callbacks;
+                    } else {
+                        var cbs = that._callbacks;
+                        for(var i in cbs) {
+                            delete cbs[i][ourNs];
+                            if(size(cbs[i]) === 0) {
+                                delete cbs[i];
+                            }
+                        }
+                    }
+                    return that;
                 }
-                if (!node || !(callback || context)) continue;
-
-                /*if (event !== STARALL)
-                {
+                // Loop through the listed events and contexts, splicing them out of the
+                // linked list of callbacks if appropriate.
+                ourNs && (events = normalizeEvents(events, that.__namespace));
+                var eventsArray = events ? events.split(eventSplitter) : _.keys(calls);
+                while(event = eventsArray.shift()) {
+                    nd = getNamespaceData(event);
+                    event = nd.event;
+                    namespace = nd.namespace;
+                    hasNs = !!namespace;
+                    if(!ourNs) {
+                        node = calls[event];
+                        delete calls[event];
+                    } else {
+                        if(calls[event]) {
+                            node = calls[event][ourNs];
+                            delete calls[event][ourNs];
+                            if(size(calls[event]) === 0) {
+                                delete calls[event];
+                            }
+                        }
+                    }
+                    if(!node || !(callback || context)) {
+                        continue;
+                    }
+                    /*if (event !== STARALL)
+                    {
                     node = calls[event];
                     delete calls[event];
                     if (!node) continue;
-                }*/
-                if (event !== STARALL && !callback)
-                {
-                    _offProcessNode(that, event, node, callback, context);
-                }
-                else if (event === ALL || !callback)
-                {
-                    for (var i in calls)
-                    {
-                        if (hasNs)
-                        {
-                            delete calls[i];
-                        }
-                        else
-                        {
-                            node = calls[i];
-                            delete calls[i];
-                            _offProcessNode(that, i, node, callback, context);
+                    }*/
+                    if(event !== STARALL && !callback) {
+                        _offProcessNode(that, event, node, callback, context);
+                    } else {
+                        if(event === ALL || !callback) {
+                            for(var i in calls) {
+                                if(hasNs) {
+                                    delete calls[i];
+                                } else {
+                                    node = calls[i];
+                                    delete calls[i];
+                                    _offProcessNode(that, i, node, callback, context);
+                                }
+                            }
+                        } else {
+                            _offProcessNode(that, event, node, callback, context);
                         }
                     }
                 }
-                else
-                {
-                    _offProcessNode(that, event, node, callback, context);
-                }
-            }
-            return that;
-        },
-        /**
+                return that;
+            },
+            __pubSubName: /**
             Trigger one or many events, firing all bound callbacks. Callbacks are
             passed the same arguments as `trigger` is, apart from the event name
             (unless you're listening on `"all"`, which will cause your callback to
             receive the true name of the event as the first argument).
-        
+            
             @method fire
             @param {Object} events The events to be fired.
-                delimited by a space.
+            delimited by a space.
             @param [args]* The arguments to pass onto the callback methods.
             @returns {Array of Values} If more than on event is fired, an Object of Arrays is returned.
-        **/
-        fire: function (events)
-        {
-            _trigger.apply(this, [false].concat(slice.call(arguments)));
-            return this;
-        },
-        __pubSubName: 'Events',
-        /**
-        Init's the Event module.
-        This is only required if you wish to use fire.async, and namespacing.
-
-        @method initEvents
-        @chainable
-        **/
-        initEvents: function ()
-        {
-            this.publish = this.fire = bind(Events.fire, this);
-            this.fire.async = bind(asyncFire, this);
-            this.initEvents = noop;
-            this.__pubSubName = this.name || 'Events';
-            if (this.name && !this.__namespace) this.__namespace = '.' + this.name;
-
-            return this;
-        },
-        /**
-        Extends Events into the given object.
-
-        @method extend
-        @param {Object} to The object ot extend events onto
-        @param {Boolean} [init] Optionally init the events.
-        **/
-        extend: function (to, init)
-        {
-            util.extend(to, Events);
-            delete to.extend;
-            init && to.initEvents();
-            return to;
-        }
-    };
-
-    /**
-        Trigger one or many events, firing all bound callbacks. Callbacks are
-        passed the same arguments as `trigger` is, apart from the event name
-        (unless you're listening on `"all"`, which will cause your callback to
-        receive the true name of the event as the first argument).
-
-        fire.async runs its events immediately.
+            **/
+            'Events',
+            initEvents: /**
+            Init's the Event module.
+            This is only required if you wish to use fire.async, and namespacing.
+            
+            @method initEvents
+            @chainable
+            **/
+            function () {
+                this.fire = this.publish = createAsyncEvent(this);
+                this.initEvents = noop;
+                this.__pubSubName = this.name || 'Events';
+                if(this.name && !this.__namespace) {
+                    this.__namespace = '.' + this.name;
+                }
+                return this;
+            },
+            extend: /**
+            Extends Events into the given object.
+            
+            @method extend
+            @param {Object} to The object ot extend events onto
+            @param {Boolean} [init] Optionally init the events.
+            **/
+            function (to, init) {
+                _.extend(to, exports.Events);
+                delete to.extend;
+                init && to.initEvents();
+                return to;
+            }
+        };
+        events.fire = events.publish = createAsyncEvent({
+        });
+        return events;
+    })();
+})
+//@ sourceMappingURL=events.js.map
+;
+define('thrust/facade',["require", "exports", 'thrust/util', './capsule'], function(require, exports, __util__, __tm__) {
+    /// <reference path="interfaces/facade.d.ts" />
+    /// <reference path="../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
     
-        @method fire.async
-        @param {Object} events The events to be fired.
-            delimited by a space.
-        @param [args]* The arguments to pass onto the callback methods.
-        @async
-        @returns {Array of Promise} If more than on event is fired, an Object of Promise Arrays is returned.
-    **/
-    /**
-        Trigger one or many events, firing all bound callbacks. Callbacks are
-        passed the same arguments as `trigger` is, apart from the event name
-        (unless you're listening on `"all"`, which will cause your callback to
-        receive the true name of the event as the first argument).
+    var util = __util__;
 
-        publish.async runs its events immediately.
-        publish.async is an alias for fire.
+    var _ = util._;
+    var tm = __tm__;
+
+    var Module = tm.Module;
+    /**
     
-        @method publish.async
-        @param {Object} events The events to be fired.
-            delimited by a space.
-        @param [args]* The arguments to pass onto the callback methods.
-        @async
-        @returns {Array of Promise} If more than on event is fired, an Object of Promise Arrays is returned.
-    **/
-    asyncFire = function (events)
-    {
-        _trigger.apply(this, [true].concat(slice.call(arguments)));
-        return this;
-    };
-
-    /**
-        Trigger one or many events, firing all bound callbacks. Callbacks are
-        passed the same arguments as `trigger` is, apart from the event name
-        (unless you're listening on `"all"`, which will cause your callback to
-        receive the true name of the event as the first argument).
-
-        publish is an alias for fire.
-    
-        @method publish
-        @param {Object} events The events to be fired.
-            delimited by a space.
-        @param [args]* The arguments to pass onto the callback methods.
-        @returns If async then returns a Promise, where the first argument contains all the returned values, as an array
-                 If sync then returns an array of the return values.
-                 If more than one event, returns an object of arrays or promises, with the key for each event.
-    **/
-    Events.publish = Events.fire;
-
-    return Events;
-});
-
-define('thrust/facade',[
-    'thrust/util', 'thrust/module'
-],
-function (util, Module)
-{
-    /**
-
     The Facade module offers the ability to create an interface or similar concept.
     With the Facade in thrust, it allows you to capture events from a module, when loaded via convention.
     Facades are mainly for use in thrust plugins.
-
+    
     @module thrust
     **/
-
     /**
     Facades are mainly for use in thrust plugins.
-
+    
     Facade has these built in methods:
     * init
     * start
     * ready
     * stop
     * destroy
-
+    
     Behind the scenes the facade methods, invoke any conventions loaded for the plugin.
-
+    
     @class thrust.Facade
     **/
     var thrustCache = Module.thrustCache;
-
-    var Facade,
-        format           = util.format,
-        facadeMethods    = ['init', 'start', 'ready', 'stop', 'destroy'],
-        defaultPrototype = {},
-
-        conventionFunctionFactory = function (name) {
-            return function (module) {
-                var that = this;
-                var returnValues = [];
-                if (module && !module.convention)
-                    module = thrustCache[module.mid].module;
-                if (that.__conventions) {
-                    return util.safeInvoke(that.__conventions, name, that, module);
-                }
-            };
-        },
-        methodWrap = function (method) {
-            return function (f) {
-                var args = Array.prototype.slice.call(arguments, 1);
-                f.apply(this, args);
-                return method.apply(this, args);
-            };
-        };
-
-    for (var i = 0, iLen = facadeMethods.length; i < iLen; i++)
-    {
+    var facadeMethods = [
+'init', 
+'start', 
+'ready', 
+'stop', 
+'destroy'    ], defaultPrototype = {
+    };
+    function conventionFunctionFactory(name) {
+        return function (m) {
+            var that = this;
+            var returnValues = [];
+            if(m && !((m).convention)) {
+                m = thrustCache[m.mid].module;
+            }
+            if(that.__conventions) {
+                return util.safeInvoke(that.__conventions, name, that, m);
+            }
+        }
+    }
+    function methodWrap(method) {
+        return function (f) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            f.apply(this, args);
+            return method.apply(this, args);
+        }
+    }
+    for(var i = 0, iLen = facadeMethods.length; i < iLen; i++) {
         var method = facadeMethods[i];
         defaultPrototype[method] = conventionFunctionFactory(method);
     }
-
     /**
     Facade init
-
+    
     Called during the init phase of a module startup.
-
+    
     @method init
     @returns Promise any facade method may optionally return a promise to delay the start of the next phase.
     **/
-
     /**
     Facade start
-
+    
     Called during the start phase of a module startup.
-
+    
     @method start
     @returns Promise any facade method may optionally return a promise to delay the start of the next phase.
     **/
-
     /**
     Facade ready
-
+    
     Called during the ready phase of a module startup.
-
+    
     @method ready
     @returns Promise any facade method may optionally return a promise to delay the start of the next phase.
     **/
-
     /**
     Facade stop
-
+    
     Called during the init phase of a module startup.
-
+    
     @method stop
     @returns Promise any facade method may optionally return a promise to delay the start of the next phase.
     **/
-
     /**
     Facade destroy
-
+    
     Called during the destroy phase of a module startup.
-
+    
     @method destroy
     @returns Promise any facade method may optionally return a promise to delay the start of the next phase.
     **/
-
-    return {
-        /**
-        AMD API
-        load
-
-        Handles fetching of a module instance
-
-        Format:
-        thrust/module!{instance}:{pluginName}:{hashKey}
-
-        hasKey: is a unique key, that the module shares with the facade, allows for defining dependencies
-                    in your define block, and get access to the modules facade.
-
-        @method load
-        @static
-        @obsolete
-        @param {String} name The name of the instance that is being fetched
-        @param {Function} parentRequire the require method to be loaded
-        @param {Function} load Allows the load to inform that AMD for the value to hand off
-        @param {Object} config The custom configuration.
-        **/
-        load: function (name, parentRequire, load, config)
-        {
-            var parts = name.split(':'),
-                instanceName = parts[0],
-                plugin = parts[1],
-                pluginName = plugin.substring(plugin.lastIndexOf('/')+1 || 0),
-                hashKey = parts[2];
-
-            if (!instanceName)
-                throw new Error('instanceName is required!');
-            if (!pluginName)
-                throw new Error('pluginName is required!');
-            if (!hashKey)
-                throw new Error('hashKey is required!');
-
-            require(['thrust!' + instanceName], function (thrust)
-            {
-                var plugin = thrust[pluginName];
-                if (!plugin)
-                {
-                    require([plugin], function (p)
-                    {
-                        load(p);
-                    });
-                    return;
+    /**
+    AMD API
+    load
+    
+    Handles fetching of a module instance
+    
+    Format:
+    thrust/capsule!{instance}:{pluginName}:{hashKey}
+    
+    hasKey: is a unique key, that the module shares with the facade, allows for defining dependencies
+    in your define block, and get access to the modules facade.
+    
+    @method load
+    @static
+    @obsolete
+    @param {String} name The name of the instance that is being fetched
+    @param {Function} parentRequire the require method to be loaded
+    @param {Function} load Allows the load to inform that AMD for the value to hand off
+    @param {Object} config The custom configuration.
+    **/
+    function load(name, parentRequire, load, config) {
+        var parts = name.split(':'), instanceName = parts[0], plugin = parts[1], pluginName = plugin.substring(plugin.lastIndexOf('/') + 1 || 0), hashKey = parts[2];
+        if(!instanceName) {
+            throw new Error('instanceName is required!');
+        }
+        if(!pluginName) {
+            throw new Error('pluginName is required!');
+        }
+        if(!hashKey) {
+            throw new Error('hashKey is required!');
+        }
+        require([
+            'thrust!' + instanceName
+        ], function (thrust) {
+            var thrustPlugin = thrust[pluginName];
+            if(!thrustPlugin) {
+                require([
+                    plugin
+                ], function (p) {
+                    load(p);
+                });
+                return;
+            }
+            var thrustModuleCacheItem = thrustCache[hashKey] || (thrustCache[hashKey] = {
+                facades: {
+                },
+                instance: {
                 }
-
-                var thrustModuleCacheItem = thrustCache[hashKey] || (thrustCache[hashKey] = { facades: {}, instance: {} });
-
-                var facade = plugin.createFacade(thrust, thrustModuleCacheItem.instance, thrustModuleCacheItem.facades);
-                
-                load(facade);
             });
-        },
-        createFacade: function(initMethod)
-        {
-            var Facade = function (module)
-            {
+            var facade = thrustPlugin.createFacade(thrust, thrustModuleCacheItem.instance, thrustModuleCacheItem.facades);
+            load(facade);
+        });
+    }
+    exports.load = load;
+    function createFacade(initMethod) {
+        var f = (function () {
+            var Facade = function (mod) {
                 initMethod.apply(this, arguments);
-
-                for (var i = 0, iLen = facadeMethods.length; i < iLen; i++)
-                {
+                for(var i = 0, iLen = facadeMethods.length; i < iLen; i++) {
                     var method = facadeMethods[i];
-                    if (this[method] !== defaultPrototype[method])
-                    {
-                        this[method] = util.wrap(this[method], methodWrap(defaultPrototype[method]));
+                    if(this[method] !== defaultPrototype[method]) {
+                        this[method] = _.wrap(this[method], methodWrap(defaultPrototype[method]));
                     }
                 }
-
-                this.module = module;
-                //this.init(module);
-            };
-
-            Facade.fn = Facade.prototype = util.extend({
-                updateFacade: function ()
-                {
+                this.mod = mod;
+                //this.init(mod);
+                            };
+            Facade.prototype = _.extend({
+                updateFacade: function (mod, facade) {
                     initMethod.apply(this, arguments);
                 }
             }, defaultPrototype);
-            
             return Facade;
-        }
-    };
-});
-define('thrust/mediator/config',['require'],function (thrustInstance)
-{
+        })();
+        return f;
+    }
+    exports.createFacade = createFacade;
+})
+//@ sourceMappingURL=facade.js.map
+;
+define('thrust/mediator/config',["require", "exports"], function(require, exports) {
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
     /**
     Provides thrust configuration
     
     @module thrust.mediator
     @submodule thrust.mediator.config
     **/
+    /**
+    Resolves the given properties when creating an instance of the plugin.
     
-
-    var config = {
-
-        /**
-        Resolves the given properties when creating an instance of the plugin.
-
-        This is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed
-        to the plugin constructor method.
-
-        @for thrust.mediator.config
-        @private
-        @property resolve
-        @readOnly
-        @type {Array}
-        **/
-        resolve: ['name', 'cfg'],
-        /**
-        The set of conventions to load into thrust/mediator.
-
-        @property conventions
-        @readOnly
-        @type {Array}
-        **/
-        conventions: [
-            'thrust/mediator/convention/container',
-            'thrust/mediator/convention/subscription',
-            'thrust/mediator/convention/autostart',
-            'thrust/mediator/convention/dependant.modules'
-        ]
-    };
-
-    return config;
-});
-define('thrust/mediator/main',[
-    'thrust/util', 'thrust/log', 'thrust/events', 'thrust/facade', 'has', './config'
-],
-function (util, log, Events, facade, has, config)
-{
+    This is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed
+    to the plugin constructor method.
     
+    @for thrust.mediator.config
+    @private
+    @property resolve
+    @readOnly
+    @type {Array}
+    **/
+    exports.resolve = [
+        'name', 
+        'cfg'
+    ];
+    /**
+    The set of conventions to load into thrust/mediator.
+    
+    @property conventions
+    @readOnly
+    @type {Array}
+    **/
+    exports.conventions = [
+        'thrust/mediator/convention/container', 
+        'thrust/mediator/convention/subscription', 
+        'thrust/mediator/convention/autostart', 
+        'thrust/mediator/convention/dependent.modules'
+    ];
+})
+//@ sourceMappingURL=config.js.map
+;
+define('thrust/mediator/main',["require", "exports", 'thrust/util', 'thrust/log', 'thrust/events', 'thrust/facade', 'has', 'thrust/config', './config'], function(require, exports, __util__, __log__, __events__, __facade__, __has__, __config__, __mediatorConfig__) {
+    /// <reference path="../../has.d.ts" />
+    /// <reference path="../interfaces/mediator/mediator.facade.d.ts" />
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
+    var util = __util__;
+
+    var _ = util._;
+    var log = __log__;
+
+    //import events = module('thrust/events');
+    var events = __events__;
+
+    var Events = events.Events;
+    var facade = __facade__;
+
+    var has = __has__;
+
+    var config = __config__;
+
+    var mediatorConfig = __mediatorConfig__;
+
+    exports.className = 'Mediator';
     // Variable declaration.
-    var format  = util.format,   // string format method
-        extend  = util.extend,   // object extension method
-        type    = util.type,       // object type method
-        when    = util.when,
-        memoize = util.memoize,
-        mediator,
-        slice   = Array.prototype.slice;
-
+        var format = util.format, extend = // string format method
+    _.extend, type = // object extension method
+    util.type, when = // object type method
+    util.when, memoize = _.memoize, mediator, slice = Array.prototype.slice;
+    var c = config;
     //#region Facade
     /**
     Creates a new mediator facade for the given module.
-
+    
     @for thrust.mediator
     @class thrust.mediator.MediatorFacade
     @constructor
     @param {thrust.Module} module The module to create the facade for
     @param {thrust.Mediator} parent The parent mediator to create the facade on.
     **/
-    var MediatorFacade = facade.createFacade(function (module, parent)
-    {
-        this.name          = module.name;
-        this.module        = module;
-        this.parent        = parent;
-        this.__conventions = parent.__conventions;
-        this._callbacks    = parent._callbacks;
-        this.initEvents();
-    });
-    util.extend(MediatorFacade.fn, Events);
-
-    /**
-    During the start of a mediator facade, start creates the internal subscriptions array.
-
-    @for thrust.mediator.MediatorFacade
-    @method start
-    **/
-    MediatorFacade.fn.init = MediatorFacade.fn.start = function ()
-    {
-        if (!this._internalSubscriptions)
-            this._internalSubscriptions = [];
-    };
-
-    /**
-    Overrides the subscribe method, and tracks the any event that is bound.
-
-    @for thrust.mediator.MediatorFacade
-    @method subscribe
-    **/
-    MediatorFacade.fn.subscribe = function (events, callback, context)
-    {
-        this._internalSubscriptions.push({ events: events, callback: callback, context: context });
-        Events.subscribe.call(this, events, callback, context);
-    };
-
-    /**
-    Unsubscribes from all events that were subscribed to.
-
-    @for thrust.mediator.MediatorFacade
-    @method stop
-    **/
-    MediatorFacade.fn.stop = function (facade)
-    {
-        var module = facade.module;
-
-        if (this._internalSubscriptions)
-        {
-            for (var i = this._internalSubscriptions.length - 1; i >= 0; i--)
-            {
-                var sub = this._internalSubscriptions[i];
-                this.unsubscribe(sub.events, sub.callback, sub.context);
+    var MediatorFacade = (function () {
+        var mediatorFacade = facade.createFacade(function (module, parent) {
+            this.name = module.name;
+            this.module = module;
+            this.parent = parent;
+            this.__conventions = parent.__conventions;
+            this._callbacks = parent._callbacks;
+            this.initEvents();
+        });
+        _.extend(mediatorFacade.prototype, Events);
+        /**
+        During the start of a mediator facade, start creates the internal subscriptions array.
+        
+        @for thrust.mediator.MediatorFacade
+        @method start
+        **/
+        mediatorFacade.prototype.init = function (m) {
+            if(!this._internalSubscriptions) {
+                this._internalSubscriptions = [];
             }
-            delete this._internalSubscriptions;
-        }
-    };
-
+            return null;
+        };
+        mediatorFacade.prototype.start = mediatorFacade.prototype.init;
+        /**
+        Overrides the subscribe method, and tracks the any event that is bound.
+        
+        @for thrust.mediator.MediatorFacade
+        @method subscribe
+        **/
+        (mediatorFacade).prototype.subscribe = function (events, callback, context) {
+            this._internalSubscriptions.push({
+                events: events,
+                callback: callback,
+                context: context
+            });
+            Events.subscribe.call(this, events, callback, context);
+        };
+        /**
+        Unsubscribes from all events that were subscribed to.
+        
+        @for thrust.mediator.MediatorFacade
+        @method stop
+        **/
+        mediatorFacade.prototype.stop = function (m) {
+            if(this._internalSubscriptions) {
+                for(var i = this._internalSubscriptions.length - 1; i >= 0; i--) {
+                    var sub = this._internalSubscriptions[i];
+                    this.unsubscribe(sub.events, sub.callback, sub.context);
+                }
+                delete this._internalSubscriptions;
+            }
+            return null;
+        };
+        return mediatorFacade;
+    })();
     //#endregion
     // Our default namespace prefix.
-
     /**
     Mediator class.
     This creates a instance of the mediator, for use inside thrust.
-
+    
     @for thrust.mediator
     @class thrust.mediator.Mediator
     @constructor
     @param {String} name The name of the mediator.
     **/
-    var Mediator = function (name, config)
-    {
-        if (!(this instanceof Mediator))
-            return new Mediator(name);
-
-        var that = this,
-            appPath = config && config.url && config.url.path;
-        that.name = name;
-        has('DEBUG') && log.debug(format('Mediator: Creating new Mediator {0}', name));
-
-        that.initEvents();
-
-        that.subscribe('thrust/ready', function ()
-        {
-            has('DEBUG') && log.info('Mediator: Ready!');
-        });
-    };
-
-    var MediatorPrototype = {
-        /**
-        Creates a new MediatorFacade, based on the given module.
-
-        @for thrust.mediator.Mediator
-        @method createFacade
-        @param {thrust.Thrust} thrust The thrust instance
-        @param {thrust.Module} module The module to create the facade for
-        @param {Object} facades The facades already added for this module.
-        **/
-        createFacade: function (thrust, module, facades)
-        {
-            if (module.mediator && !(facades.mediator instanceof MediatorFacade)) throw new Error('"mediator" is a reserved property');
-
-            var mediator;
-            if (facades.mediator)
-            {
-                facades.mediator.updateFacade(module, this);
-                mediator = facades.mediator;
+    var Mediator = (function () {
+        //#endregion
+        function Mediator(name, config) {
+            var that = this, appPath = config && config.url && config.url.path;
+            that.name = name;
+            has('DEBUG') && log.debug(format('Mediator: Creating new Mediator {0}', name));
+            that.initEvents();
+            that.subscribe('thrust/ready', function () {
+                has('DEBUG') && log.info('Mediator: Ready!');
+            });
+        }
+        Mediator.prototype.initEvents = //#region Events
+        function () {
+        };
+        Mediator.prototype.extend = function (to, init) {
+            return null;
+        };
+        Mediator.prototype.subscribe = function (events, callback, context, once) {
+        };
+        Mediator.prototype.unsubscribe = function (events, callback, context) {
+        };
+        Mediator.prototype.once = function (events, callback, context) {
+        };
+        Mediator.prototype.createFacade = function (thrust, mod, facades) {
+            if((mod).mediator && !(facades.mediator instanceof MediatorFacade)) {
+                throw new Error('"mediator" is a reserved property');
             }
-            else
-            {
-                mediator = facades.mediator = module.mediator = new MediatorFacade(module, this);
+            var mediator;
+            if(facades.mediator) {
+                facades.mediator.updateFacade(mod, this);
+                mediator = facades.mediator;
+            } else {
+                mediator = facades.mediator = (mod).mediator = new MediatorFacade(mod, this);
             }
             return mediator;
-        }
-    };
-
-    util.extend(MediatorPrototype, Events);
-
-    // Extend our prototype to include the prototype generated above.
-    Mediator.prototype = Mediator.fn = MediatorPrototype;
-
-    Mediator.config = config;
-
-    return Mediator;
-});
-
+        };
+        Mediator.config = mediatorConfig;
+        return Mediator;
+    })();
+    exports.Mediator = Mediator;    
+    // Get the actual event methods onto the Mediator
+    _.extend(Mediator.prototype, Events);
+})
+//@ sourceMappingURL=main.js.map
+;
 define('thrust/mediator', ['thrust/mediator/main'], function (main) { return main; });
 
-define('thrust/mediator/convention/autostart',['thrust/convention'],
-function (Convention)
-{
+define('thrust/mediator/convention/autostart',["require", "exports", 'thrust/convention'], function(require, exports, __c__) {
+    /// <reference path="../../interfaces/convention.d.ts" />
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
+    var c = __c__;
+
+    var Convention = c.Convention;
     /**
     @module thrust.mediator
     @submodule thrust.mediator.convention
     **/
-
     /**
     * # __thrust/mediator__ Convention - Auto Start
     *
@@ -5099,243 +5457,193 @@ function (Convention)
     * @for thrust.mediator.convention
     * @property autoStart
     **/
-    return new Convention({
-        properties: ['autoStart']
-    });
-});
-define('thrust/mediator/convention/container',['thrust/convention', 'thrust/util'],
-function (Convention, util)
-{
+    var methods = {
+        properties: [
+            'autoStart'
+        ]
+    };
+    exports.autostart = new Convention(methods);
+})
+//@ sourceMappingURL=autostart.js.map
+;
+define('thrust/mediator/convention/container',["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
+    /// <reference path="../../interfaces/mediator/mediator.facade.d.ts" />
+    /// <reference path="../../interfaces/facade.d.ts" />
+    /// <reference path="../../interfaces/convention.d.ts" />
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
+    var c = __c__;
+
+    var Convention = c.Convention;
+    var util = __util__;
+
+    var _ = util._;
     /**
     @module thrust.mediator
     @submodule thrust.mediator.convention
     **/
-
-    var event     = {
-            anyContainer: 'thrust/mediator/convention/container/any',
-            changeContainer: 'thrust/mediator/convention/container/change'
-        },
-        any       = util.any,
-        bind      = util.bind,
-        CONTAINER = 'container',
-        START     = 'start-status',
-        defer     = util.defer,
-        bind      = util.bind;
-
-    /**
-    * # __thrust/mediator__ Convention - Container
-    *
-    * The `container` convention allows you to define a virtual `container`, for your modules to go in.
-    * Conceptually only one module can be in the box at once, so when one module starts, if the `container`
-    * already has a module in it, that module will be shutdown and replaced by this module.
-    *
-    *
-    * This convention lets you not worry about cleaning up your mess, you can just focus on what modules
-    * need to start, and if you have any common modules, like a main module area, it will swap automatically.
-    *
-    *
-    *     container: 'main',
-    *
-    *
-    * Any other module that also loads with container `main` will then get loaded into the container, and the
-    * currently active module will be stopped.
-    *
-    * @for thrust.mediator.convention
-    * @property container
-    **/
-    return new Convention({
-        properties: [CONTAINER],
-        change: function (module, container)
-        {
-            var containerValue = module.convention(CONTAINER);
-            if (containerValue && container && containerValue === container)
-            {
-                if (module.convention(START))
-                    defer(bind(module.stop, module));
+        var event = {
+anyContainer: 'thrust/mediator/convention/container/any',
+changeContainer: 'thrust/mediator/convention/container/change'    }, any = _.any, bind = _.bind, CONTAINER = 'container', START = 'start-status', defer = _.defer;
+    var methods = {
+        properties: [
+            CONTAINER
+        ],
+        change: function (mod, container) {
+            var containerValue = mod.convention(CONTAINER);
+            if(containerValue && container && containerValue === container) {
+                if(mod.convention(START)) {
+                    defer(bind(mod.stop, mod));
+                }
             }
         },
-        start: function (facade, module)
-        {
-            var that = this,
-                containerValue = module.convention(CONTAINER);
-            if (containerValue)
-            {
+        start: function (facade, mod) {
+            var that = this, containerValue = mod.convention(CONTAINER);
+            if(containerValue) {
                 facade.fire(event.changeContainer, containerValue);
                 // Facade subscriptions get unsubscribed when stopping a module, so we need to resubscribe every time here.
                 // This is probably better, as the events will be less chatty.
-                facade.subscribe(event.changeContainer, bind(that.change, that, module));
+                facade.subscribe(event.changeContainer, bind(that.change, that, mod));
+            }
+            return undefined;
+        },
+        stop: function (facade, mod) {
+            return undefined;
+        }
+    };
+    exports.container = new Convention(methods);
+})
+//@ sourceMappingURL=container.js.map
+;
+define('thrust/mediator/convention/dependent.modules',["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
+    /// <reference path="../../interfaces/mediator/mediator.facade.d.ts" />
+    /// <reference path="../../interfaces/convention.d.ts" />
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
+    var c = __c__;
+
+    var Convention = c.Convention;
+    var util = __util__;
+
+    var _ = util._;
+    /**
+    @module thrust.mediator
+    @submodule thrust.mediator.convention
+    **/
+        var any = _.any, map = _.map, DMODULES = 'dependentModules', CMODULES = 'childModules', START = 'start-status', defer = _.defer, bind = _.bind;
+    var invokedependentModules = function (module, method) {
+        var requiredModules = module.convention(DMODULES);
+        if(requiredModules) {
+            return module.thrust[method](requiredModules);
+        }
+    };
+    var invokeChildModules = function (module, method) {
+        var requiredModules = module.convention(CMODULES);
+        if(requiredModules) {
+            return module.thrust[method](requiredModules);
+        }
+    };
+    var methods = {
+        properties: [
+            DMODULES, 
+            CMODULES
+        ],
+        start: function (facade, mod) {
+            return util.when.all(util.flattenToPromises([
+                invokedependentModules(mod, 'start'), 
+                invokeChildModules(mod, 'start')
+            ]));
+        },
+        ready: function (facade, mod) {
+            if(!mod.thrust.started) {
+                return util.when.all(util.flattenToPromises([
+                    invokedependentModules(mod, 'ready'), 
+                    invokeChildModules(mod, 'ready')
+                ]));
             }
         },
-        stop: function (facade)
-        {
-        }
-    });
-});
-define('thrust/mediator/convention/dependant.modules',['require', 'thrust/convention', 'thrust/util', 'thrust'],
-function (require, Convention, util, thrust)
-{
-    /**
-    @module thrust.mediator
-    @submodule thrust.mediator.convention
-    **/
-
-    var any      = util.any,
-        map      = util.map,
-        DMODULES = 'dependantModules',
-        CMODULES = 'childModules',
-        START    = 'start-status',
-        defer    = util.defer,
-        bind     = util.bind;
-
-    var invokeDependantModules = function (module, method)
-    {
-        var requiredModules = module.convention(DMODULES);
-        if (requiredModules)
-        {
-            return module.thrust[method](requiredModules);
+        stop: function (facade, mod) {
+            return invokeChildModules(mod, 'stop');
+        },
+        destroy: function (facade, mod) {
+            return invokeChildModules(mod, 'destroy');
         }
     };
+    exports.dependentModules = new Convention(methods);
+})
+//@ sourceMappingURL=dependent.modules.js.map
+;
+define('thrust/mediator/convention/subscription',["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
+    /// <reference path="../../interfaces/mediator/mediator.facade.d.ts" />
+    /// <reference path="../../interfaces/convention.d.ts" />
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
+    var c = __c__;
 
-    var invokeChildModules = function (module, method)
-    {
-        var requiredModules = module.convention(CMODULES);
-        if (requiredModules)
-        {
-            return module.thrust[method](requiredModules);
-        }
-    };
+    var Convention = c.Convention;
+    var util = __util__;
 
-    /**
-    * # __thrust/mediator__ Convention - Dependant Modules
-    *
-    * The dependant module convention introduces two properties to a module.
-    *
-    * `dependantModules` {Array}<br />
-    * These are modules that must be started along side your module, but aren't required to be stopped with your module.
-    * As an example you have an alerts module, this gives you alerts at the top of your page.  Your account settings module
-    * may be dependant on alerts, so it can fire events into the module, but alerts is not bound to the life cycle of your settings module.
-    *
-    *
-    * `childModules` {Array}<br />
-    * These are modules that must be started and stopped along side your module.  An example of this would be a context module
-    * that perhaps gives changes state to an object that is clicked in your module.
-    *
-    * @for thrust.mediator.convention
-    * @property modules
-    **/
-    return new Convention({
-        properties: [DMODULES, CMODULES],
-        init: function (facade, module)
-        {
-        },
-        start: function (facade, module)
-        {
-            return util.when.all(util.flattenToPromises([invokeDependantModules(module, 'start'), invokeChildModules(module, 'start')]));
-        },
-        ready: function (facade, module)
-        {
-            if (!module.thrust.started)
-                return util.when.all(util.flattenToPromises([invokeDependantModules(module, 'ready'), invokeChildModules(module, 'ready')]));
-        },
-        stop: function (facade, module)
-        {
-            return invokeChildModules(module, 'stop');
-        },
-        destroy: function (facade, module)
-        {
-            return invokeChildModules(module, 'destroy');
-        }
-    });
-});
-define('thrust/mediator/convention/subscription',[
-    'thrust/convention',
-    'thrust/util',
-    'thrust/events'
-],
-function (Convention, util, Events)
-{
+    var _ = util._;
     /**
     The facade convention, creates the mediator facade for each module.
-
+    
     @module thrust.mediator
     @submodule thrust.mediator.convention
     **/
-    var SUBSCRIPTIONS = 'subscriptions',
-        isFunction    = util.isFunction,
-        isString      = util.isString,
-        isArray       = util.isArray;
-
-    /**
-    * # __thrust/mediator__ Convention - Subscriptions
-    *
-    * The `subscriptions` property defines, predefined subscriptions for a module, and their appropriate definition
-    *
-    * By default the context of the subscription method, when run, will be your module,
-    *     it can be optionally defined by passing in an array.
-    *
-    *
-    * The definition can accept all of the following:
-    *
-    * * `function()` - This function will be run when the event is invoked.
-    * * `string` - This string must point at a function, that exists on the module definition.
-    * * `[function(), context]` - Where the context is the context that the function will be called with.
-    * * `[string, context]` - Where the context is the context that the function will be called with.
-    *
-    *
-    * The following is an exmaple of the events block in your module...
-    *
-    *
-    *     subscription: {
-    *         'event/area/name': myMethodHere,
-    *         'event/area/name2': 'methodDefinedOnTheModule',
-    *         'event/area/name3': [myMethodHere, myMethodContext],
-    *         'event/area/name4': ['methondDefinedOnTheModule', myMethodContext]
-    *     }
-    *
-    * @for thrust.mediator.convention
-    * @property subscriptions
-    **/
-    return new Convention({
-        properties: [SUBSCRIPTIONS],
-        start: function (facade, module)
-        {
-            var subscriptions = module.convention(SUBSCRIPTIONS);
-
-            if (subscriptions && !subscriptions._subscriptionsSet)
-            {
-                var moduleInstance = module.instance;
-                for (var subscription in subscriptions)
-                {
+        var SUBSCRIPTIONS = 'subscriptions', isFunction = _.isFunction, isString = _.isString, isArray = _.isArray;
+    var methods = {
+        properties: [
+            SUBSCRIPTIONS
+        ],
+        start: function (facade, mod) {
+            var subscriptions = mod.convention(SUBSCRIPTIONS);
+            if(subscriptions && !subscriptions._subscriptionsSet) {
+                var moduleInstance = mod.instance;
+                for(var subscription in subscriptions) {
                     var definition = subscriptions[subscription];
-                    if (isFunction(definition))
-                    {
-                        definition = [subscription, definition, moduleInstance];
-                    }
-                    else if (isString(definition))
-                    {
-                        definition = [subscription, moduleInstance[definition], moduleInstance];
-                    }
-                    else if (isArray(definition))
-                    {
-                        if (isString(definition[0]))
-                        {
-                            definition[0] = moduleInstance[definition[0]];
+                    if(isFunction(definition)) {
+                        definition = [
+                            subscription, 
+                            definition, 
+                            moduleInstance
+                        ];
+                    } else {
+                        if(isString(definition)) {
+                            definition = [
+                                subscription, 
+                                moduleInstance[definition], 
+                                moduleInstance
+                            ];
+                        } else {
+                            if(isArray(definition)) {
+                                if(isString(definition[0])) {
+                                    definition[0] = moduleInstance[definition[0]];
+                                }
+                                definition.unshift(subscription);
+                            }
                         }
-                        definition.unshift(subscription);
                     }
                     facade.subscribe.apply(facade, definition);
                 }
-                module.convention(SUBSCRIPTIONS)._subscriptionsSet = true;
+                mod.convention(SUBSCRIPTIONS)._subscriptionsSet = true;
             }
+            return null;
         },
-        stop: function (facade, module)
-        {
-            var subscriptions = module.convention(SUBSCRIPTIONS);
-
-            if (subscriptions && subscriptions._subscriptionsSet)
-            {
-                module.convention(SUBSCRIPTIONS)._subscriptionsSet = false;
+        stop: function (facade, mod) {
+            var subscriptions = mod.convention(SUBSCRIPTIONS);
+            if(subscriptions && subscriptions._subscriptionsSet) {
+                mod.convention(SUBSCRIPTIONS)._subscriptionsSet = false;
             }
+            return null;
         }
-    });
-});
+    };
+    exports.subscription = new Convention(methods);
+})
+//@ sourceMappingURL=subscription.js.map
+;

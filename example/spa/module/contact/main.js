@@ -5,7 +5,7 @@ function (util)
         wapply = util.when.apply;
 
     return {
-        dependantModules: ['module/alert'],
+        dependentModules: ['module/alert'],
         container: 'main',
         context: '#main-content',
         templates: ['module/contact/content'],

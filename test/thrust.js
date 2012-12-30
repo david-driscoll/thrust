@@ -1,4 +1,4 @@
-﻿/// <reference path="../lib/jasmine/jasmine.js" />
+﻿/// <reference path="../lib/jasmine/lib/jasmine-1.3.1/jasmine.js" />
 /// <reference path="../lib/requirejs/require.js" />
 /// <reference path="./require.test.settings.js" />
 
@@ -7,8 +7,11 @@
     /*global jasmine:true, describe:true, it:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
     'use strict';
     require(['thrust', 'thrust/mediator', 'thrust/util', 'thrust/convention'],
-    function (Thrust, ThrustMediator, util, Convention)
+    function (thrust, thrustMediator, util, convention)
     {
+        var Thrust = thrust.Thrust,
+            ThrustMediator = thrustMediator.Mediator,
+            Convention = convention.Convention;
         describe('Thrust', function ()
         {
             describe('constructor', function ()

@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>thrust.config - Thrust JS Framework</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <title>thrust.config - thrust-js</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,7 +15,7 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="Thrust JS Framework"></h1>
+                <h1><img src="..&#x2F;assets/css/logo.png" title="thrust-js"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
@@ -48,8 +48,6 @@
                 <li><a href="..&#x2F;classes/thrust.data.html">thrust.data</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.data.config.html">thrust.data.config</a></li>
-            
-                <li><a href="..&#x2F;classes/thrust.data.convention.html">thrust.data.convention</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.data.Data.html">thrust.data.Data</a></li>
             
@@ -93,8 +91,6 @@
             
                 <li><a href="..&#x2F;classes/thrust.template.config.html">thrust.template.config</a></li>
             
-                <li><a href="..&#x2F;classes/thrust.template.convention.html">thrust.template.convention</a></li>
-            
                 <li><a href="..&#x2F;classes/thrust.template.Template.html">thrust.template.Template</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.template.TemplateFacade.html">thrust.template.TemplateFacade</a></li>
@@ -102,16 +98,6 @@
                 <li><a href="..&#x2F;classes/thrust.Thrust.html">thrust.Thrust</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.util.html">thrust.util</a></li>
-            
-                <li><a href="..&#x2F;classes/thrust.util.array.html">thrust.util.array</a></li>
-            
-                <li><a href="..&#x2F;classes/thrust.util.collection.html">thrust.util.collection</a></li>
-            
-                <li><a href="..&#x2F;classes/thrust.util.func.html">thrust.util.func</a></li>
-            
-                <li><a href="..&#x2F;classes/thrust.util.obj.html">thrust.util.obj</a></li>
-            
-                <li><a href="..&#x2F;classes/thrust.util.type.html">thrust.util.type</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.util.url.html">thrust.util.url</a></li>
             
@@ -129,11 +115,7 @@
             
                 <li><a href="..&#x2F;modules/thrust.data.config.html">thrust.data.config</a></li>
             
-                <li><a href="..&#x2F;modules/thrust.data.convention.html">thrust.data.convention</a></li>
-            
                 <li><a href="..&#x2F;modules/thrust.dom.html">thrust.dom</a></li>
-            
-                <li><a href="..&#x2F;modules/thrust.dom.config.html">thrust.dom.config</a></li>
             
                 <li><a href="..&#x2F;modules/thrust.dom.convention.html">thrust.dom.convention</a></li>
             
@@ -153,17 +135,9 @@
             
                 <li><a href="..&#x2F;modules/thrust.template.config.html">thrust.template.config</a></li>
             
-                <li><a href="..&#x2F;modules/thrust.template.convention.html">thrust.template.convention</a></li>
-            
                 <li><a href="..&#x2F;modules/thrust.util.html">thrust.util</a></li>
             
-                <li><a href="..&#x2F;modules/thrust.util.array.html">thrust.util.array</a></li>
-            
-                <li><a href="..&#x2F;modules/thrust.util.collection.html">thrust.util.collection</a></li>
-            
                 <li><a href="..&#x2F;modules/thrust.util.func.html">thrust.util.func</a></li>
-            
-                <li><a href="..&#x2F;modules/thrust.util.obj.html">thrust.util.obj</a></li>
             
                 <li><a href="..&#x2F;modules/thrust.util.type.html">thrust.util.type</a></li>
             
@@ -290,6 +264,13 @@
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_autoStart">autoStart</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_childInstance">childInstance</a>
 
                                 
@@ -298,20 +279,6 @@
                         
                             <li class="index-item property">
                                 <a href="#property_exposeGlobals">exposeGlobals</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_log.enabled">log.enabled</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_log.level">log.level</a>
 
                                 
                                 
@@ -333,20 +300,6 @@
                         
                             <li class="index-item property">
                                 <a href="#property_throwErrors">throwErrors</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_url.path">url.path</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_url.traditionalEncoding">url.traditionalEncoding</a>
 
                                 
                                 
@@ -428,7 +381,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;src_config.js.html#l133"><code>src\config.js:133</code></a>
+        <a href="..&#x2F;files&#x2F;thrust_config.js.html#l140"><code>thrust\config.js:140</code></a>
         
         </p>
 
@@ -554,7 +507,7 @@ thrust/config!global = thrust!global:config = Thrust instance config from the in
             
         
         
-        <a href="..&#x2F;files&#x2F;src_config.js.html#l25"><code>src\config.js:25</code></a>
+        <a href="..&#x2F;files&#x2F;thrust_config.js.html#l26"><code>thrust\config.js:26</code></a>
         
         </p>
 
@@ -600,7 +553,7 @@ thrust/config!global = thrust!global:config = Thrust instance config from the in
             
         
         
-        <a href="..&#x2F;files&#x2F;src_config.js.html#l123"><code>src\config.js:123</code></a>
+        <a href="..&#x2F;files&#x2F;thrust_config.js.html#l124"><code>thrust\config.js:124</code></a>
         
         </p>
 
@@ -611,6 +564,50 @@ thrust/config!global = thrust!global:config = Thrust instance config from the in
 
     <div class="description">
         <p>Used internally by thrust to determine if thrust should control the life-cycle, or the consumer</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_autoStart" class="property item">
+    <h3 class="name"><code>autoStart</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;thrust_config.js.html#l132"><code>thrust\config.js:132</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Used internally by thrust to determin if the thrust instance should automatically start upon creation.</p>
     </div>
 
     
@@ -644,7 +641,7 @@ thrust/config!global = thrust!global:config = Thrust instance config from the in
             
         
         
-        <a href="..&#x2F;files&#x2F;src_config.js.html#l115"><code>src\config.js:115</code></a>
+        <a href="..&#x2F;files&#x2F;thrust_config.js.html#l116"><code>thrust\config.js:116</code></a>
         
         </p>
 
@@ -688,7 +685,7 @@ thrust/config!global = thrust!global:config = Thrust instance config from the in
             
         
         
-        <a href="..&#x2F;files&#x2F;src_config.js.html#l34"><code>src\config.js:34</code></a>
+        <a href="..&#x2F;files&#x2F;thrust_config.js.html#l35"><code>thrust\config.js:35</code></a>
         
         </p>
 
@@ -704,104 +701,6 @@ get at your thrust instance during debugging.</p>
 
     
         <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_log.enabled" class="property item">
-    <h3 class="name"><code>log.enabled</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;src_config.js.html#l81"><code>src\config.js:81</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>This toggles enabling on or off.</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_log.level" class="property item">
-    <h3 class="name"><code>log.level</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;src_config.js.html#l67"><code>src\config.js:67</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>This lends to the log level of thrust.</p>
-
-<pre class="code"><code class="prettyprint">ERROR: 1
-WARN: 2
-INFO: 3
-DEBUG: 4
-</code></pre>
-    </div>
-
-    
-        <p><strong>Default:</strong> 1</p>
     
 
     
@@ -833,7 +732,7 @@ DEBUG: 4
             
         
         
-        <a href="..&#x2F;files&#x2F;src_config.js.html#l99"><code>src\config.js:99</code></a>
+        <a href="..&#x2F;files&#x2F;thrust_config.js.html#l100"><code>thrust\config.js:100</code></a>
         
         </p>
 
@@ -885,7 +784,7 @@ DEBUG: 4
             
         
         
-        <a href="..&#x2F;files&#x2F;src_config.js.html#l91"><code>src\config.js:91</code></a>
+        <a href="..&#x2F;files&#x2F;thrust_config.js.html#l92"><code>thrust\config.js:92</code></a>
         
         </p>
 
@@ -929,7 +828,7 @@ DEBUG: 4
             
         
         
-        <a href="..&#x2F;files&#x2F;src_config.js.html#l13"><code>src\config.js:13</code></a>
+        <a href="..&#x2F;files&#x2F;thrust_config.js.html#l14"><code>thrust\config.js:14</code></a>
         
         </p>
 
@@ -942,100 +841,6 @@ DEBUG: 4
         <p>This property, tells the framework if it should throw errors or not.
 In production it's recommended not to throw errors, that way if a component fails
 there is a chance the application can still recover.</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_url.path" class="property item">
-    <h3 class="name"><code>url.path</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;src_config.js.html#l45"><code>src\config.js:45</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>This property, gives the framework it's default path, if different than '/'</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;&#x2F;&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_url.traditionalEncoding" class="property item">
-    <h3 class="name"><code>url.traditionalEncoding</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;src_config.js.html#l54"><code>src\config.js:54</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>This property, tells the framework how it should encode array form data.
-In general, for ASP.NET based applications, traditional should be true.
-For Ruby/Python based applications, this should be false.</p>
     </div>
 
     

@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>thrust.util.when - Thrust JS Framework</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <title>thrust.util.when - thrust-js</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,7 +15,7 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="Thrust JS Framework"></h1>
+                <h1><img src="..&#x2F;assets/css/logo.png" title="thrust-js"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
@@ -48,8 +48,6 @@
                 <li><a href="..&#x2F;classes/thrust.data.html">thrust.data</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.data.config.html">thrust.data.config</a></li>
-            
-                <li><a href="..&#x2F;classes/thrust.data.convention.html">thrust.data.convention</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.data.Data.html">thrust.data.Data</a></li>
             
@@ -93,8 +91,6 @@
             
                 <li><a href="..&#x2F;classes/thrust.template.config.html">thrust.template.config</a></li>
             
-                <li><a href="..&#x2F;classes/thrust.template.convention.html">thrust.template.convention</a></li>
-            
                 <li><a href="..&#x2F;classes/thrust.template.Template.html">thrust.template.Template</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.template.TemplateFacade.html">thrust.template.TemplateFacade</a></li>
@@ -102,16 +98,6 @@
                 <li><a href="..&#x2F;classes/thrust.Thrust.html">thrust.Thrust</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.util.html">thrust.util</a></li>
-            
-                <li><a href="..&#x2F;classes/thrust.util.array.html">thrust.util.array</a></li>
-            
-                <li><a href="..&#x2F;classes/thrust.util.collection.html">thrust.util.collection</a></li>
-            
-                <li><a href="..&#x2F;classes/thrust.util.func.html">thrust.util.func</a></li>
-            
-                <li><a href="..&#x2F;classes/thrust.util.obj.html">thrust.util.obj</a></li>
-            
-                <li><a href="..&#x2F;classes/thrust.util.type.html">thrust.util.type</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.util.url.html">thrust.util.url</a></li>
             
@@ -129,11 +115,7 @@
             
                 <li><a href="..&#x2F;modules/thrust.data.config.html">thrust.data.config</a></li>
             
-                <li><a href="..&#x2F;modules/thrust.data.convention.html">thrust.data.convention</a></li>
-            
                 <li><a href="..&#x2F;modules/thrust.dom.html">thrust.dom</a></li>
-            
-                <li><a href="..&#x2F;modules/thrust.dom.config.html">thrust.dom.config</a></li>
             
                 <li><a href="..&#x2F;modules/thrust.dom.convention.html">thrust.dom.convention</a></li>
             
@@ -153,17 +135,9 @@
             
                 <li><a href="..&#x2F;modules/thrust.template.config.html">thrust.template.config</a></li>
             
-                <li><a href="..&#x2F;modules/thrust.template.convention.html">thrust.template.convention</a></li>
-            
                 <li><a href="..&#x2F;modules/thrust.util.html">thrust.util</a></li>
             
-                <li><a href="..&#x2F;modules/thrust.util.array.html">thrust.util.array</a></li>
-            
-                <li><a href="..&#x2F;modules/thrust.util.collection.html">thrust.util.collection</a></li>
-            
                 <li><a href="..&#x2F;modules/thrust.util.func.html">thrust.util.func</a></li>
-            
-                <li><a href="..&#x2F;modules/thrust.util.obj.html">thrust.util.obj</a></li>
             
                 <li><a href="..&#x2F;modules/thrust.util.type.html">thrust.util.type</a></li>
             
@@ -255,20 +229,6 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_flattenToPromises">flattenToPromises</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_when">when</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
                                 <a href="#method_when.apply">when.apply</a>
 
                                 
@@ -276,7 +236,35 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_when.cancelable">when.cancelable</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_when.delay">when.delay</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_when.parallel">when.parallel</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_when.pipeline">when.pipeline</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_when.sequence">when.sequence</a>
 
                                 
                                 
@@ -303,163 +291,6 @@
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method_flattenToPromises" class="method item">
-    <h3 class="name"><code>flattenToPromises</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>Array</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Array of Promises</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;src_util_when.js.html#l57"><code>src\util\when.js:57</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Flatten and filter arrays down to just the existing promises.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">Array</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>to flatten, and filter.</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Array of Promises</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_when" class="method item">
-    <h3 class="name"><code>when</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;src_util_when.js.html#l51"><code>src\util\when.js:51</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Access to whenjs, the main library for promises.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
 
                 
                     <div id="method_when.apply" class="method item">
@@ -494,7 +325,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;src_util_when.js.html#l14"><code>src\util\when.js:14</code></a>
+        <a href="..&#x2F;files&#x2F;thrust_util_when.js.html#l29"><code>thrust\util\when.js:29</code></a>
         
         </p>
 
@@ -507,6 +338,61 @@
     <div class="description">
         <p>when.apply, used to apply when results over a function, similar to jQuerys Deferred.
 See for more information: <a href="https://github.com/cujojs/when/wiki/when-apply">https://github.com/cujojs/when/wiki/when-apply</a></p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_when.cancelable" class="method item">
+    <h3 class="name"><code>when.cancelable</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;thrust_util_when.js.html#l72"><code>thrust\util\when.js:72</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>when.cancelable
+See for more information: <a href="https://github.com/cujojs/when/wiki/when-cancelable">https://github.com/cujojs/when/wiki/when-cancelable</a></p>
     </div>
 
     
@@ -549,7 +435,7 @@ See for more information: <a href="https://github.com/cujojs/when/wiki/when-appl
             
         
         
-        <a href="..&#x2F;files&#x2F;src_util_when.js.html#l22"><code>src\util\when.js:22</code></a>
+        <a href="..&#x2F;files&#x2F;thrust_util_when.js.html#l37"><code>thrust\util\when.js:37</code></a>
         
         </p>
 
@@ -562,6 +448,171 @@ See for more information: <a href="https://github.com/cujojs/when/wiki/when-appl
     <div class="description">
         <p>when.delay, creates a promise that resolves in x ms, using setTimeout.
 See for more information: <a href="https://github.com/cujojs/when/wiki/when-delay">https://github.com/cujojs/when/wiki/when-delay</a></p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_when.parallel" class="method item">
+    <h3 class="name"><code>when.parallel</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;thrust_util_when.js.html#l51"><code>thrust\util\when.js:51</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>when.parallel
+See for more information: <a href="https://github.com/cujojs/when/wiki/when-parallel">https://github.com/cujojs/when/wiki/when-parallel</a></p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_when.pipeline" class="method item">
+    <h3 class="name"><code>when.pipeline</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;thrust_util_when.js.html#l58"><code>thrust\util\when.js:58</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>when.pipeline
+See for more information: <a href="https://github.com/cujojs/when/wiki/when-pipeline">https://github.com/cujojs/when/wiki/when-pipeline</a></p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_when.sequence" class="method item">
+    <h3 class="name"><code>when.sequence</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;thrust_util_when.js.html#l65"><code>thrust\util\when.js:65</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>when.sequence
+See for more information: <a href="https://github.com/cujojs/when/wiki/when-sequence">https://github.com/cujojs/when/wiki/when-sequence</a></p>
     </div>
 
     
@@ -604,7 +655,7 @@ See for more information: <a href="https://github.com/cujojs/when/wiki/when-dela
             
         
         
-        <a href="..&#x2F;files&#x2F;src_util_when.js.html#l29"><code>src\util\when.js:29</code></a>
+        <a href="..&#x2F;files&#x2F;thrust_util_when.js.html#l44"><code>thrust\util\when.js:44</code></a>
         
         </p>
 

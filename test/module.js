@@ -1,4 +1,4 @@
-﻿/// <reference path="../lib/jasmine/jasmine.js" />
+﻿/// <reference path="../lib/jasmine/lib/jasmine-1.3.1/jasmine.js" />
 /// <reference path="../lib/requirejs/require.js" />
 /// <reference path="./require.test.settings.js" />
 
@@ -6,9 +6,14 @@
 {
     /*global jasmine:true, describe:true, it:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
     'use strict';
-    require(['thrust/module', 'thrust', 'thrust/convention', 'thrust/util'],
-    function (Module, Thrust, Convention, util)
+    require(['thrust/capsule', 'thrust', 'thrust/convention', 'thrust/util'],
+    function (module, thrust, convention, util)
     {
+        var Module = module.Module,
+            Thrust = thrust.Thrust,
+            Convention = convention.Convention,
+            _ = util._;
+
         describe('Module', function ()
         {
             var t, c1, c2, s1, s2;
@@ -47,7 +52,7 @@
                     prop1: 'myValue',
                     prop2: 3
                 };
-                var e = util.extend({}, d);
+                var e = _.extend({}, d);
                 var m = new Module(t, d);
 
                 expect(d.prop1).not.toBeDefined();

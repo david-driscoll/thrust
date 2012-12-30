@@ -1,4 +1,4 @@
-﻿/// <reference path="../lib/jasmine/jasmine.js" />
+﻿/// <reference path="../lib/jasmine/lib/jasmine-1.3.1/jasmine.js" />
 /// <reference path="../lib/requirejs/require.js" />
 /// <reference path="./require.test.settings.js" />
 
@@ -7,8 +7,9 @@
     /*global jasmine:true, describe:true, it:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
     'use strict';
     require(['thrust/facade', 'thrust/convention', 'thrust/util'],
-    function (Facade, Convention, util)
+    function (Facade, convention, util)
     {
+        var Convention = convention.Convention;
         describe('Facade', function ()
         {
             var f, c1, c2;

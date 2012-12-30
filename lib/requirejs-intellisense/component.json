@@ -1,0 +1,9 @@
+{
+  "name": "requirejs-intellisense",
+  "version": "0.0.0",
+  "commit": "d4cff208a9a8df0461aeb134c99647622ac37732",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jrburke/requirejs-intellisense.git"
+  }
+}

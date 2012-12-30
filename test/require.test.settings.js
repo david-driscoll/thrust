@@ -12,9 +12,9 @@
             'aop': '../lib/aop/aop',
             //#endregion
             //#region References for RequireJs
-            'text': '../lib/text/text',
-            'i18n': '../lib/i18n/i18n',
-            'domReady': '../lib/domReady/domReady',
+            'text': '../lib/requirejs-text/text',
+            'i18n': '../lib/requirejs-i18n/i18n',
+            'domReady': '../lib/requirejs-domready/domReady',
             'doT': '../lib/doT/doT',
             'jquery': '../lib/jquery/jquery-1.8.1',
             'has': '../lib/has/has',
@@ -23,13 +23,13 @@
             //#endregion
         },
         packages: [
-            { name: 'thrust', location: '../src' },
-            { name: 'thrust/util', location: '../src/util' },
-            { name: 'thrust/mediator', location: '../src/mediator' },
-            { name: 'thrust/data', location: '../src/data' },
-            { name: 'thrust/dom', location: '../src/dom' },
-            { name: 'thrust/template', location: '../src/template' },
-            { name: 'thrust/spa', location: '../src/spa' },
+            { name: 'thrust', location: '../thrust' },
+            { name: 'thrust/util', location: '../thrust/util' },
+            { name: 'thrust/mediator', location: '../thrust/mediator' },
+            { name: 'thrust/data', location: '../thrust/data' },
+            { name: 'thrust/dom', location: '../thrust/dom' },
+            { name: 'thrust/template', location: '../thrust/template' },
+            { name: 'thrust/spa', location: '../thrust/spa' },
             { name: 'when', main: 'when', location: '../lib/when' }
         ],
         shim: {

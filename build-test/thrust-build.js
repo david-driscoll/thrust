@@ -1,4 +1,4 @@
-﻿/// <reference path="../lib/jasmine/jasmine.js" />
+﻿/// <reference path="../lib/jasmine/lib/jasmine-1.3.1/jasmine.js" />
 /// <reference path="../lib/requirejs/require.js" />
 /// <reference path="./require.test.settings.js" />
 

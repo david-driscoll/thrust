@@ -1,13 +1,10 @@
-/*! Thrust JS Framework - v0.1.0 - 2012-10-27
-* thrust-home
-* Copyright (c) 2012 David Driscoll; Licensed MIT */
 
 
 
 
 //
-// Generated on Sat Sep 01 2012 21:49:06 GMT+0530 (IST) by Nodejitsu, Inc (Using Codesurgeon).
-// Version 1.1.6
+// Generated on Sun Dec 16 2012 22:47:05 GMT-0500 (EST) by Nodejitsu, Inc (Using Codesurgeon).
+// Version 1.1.9
 //
 
 (function (exports) {
@@ -189,6 +186,7 @@ var Router = exports.Router = function (routes) {
   this.params   = {};
   this.routes   = {};
   this.methods  = ['on', 'once', 'after', 'before'];
+  this.scope    = [];
   this._methods = {};
 
   this._insert = this.insert;
@@ -235,7 +233,7 @@ Router.prototype.init = function (r) {
 
 Router.prototype.explode = function () {
   var v = this.history === true ? this.getPath() : dloc.hash;
-  if (v[1] === '/') { v=v.slice(1) }
+  if (v.charAt(1) === '/') { v=v.slice(1) }
   return v.slice(1, v.length).split("/");
 };
 
@@ -360,9 +358,13 @@ function paramifyString(str, params, mod) {
 }
 
 function regifyString(str, params) {
-  if (~str.indexOf("*")) {
-    str = str.replace(/\*/g, "([_.()!\\ %@&a-zA-Z0-9-]+)");
+  var matches, last = 0, out = "";
+  while (matches = str.substr(last).match(/[^\w\d\- %@&]*\*[^\w\d\- %@&]*/)) {
+    last = matches.index + matches[0].length;
+    matches[0] = matches[0].replace(/^\*/, "([_.()!\\ %@&a-zA-Z0-9-]+)");
+    out += str.substr(0, matches.index) + matches[0];
   }
+  str = out += str.substr(last);
   var captures = str.match(/:([^\/]+)/ig), length;
   if (captures) {
     length = captures.length;
@@ -371,6 +373,26 @@ function regifyString(str, params) {
     }
   }
   return str;
+}
+
+function terminator(routes, delimiter, start, stop) {
+  var last = 0, left = 0, right = 0, start = (start || "(").toString(), stop = (stop || ")").toString(), i;
+  for (i = 0; i < routes.length; i++) {
+    var chunk = routes[i];
+    if (chunk.indexOf(start, last) > chunk.indexOf(stop, last) || ~chunk.indexOf(start, last) && !~chunk.indexOf(stop, last) || !~chunk.indexOf(start, last) && ~chunk.indexOf(stop, last)) {
+      left = chunk.indexOf(start, last);
+      right = chunk.indexOf(stop, last);
+      if (~left && !~right || !~left && ~right) {
+        var tmp = routes.slice(0, (i || 1) + 1).join(delimiter);
+        routes = [ tmp ].concat(routes.slice((i || 1) + 1));
+      }
+      last = (right > left ? right : left) + 1;
+      i = 0;
+    } else {
+      last = 0;
+    }
+  }
+  return routes;
 }
 
 Router.prototype.configure = function(options) {
@@ -424,7 +446,9 @@ Router.prototype.on = Router.prototype.route = function(method, path, route) {
       self.on(m.toLowerCase(), path, route);
     });
   }
-  this.insert(method, this.scope.concat(path.split(new RegExp(this.delimiter))), route);
+  path = path.split(new RegExp(this.delimiter));
+  path = terminator(path, this.delimiter);
+  this.insert(method, this.scope.concat(path), route);
 };
 
 Router.prototype.dispatch = function(method, path, callback) {
@@ -674,6 +698,7 @@ Router.prototype.mount = function(routes, path) {
     }
     if (isRoute) {
       local = local.concat(rename.split(self.delimiter));
+      local = terminator(local, self.delimiter);
     }
     self.insert(event, local, routes[route]);
   }
@@ -693,123 +718,128 @@ define("flatiron/director", (function (global) {
     }
 }(this)));
 
-define('thrust/spa/config',['require'],function (thrustInstance)
-{
+define('thrust/spa/config',["require", "exports"], function(require, exports) {
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
     /**
     Provides thrust configuration
     
     @module thrust.spa
     @submodule thrust.spa.config
     **/
+    /**
+    Resolves the given properties when creating an instance of the plugin.
     
-
-    var config = {
-        /**
-        Resolves the given properties when creating an instance of the plugin.
-
-        This is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed
-        to the plugin constructor method.
-
-        @for thrust.spa.config
-        @private
-        @property resolve
-        @readOnly
-        @type {Array}
-        **/
-        resolve: ['cfg', 'name', 'mediator'],
-        /**
-        The set of conventions to load into thrust/mediator.
-
-        @property conventions
-        @readOnly
-        @type {Array}
-        **/
-        conventions: [
-            'thrust/spa/convention/start',
-            'thrust/spa/convention/spalink'
-        ],
-        /**
-        Defines the value of custom parameters.
-        You can also define custom parameters to be a regular expression, and then use them in your routes
-
-        @property params
-        @readOnly
-        @type {Object}
-        **/
-        params: {},
-        /**
-        The predfined routes to be used by spa.
-
-        @property routes
-        @readOnly
-        @type {Object}
-        **/
-        routes: {},
-        /**
-        The file exstenion that should be removed when resolving routes and starting modules.
-
-        @property fileExtension
-        @readOnly
-        @type {String}
-        **/
-        fileExtension: '.html'
+    This is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed
+    to the plugin constructor method.
+    
+    @for thrust.spa.config
+    @private
+    @property resolve
+    @readOnly
+    @type {Array}
+    **/
+    exports.resolve = [
+        'cfg', 
+        'name', 
+        'mediator'
+    ];
+    /**
+    The set of conventions to load into thrust/mediator.
+    
+    @property conventions
+    @readOnly
+    @type {Array}
+    **/
+    exports.conventions = [
+        'thrust/spa/convention/start', 
+        'thrust/spa/convention/spalink'
+    ];
+    /**
+    Defines the value of custom parameters.
+    You can also define custom parameters to be a regular expression, and then use them in your routes
+    
+    @property params
+    @readOnly
+    @type {Object}
+    **/
+    exports.params = {
     };
+    /**
+    The predfined routes to be used by spa.
+    
+    @property routes
+    @readOnly
+    @type {Object}
+    **/
+    exports.routes = {
+    };
+    /**
+    The file exstenion that should be removed when resolving routes and starting modules.
+    
+    @property fileExtension
+    @readOnly
+    @type {String}
+    **/
+    exports.fileExtension = '.html';
+})
+//@ sourceMappingURL=config.js.map
+;
+define('thrust/spa/main',["require", "exports", 'thrust/util', 'thrust', 'thrust/log', 'has', 'flatiron/director', 'thrust/instance', './config'], function(require, exports, __util__, __thrust__, __log__, __has__, __flatironRouter__, __instance__, __config__) {
+    /// <reference path="../interfaces/spa/spa.d.ts" />
+    /// <reference path="../interfaces/spa/spa.facade.d.ts" />
+    /// <reference path="../interfaces/spa/spa.config.d.ts" />
+    /// <reference path="../interfaces/mediator/mediator.d.ts" />
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
+    var util = __util__;
 
-    return config;
-});
-define('thrust/spa/main',[
-    'require',
-    'thrust',
-    'thrust/util',
-    'thrust/log',
-    'has',
-    'flatiron/director',
-    'domReady',
-    'thrust/instance',
-    './config'
-],
-function (require, Thrust, util, log, has, Router, domReady, instance, config)
-{
-    var each       = util.each,
-        isString   = util.isString,
-        isArray    = util.isArray,
-        isFunction = util.isFunction,
-        isObject   = util.isObject,
-        isRegExp   = util.isRegExp,
-        extend     = util.extend,
-        once       = util.once,
-        when       = util.when,
-        bind       = util.bind,
-        invoke     = util.invoke,
-        pluck      = util.pluck,
-        map        = util.map,
-        defer      = util.defer,
-        reduce     = util.reduce,
-        memoize    = util.memoize,
-        toArray    = util.toArray,
-        format     = util.format,
-        START      = 'start';
+    var _ = util._;
+    var thrust = __thrust__;
 
+    var Thrust = thrust.Thrust;
+    var log = __log__;
 
-    var extractParams = function (route)
-    {
-        var params = [],
-            index = route.indexOf(':'),
-            slashIndex;
-        while (index > -1)
-        {
+    var has = __has__;
+
+    var flatironRouter = __flatironRouter__;
+
+    var Router = flatironRouter.Router || flatironRouter;
+    
+    var instance = __instance__;
+
+    var config = __config__;
+
+    exports.className = 'SinglePageApplication';
+    config;
+    var each = _.each, isString = _.isString, isArray = _.isArray, isFunction = _.isFunction, isObject = _.isObject, isRegExp = _.isRegExp, extend = _.extend, once = _.once, when = util.when, bind = _.bind, invoke = _.invoke, pluck = _.pluck, map = _.map, defer = _.defer, reduce = _.reduce, memoize = _.memoize, toArray = _.toArray, format = util.format, START = 'start';
+    var extractParams = function (route) {
+        var params = [], index = route.indexOf(':'), slashIndex;
+        while(index > -1) {
             slashIndex = route.indexOf('/', index);
-            if (slashIndex === -1)
+            if(slashIndex === -1) {
                 slashIndex = route.length;
+            }
             params.push(route.substring(index, slashIndex - index + 1));
             route = route.substring(slashIndex);
             index = route.indexOf(':');
         }
-
         return params;
     };
+    var eventFactory = function (event, mediator) {
+        return function () {
+            has('DEBUG') && log.debug(format('Firing spa "{0}" with [{1}]', event, toArray(arguments).join(',')));
+            mediator.fire.async.apply(mediator, [
+                event
+            ].concat(toArray(arguments)));
+        }
+    };
     /**
-
+    
     @for thrust.spa
     @class thrust.spa.SinglePageApp
     @constructor
@@ -817,29 +847,23 @@ function (require, Thrust, util, log, has, Router, domReady, instance, config)
     @param {String} instanceName The thrust instance name
     @param {thrust.mediatorMediator} mediator The thrust instance mediator
     **/
-    var SinglePageApp = function (config, instanceName, mediator)
-    {
-        var that = this;
-        that.baseUrl = config.url.path;
-
-        config = config.spa;
-
-        that.fileExtension = config.fileExtension;
-
-        var routes = that.configureRoutes(config.routes),
-            params = config.params;
-
-        var eventFactory = memoize(function (event)
-        {
-            return function ()
-            {
-                has('DEBUG') && log.debug(format('Firing spa "{0}" with [{1}]', event, toArray(arguments).join(',')));
-                mediator.fire.async.apply(mediator, [event].concat(toArray(arguments)));
-            };
-        });
-
-        var router = that.router = new Router(routes)
-            .configure({
+    var SinglePageApplication = (function () {
+        function SinglePageApplication(config, instanceName, mediator) {
+            this.startingModulePromise = null;
+            var that = this;
+            that.baseUrl = config.url.path;
+            var spaConfig = config.spa;
+            that.fileExtension = spaConfig.fileExtension;
+            var routes = that.configureRoutes(spaConfig.routes), params = spaConfig.params;
+            var eventFactory = memoize(function (event) {
+                return function () {
+                    has('DEBUG') && log.debug(format('Firing spa "{0}" with [{1}]', event, toArray(arguments).join(',')));
+                    mediator.fire.async.apply(mediator, [
+                        event
+                    ].concat(toArray(arguments)));
+                }
+            });
+            var router = that.router = new Router(routes).configure({
                 recurse: false,
                 strict: false,
                 async: false,
@@ -847,171 +871,174 @@ function (require, Thrust, util, log, has, Router, domReady, instance, config)
                 notfound: eventFactory('thrust/spa/route/notfound'),
                 before: eventFactory('thrust/spa/route/before'),
                 on: eventFactory('thrust/spa/route/run'),
-                after: eventFactory('thrust/spa/route/after'),
+                after: eventFactory('thrust/spa/route/after')
             });
-
-        each(params, function (x, i)
-        {
-            router.param(i, x);
-        });
-
-        /**
-        Start the single page app router.
-
-        @method start
-        **/
-        that.start = function ()
-        {
-            that.thrust = instance.getInstance(instanceName);
-            that.router.init();
-            mediator.fire.async('thrust/spa/start');
-        };
-
-        that.navigate = that.navigate.bind(that);
-    };
-
-    SinglePageApp.prototype = {
-        /**
-        Hands the navigate method off to the module, so any module can trigger a navigation event.
-
-        @for thrust.spa.SinglePageApp
-        @method createFacade
-        @param {thrust.Thrust} thrust The thrust instance
-        @param {thrust.Module} module The module to create the facade for
-        @param {Object} facades The facades already added for this module.
-        **/
-        createFacade: function (thrust, module, facades)
-        {
-            var that = this;
-            if (module.navigate) throw new Error('"navigate" is a reserved property');
-
-            // Already pre bound, so we only pass around 1 function per instance.
-            module.navigate = that.navigate;
-        },
+            _.each(params, function (x, i) {
+                router.param(i, x);
+            });
+            /**
+            Start the single page app router.
+            
+            @method start
+            **/
+            that.start = function () {
+                that.thrust = instance.getInstance(instanceName);
+                that.router.init();
+                mediator.fire.async('thrust/spa/start');
+            };
+            that.navigate = that.navigate.bind(that);
+        }
         /**
         Navigates to the given url.
-
+        
         @method navigate
         @param {String} location The location to navigate to.
         **/
-        navigate: function(location)
-        {
+                SinglePageApplication.prototype.navigate = function (location) {
             var that = this;
             var url = util.fixupUrl(location, that.baseUrl);
             that.router.setRoute(url);
-        },
-        /**
+        }/**
+        Start the single page app router.
+        
+        @method start
+        **/
+        ;
+        SinglePageApplication.prototype.start = function () {
+            this.thrust = instance.getInstance(this.instanceName);
+            this.router.init();
+            this.thrust.mediator.fire.async('thrust/spa/start');
+        }/**
         Configures the route object for the spa instance
-
+        
         Routes can be in 4 forms
-
-            {
-                '/path/to/:foo': 'path/to/module',
-                '/path/to/:bar': ['path/to/module1', 'path/to/module2'],
-                '/path/to/:fb': { path: 'path/to/module', args: ['args', 'to', 'hand off to start'] }
-                '/path/to/:foo/:bar': function(foo, bar){  custom handler }
-            }
-
+        
+        {
+        '/path/to/:foo': 'path/to/module',
+        '/path/to/:bar': ['path/to/module1', 'path/to/module2'],
+        '/path/to/:fb': { path: 'path/to/module', args: ['args', 'to', 'hand off to start'] }
+        '/path/to/:foo/:bar': function(foo, bar){  custom handler }
+        }
+        
         @method configureRoutes
         @param {Object} routes Object of routes.
         **/
-        configureRoutes: function (routes)
-        {
-            var that = this, configuredRoutes = {};
-            each(routes, function (value, route)
-            {
-                var realRoute = util.fixupUrl(route, that.baseUrl);
-                if (isFunction(value))
-                {
-                    configuredRoutes[realRoute] = value;
-                }
-                else if (isArray(value))
-                {
-                    var modules = [], methods = [];
-                    for (var i = 0, iLen = value.length; i < iLen; i++)
-                    {
-                        var v = value[v];
-                        if (isString(v) || isObject(v))
-                            modules.push(v);
-                        else if (isFunction(v))
-                            methods.push(v);
+        ;
+        SinglePageApplication.prototype.configureRoutes = function (routes) {
+            var that = this, configuredRoutes = {
+            };
+            // each(routes, function (value, route) {
+            for(var route in routes) {
+                if(_.has(routes, route)) {
+                    var value = routes[route];
+                    var realRoute = util.fixupUrl(route, that.baseUrl);
+                    if(isFunction(value)) {
+                        configuredRoutes[realRoute] = value;
+                    } else {
+                        if(isArray(value)) {
+                            var modules = [], methods = [];
+                            for(var i = 0, iLen = value.length; i < iLen; i++) {
+                                var v = value[v];
+                                if(isString(v) || isObject(v)) {
+                                    modules.push(v);
+                                } else {
+                                    if(isFunction(v)) {
+                                        methods.push(v);
+                                    }
+                                }
+                            }
+                            var moduleCallback = that.moduleStartCallback(route, modules);
+                            methods.push(moduleCallback);
+                            configuredRoutes[realRoute] = methods;
+                        } else {
+                            if(isString(value)) {
+                                var moduleCallback = that.moduleStartCallback(route, value);
+                                configuredRoutes[realRoute] = moduleCallback;
+                            }
+                        }
                     }
-
-                    var moduleCallback = that.__moduleStartCallback(route, modules);
-                    methods.push(moduleCallback);
-                    configuredRoutes[realRoute] = methods;
                 }
-                else if (isString(value))
-                {
-                    var moduleCallback = that.__moduleStartCallback(route, value);
-                    configuredRoutes[realRoute] = moduleCallback;
-                }
-            });
-
+            }
+            //});
             return configuredRoutes;
-        },
-        /**
-
-        @method __moduleStartCallback
+        }/**
+        
+        @method moduleStartCallback
         @private
         @param {String | Array | Object} modules String to start a single module, Array to start many modules, Object to start a module with specific arguments.
         **/
-        __moduleStartCallback: function(route, modules)
-        {
-            var args = [], params = extractParams(route),
-                that = this,
-                fileExtension = that.fileExtension;
-
-            if (isObject(modules))
-            {
+        ;
+        SinglePageApplication.prototype.moduleStartCallback = function (route, modules) {
+            var args = [], params = extractParams(route), that = this, fileExtension = that.fileExtension;
+            if(isObject(modules)) {
                 args = modules.args || args;
                 modules = modules.path;
             }
-
-            if (isString(modules))
-            {
-                modules = [modules];
+            if(isString(modules)) {
+                modules = [
+                    modules
+                ];
             }
-
-            return function ()
-            {
-                var ar = toArray(arguments),
-                    thrust = that.thrust,
-                    mappedModules = map(modules, function (modulePath)
-                    {
-                        return reduce(ar, function (memo, arg, i)
-                        {
-                            return memo.replace(params[i],
-                                arg.toLowerCase());
-                        }, modulePath).replace(fileExtension, '');
-                    });
-
-                var promise = thrust.start.apply(thrust, [mappedModules].concat(args));
-                if (!that.thrust.started)
-                    promise.then(function ()
-                    {
+            return function () {
+                var ar = toArray(arguments), thrust = that.thrust, mappedModules = map(modules, function (modulePath) {
+return reduce(ar, function (memo, arg, i) {
+return memo.replace(params[i], arg.toLowerCase());                    }, modulePath).replace(fileExtension, '');                });
+                var promise = thrust.start.apply(thrust, [
+                    mappedModules
+                ].concat(args));
+                if(!that.thrust.started) {
+                    promise.then(function () {
                         thrust.ready(mappedModules, args);
                     });
-
+                }
                 that.startingModulePromise = promise;
-            };
-        }
-    };
-
-    SinglePageApp.config = config;
-
-    return SinglePageApp;
-});
+            }
+        }/**
+        Hands the navigate method off to the module, so any module can trigger a navigation event.
+        
+        @for thrust.spa.SinglePageApp
+        @method createFacade
+        @param {thrust.Thrust} thrust The thrust instance
+        @param {thrust.Module} mod The module to create the facade for
+        @param {Object} facades The facades already added for this module.
+        **/
+        ;
+        SinglePageApplication.prototype.createFacade = function (thrust, mod, facades) {
+            var that = this;
+            if(mod.navigate) {
+                throw new Error('"navigate" is a reserved property');
+            }
+            // Already pre bound, so we only pass around 1 function per instance.
+            mod.navigate = that.navigate.bind(that);
+            return null;
+        };
+        SinglePageApplication.config = config;
+        return SinglePageApplication;
+    })();
+    exports.SinglePageApplication = SinglePageApplication;    
+})
+//@ sourceMappingURL=main.js.map
+;
 define('thrust/spa', ['thrust/spa/main'], function (main) { return main; });
 
-define('thrust/spa/convention/start',['thrust/convention', 'thrust/util'],
-function (Convention, util)
-{
+define('thrust/spa/convention/start',["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
+    /// <reference path="../../interfaces/spa/spa.d.ts" />
+    /// <reference path="../../interfaces/template/template.facade.d.ts" />
+    /// <reference path="../../interfaces/convention.d.ts" />
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
+    var c = __c__;
+
+    var Convention = c.Convention;
+    var util = __util__;
+
+    var _ = util._;
     /**
     @module thrust.spa
     @submodule thrust.spa.convention
     **/
-
     /**
     * # __thrust/spa__ Convention - Start
     *
@@ -1021,13 +1048,14 @@ function (Convention, util)
     * @for thrust.spa.convention
     * @property start
     **/
-    return new Convention({
-        orbit: function (thrust)
-        {
+    var methods = {
+        orbit: function (thrust) {
             var router = thrust.spa;
             router.start();
-
-            return thrust.spa.startingModulePromise || undefined;
+            return thrust.spa.startingModulePromise || null;
         }
-    });
-});
+    };
+    exports.subscription = new Convention(methods);
+})
+//@ sourceMappingURL=start.js.map
+;

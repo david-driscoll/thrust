@@ -1,0 +1,8 @@
+{
+  "name": "knockout.mapping",
+  "version": "2.3.5",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/david-driscoll/knockout.mapping.git"
+  }
+}

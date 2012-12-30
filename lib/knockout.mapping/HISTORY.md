@@ -1,3 +1,16 @@
+Release 2.3.5 - December 10th, 2012
+
+* Issue #121: Added functionality so that explicit declared none observable members on a ViewModel will remain none observable after mapping
+
+Release 2.3.4 - November 22nd, 2012
+
+* Issue #114: Added new "observe" array to options
+
+Release 2.3.3 - October 30th, 2012
+
+* Fixed issue #105, #111: Update callback is not being called
+* Fixed issue #107: String values in mapping cause infinite recursion in extendObject
+
 Release 2.3.2 - August 20th, 2012
 
 * Fixed issue #86: Don't update properties on object with update callback

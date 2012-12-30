@@ -29,10 +29,23 @@
     ],
     "main": "./src/main.js",
     "devDependencies" : {
-        "grunt-rigger": "*",
-        "grunt-requirejs": "*",
-        "node.extend": "*",
-        "grunt-shell": "*",
-        "grunt-jasmine-task": "*"
+        "grunt": "~0.4.0",
+        "grunt-typescript": "git://github.com/david-driscoll/grunt-typescript.git",
+        "grunt-amd-dist": "*",
+        "grunt-amd-doc": "*",
+        "grunt-benchmark": "*",
+        "grunt-bower-task": "*",
+        "grunt-contrib-build": "*",
+        "grunt-contrib-clean": "*",
+        "grunt-contrib-concat": "*",
+        "grunt-contrib-less": "*",
+        "grunt-contrib-jasmine": "*",
+        "grunt-contrib-jshint": "*",
+        "grunt-contrib-nodeunit": "*",
+        "grunt-contrib-requirejs": "*",
+        "grunt-contrib-symlink": "*",
+        "grunt-contrib-watch": "*",
+        "grunt-contrib-uglify": "*",
+        "grunt-contrib-yuidoc": "*"
     }
-}
+}   

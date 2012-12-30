@@ -1,0 +1,9 @@
+{
+  "name": "xrayquire",
+  "version": "0.0.0",
+  "commit": "722a7e212b71b5083b8e5ad53150b8d22e8e9334",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/requirejs/xrayquire.git"
+  }
+}

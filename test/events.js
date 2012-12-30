@@ -1,4 +1,4 @@
-﻿/// <reference path="../lib/jasmine/jasmine.js" />
+﻿/// <reference path="../lib/jasmine/lib/jasmine-1.3.1/jasmine.js" />
 /// <reference path="../lib/requirejs/require.js" />
 /// <reference path="./require.test.settings.js" />
 
@@ -7,8 +7,9 @@
     /*global jasmine:true, describe:true, it:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
     'use strict';
     require(['thrust/events', 'thrust/util'],
-    function (Events, util)
+    function (events, util)
     {
+        var Events = events.Events;
         describe('Events', function ()
         {
             describe('extends', function ()
@@ -23,13 +24,13 @@
                     expect(o.subscribe).toBeDefined();
                     expect(o.once).toBeDefined();
                     expect(o.unsubscribe).toBeDefined();
-                    expect(o.fire.async).not.toBeDefined();
-                    expect(o.publish.async).not.toBeDefined();
+                    expect(o.fire.async).toBeDefined();
+                    expect(o.publish.async).toBeDefined();
                     expect(o.initEvents).not.toBeNull();
                     expect(o.__pubSubName).toBe('Events');
                 });
 
-                it ('extends and inits as expected', function()
+                it('extends and inits as expected', function ()
                 {
                     var o = {};
                     Events.extend(o, true);

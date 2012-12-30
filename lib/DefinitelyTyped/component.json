@@ -1,0 +1,9 @@
+{
+  "name": "DefinitelyTyped",
+  "version": "0.0.0",
+  "commit": "d57605344b3b45820b8754786826581e9ccfee95",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/borisyankov/DefinitelyTyped.git"
+  }
+}

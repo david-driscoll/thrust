@@ -1,4 +1,4 @@
-﻿/// <reference path="../lib/jasmine/jasmine.js" />
+﻿/// <reference path="../lib/jasmine/lib/jasmine-1.3.1/jasmine.js" />
 /// <reference path="../lib/requirejs/require.js" />
 /// <reference path="./require.test.settings.js" />
 
@@ -6,9 +6,15 @@
 {
     /*global jasmine:true, describe:true, it:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
     'use strict';
-    require(['thrust', 'thrust/mediator', 'thrust/util', 'thrust/module', 'thrust/mediator/convention/autostart', 'thrust/mediator/convention/subscription'],
-    function (Thrust, Mediator, util, Module, autostart, subscription)
+    require(['thrust', 'thrust/mediator', 'thrust/util', 'thrust/capsule', 'thrust/mediator/convention/autostart', 'thrust/mediator/convention/subscription'],
+    function (thrust, thrustMediator, util, m, _autostart, _subscription)
     {
+        var Thrust = thrust.Thrust,
+            Mediator = thrustMediator.Mediator,
+            Module = m.Module,
+            autostart = _autostart.autostart,
+            subscription = _subscription.subscription;
+
         var t, c;
         beforeEach(function ()
         {

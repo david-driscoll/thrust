@@ -1,6 +1,7 @@
 define(['thrust', 'jquery', 'showdown'],
-function(Thrust, $, Showdown)
+function(thrust, $, Showdown)
 {
+    var Thrust = thrust.Thrust;
     var converter = new Showdown.converter();
     $(function ()
     {

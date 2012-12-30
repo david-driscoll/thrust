@@ -17,30 +17,30 @@
             'knockout.mapping': '../../lib/knockout.mapping/build/output/knockout.mapping-latest.debug',
             //#endregion
             //#region References for RequireJs
-            'text': '../../lib/text/text',
-            'i18n': '../../lib/i18n/i18n',
-            'domReady': '../../lib/domReady/domReady',
+            'text': '../../lib/requirejs-text/text',
+            'i18n': '../../lib/requirejs-i18n/i18n',
+            'domReady': '../../lib/requirejs-domready/domReady',
             'sizzle': '../../lib/sizzle/sizzle',
-            'jquery': '../../lib/jquery/jquery-1.8.1',
+            'jquery': '../../lib/jquery/jquery',
             'doT': '../../lib/doT/doT',
-            'flatiron/director': '../../lib/director/build/director-1.1.6',
+            'flatiron/director': '../../lib/director/build/director',
             'has': '../../lib/has/has',
             'backbone': '../../lib/backbone/backbone',
             'showdown': '../../lib/showdown/compressed/showdown'
             //#endregion
         },
         packages: [
-            { name: 'thrust', location: '../../src' },
-            { name: 'thrust/util', location: '../../src/util' },
-            { name: 'thrust/mediator', location: '../../src/mediator' },
-            { name: 'thrust/data', location: '../../src/data' },
-            { name: 'thrust/dom', location: '../../src/dom' },
-            { name: 'thrust/template', location: '../../src/template' },
-            { name: 'thrust/spa', location: '../../src/spa' },
+            { name: 'thrust', location: '../../thrust' },
+            { name: 'thrust/util', location: '../../thrust/util' },
+            { name: 'thrust/mediator', location: '../../thrust/mediator' },
+            { name: 'thrust/data', location: '../../thrust/data' },
+            { name: 'thrust/dom', location: '../../thrust/dom' },
+            { name: 'thrust/template', location: '../../thrust/template' },
+            { name: 'thrust/spa', location: '../../thrust/spa' },
             { name: 'when', main: 'when', location: '../../lib/when' },
-            /*{ name: 'kob-model', location: '../../lib/kob-model/src' },
-            { name: 'kob-model/simple', location: '../../lib/kob-model/src/simple' },
-            { name: 'kob-model/complex', location: '../../lib/kob-model/src/complex' }*/
+            /*{ name: 'kob-model', location: '../../lib/kob-model/thrust' },
+            { name: 'kob-model/simple', location: '../../lib/kob-model/thrust/simple' },
+            { name: 'kob-model/complex', location: '../../lib/kob-model/thrust/complex' }*/
         ],
         shim: {
             'flatiron/director': { exports: 'Router' },

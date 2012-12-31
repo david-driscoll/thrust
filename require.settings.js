@@ -1,4 +1,5 @@
 ﻿require.config({
+    baseUrl: './src',
     paths: {
         'require': 'lib/requirejs/require',
         'lodash': 'lib/lodash/lodash',

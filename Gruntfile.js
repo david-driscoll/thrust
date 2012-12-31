@@ -1,37 +1,107 @@
 module.exports = function (grunt)
 {
-    var requireSettings,
-        _ = grunt.util._;
-    function getRequireSettings(settings)
-    {
-        if (requireSettings == null)
-        {
-            var rs = grunt.file.read('./require.settings.js').toString();
-            rs = rs.substring(rs.indexOf('({') + 1);
-            rs = rs.substring(0, rs.lastIndexOf('})') + 1);
-            var resultFn = new Function('return ' + rs);
-            requireSettings = resultFn();
-        }
-        return _.merge(settings || {}, requireSettings)
-    }
+    var helpers = require('./zgrunt/helpers'),
+        _ = grunt.util._,
+        requireSettings = helpers.getRequireSettings(grunt);
 
+    var metadata = {
+        exclusions: ['when', 'lodash'],
+        thrust: {
+            scripts: 'src/thrust/**/*.js',
+            typeScripts: 'src/thrust/**/*.ts',
+            includedModules: [
+                'src/thrust/*.js',
+                '!src/thrust/util.js',
+                '!src/thrust/main.js'
+            ],
+            mainExclusions: ['!src/thrust/**/*main.*'],
+        },
+        tests: {
+            thrustScripts: ['src/thrust/**/*.js', '!src/thrust.js', '!src/thrust/util.js'],
+            scripts: ['test/**/*.js'],
+        },
+        buildTests: {
+            scripts: ['build-test/**/*.js'],
+        },
+        requireSettings: requireSettings,
+        liDir: './lib'
+    };
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        meta: {
-            thrust: {
-                scripts: 'thrust/**/*.js',
-                typeScripts: 'thrust/**/*.ts'
-            },
-            tests: {
-                thrustScripts: ['thrust/**/*.js', '!thrust.js', '!thrust/util.js'],
-                scripts: ['test/**/*.js'],
-            },
-            buildTests: {
-                scripts: ['build-test/**/*.js'],
-            },
-            requireSettings: getRequireSettings(),
-            liDir: './lib'
+        meta: metadata,
+        doc: {
+            //globbing-supported String or Array of Strings with gruntfile-relative
+            //files to process for documentation
+            include: 'src/deferreds/**/*.js',
+
+            //directory to output generated HTML (default = 'doc/out')
+            out: 'doc/out',
+
+            //directory to store jsdoc cache (default = 'doc/cache')
+            cache: 'doc/cache',
+
+            //directory to look for markdown mixins (default = 'doc/mixin')
+            mixin: 'doc/mixin',
+
+            //github URL where source is available. the file path and line number of
+            //each documented variable will be added to this to make source links.
+            repoview: 'https://github.com/zship/deferreds.js/blob/develop/',
+
+            //Array of Type (see tasks/doc/Types.js) objects to transform into links
+            //when used as parameter types, return types, or description namepaths
+            types: (function ()
+            {
+                var types = [];
+
+                //make all built-in types link to their MDN pages
+                ['Number', 'String', 'Object', 'Function', 'Array', 'RegExp', 'Boolean'].forEach(function (val)
+                {
+                    types.push({
+                        name: val,
+                        link: 'https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/' + val
+                    });
+                });
+
+                types.push({
+                    name: 'Any',
+                    link: 'https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects'
+                });
+
+                types.push({
+                    name: 'void',
+                    link: 'https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/undefined'
+                });
+
+                types.push({
+                    name: 'Element',
+                    link: 'https://developer.mozilla.org/en-US/docs/DOM/element'
+                });
+
+                types.push({
+                    name: 'Constructor',
+                    link: 'https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/constructor'
+                });
+
+                types.push({
+                    name: 'jQuery',
+                    link: 'http://api.jquery.com/jQuery/'
+                });
+
+                types.push({
+                    name: 'require',
+                    link: 'http://requirejs.org/'
+                });
+
+                types.push({
+                    //any name matching this RegExp (with name.search()) will be given
+                    //the following link
+                    regexp: /amd-utils\/.*/,
+                    link: 'http://millermedeiros.github.com/amd-utils/'
+                });
+
+                return types;
+            })()
         },
         /*bower: {
             install: {
@@ -56,17 +126,17 @@ module.exports = function (grunt)
                 src: ['<%= meta.tests.thrustScripts %>'],
                 options: {
                     specs: '<%= meta.tests.scripts %>',
-                    template: './RequireJSRunner.tmpl',
+                    template: './zgrunt/RequireJSRunner.tmpl',
                     templateOptions: {
                         requirejs: './' + requireSettings.paths.require + '.js',
-                        requireConfig: getRequireSettings({ baseUrl: '' })
+                        requireConfig: helpers.getRequireSettings(grunt, { baseUrl: './src/' })
                     },
                 }
             }
         },
         jshint: {
             thrust: {
-                src: ['<%= meta.tests.scripts %>', ]
+                src: ['<%= meta.thrust.scripts %>', '<%= meta.tests.scripts %>', '<%= meta.buildTests.scripts %>']
             },
             options: {
                 jshintrc: '.jshintrc',
@@ -91,6 +161,59 @@ module.exports = function (grunt)
             }
             }
             },*/
+        requirejs: {
+            thrust: {
+                options: {
+                    //appDir: './src',
+                    mainConfigFile: './require.settings.js',
+                    //baseUrl: './',
+                    dir: './dist',
+                    skipDirOptimize: false,
+                    keepBuildDir: true,
+                    optimize: 'uglify2',
+                    uglify2: {},
+                    useStrict: true,
+                    preserveLicenseComments: false,
+                    generateSourceMaps: false, // RCA including typescript source maps
+                    useSourceUrl: true,
+                    has: {
+                        DEBUG: false
+                    },
+                    modules: [
+                        {
+                            // Build thrust will all it's default modules
+                            // Also include mediator, if a new mediator implementation comes around this may need to be customized later.
+                            // This will also implcitly incude thrust/util
+                            name: 'thrust',
+                            exclude: metadata.exclusions,
+                            include: metadata.thrust.includedModules.concat([
+                                'thrust/mediator/*.js',
+                                'thrust/mediator/convention/*.js',
+                            ]).concat(metadata.thrust.mainExclusions),
+                            override: {
+                                out: 'dist/thrust.js',
+                                optimize: 'none',
+                                preserveLicenseComments: true,
+                                has: {
+                                    DEBUG: true
+                                },
+                            }
+                        },
+                        {
+                            name: 'thrust',
+                            exclude: metadata.exclusions,
+                            include: metadata.thrust.includedModules.concat([
+                                'thrust/mediator/*.js',
+                                'thrust/mediator/convention/*.js',
+                            ]).concat(metadata.thrust.mainExclusions),
+                            override: {
+                                out: 'dist/thrust.min.js',
+                            },
+                        },
+                    ],
+                }
+            }
+        },
         typescript: {
             thrust: {
                 src: ['<%= meta.thrust.typeScripts %>'],
@@ -154,7 +277,6 @@ module.exports = function (grunt)
     //#region Plugins
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    //grunt.loadNpmTasks('grunt-amd-dist');
     grunt.loadNpmTasks('grunt-amd-doc');
     grunt.loadNpmTasks('grunt-benchmark');
     //grunt.loadNpmTasks('grunt-bower-task');
@@ -167,7 +289,6 @@ module.exports = function (grunt)
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
-    grunt.loadNpmTasks('grunt-contrib-symlink');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
@@ -176,5 +297,5 @@ module.exports = function (grunt)
 
     // Default task(s).
     grunt.registerTask('init', ['bower:install']);
-    grunt.registerTask('default', ['typescript', 'bom', 'jshint', 'jasmine:thrust', 'jasmine:thrust:build', 'yuidoc', 'clean']);
+    grunt.registerTask('default', ['typescript', 'bom', 'jshint', 'jasmine:thrust', 'jasmine:thrust:build', 'requirejs:thrust', 'yuidoc', 'clean']);
 }

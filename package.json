@@ -31,7 +31,6 @@
     "devDependencies" : {
         "grunt": "~0.4.0",
         "grunt-typescript": "git://github.com/david-driscoll/grunt-typescript.git",
-        "grunt-amd-dist": "*",
         "grunt-amd-doc": "*",
         "grunt-benchmark": "*",
         "grunt-bower-task": "*",
@@ -43,7 +42,6 @@
         "grunt-contrib-jshint": "*",
         "grunt-contrib-nodeunit": "*",
         "grunt-contrib-requirejs": "*",
-        "grunt-contrib-symlink": "*",
         "grunt-contrib-watch": "*",
         "grunt-contrib-uglify": "*",
         "grunt-contrib-yuidoc": "*"

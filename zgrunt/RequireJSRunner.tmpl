@@ -23,7 +23,7 @@
 			script = script.replace(/\.js$/,"");
 			if (options.requireConfig && options.requireConfig.baseUrl) script = script.replace(new RegExp('^' + options.requireConfig.baseUrl),"");
 			if (options.loaderPlugin) script = options.loaderPlugin + '!' + script;
-			if (script.indexOf('./') === 0) script = script.substring(2);
+			if (script.indexOf('./src/') === 0) script = script.substring('./src/'.length + 1);
 			if (script.indexOf('/main') === (script.length - 5)) script = script.substring(0, script.length - 5);
 			%>'<%= script %>' <%= i < scripts.src.length-1 ? ',' : ''%>
       <% }) %>

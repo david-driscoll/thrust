@@ -1,5 +1,20 @@
 module.exports = function (grunt)
 {
+    var requireSettings,
+        _ = grunt.util._;
+    function getRequireSettings(settings)
+    {
+        if (requireSettings == null)
+        {
+            var rs = grunt.file.read('./require.settings.js').toString();
+            rs = rs.substring(rs.indexOf('({') + 1);
+            rs = rs.substring(0, rs.lastIndexOf('})') + 1);
+            var resultFn = new Function('return ' + rs);
+            requireSettings = resultFn();
+        }
+        return _.merge(settings || {}, requireSettings)
+    }
+
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -9,22 +24,22 @@ module.exports = function (grunt)
                 typeScripts: 'thrust/**/*.ts'
             },
             tests: {
-                scripts: 'tests/**/*.js',
-                typeScripts: 'tests/**/*.ts'
+                thrustScripts: ['thrust/**/*.js', '!thrust.js', '!thrust/util.js'],
+                scripts: ['test/**/*.js'],
             },
             buildTests: {
-                scripts: 'tests/**/*.js',
-                typeScripts: 'tests/**/*.ts'
+                scripts: ['build-test/**/*.js'],
             },
+            requireSettings: getRequireSettings(),
             liDir: './lib'
         },
-        bower: {
+        /*bower: {
             install: {
                 targetDir: '<%= meta.libDir %>',
                 cleanup: false,
                 install: true
             }
-        },
+        },*/
         bom: {
             thrust: {
                 src: [
@@ -34,28 +49,30 @@ module.exports = function (grunt)
             }
         },
         clean: {
-            build: [
-                'build'
-            ]
+            build: ['build']
         },
         jasmine: {
             thrust: {
-                src: [
-                    '<%= meta.thrust.scripts %>'
-                ]
+                src: ['<%= meta.tests.thrustScripts %>'],
+                options: {
+                    specs: '<%= meta.tests.scripts %>',
+                    template: './RequireJSRunner.tmpl',
+                    templateOptions: {
+                        requirejs: './' + requireSettings.paths.require + '.js',
+                        requireConfig: getRequireSettings({ baseUrl: '' })
+                    },
+                }
             }
         },
         jshint: {
             thrust: {
-                src: [
-                    '<%= meta.tests.scripts %>',
-                ]
+                src: ['<%= meta.tests.scripts %>', ]
             },
             options: {
-                jshintrc: '.jshintrc'
+                jshintrc: '.jshintrc',
             }
         },
-        typescript: /*less: {
+        /*less: {
             development: {
             options: {
             paths: ["assets/css"]
@@ -74,11 +91,9 @@ module.exports = function (grunt)
             }
             }
             },*/
-        {
+        typescript: {
             thrust: {
-                src: [
-                    '<%= meta.thrust.typeScripts %>'
-                ],
+                src: ['<%= meta.thrust.typeScripts %>'],
                 dest: '.',
                 options: {
                     module: 'amd',
@@ -105,9 +120,7 @@ module.exports = function (grunt)
         },
         watch: {
             scripts: {
-                files: [
-                    '<%= meta.thrust.typeScripts %>'
-                ],
+                files: ['<%= meta.thrust.typeScripts %>'],
                 tasks: [
                     'typescript',
                     'bom',
@@ -137,12 +150,14 @@ module.exports = function (grunt)
             }
         }
     });
+
+    //#region Plugins
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
     //grunt.loadNpmTasks('grunt-amd-dist');
     grunt.loadNpmTasks('grunt-amd-doc');
     grunt.loadNpmTasks('grunt-benchmark');
-    grunt.loadNpmTasks('grunt-bower-task');
+    //grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-bom');
     grunt.loadNpmTasks('grunt-contrib-build');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -157,15 +172,9 @@ module.exports = function (grunt)
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-typescript');
+    //#endregion
+
     // Default task(s).
-    grunt.registerTask('init', [
-        'bower:install'
-    ]);
-    grunt.registerTask('default', [
-        'typescript',
-        'bom',
-        'jshint',
-        'yuidoc',
-        'clean'
-    ]);
+    grunt.registerTask('init', ['bower:install']);
+    grunt.registerTask('default', ['typescript', 'bom', 'jshint', 'jasmine:thrust', 'jasmine:thrust:build', 'yuidoc', 'clean']);
 }

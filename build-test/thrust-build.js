@@ -146,6 +146,6 @@
         });
     });
 
-    jasmine.getEnv().execute();
+    //jasmine.getEnv().execute();
 
 })(require);

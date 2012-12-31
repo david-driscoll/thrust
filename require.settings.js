@@ -2,8 +2,6 @@
     paths: {
         'require': 'lib/requirejs/require',
         'lodash': 'lib/lodash/lodash',
-        //#endregion
-        //#region References for RequireJs
         'text': 'lib/requirejs-text/text',
         'i18n': 'lib/requirejs-i18n/i18n',
         'domReady': 'lib/requirejs-domready/domReady',
@@ -27,4 +25,4 @@
     shim: {
         'flatiron/director': { exports: 'Router' }
     },
-});
+})

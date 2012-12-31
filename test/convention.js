@@ -1,13 +1,12 @@
-﻿/// <reference path="../lib/DefinitelyTyped/jasmine/jasmine-1.2.d.ts" />
-/// <reference path="../lib/jasmine/jasmine.js" />
-/// <reference path="../lib/requirejs/require.js" />
-/// <reference path="./require.test.settings.js" />
+﻿/// <reference path="../lib/jasmine/lib/jasmine-1.3.1/jasmine.js" />
 
 /*global jasmine:true, describe:true, it:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
-'use strict';
-require(['thrust/convention', 'thrust/util'],
-function (convention, util)
+(function ()
 {
+    'use strict';
+    var convention = require('thrust/convention'),
+        util = require('thrust/util');
+
     describe('Convention', function ()
     {
         it('creates', function ()
@@ -24,6 +23,4 @@ function (convention, util)
             expect(c.deorbit).not.toBe(convention.Convention.prototype.deorbit);
         });
     });
-
-    jasmine.getEnv().execute();
-});
+})()

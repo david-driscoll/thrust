@@ -91,7 +91,8 @@ module.exports = function (grunt)
 
     var cleanConfig = {
         build: ['build'],
-        dist: ['dist']
+        dist: ['dist'],
+        'require.settings': ['require.settings-*.js']
     };
 
     var copyConfig = {
@@ -482,5 +483,5 @@ module.exports = function (grunt)
     // by default we don't build or test integrated.
     // full should be run though before every push, just as a sanity check.
     // integrated before default to hand a strange exception from r.js
-    grunt.registerTask('full', ['clean:dist', 'code-validation', '__integrated-partial__', '__default-partial__', 'validate-build', 'validate-build-integrated', 'docs']);
+    grunt.registerTask('full', ['clean:dist', 'code-validation', '__integrated-partial__', '__default-partial__', 'validate-build', 'validate-build-integrated', 'build-example-settings', 'clean:require.settings', 'docs']);
 }

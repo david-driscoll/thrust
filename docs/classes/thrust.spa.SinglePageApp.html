@@ -49,6 +49,8 @@
             
                 <li><a href="..&#x2F;classes/thrust.data.config.html">thrust.data.config</a></li>
             
+                <li><a href="..&#x2F;classes/thrust.data.convention.html">thrust.data.convention</a></li>
+            
                 <li><a href="..&#x2F;classes/thrust.data.Data.html">thrust.data.Data</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.data.DataFacade.html">thrust.data.DataFacade</a></li>
@@ -91,6 +93,8 @@
             
                 <li><a href="..&#x2F;classes/thrust.template.config.html">thrust.template.config</a></li>
             
+                <li><a href="..&#x2F;classes/thrust.template.convention.html">thrust.template.convention</a></li>
+            
                 <li><a href="..&#x2F;classes/thrust.template.Template.html">thrust.template.Template</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.template.TemplateFacade.html">thrust.template.TemplateFacade</a></li>
@@ -115,6 +119,8 @@
             
                 <li><a href="..&#x2F;modules/thrust.data.config.html">thrust.data.config</a></li>
             
+                <li><a href="..&#x2F;modules/thrust.data.convention.html">thrust.data.convention</a></li>
+            
                 <li><a href="..&#x2F;modules/thrust.dom.html">thrust.dom</a></li>
             
                 <li><a href="..&#x2F;modules/thrust.dom.convention.html">thrust.dom.convention</a></li>
@@ -135,9 +141,13 @@
             
                 <li><a href="..&#x2F;modules/thrust.template.config.html">thrust.template.config</a></li>
             
+                <li><a href="..&#x2F;modules/thrust.template.convention.html">thrust.template.convention</a></li>
+            
                 <li><a href="..&#x2F;modules/thrust.util.html">thrust.util</a></li>
             
                 <li><a href="..&#x2F;modules/thrust.util.func.html">thrust.util.func</a></li>
+            
+                <li><a href="..&#x2F;modules/thrust.util.obj.html">thrust.util.obj</a></li>
             
                 <li><a href="..&#x2F;modules/thrust.util.type.html">thrust.util.type</a></li>
             
@@ -188,7 +198,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;thrust_spa_main.js.html#l52"><code>thrust\spa\main.js:52</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;build_doc_src_thrust_spa_main.tsdoc.html#l1"><code>build\doc\src\thrust\spa\main.tsdoc:1</code></a>
         </div>
     
 
@@ -264,7 +274,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;thrust_spa_main.js.html#l52"><code>thrust\spa\main.js:52</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_spa_main.tsdoc.html#l1"><code>build\doc\src\thrust\spa\main.tsdoc:1</code></a>
         
         </p>
 
@@ -364,7 +374,35 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
+                                <a href="#method_configureRoutes">configureRoutes</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_createFacade">createFacade</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_moduleStartCallback">moduleStartCallback</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_navigate">navigate</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_start">start</a>
 
                                 
                                 
@@ -391,6 +429,321 @@
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_configureRoutes" class="method item">
+    <h3 class="name"><code>configureRoutes</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>routes</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_spa_main.tsdoc.html#l26"><code>build\doc\src\thrust\spa\main.tsdoc:26</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Configures the route object for the spa instance</p>
+
+<p>Routes can be in 4 forms</p>
+
+<pre class="code prettyprint"><code>{
+    '/path/to/:foo': 'path/to/module',
+    '/path/to/:bar': ['path/to/module1', 'path/to/module2'],
+    '/path/to/:fb': { path: 'path/to/module', args: ['args', 'to', 'hand off to start'] }
+    '/path/to/:foo/:bar': function(foo, bar){  custom handler }
+}
+</code></pre>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">routes</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Object of routes.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_createFacade" class="method item">
+    <h3 class="name"><code>createFacade</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>thrust</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>mod</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>facades</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_spa_main.tsdoc.html#l47"><code>build\doc\src\thrust\spa\main.tsdoc:47</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Hands the navigate method off to the module, so any module can trigger a navigation event.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">thrust</code>
+                        <span class="type"><a href="..\classes\thrust.Thrust.html" class="crosslink">thrust.Thrust</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The thrust instance</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">mod</code>
+                        <span class="type"><a href="..\classes\thrust.Module.html" class="crosslink">thrust.Module</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The module to create the facade for</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">facades</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The facades already added for this module.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_moduleStartCallback" class="method item private">
+    <h3 class="name"><code>moduleStartCallback</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>modules</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_spa_main.tsdoc.html#l41"><code>build\doc\src\thrust\spa\main.tsdoc:41</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">modules</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>String to start a single module, Array to start many modules, Object to start a module with specific arguments.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="method_navigate" class="method item">
@@ -435,7 +788,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;thrust_spa_main.js.html#l102"><code>thrust\spa\main.js:102</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_spa_main.tsdoc.html#l15"><code>build\doc\src\thrust\spa\main.tsdoc:15</code></a>
         
         </p>
 
@@ -512,7 +865,61 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;thrust_spa_main.js.html#l90"><code>thrust\spa\main.js:90</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_spa_main.tsdoc.html#l10"><code>build\doc\src\thrust\spa\main.tsdoc:10</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Start the single page app router.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_start" class="method item">
+    <h3 class="name"><code>start</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_spa_main.tsdoc.html#l21"><code>build\doc\src\thrust\spa\main.tsdoc:21</code></a>
         
         </p>
 

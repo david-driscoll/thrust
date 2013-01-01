@@ -14,7 +14,7 @@ define(["require", "exports", 'lodash', '../type', 'module'], function(require, 
     *
     * Date: Wed Mar 21 12:46:34 2012 -0700
     */
-    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     //export module guid {
     'use strict';

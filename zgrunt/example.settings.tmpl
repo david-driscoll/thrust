@@ -1,0 +1,42 @@
+﻿<% if (!fileExists) { %>(function (require)
+{
+    'use strict';
+    <% } %>//#region default settings
+    function getSettings(mode, settings)
+    {
+        var allSettings = <%= JSON.stringify(settings) %>;
+
+        // debug / release, releaseMin, integrated
+        var defaults = allSettings[mode];
+
+        if (!settings.paths)
+            settings.paths = {};
+        for (var i in defaults.paths)
+            if (!settings.paths[i])
+                settings.paths[i] = defaults.paths[i];
+
+        if (!settings.packages)
+            settings.packages = defaults.packages;
+        else
+            settings.packages = settings.packages.concat(defaults.packages);
+
+        for (var i in defaults.shim)
+            if (!settings.shim[i])
+                settings.shim[i] = defaults.shim[i];
+
+        return settings;
+    }
+    //#endregion<% if (!fileExists) { %>
+
+    // debug / release, releaseMin, integrated
+    require.config(getSettings('debug', {
+        paths: {},
+        packages: [],
+        shim: {},
+        has: {
+            DEBUG: true
+        },
+        config: {}
+    }));
+})(require);
+<% } %>

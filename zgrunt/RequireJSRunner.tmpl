@@ -1,43 +1,75 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Jasmine Spec Runner</title>
-  <script src="<%= options.requirejs %>"></script>
-  <script>
-    <% if (options.requireConfig) { %>
-    require.config(<%= JSON.stringify(options.requireConfig) %>);
-    <% } %>
-  </script>
-  <% css.forEach(function(style){ %>
-  <link rel="stylesheet" type="text/css" href="<%= style %>">
-  <% }) %>
-  <% with (scripts) { %>
-    <% [].concat(jasmine, vendor, helpers).forEach(function(script){ %>
-    <script src="<%= script %>"></script>
-    <% }) %>
-  <% }; %>
-  <script>
-    require([
-      <% scripts.src.forEach(function(script, i){
-			script = script.replace(/\.js$/,"");
-			if (options.requireConfig && options.requireConfig.baseUrl) script = script.replace(new RegExp('^' + options.requireConfig.baseUrl),"");
-			if (options.loaderPlugin) script = options.loaderPlugin + '!' + script;
-			if (script.indexOf('./src/') === 0) script = script.substring('./src/'.length + 1);
-			if (script.indexOf('/main') === (script.length - 5)) script = script.substring(0, script.length - 5);
-			%>'<%= script %>' <%= i < scripts.src.length-1 ? ',' : ''%>
-      <% }) %>
-      ],
-      function(){
-        require(['<%= [].concat(scripts.specs,scripts.reporters).join("','") %>'], function(){
-          require(['<%= scripts.start.join("','") %>'], function(){
-            // good to go! Our tests should already be running.
-          })
+    <head>
+        <meta charset="utf-8">
+        <title>Jasmine Spec Runner</title>
+        <script src="<%= options.requirejs %>"></script>
+        <script>
+            <%
+            if (options.requireConfig) {
+                if (typeof options.requireConfig === 'string') {
+                    options.requireConfig = options.loadSettings(options.requireConfig);
+                }
+                    %>
+                require.config(<%= JSON.stringify(options.requireConfig) %>);
+                    <%
+            }
+            %>
+        </script>
+        <% css.forEach(function(style){ %>
+        <link rel="stylesheet" type="text/css" href="<%= style %>">
+        <% }) %>
+        <% with (scripts) {
+            [].concat(jasmine, vendor, helpers).forEach(function(script){ %>
+                <script src="<%= script %>"></script><%
+            })
+        };
+
+            var packageScripts = scripts.src.filter(function(x){ return x.indexOf('main.js') === (x.length - 'main.js'.length); }),
+                thrustScript = scripts.src.filter(function(x){ return x.indexOf('thrust/main.js') === (x.length - 'thrust/main.js'.length); }),
+                otherScripts = scripts.src.filter(function(x){ return x.indexOf('main.js') !== (x.length - 'main.js'.length); });
+
+            var processScriptName = function(script){
+                script = script.replace(/\.js$/,"");
+                if (options.requireConfig && options.requireConfig.baseUrl) script = script.replace(new RegExp('^' + options.requireConfig.baseUrl),"");
+                if (options.loaderPlugin) script = options.loaderPlugin + '!' + script;
+                if (script.indexOf('./src/') === 0) script = script.substring('./src/'.length);
+                if (script.indexOf('/main') === (script.length - 5)) script = script.substring(0, script.length - 5);
+                return script;
+            }
+        %>
+        <script>
+        require(['<%= processScriptName(thrustScript[0]) %>'],function(){
+            require([
+            <%
+                packageScripts.forEach(function(script, i){
+                    script = processScriptName(script);
+                    %>'<%= script %>' <%= i < scripts.src.length-1 ? ',' : ''%>
+                    <%
+                })
+            %>
+            ],function(){
+                require([
+                <%
+                    otherScripts.forEach(function(script, i){
+                        script = processScriptName(script);
+                        %>'<%= script %>' <%= i < scripts.src.length-1 ? ',' : ''%>
+                        <%
+                    })
+                %>
+                ],function(){
+                    require(['<%= [].concat(scripts.specs,scripts.reporters).join("','") %>'],
+                    function(){
+                        require(['<%= scripts.start.join("','") %>'],
+                        function(){
+                            // good to go! Our tests should already be running.
+                        })
+                    })
+                })
+            })
         })
-      }
-    )
-  </script>
-</head>
+        </script>
+    </head>
 <body>
 </body>
 </html>

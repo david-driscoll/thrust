@@ -6,8 +6,19 @@
         "url": "thrust-home"
     },
     "files": {
-        "thrust\\data\\config.js": {
-            "name": "thrust\\data\\config.js",
+        "build\\doc\\src\\thrust\\data\\convention\\start.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\data\\convention\\start.tsdoc",
+            "modules": {
+                "thrust.data.convention": 1
+            },
+            "classes": {},
+            "fors": {
+                "thrust.data.convention": 1
+            },
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\data\\config.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\data\\config.tsdoc",
             "modules": {
                 "thrust.data.config": 1
             },
@@ -17,8 +28,8 @@
             },
             "namespaces": {}
         },
-        "thrust\\data\\event.factory.js": {
-            "name": "thrust\\data\\event.factory.js",
+        "build\\doc\\src\\thrust\\data\\event.factory.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\data\\event.factory.tsdoc",
             "modules": {
                 "thrust.data": 1
             },
@@ -28,8 +39,8 @@
             },
             "namespaces": {}
         },
-        "thrust\\data\\event.types.js": {
-            "name": "thrust\\data\\event.types.js",
+        "build\\doc\\src\\thrust\\data\\event.types.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\data\\event.types.tsdoc",
             "modules": {},
             "classes": {},
             "fors": {
@@ -37,8 +48,8 @@
             },
             "namespaces": {}
         },
-        "thrust\\data\\main.js": {
-            "name": "thrust\\data\\main.js",
+        "build\\doc\\src\\thrust\\data\\main.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\data\\main.tsdoc",
             "modules": {},
             "classes": {
                 "thrust.data.DataFacade": 1,
@@ -46,12 +57,13 @@
             },
             "fors": {
                 "thrust.data": 1,
+                "thrust.data.Data": 1,
                 "thrust.data.DataFacade": 1
             },
             "namespaces": {}
         },
-        "thrust\\data\\response.queue.js": {
-            "name": "thrust\\data\\response.queue.js",
+        "build\\doc\\src\\thrust\\data\\response.queue.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\data\\response.queue.tsdoc",
             "modules": {},
             "classes": {
                 "thrust.data.ResponseQueue": 1
@@ -61,8 +73,37 @@
             },
             "namespaces": {}
         },
-        "thrust\\dom\\config.js": {
-            "name": "thrust\\dom\\config.js",
+        "build\\doc\\src\\thrust\\dom\\convention\\action.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\dom\\convention\\action.tsdoc",
+            "modules": {
+                "thrust.dom.convention": 1
+            },
+            "classes": {},
+            "fors": {
+                "thrust.dom.convention": 1
+            },
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\dom\\convention\\context.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\dom\\convention\\context.tsdoc",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "thrust.dom.convention": 1
+            },
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\dom\\convention\\event.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\dom\\convention\\event.tsdoc",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "thrust.dom.convention": 1
+            },
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\dom\\config.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\dom\\config.tsdoc",
             "modules": {},
             "classes": {},
             "fors": {
@@ -70,8 +111,15 @@
             },
             "namespaces": {}
         },
-        "thrust\\mediator\\convention\\autostart.js": {
-            "name": "thrust\\mediator\\convention\\autostart.js",
+        "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\mediator\\convention\\autostart.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\mediator\\convention\\autostart.tsdoc",
             "modules": {
                 "thrust.mediator.convention": 1
             },
@@ -81,29 +129,35 @@
             },
             "namespaces": {}
         },
-        "thrust\\mediator\\convention\\container.js": {
-            "name": "thrust\\mediator\\convention\\container.js",
+        "build\\doc\\src\\thrust\\mediator\\convention\\container.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\mediator\\convention\\container.tsdoc",
             "modules": {},
             "classes": {},
-            "fors": {},
+            "fors": {
+                "thrust.mediator.convention": 1
+            },
             "namespaces": {}
         },
-        "thrust\\mediator\\convention\\dependent.modules.js": {
-            "name": "thrust\\mediator\\convention\\dependent.modules.js",
+        "build\\doc\\src\\thrust\\mediator\\convention\\dependent.modules.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\mediator\\convention\\dependent.modules.tsdoc",
             "modules": {},
             "classes": {},
-            "fors": {},
+            "fors": {
+                "thrust.mediator.convention": 1
+            },
             "namespaces": {}
         },
-        "thrust\\mediator\\convention\\subscription.js": {
-            "name": "thrust\\mediator\\convention\\subscription.js",
+        "build\\doc\\src\\thrust\\mediator\\convention\\subscription.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\mediator\\convention\\subscription.tsdoc",
             "modules": {},
             "classes": {},
-            "fors": {},
+            "fors": {
+                "thrust.mediator.convention": 1
+            },
             "namespaces": {}
         },
-        "thrust\\mediator\\config.js": {
-            "name": "thrust\\mediator\\config.js",
+        "build\\doc\\src\\thrust\\mediator\\config.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\mediator\\config.tsdoc",
             "modules": {
                 "thrust.mediator.config": 1
             },
@@ -113,8 +167,8 @@
             },
             "namespaces": {}
         },
-        "thrust\\mediator\\main.js": {
-            "name": "thrust\\mediator\\main.js",
+        "build\\doc\\src\\thrust\\mediator\\main.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\mediator\\main.tsdoc",
             "modules": {},
             "classes": {
                 "thrust.mediator.MediatorFacade": 1,
@@ -126,19 +180,17 @@
             },
             "namespaces": {}
         },
-        "thrust\\spa\\convention\\spalink.js": {
-            "name": "thrust\\spa\\convention\\spalink.js",
-            "modules": {
-                "thrust.dom.convention": 1
-            },
+        "build\\doc\\src\\thrust\\spa\\convention\\spalink.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\spa\\convention\\spalink.tsdoc",
+            "modules": {},
             "classes": {},
             "fors": {
                 "thrust.dom.convention": 1
             },
             "namespaces": {}
         },
-        "thrust\\spa\\convention\\start.js": {
-            "name": "thrust\\spa\\convention\\start.js",
+        "build\\doc\\src\\thrust\\spa\\convention\\start.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\spa\\convention\\start.tsdoc",
             "modules": {
                 "thrust.spa.convention": 1
             },
@@ -148,8 +200,8 @@
             },
             "namespaces": {}
         },
-        "thrust\\spa\\config.js": {
-            "name": "thrust\\spa\\config.js",
+        "build\\doc\\src\\thrust\\spa\\config.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\spa\\config.tsdoc",
             "modules": {
                 "thrust.spa.config": 1
             },
@@ -159,19 +211,40 @@
             },
             "namespaces": {}
         },
-        "thrust\\spa\\main.js": {
-            "name": "thrust\\spa\\main.js",
+        "build\\doc\\src\\thrust\\spa\\main.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\spa\\main.tsdoc",
             "modules": {},
             "classes": {
                 "thrust.spa.SinglePageApp": 1
             },
             "fors": {
-                "thrust.spa": 1
+                "thrust.spa": 1,
+                "thrust.spa.SinglePageApp": 1
             },
             "namespaces": {}
         },
-        "thrust\\template\\config.js": {
-            "name": "thrust\\template\\config.js",
+        "build\\doc\\src\\thrust\\template\\convention\\knockout.engine.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\template\\convention\\knockout.engine.tsdoc",
+            "modules": {
+                "thrust.template.convention": 1
+            },
+            "classes": {},
+            "fors": {
+                "thrust.template.convention": 1
+            },
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\template\\convention\\template.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\template\\convention\\template.tsdoc",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "thrust.template.convention": 1
+            },
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\template\\config.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\template\\config.tsdoc",
             "modules": {
                 "thrust.template.config": 1
             },
@@ -181,8 +254,8 @@
             },
             "namespaces": {}
         },
-        "thrust\\template\\main.js": {
-            "name": "thrust\\template\\main.js",
+        "build\\doc\\src\\thrust\\template\\main.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\template\\main.tsdoc",
             "modules": {
                 "thrust.template": 1
             },
@@ -197,8 +270,8 @@
             },
             "namespaces": {}
         },
-        "thrust\\util\\function.js": {
-            "name": "thrust\\util\\function.js",
+        "build\\doc\\src\\thrust\\util\\function.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\util\\function.tsdoc",
             "modules": {
                 "thrust.util.func": 1
             },
@@ -206,8 +279,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "thrust\\util\\guid.js": {
-            "name": "thrust\\util\\guid.js",
+        "build\\doc\\src\\thrust\\util\\guid.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\util\\guid.tsdoc",
             "modules": {
                 "thrust.util": 1
             },
@@ -217,8 +290,24 @@
             },
             "namespaces": {}
         },
-        "thrust\\util\\string.js": {
-            "name": "thrust\\util\\string.js",
+        "build\\doc\\src\\thrust\\util\\main.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\util\\object.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\util\\object.tsdoc",
+            "modules": {
+                "thrust.util.obj": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\util\\string.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\util\\string.tsdoc",
             "modules": {},
             "classes": {},
             "fors": {
@@ -226,8 +315,8 @@
             },
             "namespaces": {}
         },
-        "thrust\\util\\type.js": {
-            "name": "thrust\\util\\type.js",
+        "build\\doc\\src\\thrust\\util\\type.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\util\\type.tsdoc",
             "modules": {
                 "thrust.util.type": 1
             },
@@ -235,8 +324,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "thrust\\util\\url.js": {
-            "name": "thrust\\util\\url.js",
+        "build\\doc\\src\\thrust\\util\\url.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\util\\url.tsdoc",
             "modules": {
                 "thrust.util.url": 1
             },
@@ -246,8 +335,8 @@
             },
             "namespaces": {}
         },
-        "thrust\\util\\when.js": {
-            "name": "thrust\\util\\when.js",
+        "build\\doc\\src\\thrust\\util\\when.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\util\\when.tsdoc",
             "modules": {
                 "thrust.util.when": 1
             },
@@ -257,8 +346,8 @@
             },
             "namespaces": {}
         },
-        "thrust\\capsule.js": {
-            "name": "thrust\\capsule.js",
+        "build\\doc\\src\\thrust\\capsule.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\capsule.tsdoc",
             "modules": {},
             "classes": {
                 "thrust.Module": 1
@@ -266,8 +355,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "thrust\\config.js": {
-            "name": "thrust\\config.js",
+        "build\\doc\\src\\thrust\\config.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\config.tsdoc",
             "modules": {
                 "thrust.config": 1
             },
@@ -277,8 +366,8 @@
             },
             "namespaces": {}
         },
-        "thrust\\convention.js": {
-            "name": "thrust\\convention.js",
+        "build\\doc\\src\\thrust\\convention.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\convention.tsdoc",
             "modules": {},
             "classes": {
                 "thrust.Convention": 1
@@ -286,8 +375,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "thrust\\events.js": {
-            "name": "thrust\\events.js",
+        "build\\doc\\src\\thrust\\events.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\events.tsdoc",
             "modules": {},
             "classes": {
                 "thrust.Events": 1
@@ -295,8 +384,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "thrust\\facade.js": {
-            "name": "thrust\\facade.js",
+        "build\\doc\\src\\thrust\\facade.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\facade.tsdoc",
             "modules": {},
             "classes": {
                 "thrust.Facade": 1
@@ -304,15 +393,15 @@
             "fors": {},
             "namespaces": {}
         },
-        "thrust\\ignite.js": {
-            "name": "thrust\\ignite.js",
+        "build\\doc\\src\\thrust\\ignite.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\ignite.tsdoc",
             "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "thrust\\instance.js": {
-            "name": "thrust\\instance.js",
+        "build\\doc\\src\\thrust\\instance.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\instance.tsdoc",
             "modules": {},
             "classes": {},
             "fors": {
@@ -320,8 +409,8 @@
             },
             "namespaces": {}
         },
-        "thrust\\log.js": {
-            "name": "thrust\\log.js",
+        "build\\doc\\src\\thrust\\log.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\log.tsdoc",
             "modules": {},
             "classes": {
                 "thrust.Log": 1
@@ -329,13 +418,22 @@
             "fors": {},
             "namespaces": {}
         },
-        "thrust\\main.js": {
-            "name": "thrust\\main.js",
+        "build\\doc\\src\\thrust\\main.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\main.tsdoc",
             "modules": {
                 "thrust": 1
             },
             "classes": {
                 "thrust.Thrust": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\util.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\util.tsdoc",
+            "modules": {},
+            "classes": {
+                "thrust.util": 1
             },
             "fors": {},
             "namespaces": {}
@@ -345,27 +443,43 @@
         "thrust.data": {
             "name": "thrust.data",
             "submodules": {
+                "thrust.data.convention": 1,
                 "thrust.data.config": 1
             },
             "classes": {
+                "thrust.data.convention": 1,
                 "thrust.data.config": 1,
                 "thrust.data": 1,
                 "thrust.data.DataFacade": 1,
                 "thrust.data.Data": 1,
-                "thrust.data.ResponseQueue": 1,
-                "thrust.dom.config": 1
+                "thrust.data.ResponseQueue": 1
             },
             "fors": {
+                "thrust.data.convention": 1,
                 "thrust.data.config": 1,
                 "thrust.data": 1,
-                "thrust.data.DataFacade": 1,
-                "thrust.dom.config": 1
+                "thrust.data.Data": 1,
+                "thrust.data.DataFacade": 1
             },
             "namespaces": {},
             "tag": "module",
-            "file": "thrust\\data\\response.queue.js",
-            "line": 36,
+            "file": "build\\doc\\src\\thrust\\data\\response.queue.tsdoc",
+            "line": 1,
             "description": "The event factory links jQuery Events up to thrust centric events.\nThe event factory would be replaced if we were ever moved off of the jQuery dependancy."
+        },
+        "thrust.data.convention": {
+            "name": "thrust.data.convention",
+            "submodules": {},
+            "classes": {
+                "thrust.data.convention": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "thrust.data",
+            "namespace": "",
+            "file": "build\\doc\\src\\thrust\\data\\convention\\start.tsdoc",
+            "line": 1
         },
         "thrust.data.config": {
             "name": "thrust.data.config",
@@ -378,9 +492,38 @@
             "namespaces": {},
             "module": "thrust.data",
             "namespace": "",
-            "file": "thrust\\data\\config.js",
-            "line": 6,
+            "file": "build\\doc\\src\\thrust\\data\\config.tsdoc",
+            "line": 1,
             "description": "Provides thrust configuration"
+        },
+        "thrust.dom": {
+            "name": "thrust.dom",
+            "submodules": {
+                "thrust.dom.convention": 1
+            },
+            "classes": {
+                "thrust.dom.convention": 1,
+                "thrust.dom.config": 1
+            },
+            "fors": {
+                "thrust.dom.convention": 1,
+                "thrust.dom.config": 1
+            },
+            "namespaces": {}
+        },
+        "thrust.dom.convention": {
+            "name": "thrust.dom.convention",
+            "submodules": {},
+            "classes": {
+                "thrust.dom.convention": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "thrust.dom",
+            "namespace": "",
+            "file": "build\\doc\\src\\thrust\\dom\\convention\\action.tsdoc",
+            "line": 1
         },
         "thrust.mediator": {
             "name": "thrust.mediator",
@@ -402,8 +545,8 @@
                 "thrust.mediator.MediatorFacade": 1
             },
             "namespaces": {},
-            "file": "thrust\\mediator\\main.js",
-            "line": 99
+            "file": "build\\doc\\src\\thrust\\mediator\\main.tsdoc",
+            "line": 28
         },
         "thrust.mediator.convention": {
             "name": "thrust.mediator.convention",
@@ -416,8 +559,8 @@
             "namespaces": {},
             "module": "thrust.mediator",
             "namespace": "",
-            "file": "thrust\\mediator\\convention\\autostart.js",
-            "line": 10,
+            "file": "build\\doc\\src\\thrust\\mediator\\convention\\autostart.tsdoc",
+            "line": 1,
             "description": "The facade convention, creates the mediator facade for each module."
         },
         "thrust.mediator.config": {
@@ -431,36 +574,9 @@
             "namespaces": {},
             "module": "thrust.mediator",
             "namespace": "",
-            "file": "thrust\\mediator\\config.js",
-            "line": 6,
+            "file": "build\\doc\\src\\thrust\\mediator\\config.tsdoc",
+            "line": 1,
             "description": "Provides thrust configuration"
-        },
-        "thrust.dom": {
-            "name": "thrust.dom",
-            "submodules": {
-                "thrust.dom.convention": 1
-            },
-            "classes": {
-                "thrust.dom.convention": 1
-            },
-            "fors": {
-                "thrust.dom.convention": 1
-            },
-            "namespaces": {}
-        },
-        "thrust.dom.convention": {
-            "name": "thrust.dom.convention",
-            "submodules": {},
-            "classes": {
-                "thrust.dom.convention": 1
-            },
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "thrust.dom",
-            "namespace": "",
-            "file": "thrust\\spa\\convention\\spalink.js",
-            "line": 24
         },
         "thrust.spa": {
             "name": "thrust.spa",
@@ -477,11 +593,12 @@
             "fors": {
                 "thrust.spa.convention": 1,
                 "thrust.spa.config": 1,
-                "thrust.spa": 1
+                "thrust.spa": 1,
+                "thrust.spa.SinglePageApp": 1
             },
             "namespaces": {},
-            "file": "thrust\\spa\\main.js",
-            "line": 52
+            "file": "build\\doc\\src\\thrust\\spa\\main.tsdoc",
+            "line": 1
         },
         "thrust.spa.convention": {
             "name": "thrust.spa.convention",
@@ -494,8 +611,8 @@
             "namespaces": {},
             "module": "thrust.spa",
             "namespace": "",
-            "file": "thrust\\spa\\convention\\start.js",
-            "line": 15
+            "file": "build\\doc\\src\\thrust\\spa\\convention\\start.tsdoc",
+            "line": 1
         },
         "thrust.spa.config": {
             "name": "thrust.spa.config",
@@ -508,22 +625,25 @@
             "namespaces": {},
             "module": "thrust.spa",
             "namespace": "",
-            "file": "thrust\\spa\\config.js",
-            "line": 6,
+            "file": "build\\doc\\src\\thrust\\spa\\config.tsdoc",
+            "line": 1,
             "description": "Provides thrust configuration"
         },
         "thrust.template": {
             "name": "thrust.template",
             "submodules": {
+                "thrust.template.convention": 1,
                 "thrust.template.config": 1
             },
             "classes": {
+                "thrust.template.convention": 1,
                 "thrust.template.config": 1,
                 "thrust.template": 1,
                 "thrust.template.Template": 1,
                 "thrust.template.TemplateFacade": 1
             },
             "fors": {
+                "thrust.template.convention": 1,
                 "thrust.template.config": 1,
                 "thrust.template": 1,
                 "thrust.template.Template": 1,
@@ -531,11 +651,25 @@
             },
             "namespaces": {},
             "tag": "module",
-            "file": "thrust\\template\\main.js",
-            "line": 283,
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 111,
             "requires": [
                 "thrust.data"
             ]
+        },
+        "thrust.template.convention": {
+            "name": "thrust.template.convention",
+            "submodules": {},
+            "classes": {
+                "thrust.template.convention": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "thrust.template",
+            "namespace": "",
+            "file": "build\\doc\\src\\thrust\\template\\convention\\knockout.engine.tsdoc",
+            "line": 1
         },
         "thrust.template.config": {
             "name": "thrust.template.config",
@@ -548,14 +682,15 @@
             "namespaces": {},
             "module": "thrust.template",
             "namespace": "",
-            "file": "thrust\\template\\config.js",
-            "line": 6,
+            "file": "build\\doc\\src\\thrust\\template\\config.tsdoc",
+            "line": 1,
             "description": "Provides thrust configuration"
         },
         "thrust.util": {
             "name": "thrust.util",
             "submodules": {
                 "thrust.util.func": 1,
+                "thrust.util.obj": 1,
                 "thrust.util.type": 1,
                 "thrust.util.url": 1,
                 "thrust.util.when": 1
@@ -572,8 +707,8 @@
             },
             "namespaces": {},
             "module": "thrust.util",
-            "file": "thrust\\util\\guid.js",
-            "line": 9
+            "file": "build\\doc\\src\\thrust\\util.tsdoc",
+            "line": 1
         },
         "thrust.util.func": {
             "name": "thrust.util.func",
@@ -584,8 +719,20 @@
             "namespaces": {},
             "module": "thrust.util",
             "namespace": "",
-            "file": "thrust\\util\\function.js",
-            "line": 10
+            "file": "build\\doc\\src\\thrust\\util\\function.tsdoc",
+            "line": 1
+        },
+        "thrust.util.obj": {
+            "name": "thrust.util.obj",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "thrust.util",
+            "namespace": "",
+            "file": "build\\doc\\src\\thrust\\util\\object.tsdoc",
+            "line": 1
         },
         "thrust.util.type": {
             "name": "thrust.util.type",
@@ -596,8 +743,8 @@
             "namespaces": {},
             "module": "thrust.util",
             "namespace": "",
-            "file": "thrust\\util\\type.js",
-            "line": 9
+            "file": "build\\doc\\src\\thrust\\util\\type.tsdoc",
+            "line": 1
         },
         "thrust.util.url": {
             "name": "thrust.util.url",
@@ -610,8 +757,8 @@
             "namespaces": {},
             "module": "thrust.util",
             "namespace": "",
-            "file": "thrust\\util\\url.js",
-            "line": 10
+            "file": "build\\doc\\src\\thrust\\util\\url.tsdoc",
+            "line": 1
         },
         "thrust.util.when": {
             "name": "thrust.util.when",
@@ -624,8 +771,8 @@
             "namespaces": {},
             "module": "thrust.util",
             "namespace": "",
-            "file": "thrust\\util\\when.js",
-            "line": 24
+            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
+            "line": 1
         },
         "thrust": {
             "name": "thrust",
@@ -633,6 +780,7 @@
                 "thrust.config": 1
             },
             "classes": {
+                "thrust.util": 1,
                 "thrust.Module": 1,
                 "thrust.config": 1,
                 "thrust.Convention": 1,
@@ -648,8 +796,8 @@
             },
             "namespaces": {},
             "tag": "main",
-            "file": "thrust\\main.js",
-            "line": 194,
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 20,
             "description": "The thrust application!",
             "params": [
                 {
@@ -682,12 +830,24 @@
             "namespaces": {},
             "module": "thrust",
             "namespace": "",
-            "file": "thrust\\config.js",
-            "line": 8,
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 1,
             "description": "Provides thrust configuration"
         }
     },
     "classes": {
+        "thrust.data.convention": {
+            "name": "thrust.data.convention",
+            "shortname": "thrust.data.convention",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "thrust.data",
+            "submodule": "thrust.data.convention",
+            "namespace": ""
+        },
         "thrust.data.config": {
             "name": "thrust.data.config",
             "shortname": "thrust.data.config",
@@ -721,8 +881,8 @@
             "extension_for": [],
             "module": "thrust.data",
             "namespace": "",
-            "file": "thrust\\data\\main.js",
-            "line": 47,
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 1,
             "description": "The data facade that is handed off to modules.\n\n\nEnables data transport, using jQuery for thrust.",
             "params": [
                 {
@@ -750,8 +910,8 @@
             ],
             "module": "thrust.data",
             "namespace": "",
-            "file": "thrust\\data\\main.js",
-            "line": 75,
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 13,
             "description": "The master data plugin.\n\n\nEnables data transport, using jQuery for thrust.",
             "params": [
                 {
@@ -782,8 +942,8 @@
             "extension_for": [],
             "module": "thrust.data",
             "namespace": "",
-            "file": "thrust\\data\\response.queue.js",
-            "line": 36,
+            "file": "build\\doc\\src\\thrust\\data\\response.queue.tsdoc",
+            "line": 1,
             "description": "The response queue class handles creation of a queue or batching system.\nWith this system, we can batch up all our server requests, and request them from the server all around the same time.\nIn addition to that, when the requests come back we can also spool them together, so that the calls don't resolve until\neither all the calls come back, or a specific time has elapsed.",
             "is_constructor": 1,
             "params": [
@@ -804,6 +964,18 @@
                 }
             ]
         },
+        "thrust.dom.convention": {
+            "name": "thrust.dom.convention",
+            "shortname": "thrust.dom.convention",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "thrust.dom",
+            "submodule": "thrust.dom.convention",
+            "namespace": ""
+        },
         "thrust.dom.config": {
             "name": "thrust.dom.config",
             "shortname": "thrust.dom.config",
@@ -812,7 +984,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "thrust.data",
+            "module": "thrust.dom",
             "namespace": ""
         },
         "thrust.mediator.convention": {
@@ -860,8 +1032,8 @@
             "extension_for": [],
             "module": "thrust.mediator",
             "namespace": "",
-            "file": "thrust\\mediator\\main.js",
-            "line": 33,
+            "file": "build\\doc\\src\\thrust\\mediator\\main.tsdoc",
+            "line": 1,
             "description": "Creates a new mediator facade for the given module.",
             "is_constructor": 1,
             "params": [
@@ -887,8 +1059,8 @@
             "extension_for": [],
             "module": "thrust.mediator",
             "namespace": "",
-            "file": "thrust\\mediator\\main.js",
-            "line": 99,
+            "file": "build\\doc\\src\\thrust\\mediator\\main.tsdoc",
+            "line": 28,
             "description": "Mediator class.\nThis creates a instance of the mediator, for use inside thrust.",
             "is_constructor": 1,
             "params": [
@@ -898,18 +1070,6 @@
                     "type": "String"
                 }
             ]
-        },
-        "thrust.dom.convention": {
-            "name": "thrust.dom.convention",
-            "shortname": "thrust.dom.convention",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "thrust.dom",
-            "submodule": "thrust.dom.convention",
-            "namespace": ""
         },
         "thrust.spa.convention": {
             "name": "thrust.spa.convention",
@@ -956,8 +1116,8 @@
             "extension_for": [],
             "module": "thrust.spa",
             "namespace": "",
-            "file": "thrust\\spa\\main.js",
-            "line": 52,
+            "file": "build\\doc\\src\\thrust\\spa\\main.tsdoc",
+            "line": 1,
             "is_constructor": 1,
             "params": [
                 {
@@ -976,6 +1136,18 @@
                     "type": "thrust.mediatorMediator"
                 }
             ]
+        },
+        "thrust.template.convention": {
+            "name": "thrust.template.convention",
+            "shortname": "thrust.template.convention",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "thrust.template",
+            "submodule": "thrust.template.convention",
+            "namespace": ""
         },
         "thrust.template.config": {
             "name": "thrust.template.config",
@@ -1010,8 +1182,8 @@
             "extension_for": [],
             "module": "thrust.template",
             "namespace": "",
-            "file": "thrust\\template\\main.js",
-            "line": 39,
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 5,
             "description": "The template plugin consturctor.",
             "params": [
                 {
@@ -1040,8 +1212,8 @@
             "extension_for": [],
             "module": "thrust.template",
             "namespace": "",
-            "file": "thrust\\template\\main.js",
-            "line": 283,
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 111,
             "is_constructor": 1,
             "params": [
                 {
@@ -1064,9 +1236,20 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "thrust.util",
+            "module": "thrust",
             "submodule": "thrust.util",
-            "namespace": ""
+            "namespace": "",
+            "file": "build\\doc\\src\\thrust\\util.tsdoc",
+            "line": 1,
+            "uses": [
+                "thrust-util.array",
+                "thrust-util.collection",
+                "thrust-util.func",
+                "thrust-util.obj",
+                "thrust-util.type",
+                "thrust-util.url",
+                "thrust-util.when"
+            ]
         },
         "thrust.util.url": {
             "name": "thrust.util.url",
@@ -1102,8 +1285,8 @@
             "extension_for": [],
             "module": "thrust",
             "namespace": "",
-            "file": "thrust\\capsule.js",
-            "line": 53,
+            "file": "build\\doc\\src\\thrust\\capsule.tsdoc",
+            "line": 10,
             "description": "The module is the heart of the thrust, every module gets one facade per module."
         },
         "thrust.config": {
@@ -1128,8 +1311,8 @@
             "extension_for": [],
             "module": "thrust",
             "namespace": "",
-            "file": "thrust\\convention.js",
-            "line": 27,
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 6,
             "description": "The convention class, takes an overloaded set of methods, for any method that needs to be overloaded.",
             "is_constructor": 1,
             "params": [
@@ -1150,8 +1333,8 @@
             "extension_for": [],
             "module": "thrust",
             "namespace": "",
-            "file": "thrust\\events.js",
-            "line": 230,
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 89,
             "description": "Thrust Events are based off of the Backbone event model, with special additions.\n\n* Events can be fired asyncronously.\n* Events can be namespaced."
         },
         "thrust.Facade": {
@@ -1164,8 +1347,8 @@
             "extension_for": [],
             "module": "thrust",
             "namespace": "",
-            "file": "thrust\\facade.js",
-            "line": 21,
+            "file": "build\\doc\\src\\thrust\\facade.tsdoc",
+            "line": 9,
             "description": "Facades are mainly for use in thrust plugins.\n\nFacade has these built in methods:\n* init\n* start\n* ready\n* stop\n* destroy\n\nBehind the scenes the facade methods, invoke any conventions loaded for the plugin."
         },
         "thrust.instance": {
@@ -1189,9 +1372,9 @@
             "extension_for": [],
             "module": "thrust",
             "namespace": "",
-            "file": "thrust\\log.js",
-            "line": 47,
-            "description": "A basic logger for the thrust framework.\nDisables debug logging when thrust is not in debug mode."
+            "file": "build\\doc\\src\\thrust\\log.tsdoc",
+            "line": 8,
+            "description": "A basic logger for the thrust framework.\n    Disables debug logging when thrust is not in debug mode."
         },
         "thrust.Thrust": {
             "name": "thrust.Thrust",
@@ -1203,8 +1386,8 @@
             "extension_for": [],
             "module": "thrust",
             "namespace": "",
-            "file": "thrust\\main.js",
-            "line": 194,
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 20,
             "description": "The primary thrust class.",
             "is_constructor": 1,
             "params": [
@@ -1222,8 +1405,18 @@
     },
     "classitems": [
         {
-            "file": "thrust\\data\\config.js",
-            "line": 12,
+            "file": "build\\doc\\src\\thrust\\data\\convention\\start.tsdoc",
+            "line": 5,
+            "description": "# __thrust/data__ Convention - Start\nThe data start convention, delays thrusts ready (orbit) event, until a timeout, or all the calls return, which ever happens first.\nThis convention allows your applicfation to delay it's loading, until all the data that is required to be preloaded has ben loaded.\n\n## Why is this useful?\nTake an example you have a complex application, that needs data from several different API's. Perhaps you're loading tweets from twitter,\n user profile information from your server, and the pages main content.\n\nThe typical page will load and do all it's operations on DOM Ready, and fire off it's data requests.  You then perhaps have a loader up\n on the tweet box, and the users profile picture.\n\nA Thrust base page, will have an overall loader up.  As it starts up the modules, any module that fires off a data request will have that\n request captured.  Once all requests have been completed, thrust completes loading, and any modules that were expecting data, will have it\n immediately with their ready call.\n\n\n##That's cool, but what if I need a long running call?\n\nThat's a good point sometimes your application does not need to be blocked, maybe you expect that call to be long running, or you don't\n really know if it'll be long running or not.  Using data plugin API you can pass the following option, and the queue will be bypassed.\n\n   { silent: true }",
+            "itemtype": "property",
+            "name": "start",
+            "class": "thrust.data.convention",
+            "module": "thrust.data",
+            "submodule": "thrust.data.convention"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\config.tsdoc",
+            "line": 7,
             "description": "Resolves the given properties when creating an instance of the plugin.\n\nThis is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed\nto the plugin constructor method.",
             "access": "private",
             "tagname": "",
@@ -1236,8 +1429,8 @@
             "submodule": "thrust.data.config"
         },
         {
-            "file": "thrust\\data\\config.js",
-            "line": 29,
+            "file": "build\\doc\\src\\thrust\\data\\config.tsdoc",
+            "line": 19,
             "description": "The set of conventions to load into thrust/dom.",
             "itemtype": "property",
             "name": "conventions",
@@ -1248,8 +1441,8 @@
             "submodule": "thrust.data.config"
         },
         {
-            "file": "thrust\\data\\config.js",
-            "line": 39,
+            "file": "build\\doc\\src\\thrust\\data\\config.tsdoc",
+            "line": 26,
             "description": "Decides if `thrust/data` should cache requests or not.\n\nYou should turn this to `false`, if you are experiencing caching issues and need to debug.",
             "itemtype": "property",
             "name": "cache",
@@ -1261,8 +1454,8 @@
             "submodule": "thrust.data.config"
         },
         {
-            "file": "thrust\\data\\config.js",
-            "line": 50,
+            "file": "build\\doc\\src\\thrust\\data\\config.tsdoc",
+            "line": 36,
             "description": "`startTimeout` is part of queueing built into `thrust/data`.  It defines the wait time before requests\n are started.\n\nThe queueing system works in the followig manner.  All requests that are queued together per HTTP\n request method (`GET`, `POST`, `PUT`, `DELETE`, `PATCH`, etc).  After the first request, the timer\n starts, once the timeout elapses, all the requests are shipped off at once.\n\nThis counter intuitive if you're looking to get the request back immediately, but from a UX perspective\n this allows the UI to stay in sync and give the user a cohesive, instead of seeing loaders, show up and\n disappear at seemingly random intervals, the user does an action, and then sees a response.",
             "itemtype": "property",
             "name": "startTimeout",
@@ -1274,8 +1467,8 @@
             "submodule": "thrust.data.config"
         },
         {
-            "file": "thrust\\data\\config.js",
-            "line": 72,
+            "file": "build\\doc\\src\\thrust\\data\\config.tsdoc",
+            "line": 57,
             "description": "`finishTimeout` is part of queueing built into `thrust/data`.  It defines the wait time before the\n queue is completed.  If all the requests finish early, the timeout is canceled.\n\nThe queueing system works in the followig manner.  All requests that are queued together per HTTP\n request method (`GET`, `POST`, `PUT`, `DELETE`, `PATCH`, etc).  After the requests are fired off\n `thrust/data` will wait until it gets a response from everyone of them.  If for some reason a request\n takes to long, and the timeout is hit, all the requests that have completed, will be releaseed, allowing\n the application to continue undisrupted.\n\nThis counter intuitive if you're looking to get the request back immediately, but from a UX perspective\n this allows the UI to stay in sync and give the user a cohesive, instead of seeing loaders, show up and\n disappear at seemingly random intervals, the user does an action, and then sees a response.",
             "itemtype": "property",
             "name": "finishTimeout",
@@ -1287,8 +1480,8 @@
             "submodule": "thrust.data.config"
         },
         {
-            "file": "thrust\\data\\event.factory.js",
-            "line": 32,
+            "file": "build\\doc\\src\\thrust\\data\\event.factory.tsdoc",
+            "line": 7,
             "description": "Wraps beforeSend, which is a custom property on the jQuery ajax data call.",
             "itemtype": "method",
             "name": "beforeSendMethod",
@@ -1298,8 +1491,8 @@
             "module": "thrust.data"
         },
         {
-            "file": "thrust\\data\\event.factory.js",
-            "line": 73,
+            "file": "build\\doc\\src\\thrust\\data\\event.factory.tsdoc",
+            "line": 13,
             "description": "Binds all the jQuery data events and creates event native thrust events out of them.",
             "access": "private",
             "tagname": "",
@@ -1316,8 +1509,8 @@
             "module": "thrust.data"
         },
         {
-            "file": "thrust\\data\\event.types.js",
-            "line": 7,
+            "file": "build\\doc\\src\\thrust\\data\\event.types.tsdoc",
+            "line": 6,
             "description": "The `thrust/data/wait` event is fired once a data call is made.",
             "itemtype": "event",
             "name": "thrust/data/wait",
@@ -1337,8 +1530,8 @@
             "module": "thrust.data"
         },
         {
-            "file": "thrust\\data\\event.types.js",
-            "line": 15,
+            "file": "build\\doc\\src\\thrust\\data\\event.types.tsdoc",
+            "line": 13,
             "description": "The `thrust/data/start` event is fired the queue is started.",
             "itemtype": "event",
             "name": "thrust/data/start",
@@ -1363,9 +1556,9 @@
             "module": "thrust.data"
         },
         {
-            "file": "thrust\\data\\event.types.js",
-            "line": 24,
-            "description": "The `thrust/data/status` event is fired for every item that returns from the queue.\n\nNOTE: It is entirely possible for `thrust/data/status** to be called after `thrust/data/stop** if several\ncalls take to long to complete.  This is intended, and potentially useful information.",
+            "file": "build\\doc\\src\\thrust\\data\\event.types.tsdoc",
+            "line": 21,
+            "description": "The `thrust/data/status` event is fired for every item that returns from the queue.\n\nNOTE: It is entirely possible for `thrust/data/status** to be called after `thrust/data/stop** if several\n    calls take to long to complete.  This is intended, and potentially useful information.",
             "itemtype": "event",
             "name": "thrust/data/status",
             "params": [
@@ -1389,8 +1582,8 @@
             "module": "thrust.data"
         },
         {
-            "file": "thrust\\data\\event.types.js",
-            "line": 36,
+            "file": "build\\doc\\src\\thrust\\data\\event.types.tsdoc",
+            "line": 32,
             "description": "The `thrust/data/stop` event is fired when all items in the queue return, or the finishedTimeout setting elapses.",
             "itemtype": "event",
             "name": "thrust/data/stop",
@@ -1415,8 +1608,157 @@
             "module": "thrust.data"
         },
         {
-            "file": "thrust\\data\\main.js",
-            "line": 159,
+            "file": "build\\doc\\src\\thrust\\data\\event.types.tsdoc",
+            "line": 40,
+            "description": "The `thrust/data/event/before-send` event is wrapped by thrust, and fired through jQuery.\n\n\nNOTE: Marked as private because this event exposes underlying jQuery arguments, and may\nbe changed in the future.",
+            "itemtype": "event",
+            "name": "thrust/data/event/before-send",
+            "access": "private",
+            "tagname": "",
+            "class": "thrust.data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\event.types.tsdoc",
+            "line": 50,
+            "description": "The `thrust/data/event/start` event is wrapped by thrust, and fired through jQuery.\n\n\nNOTE: Marked as private because this event exposes underlying jQuery arguments, and may\nbe changed in the future.",
+            "itemtype": "event",
+            "name": "thrust/data/event/start",
+            "access": "private",
+            "tagname": "",
+            "class": "thrust.data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\event.types.tsdoc",
+            "line": 60,
+            "description": "The `thrust/data/event/send` event is wrapped by thrust, and fired through jQuery.\n\n\nNOTE: Marked as private because this event exposes underlying jQuery arguments, and may\nbe changed in the future.",
+            "itemtype": "event",
+            "name": "thrust/data/event/send",
+            "access": "private",
+            "tagname": "",
+            "class": "thrust.data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\event.types.tsdoc",
+            "line": 70,
+            "description": "The `thrust/data/event/error` event is wrapped by thrust, and fired through jQuery.\n\n\nNOTE: Marked as private because this event exposes underlying jQuery arguments, and may\nbe changed in the future.",
+            "itemtype": "event",
+            "name": "thrust/data/event/error",
+            "access": "private",
+            "tagname": "",
+            "class": "thrust.data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\event.types.tsdoc",
+            "line": 80,
+            "description": "The `thrust/data/event/success` event is wrapped by thrust, and fired through jQuery.\n\n\nNOTE: Marked as private because this event exposes underlying jQuery arguments, and may\nbe changed in the future.",
+            "itemtype": "event",
+            "name": "thrust/data/event/success",
+            "access": "private",
+            "tagname": "",
+            "class": "thrust.data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\event.types.tsdoc",
+            "line": 90,
+            "description": "The `thrust/data/event/complete` event is wrapped by thrust, and fired through jQuery.\n\n\nNOTE: Marked as private because this event exposes underlying jQuery arguments, and may\nbe changed in the future.",
+            "itemtype": "event",
+            "name": "thrust/data/event/complete",
+            "access": "private",
+            "tagname": "",
+            "class": "thrust.data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\event.types.tsdoc",
+            "line": 100,
+            "description": "The `thrust/data/event/stop` event is wrapped by thrust, and fired through jQuery.\n\n\nNOTE: Marked as private because this event exposes underlying jQuery arguments, and may\nbe changed in the future.",
+            "itemtype": "event",
+            "name": "thrust/data/event/stop",
+            "access": "private",
+            "tagname": "",
+            "class": "thrust.data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 26,
+            "description": "Creates a DataFacade for the given module.",
+            "itemtype": "method",
+            "name": "createFacade",
+            "params": [
+                {
+                    "name": "thrust",
+                    "description": "The thrust instance",
+                    "type": "Thrust"
+                },
+                {
+                    "name": "module",
+                    "description": "The module",
+                    "type": "Module"
+                },
+                {
+                    "name": "facades",
+                    "description": "The available facades",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The new DataFacade",
+                "type": "DataFacade"
+            },
+            "class": "thrust.data.Data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 36,
+            "description": "Does a GET to the server, for the given data and settings.",
+            "itemtype": "method",
+            "name": "getData",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The url to get data from",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "The data to pass to the given url",
+                    "type": "Object"
+                },
+                {
+                    "name": "settings",
+                    "description": "The settings of the task to be done",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "cache",
+                            "description": "Do we cache this call or not.",
+                            "type": "Boolean"
+                        },
+                        {
+                            "name": "silent",
+                            "description": "Do we use the built in data queue.",
+                            "type": "Boolean"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "The promise if this request completes or fails",
+                "type": "Promise"
+            },
+            "class": "thrust.data.Data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 48,
             "description": "Does a GET to the server, for the given data and settings.",
             "itemtype": "method",
             "name": "getData",
@@ -1457,8 +1799,50 @@
             "module": "thrust.data"
         },
         {
-            "file": "thrust\\data\\main.js",
-            "line": 191,
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 60,
+            "description": "Does a POST to the server, for the given data and settings.",
+            "itemtype": "method",
+            "name": "postData",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The url to get data from",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "The data to pass to the given url",
+                    "type": "Object"
+                },
+                {
+                    "name": "settings",
+                    "description": "The settings of the task to be done",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "cache",
+                            "description": "Do we cache this call or not.",
+                            "type": "Boolean"
+                        },
+                        {
+                            "name": "silent",
+                            "description": "Do we use the built in data queue.",
+                            "type": "Boolean"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "The promise if this request completes or fails",
+                "type": "Promise"
+            },
+            "class": "thrust.data.Data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 72,
             "description": "Does a POST to the server, for the given data and settings.",
             "itemtype": "method",
             "name": "postData",
@@ -1499,8 +1883,45 @@
             "module": "thrust.data"
         },
         {
-            "file": "thrust\\data\\main.js",
-            "line": 224,
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 84,
+            "description": "Does a GET to the server, using the given settings.\n\nData must be passed in using settings: { data: {} } otherwise use getData.",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The url to get data from",
+                    "type": "String"
+                },
+                {
+                    "name": "settings",
+                    "description": "The settings of the task to be done",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "cache",
+                            "description": "Do we cache this call or not.",
+                            "type": "Boolean"
+                        },
+                        {
+                            "name": "silent",
+                            "description": "Do we use the built in data queue.",
+                            "type": "Boolean"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "The promise if this request completes or fails",
+                "type": "Promise"
+            },
+            "class": "thrust.data.Data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 97,
             "description": "Does a GET to the server, using the given settings.\n\nData must be passed in using settings: { data: {} } otherwise use getData.",
             "itemtype": "method",
             "name": "get",
@@ -1536,8 +1957,45 @@
             "module": "thrust.data"
         },
         {
-            "file": "thrust\\data\\main.js",
-            "line": 266,
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 110,
+            "description": "Does a POST to the server, using the given settings.\n\nData must be passed in using settings: { data: {} } otherwise use postData.",
+            "itemtype": "method",
+            "name": "post",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The url to get data from",
+                    "type": "String"
+                },
+                {
+                    "name": "settings",
+                    "description": "The settings of the task to be done",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "cache",
+                            "description": "Do we cache this call or not.",
+                            "type": "Boolean"
+                        },
+                        {
+                            "name": "silent",
+                            "description": "Do we use the built in data queue.",
+                            "type": "Boolean"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "The promise if this request completes or fails",
+                "type": "Promise"
+            },
+            "class": "thrust.data.Data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 123,
             "description": "Does a POST to the server, using the given settings.\n\nData must be passed in using settings: { data: {} } otherwise use postData.",
             "itemtype": "method",
             "name": "post",
@@ -1573,8 +2031,45 @@
             "module": "thrust.data"
         },
         {
-            "file": "thrust\\data\\main.js",
-            "line": 306,
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 136,
+            "description": "Does an ajax call to the given url, with the given settings.",
+            "itemtype": "method",
+            "name": "ajax",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The url to get data from",
+                    "type": "String"
+                },
+                {
+                    "name": "settings",
+                    "description": "The settings of the task to be done",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "cache",
+                            "description": "Do we cache this call or not.",
+                            "type": "Boolean"
+                        },
+                        {
+                            "name": "silent",
+                            "description": "Do we use the built in data queue.",
+                            "type": "Boolean"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "The promise if this request completes or fails",
+                "type": "Promise"
+            },
+            "class": "thrust.data.Data",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\data\\main.tsdoc",
+            "line": 147,
             "description": "Does an ajax call to the given url, with the given settings.",
             "itemtype": "method",
             "name": "ajax",
@@ -1610,8 +2105,8 @@
             "module": "thrust.data"
         },
         {
-            "file": "thrust\\data\\response.queue.js",
-            "line": 56,
+            "file": "build\\doc\\src\\thrust\\data\\response.queue.tsdoc",
+            "line": 14,
             "description": "Adds a request to the queue\nQueues are split up by HTTP type, so GET requests go with GET requests and POST requests go with POST requests.",
             "itemtype": "method",
             "name": "addToQueue",
@@ -1640,8 +2135,58 @@
             "module": "thrust.data"
         },
         {
-            "file": "thrust\\dom\\config.js",
-            "line": 6,
+            "file": "build\\doc\\src\\thrust\\data\\response.queue.tsdoc",
+            "line": 24,
+            "description": "Returns a function, that will process the given queue after the start time has elapsed.",
+            "itemtype": "method",
+            "name": "process",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The queue type, to process.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The function that will do the work on the queue.",
+                "type": "Function"
+            },
+            "class": "thrust.data.ResponseQueue",
+            "module": "thrust.data"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\dom\\convention\\action.tsdoc",
+            "line": 5,
+            "description": "# __thrust/dom__ Convention - Actions\n\nThe dom action convention allows you to create custom actions, that execute when a certian event happen.\n\n\n## Supported events\n* `click`\n\nNOTE: More events will be added when they make sense to add them.\n\n\nThe definition can accept all of the following:\n\n* `function()` - This function will be run when the action is invoked.\n* `string` - This string must point at a function, that exists on the module definition.\n* `[function(), context]` - Where the context is the context that the function will be called with.\n* `[string, context]` - Where the context is the context that the function will be called with.\n\n\nThe definition that is used to define an action is below...\n\nNOTE: The below is written as if it were part of a module definition.\n\n\n    actions: {\n        'click': {\n            'doFunction': function()\n            {\n                alert('My awesome alert here!');\n            },\n            'doString': 'actionString',\n            'doContextFunction': [function()\n            {\n                alert('My awesome alert here!');\n            }, context],\n            'doString': ['actionString', context],\n        }\n    },\n    actionString: function()\n    {\n        alert('My awesome alert here!');\n    }\n\nTo utlize the action, simply add a `data-action-{event}` attribute, with the name of the action as the va;ie to any of the following elements:\n\n* `a`\n* `button`\n* `input[type=\"button\"]`\n* `input[type=\"submit\"]`",
+            "itemtype": "property",
+            "name": "actions",
+            "class": "thrust.dom.convention",
+            "module": "thrust.dom",
+            "submodule": "thrust.dom.convention"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\dom\\convention\\context.tsdoc",
+            "line": 5,
+            "description": "# __thrust/dom__ Convention - Context\n\nThe context convention allows you to specific a selector for your module.  This selector can be anything that is compatable with jQuerys Sizzle engine.\n\nThen the default context of your modules `dom()` / `$()` will be that selector.  In addition any internal find `dom.find` / `dom.$` / `$.find` / `dom.$`,\nwill also have the selector as the root context.\n\n\n    {\n        context: '#myDiv'\n    }",
+            "itemtype": "property",
+            "name": "context",
+            "class": "thrust.dom.convention",
+            "module": "thrust.dom",
+            "submodule": "thrust.dom.convention"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\dom\\convention\\event.tsdoc",
+            "line": 5,
+            "description": "# __thrust/dom__ Convention - Events\n\nThe dom events convention, allows you to automatically bind events for your module.  Using this module you can bind common events like\nmouse over, click, etc, to a method or handler.\n\nThe definition can accept all of the following:\n\n* `function()` - This function will be run when the event is invoked.\n* `string` - This string must point at a function, that exists on the module definition.\n* `[function(), context]` - Where the context is the context that the function will be called with.\n* `[string, context]` - Where the context is the context that the function will be called with.\n* `[selector, function(), context]` - Where the selector is a jquery delegate selector.\n* `[selector, string, context]` - Where the selector is a jquery delegate selector.\n\n\nThe following is an example of the events block in your module...\n\n\n     events: {\n         'focus': function() { alert('Test Function'); },\n         'mouseover': 'mouseOver',\n         'click': ['li', function() { alert('Test function'); }]\n     },\n     mouseOver: function() { alert('Test Function'); },",
+            "itemtype": "property",
+            "name": "events",
+            "class": "thrust.dom.convention",
+            "module": "thrust.dom",
+            "submodule": "thrust.dom.convention"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\dom\\config.tsdoc",
+            "line": 1,
             "description": "Resolves the given properties when creating an instance of the plugin.\n\nThis is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed\nto the plugin constructor method.",
             "access": "private",
             "tagname": "",
@@ -1650,22 +2195,98 @@
             "readonly": "",
             "type": "{Array}",
             "class": "thrust.dom.config",
-            "module": "thrust.data"
+            "module": "thrust.dom"
         },
         {
-            "file": "thrust\\dom\\config.js",
-            "line": 22,
+            "file": "build\\doc\\src\\thrust\\dom\\config.tsdoc",
+            "line": 13,
             "description": "The set of conventions to load into thrust/dom.",
             "itemtype": "property",
             "name": "conventions",
             "readonly": "",
             "type": "{Array}",
             "class": "thrust.dom.config",
-            "module": "thrust.data"
+            "module": "thrust.dom"
         },
         {
-            "file": "thrust\\mediator\\convention\\autostart.js",
+            "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
+            "line": 1,
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
+            "line": 2,
+            "description": "ATTRIBUTES",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
+            "line": 5,
+            "description": "CSS",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
+            "line": 8,
+            "description": "DATA",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
+            "line": 11,
+            "description": "EFFECTS",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 14,
+            "description": "EVENTS",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
+            "line": 17,
+            "description": "INTERNALS",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
+            "line": 20,
+            "description": "MANIPULATION",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
+            "line": 23,
+            "description": "MISCELLANEOUS",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
+            "line": 26,
+            "description": "PROPERTIES",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
+            "line": 29,
+            "description": "TRAVERSING",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\mediator\\convention\\autostart.tsdoc",
+            "line": 5,
             "description": "# __thrust/mediator__ Convention - Auto Start\n\nThe auto start property allows for a module, to be automatically started once it is\nincluded into a thrust instnace, without having to explicity call start on the module.\n\n\nThis is useful for certian types of modules, usually persistant ones that always need to load regardless.\nFor example a navigation module, or user settings module.",
             "itemtype": "property",
             "name": "autoStart",
@@ -1674,8 +2295,38 @@
             "submodule": "thrust.mediator.convention"
         },
         {
-            "file": "thrust\\mediator\\config.js",
-            "line": 12,
+            "file": "build\\doc\\src\\thrust\\mediator\\convention\\container.tsdoc",
+            "line": 5,
+            "description": "# __thrust/mediator__ Convention - Container\n\nThe `container` convention allows you to define a virtual `container`, for your modules to go in.\nConceptually only one module can be in the box at once, so when one module starts, if the `container`\nalready has a module in it, that module will be shutdown and replaced by this module.\n\n\nThis convention lets you not worry about cleaning up your mess, you can just focus on what modules\nneed to start, and if you have any common modules, like a main module area, it will swap automatically.\n\n\n    container: 'main',\n\n\nAny other module that also loads with container `main` will then get loaded into the container, and the\ncurrently active module will be stopped.",
+            "itemtype": "property",
+            "name": "container",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.mediator",
+            "submodule": "thrust.mediator.convention"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\mediator\\convention\\dependent.modules.tsdoc",
+            "line": 5,
+            "description": "# __thrust/mediator__ Convention - Dependant Modules\n\nThe dependent module convention introduces two properties to a module.\n\n`dependentModules` {Array}<br />\nThese are modules that must be started along side your module, but aren't required to be stopped with your module.\nAs an example you have an alerts module, this gives you alerts at the top of your page.  Your account settings module\nmay be dependent on alerts, so it can fire events into the module, but alerts is not bound to the life cycle of your settings module.\n\n\n`childModules` {Array}<br />\nThese are modules that must be started and stopped along side your module.  An example of this would be a context module\nthat perhaps gives changes state to an object that is clicked in your module.",
+            "itemtype": "property",
+            "name": "modules",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.mediator",
+            "submodule": "thrust.mediator.convention"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\mediator\\convention\\subscription.tsdoc",
+            "line": 7,
+            "description": "# __thrust/mediator__ Convention - Subscriptions\n\nThe `subscriptions` property defines, predefined subscriptions for a module, and their appropriate definition\n\nBy default the context of the subscription method, when run, will be your module,\n    it can be optionally defined by passing in an array.\n\n\nThe definition can accept all of the following:\n\n* `function()` - This function will be run when the event is invoked.\n* `string` - This string must point at a function, that exists on the module definition.\n* `[function(), context]` - Where the context is the context that the function will be called with.\n* `[string, context]` - Where the context is the context that the function will be called with.\n\n\nThe following is an exmaple of the events block in your module...\n\n\n    subscription: {\n        'event/area/name': myMethodHere,\n        'event/area/name2': 'methodDefinedOnTheModule',\n        'event/area/name3': [myMethodHere, myMethodContext],\n        'event/area/name4': ['methondDefinedOnTheModule', myMethodContext]\n    }",
+            "itemtype": "property",
+            "name": "subscriptions",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.mediator",
+            "submodule": "thrust.mediator.convention"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\mediator\\config.tsdoc",
+            "line": 7,
             "description": "Resolves the given properties when creating an instance of the plugin.\n\nThis is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed\nto the plugin constructor method.",
             "access": "private",
             "tagname": "",
@@ -1688,8 +2339,8 @@
             "submodule": "thrust.mediator.config"
         },
         {
-            "file": "thrust\\mediator\\config.js",
-            "line": 28,
+            "file": "build\\doc\\src\\thrust\\mediator\\config.tsdoc",
+            "line": 19,
             "description": "The set of conventions to load into thrust/mediator.",
             "itemtype": "property",
             "name": "conventions",
@@ -1700,8 +2351,8 @@
             "submodule": "thrust.mediator.config"
         },
         {
-            "file": "thrust\\mediator\\main.js",
-            "line": 52,
+            "file": "build\\doc\\src\\thrust\\mediator\\main.tsdoc",
+            "line": 10,
             "description": "During the start of a mediator facade, start creates the internal subscriptions array.",
             "itemtype": "method",
             "name": "start",
@@ -1709,8 +2360,8 @@
             "module": "thrust.mediator"
         },
         {
-            "file": "thrust\\mediator\\main.js",
-            "line": 65,
+            "file": "build\\doc\\src\\thrust\\mediator\\main.tsdoc",
+            "line": 16,
             "description": "Overrides the subscribe method, and tracks the any event that is bound.",
             "itemtype": "method",
             "name": "subscribe",
@@ -1718,8 +2369,8 @@
             "module": "thrust.mediator"
         },
         {
-            "file": "thrust\\mediator\\main.js",
-            "line": 79,
+            "file": "build\\doc\\src\\thrust\\mediator\\main.tsdoc",
+            "line": 22,
             "description": "Unsubscribes from all events that were subscribed to.",
             "itemtype": "method",
             "name": "stop",
@@ -1727,8 +2378,8 @@
             "module": "thrust.mediator"
         },
         {
-            "file": "thrust\\spa\\convention\\spalink.js",
-            "line": 28,
+            "file": "build\\doc\\src\\thrust\\spa\\convention\\spalink.tsdoc",
+            "line": 5,
             "description": "# __thrust/dom__ Convention - Single Page App Link\n\nRequires thrust/dom",
             "itemtype": "property",
             "name": "spa;ink",
@@ -1737,8 +2388,8 @@
             "submodule": "thrust.dom.convention"
         },
         {
-            "file": "thrust\\spa\\convention\\start.js",
-            "line": 19,
+            "file": "build\\doc\\src\\thrust\\spa\\convention\\start.tsdoc",
+            "line": 5,
             "description": "# __thrust/spa__ Convention - Start\n\nThe single page app start convention, does the actual starting of the plugin, in addition it also delays\nfull orbit, until any module it has started has been loaded.",
             "itemtype": "property",
             "name": "start",
@@ -1747,8 +2398,8 @@
             "submodule": "thrust.spa.convention"
         },
         {
-            "file": "thrust\\spa\\config.js",
-            "line": 12,
+            "file": "build\\doc\\src\\thrust\\spa\\config.tsdoc",
+            "line": 7,
             "description": "Resolves the given properties when creating an instance of the plugin.\n\nThis is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed\nto the plugin constructor method.",
             "access": "private",
             "tagname": "",
@@ -1761,8 +2412,8 @@
             "submodule": "thrust.spa.config"
         },
         {
-            "file": "thrust\\spa\\config.js",
-            "line": 29,
+            "file": "build\\doc\\src\\thrust\\spa\\config.tsdoc",
+            "line": 19,
             "description": "The set of conventions to load into thrust/mediator.",
             "itemtype": "property",
             "name": "conventions",
@@ -1773,8 +2424,8 @@
             "submodule": "thrust.spa.config"
         },
         {
-            "file": "thrust\\spa\\config.js",
-            "line": 40,
+            "file": "build\\doc\\src\\thrust\\spa\\config.tsdoc",
+            "line": 26,
             "description": "Defines the value of custom parameters.\nYou can also define custom parameters to be a regular expression, and then use them in your routes",
             "itemtype": "property",
             "name": "params",
@@ -1785,8 +2436,8 @@
             "submodule": "thrust.spa.config"
         },
         {
-            "file": "thrust\\spa\\config.js",
-            "line": 50,
+            "file": "build\\doc\\src\\thrust\\spa\\config.tsdoc",
+            "line": 34,
             "description": "The predfined routes to be used by spa.",
             "itemtype": "property",
             "name": "routes",
@@ -1797,8 +2448,8 @@
             "submodule": "thrust.spa.config"
         },
         {
-            "file": "thrust\\spa\\config.js",
-            "line": 59,
+            "file": "build\\doc\\src\\thrust\\spa\\config.tsdoc",
+            "line": 41,
             "description": "The file exstenion that should be removed when resolving routes and starting modules.",
             "itemtype": "property",
             "name": "fileExtension",
@@ -1809,8 +2460,8 @@
             "submodule": "thrust.spa.config"
         },
         {
-            "file": "thrust\\spa\\main.js",
-            "line": 90,
+            "file": "build\\doc\\src\\thrust\\spa\\main.tsdoc",
+            "line": 10,
             "description": "Start the single page app router.",
             "itemtype": "method",
             "name": "start",
@@ -1818,8 +2469,8 @@
             "module": "thrust.spa"
         },
         {
-            "file": "thrust\\spa\\main.js",
-            "line": 102,
+            "file": "build\\doc\\src\\thrust\\spa\\main.tsdoc",
+            "line": 15,
             "description": "Navigates to the given url.",
             "itemtype": "method",
             "name": "navigate",
@@ -1834,8 +2485,96 @@
             "module": "thrust.spa"
         },
         {
-            "file": "thrust\\template\\config.js",
-            "line": 12,
+            "file": "build\\doc\\src\\thrust\\spa\\main.tsdoc",
+            "line": 21,
+            "description": "Start the single page app router.",
+            "itemtype": "method",
+            "name": "start",
+            "class": "thrust.spa.SinglePageApp",
+            "module": "thrust.spa"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\spa\\main.tsdoc",
+            "line": 26,
+            "description": "Configures the route object for the spa instance\n\nRoutes can be in 4 forms\n\n    {\n        '/path/to/:foo': 'path/to/module',\n        '/path/to/:bar': ['path/to/module1', 'path/to/module2'],\n        '/path/to/:fb': { path: 'path/to/module', args: ['args', 'to', 'hand off to start'] }\n        '/path/to/:foo/:bar': function(foo, bar){  custom handler }\n    }",
+            "itemtype": "method",
+            "name": "configureRoutes",
+            "params": [
+                {
+                    "name": "routes",
+                    "description": "Object of routes.",
+                    "type": "Object"
+                }
+            ],
+            "class": "thrust.spa.SinglePageApp",
+            "module": "thrust.spa"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\spa\\main.tsdoc",
+            "line": 41,
+            "itemtype": "method",
+            "name": "moduleStartCallback",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "modules",
+                    "description": "String to start a single module, Array to start many modules, Object to start a module with specific arguments.",
+                    "type": "String | Array | Object"
+                }
+            ],
+            "class": "thrust.spa.SinglePageApp",
+            "module": "thrust.spa"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\spa\\main.tsdoc",
+            "line": 47,
+            "description": "Hands the navigate method off to the module, so any module can trigger a navigation event.",
+            "itemtype": "method",
+            "name": "createFacade",
+            "params": [
+                {
+                    "name": "thrust",
+                    "description": "The thrust instance",
+                    "type": "thrust.Thrust"
+                },
+                {
+                    "name": "mod",
+                    "description": "The module to create the facade for",
+                    "type": "thrust.Module"
+                },
+                {
+                    "name": "facades",
+                    "description": "The facades already added for this module.",
+                    "type": "Object"
+                }
+            ],
+            "class": "thrust.spa.SinglePageApp",
+            "module": "thrust.spa"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\template\\convention\\knockout.engine.tsdoc",
+            "line": 5,
+            "description": "# __thrust/template__ Convention - Knockout Engine\n\nThe knockout engine convention is less of a convention and instead introduces a new custom knockout template engine\nThis engine takes the the same template path, that you'd use to fetch a template instead of the dom id, to fetch the template\nwhen using knockout templates by name.\n\n\nThis allows you to follow the same convention in both your modules, as you would your views and templates.",
+            "itemtype": "property",
+            "name": "templates",
+            "class": "thrust.template.convention",
+            "module": "thrust.template",
+            "submodule": "thrust.template.convention"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\template\\convention\\template.tsdoc",
+            "line": 5,
+            "description": "# __thrust/template__ Convention - Templates\n\nThe `templates` convention takes a list of template paths, that need to be fetched for this module.\nWhen the module starts, the templates will be fetched automatically by the modules code, in addition\nthe template ready method will be held until all the templates have returned with a value.\n\n\nWhen the templates have been resolved, your module will have an object on it with the values of the templates location.\nIn addition the templates object will have a get, fetch and has method, to get different templates if required further\ndown the line.",
+            "itemtype": "property",
+            "name": "templates",
+            "class": "thrust.template.convention",
+            "module": "thrust.template",
+            "submodule": "thrust.template.convention"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\template\\config.tsdoc",
+            "line": 7,
             "description": "Resolves the given properties when creating an instance of the plugin.\n\nThis is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed\nto the plugin constructor method.",
             "access": "private",
             "tagname": "",
@@ -1848,8 +2587,8 @@
             "submodule": "thrust.template.config"
         },
         {
-            "file": "thrust\\template\\config.js",
-            "line": 28,
+            "file": "build\\doc\\src\\thrust\\template\\config.tsdoc",
+            "line": 19,
             "description": "The set of conventions to load into thrust/template.",
             "itemtype": "property",
             "name": "conventions",
@@ -1860,8 +2599,8 @@
             "submodule": "thrust.template.config"
         },
         {
-            "file": "thrust\\template\\config.js",
-            "line": 39,
+            "file": "build\\doc\\src\\thrust\\template\\config.tsdoc",
+            "line": 26,
             "description": "Maps the available templates, to their appropriate module name.\n\n**precompiled is a special case, and those methods are expected to be code built functions.",
             "itemtype": "property",
             "name": "types",
@@ -1872,8 +2611,8 @@
             "submodule": "thrust.template.config"
         },
         {
-            "file": "thrust\\template\\config.js",
-            "line": 52,
+            "file": "build\\doc\\src\\thrust\\template\\config.tsdoc",
+            "line": 35,
             "description": "Maps the template evaluators, so that when creating a template for knockout, it knows how to properly output the information.",
             "itemtype": "property",
             "name": "evaluators",
@@ -1884,8 +2623,8 @@
             "submodule": "thrust.template.config"
         },
         {
-            "file": "thrust\\template\\config.js",
-            "line": 65,
+            "file": "build\\doc\\src\\thrust\\template\\config.tsdoc",
+            "line": 42,
             "description": "The default template type, used when extension isn't given.",
             "itemtype": "property",
             "name": "defaultType",
@@ -1897,8 +2636,8 @@
             "submodule": "thrust.template.config"
         },
         {
-            "file": "thrust\\template\\config.js",
-            "line": 74,
+            "file": "build\\doc\\src\\thrust\\template\\config.tsdoc",
+            "line": 50,
             "description": "The base location, relative to the application path for template location.\nIf template paths are given relative to application path, this can be left empty.",
             "itemtype": "property",
             "name": "baseUrl",
@@ -1910,8 +2649,8 @@
             "submodule": "thrust.template.config"
         },
         {
-            "file": "thrust\\template\\config.js",
-            "line": 84,
+            "file": "build\\doc\\src\\thrust\\template\\config.tsdoc",
+            "line": 59,
             "description": "Defines the extension used for templates stored on the server.",
             "itemtype": "property",
             "name": "extension",
@@ -1923,8 +2662,8 @@
             "submodule": "thrust.template.config"
         },
         {
-            "file": "thrust\\template\\config.js",
-            "line": 93,
+            "file": "build\\doc\\src\\thrust\\template\\config.tsdoc",
+            "line": 67,
             "description": "Defines the AMD paths to find the given template type",
             "itemtype": "property",
             "name": "templatePaths",
@@ -1936,8 +2675,8 @@
             "submodule": "thrust.template.config"
         },
         {
-            "file": "thrust\\template\\main.js",
-            "line": 80,
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 15,
             "description": "Gets a template from the cache if it has been fetched. False otherwise.",
             "itemtype": "method",
             "name": "get",
@@ -1956,8 +2695,8 @@
             "module": "thrust.template"
         },
         {
-            "file": "thrust\\template\\main.js",
-            "line": 88,
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 23,
             "description": "Gets a template from the cache if it has been fetched. False otherwise.",
             "itemtype": "method",
             "name": "get",
@@ -1976,8 +2715,59 @@
             "module": "thrust.template"
         },
         {
-            "file": "thrust\\template\\main.js",
-            "line": 139,
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 31,
+            "description": "Sets a template to the cache, with the given information",
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The template name",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "The template engine type",
+                    "type": "String"
+                },
+                {
+                    "name": "compiledTemplate",
+                    "description": "The compiled template method",
+                    "type": "Function"
+                },
+                {
+                    "name": "html",
+                    "description": "The template HTML.",
+                    "type": "String"
+                }
+            ],
+            "class": "thrust.template.Template",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 41,
+            "description": "Checks if the template exists in the cache.",
+            "itemtype": "method",
+            "name": "has",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The template name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Wether the template exists or not.",
+                "type": "Boolean"
+            },
+            "class": "thrust.template.Template",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 49,
             "description": "Checks if the template exists in the cache.",
             "itemtype": "method",
             "name": "has",
@@ -1996,8 +2786,94 @@
             "module": "thrust.template"
         },
         {
-            "file": "thrust\\template\\main.js",
-            "line": 207,
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 57,
+            "description": "Creates a new template given the information",
+            "itemtype": "method",
+            "name": "newTemplate",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The template name",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "The template engine type",
+                    "type": "String"
+                },
+                {
+                    "name": "html",
+                    "description": "The template HTML.",
+                    "type": "String"
+                },
+                {
+                    "name": "engine",
+                    "description": "The template engine",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The new template instance.",
+                "type": "Object"
+            },
+            "class": "thrust.template.Template",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 68,
+            "description": "Compiles a template given the html and the engine type.",
+            "itemtype": "method",
+            "name": "compile",
+            "params": [
+                {
+                    "name": "html",
+                    "description": "The html to generate the template from",
+                    "type": "String"
+                },
+                {
+                    "name": "engine",
+                    "description": "The template engine that is being used.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The compiled template method",
+                "type": "Function"
+            },
+            "class": "thrust.template.Template",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 77,
+            "description": "Fetchs a template from the server, or template store.",
+            "itemtype": "method",
+            "name": "fetch",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The template name",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "The template type if not the default",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "The promise for when the template has been loaded.",
+                "type": "Promise"
+            },
+            "class": "thrust.template.Template",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 86,
             "description": "Fetchs a template from the server, or template store.",
             "itemtype": "method",
             "name": "fetch",
@@ -2022,8 +2898,51 @@
             "module": "thrust.template"
         },
         {
-            "file": "thrust\\util\\function.js",
-            "line": 15,
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 95,
+            "description": "Creates a new template from the given DOM Node",
+            "itemtype": "method",
+            "name": "createFromDomNode",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "THe dome element.",
+                    "type": "Node"
+                }
+            ],
+            "class": "thrust.template.Template",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 103,
+            "itemtype": "method",
+            "name": "createFacade",
+            "params": [
+                {
+                    "name": "thrust",
+                    "description": "The thrust instance",
+                    "type": "thrust.Thrust"
+                },
+                {
+                    "name": "module",
+                    "description": "The module to create the facade for",
+                    "type": "thrust.Module"
+                },
+                {
+                    "name": "facades",
+                    "description": "The facades already added for this module.",
+                    "type": "Object"
+                }
+            ],
+            "class": "thrust.template.Template",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\util\\function.tsdoc",
+            "line": 5,
             "description": "A function that does nothing, or no operation.  Hence the name noop.",
             "itemtype": "method",
             "name": "noop",
@@ -2032,9 +2951,9 @@
             "submodule": "thrust.util.func"
         },
         {
-            "file": "thrust\\util\\function.js",
-            "line": 24,
-            "description": "Attempts to invoke, similar to _.invoke, but in this case it verifies that the property exist,\nand also verifies that it is a function, and not the noop method available in thrust.\n\nThe intent is a method that allows override of functions, without creating custom code.",
+            "file": "build\\doc\\src\\thrust\\util\\function.tsdoc",
+            "line": 10,
+            "description": "Attempts to invoke, similar to _.invoke, but in this case it verifies that the property exist,\n    and also verifies that it is a function, and not the noop method available in thrust.\n\n    The intent is a method that allows override of functions, without creating custom code.",
             "itemtype": "method",
             "name": "saveInvoke",
             "params": [
@@ -2061,8 +2980,8 @@
             "submodule": "thrust.util.func"
         },
         {
-            "file": "thrust\\util\\function.js",
-            "line": 69,
+            "file": "build\\doc\\src\\thrust\\util\\function.tsdoc",
+            "line": 21,
             "description": "Constructor used to beget objects that wire needs to create using new.",
             "params": [
                 {
@@ -2081,8 +3000,8 @@
             "submodule": "thrust.util.func"
         },
         {
-            "file": "thrust\\util\\function.js",
-            "line": 77,
+            "file": "build\\doc\\src\\thrust\\util\\function.tsdoc",
+            "line": 31,
             "description": "Creates an object by either invoking ctor as a function and returning the result,\nor by calling new ctor().  It uses a simple heuristic to try to guess which approach\nis the \"right\" one.",
             "params": [
                 {
@@ -2104,8 +3023,8 @@
             "submodule": "thrust.util.func"
         },
         {
-            "file": "thrust\\util\\function.js",
-            "line": 96,
+            "file": "build\\doc\\src\\thrust\\util\\function.tsdoc",
+            "line": 51,
             "description": "Flatten and filter arrays down to just the existing promises.",
             "itemtype": "method",
             "name": "flattenToPromises",
@@ -2125,8 +3044,8 @@
             "submodule": "thrust.util.func"
         },
         {
-            "file": "thrust\\util\\guid.js",
-            "line": 16,
+            "file": "build\\doc\\src\\thrust\\util\\guid.tsdoc",
+            "line": 5,
             "description": "Returns a new sudo guid, limiations in JavaScript make must more reliable guids fairly difficult to create.",
             "itemtype": "method",
             "name": "newGuid",
@@ -2139,8 +3058,8 @@
             "submodule": "thrust.util"
         },
         {
-            "file": "thrust\\util\\guid.js",
-            "line": 27,
+            "file": "build\\doc\\src\\thrust\\util\\guid.tsdoc",
+            "line": 12,
             "description": "Returns an empty guid.",
             "itemtype": "method",
             "name": "emptyGuid",
@@ -2153,8 +3072,8 @@
             "submodule": "thrust.util"
         },
         {
-            "file": "thrust\\util\\guid.js",
-            "line": 37,
+            "file": "build\\doc\\src\\thrust\\util\\guid.tsdoc",
+            "line": 18,
             "description": "Checks if the given string is a guid.",
             "itemtype": "method",
             "name": "isGuid",
@@ -2174,8 +3093,8 @@
             "submodule": "thrust.util"
         },
         {
-            "file": "thrust\\util\\guid.js",
-            "line": 48,
+            "file": "build\\doc\\src\\thrust\\util\\guid.tsdoc",
+            "line": 25,
             "description": "Checks if the Guid is an Empty Guid",
             "itemtype": "method",
             "name": "isGuidEmpty",
@@ -2195,8 +3114,29 @@
             "submodule": "thrust.util"
         },
         {
-            "file": "thrust\\util\\string.js",
-            "line": 8,
+            "file": "build\\doc\\src\\thrust\\util\\object.tsdoc",
+            "line": 5,
+            "description": "Inverts an object.  The keys become values, and the values become keys.\nDoes not do any copying.",
+            "itemtype": "method",
+            "name": "invert",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "The object to invert.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The inverted object.",
+                "type": "Object"
+            },
+            "class": "thrust.util",
+            "module": "thrust.util",
+            "submodule": "thrust.util.obj"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\util\\string.tsdoc",
+            "line": 1,
             "description": "C# style string format.",
             "itemtype": "method",
             "name": "format",
@@ -2204,8 +3144,8 @@
             "module": "thrust.util"
         },
         {
-            "file": "thrust\\util\\type.js",
-            "line": 13,
+            "file": "build\\doc\\src\\thrust\\util\\type.tsdoc",
+            "line": 5,
             "description": "Returns the type of the given Object\n\nNOTE: currently this type has been loaded from jQuery source code.",
             "itemtype": "method",
             "name": "type",
@@ -2214,8 +3154,8 @@
             "submodule": "thrust.util.type"
         },
         {
-            "file": "thrust\\util\\type.js",
-            "line": 22,
+            "file": "build\\doc\\src\\thrust\\util\\type.tsdoc",
+            "line": 12,
             "description": "Checks is the object is array like, like the aruguments object, but not a string, oe array.\njQuery objects for example would report as array like.\nAs well as knockout observable arrays report as array like.",
             "itemtype": "method",
             "name": "isArrayLike",
@@ -2235,8 +3175,8 @@
             "submodule": "thrust.util.type"
         },
         {
-            "file": "thrust\\util\\type.js",
-            "line": 35,
+            "file": "build\\doc\\src\\thrust\\util\\type.tsdoc",
+            "line": 21,
             "description": "Checks if the given object is array or array like.",
             "itemtype": "method",
             "name": "isArrayOrArrayLike",
@@ -2256,8 +3196,8 @@
             "submodule": "thrust.util.type"
         },
         {
-            "file": "thrust\\util\\url.js",
-            "line": 16,
+            "file": "build\\doc\\src\\thrust\\util\\url.tsdoc",
+            "line": 5,
             "description": "jQuery param method to encode form parameters.",
             "itemtype": "method",
             "name": "param",
@@ -2266,8 +3206,8 @@
             "submodule": "thrust.util.url"
         },
         {
-            "file": "thrust\\util\\url.js",
-            "line": 23,
+            "file": "build\\doc\\src\\thrust\\util\\url.tsdoc",
+            "line": 11,
             "description": "Cleans up double slashs in a url, used by thrust/data",
             "itemtype": "method",
             "name": "cleanUrl",
@@ -2284,8 +3224,8 @@
             "submodule": "thrust.util.url"
         },
         {
-            "file": "thrust\\util\\url.js",
-            "line": 34,
+            "file": "build\\doc\\src\\thrust\\util\\url.tsdoc",
+            "line": 18,
             "description": "Checks for existance of application path in the url, or http if the url is supposed to go to another location.",
             "itemtype": "method",
             "name": "fixupUrl",
@@ -2302,8 +3242,8 @@
             "submodule": "thrust.util.url"
         },
         {
-            "file": "thrust\\util\\when.js",
-            "line": 29,
+            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
+            "line": 5,
             "description": "when.apply, used to apply when results over a function, similar to jQuerys Deferred.\nSee for more information: [https://github.com/cujojs/when/wiki/when-apply](https://github.com/cujojs/when/wiki/when-apply)",
             "itemtype": "method",
             "name": "when.apply",
@@ -2312,8 +3252,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "thrust\\util\\when.js",
-            "line": 37,
+            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
+            "line": 12,
             "description": "when.delay, creates a promise that resolves in x ms, using setTimeout.\nSee for more information: [https://github.com/cujojs/when/wiki/when-delay](https://github.com/cujojs/when/wiki/when-delay)",
             "itemtype": "method",
             "name": "when.delay",
@@ -2322,8 +3262,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "thrust\\util\\when.js",
-            "line": 44,
+            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
+            "line": 18,
             "description": "when.timeout, creates a promise that will timeout if x ms if not resolved.\nSee for more information: [https://github.com/cujojs/when/wiki/when-timeout](https://github.com/cujojs/when/wiki/when-timeout)",
             "itemtype": "method",
             "name": "when.timeout",
@@ -2332,8 +3272,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "thrust\\util\\when.js",
-            "line": 51,
+            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
+            "line": 24,
             "description": "when.parallel\nSee for more information: [https://github.com/cujojs/when/wiki/when-parallel](https://github.com/cujojs/when/wiki/when-parallel)",
             "itemtype": "method",
             "name": "when.parallel",
@@ -2342,8 +3282,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "thrust\\util\\when.js",
-            "line": 58,
+            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
+            "line": 30,
             "description": "when.pipeline\nSee for more information: [https://github.com/cujojs/when/wiki/when-pipeline](https://github.com/cujojs/when/wiki/when-pipeline)",
             "itemtype": "method",
             "name": "when.pipeline",
@@ -2352,8 +3292,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "thrust\\util\\when.js",
-            "line": 65,
+            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
+            "line": 36,
             "description": "when.sequence\nSee for more information: [https://github.com/cujojs/when/wiki/when-sequence](https://github.com/cujojs/when/wiki/when-sequence)",
             "itemtype": "method",
             "name": "when.sequence",
@@ -2362,8 +3302,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "thrust\\util\\when.js",
-            "line": 72,
+            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
+            "line": 42,
             "description": "when.cancelable\nSee for more information: [https://github.com/cujojs/when/wiki/when-cancelable](https://github.com/cujojs/when/wiki/when-cancelable)",
             "itemtype": "method",
             "name": "when.cancelable",
@@ -2372,8 +3312,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "thrust\\capsule.js",
-            "line": 22,
+            "file": "build\\doc\\src\\thrust\\capsule.tsdoc",
+            "line": 1,
             "description": "Moves all properties, that should exist outside of the module, into a private object for holding.",
             "itemtype": "method",
             "name": "moveToThrustCache",
@@ -2400,8 +3340,8 @@
             "module": "thrust.util"
         },
         {
-            "file": "thrust\\capsule.js",
-            "line": 109,
+            "file": "build\\doc\\src\\thrust\\capsule.tsdoc",
+            "line": 19,
             "description": "Getter/Setter for convention methods.\nGets the value convention property (defined in the properties array of a facade).\nSets the value of a convention property (for storing convention configuration)",
             "params": [
                 {
@@ -2426,8 +3366,70 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\capsule.js",
-            "line": 218,
+            "file": "build\\doc\\src\\thrust\\capsule.tsdoc",
+            "line": 29,
+            "description": "Injects this module into the given thrust instance.",
+            "itemtype": "method",
+            "name": "thrustCreate",
+            "params": [
+                {
+                    "name": "thrust",
+                    "description": "The thrust instance.",
+                    "type": "Thrust"
+                }
+            ],
+            "class": "thrust.Module",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\capsule.tsdoc",
+            "line": 35,
+            "description": "Makes a call to all the modules facades\nThe order of the call depends on the order required.\nDuring the startup stage (init, start, ready) facades are called first.\nDuring the shutdown state (stop, destroy) facades are called last.\nThis allows modules to startup and shutdown will all the tools it had to begin with.",
+            "itemtype": "method",
+            "name": "thrustCall",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "method",
+                    "description": "the method to call",
+                    "type": "String"
+                },
+                {
+                    "name": "facadeAfter",
+                    "description": "calls facade methods before or after module method.",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "args",
+                    "description": "Args to be passed onto the module method.",
+                    "type": "Array"
+                }
+            ],
+            "class": "thrust.Module",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\capsule.tsdoc",
+            "line": 48,
+            "description": "Start the module, inside the thrust container it was created on.",
+            "itemtype": "method",
+            "name": "start",
+            "class": "thrust.Module",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\capsule.tsdoc",
+            "line": 53,
+            "description": "Stop the module, inside the thrust container it was created on.",
+            "itemtype": "method",
+            "name": "start",
+            "class": "thrust.Module",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\capsule.tsdoc",
+            "line": 58,
             "description": "AMD API\nload\n\nHandles fetching of a module instance.\nFormat:\nthrust/capsule!{instance}:{moduleName}",
             "itemtype": "method",
             "name": "load",
@@ -2458,8 +3460,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\config.js",
-            "line": 14,
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 7,
             "description": "This property, tells the framework if it should throw errors or not.\nIn production it's recommended not to throw errors, that way if a component fails\nthere is a chance the application can still recover.",
             "itemtype": "property",
             "name": "throwErrors",
@@ -2471,8 +3473,8 @@
             "submodule": "thrust.config"
         },
         {
-            "file": "thrust\\config.js",
-            "line": 26,
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 18,
             "description": "Tells the framework to run in async mode, this may delay start up, but will make image loading and inital running appear faster.",
             "itemtype": "property",
             "name": "async",
@@ -2484,8 +3486,8 @@
             "submodule": "thrust.config"
         },
         {
-            "file": "thrust\\config.js",
-            "line": 35,
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 26,
             "description": "Tells thrust to expose each instance as a global, this allows legacy components to utilize parts of thrust, or easily\nget at your thrust instance during debugging.",
             "itemtype": "property",
             "name": "exposeGlobals",
@@ -2497,8 +3499,60 @@
             "submodule": "thrust.config"
         },
         {
-            "file": "thrust\\config.js",
-            "line": 92,
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 35,
+            "description": "This property, gives the framework it's default path, if different than '/'",
+            "itemtype": "property",
+            "name": "url.path",
+            "readonly": "",
+            "type": "{String}",
+            "default": "\"/\"",
+            "class": "thrust.config",
+            "module": "thrust",
+            "submodule": "thrust.config"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 43,
+            "description": "This property, tells the framework how it should encode array form data.\nIn general, for ASP.NET based applications, traditional should be true.\nFor Ruby/Python based applications, this should be false.",
+            "itemtype": "property",
+            "name": "url.traditionalEncoding",
+            "readonly": "",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "thrust.config",
+            "module": "thrust",
+            "submodule": "thrust.config"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 53,
+            "description": "This lends to the log level of thrust.\n\n    ERROR: 1\n    WARN: 2\n    INFO: 3\n    DEBUG: 4",
+            "itemtype": "property",
+            "name": "log.level",
+            "readonly": "",
+            "type": "{String}",
+            "default": "1",
+            "class": "thrust.config",
+            "module": "thrust",
+            "submodule": "thrust.config"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 66,
+            "description": "This toggles enabling on or off.",
+            "itemtype": "property",
+            "name": "log.enabled",
+            "readonly": "",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "thrust.config",
+            "module": "thrust",
+            "submodule": "thrust.config"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 74,
             "description": "Plugins for thrust to load, override with your own set if you have a different set.",
             "itemtype": "property",
             "name": "plugins",
@@ -2509,8 +3563,8 @@
             "submodule": "thrust.config"
         },
         {
-            "file": "thrust\\config.js",
-            "line": 100,
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 81,
             "description": "The set of modules to preload with the inital wireup of the Thrust instance.\n\nAccepts the module path a string or the module as an object in the following format.\n  Where args will be handed off to the module life cycle methods.\n\n   {\n       path: '',\n       args: []\n   }",
             "itemtype": "property",
             "name": "modules",
@@ -2521,8 +3575,8 @@
             "submodule": "thrust.config"
         },
         {
-            "file": "thrust\\config.js",
-            "line": 116,
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 96,
             "description": "Used internally by thrust to determine if the life-cycle is controlled by thrust, or a parent instance.",
             "itemtype": "property",
             "name": "childInstance",
@@ -2533,8 +3587,8 @@
             "submodule": "thrust.config"
         },
         {
-            "file": "thrust\\config.js",
-            "line": 124,
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 103,
             "description": "Used internally by thrust to determine if thrust should control the life-cycle, or the consumer",
             "itemtype": "property",
             "name": "automaticLifecycle",
@@ -2545,8 +3599,8 @@
             "submodule": "thrust.config"
         },
         {
-            "file": "thrust\\config.js",
-            "line": 132,
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 110,
             "description": "Used internally by thrust to determin if the thrust instance should automatically start upon creation.",
             "itemtype": "property",
             "name": "autoStart",
@@ -2557,8 +3611,8 @@
             "submodule": "thrust.config"
         },
         {
-            "file": "thrust\\config.js",
-            "line": 140,
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 117,
             "description": "AMD API\nload\n\nHandles fetching of a current config for the current thrust instance, or the config of the given plugin.\nAdding the : character requests a specific config plugin.\nthrust/config!global = thrust!global:config = Thrust instance config from the instance named global.",
             "itemtype": "method",
             "name": "load",
@@ -2590,8 +3644,18 @@
             "submodule": "thrust.config"
         },
         {
-            "file": "thrust\\convention.js",
-            "line": 45,
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 13,
+            "description": "These properties are stripped off of any module, and held in a private space for other convention methods to use.",
+            "itemtype": "property",
+            "name": "properties",
+            "optional": 1,
+            "class": "thrust.Convention",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 18,
             "description": "This is called during create of a module, generally used to create a facade, that is then bound to the module.",
             "itemtype": "method",
             "name": "create",
@@ -2617,8 +3681,218 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\events.js",
-            "line": 67,
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 26,
+            "description": "This method is called during the thrust init phase, or an individual module's init phase",
+            "itemtype": "method",
+            "name": "init",
+            "optional": 1,
+            "params": [
+                {
+                    "name": "facades",
+                    "description": "The facades for the module.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A promise may be returned, to delay the next phase from begining.",
+                "type": "Promise"
+            },
+            "class": "thrust.Convention",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 34,
+            "description": "This method is called during the thrust start phase, or an individual module's start phase",
+            "itemtype": "method",
+            "name": "start",
+            "optional": 1,
+            "params": [
+                {
+                    "name": "facades",
+                    "description": "The facades for the module.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A promise may be returned, to delay the next phase from begining.",
+                "type": "Promise"
+            },
+            "class": "thrust.Convention",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 42,
+            "description": "This method is called during the thrust ready phase, or an individual module's ready phase",
+            "itemtype": "method",
+            "name": "ready",
+            "optional": 1,
+            "params": [
+                {
+                    "name": "facades",
+                    "description": "The facades for the module.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A promise may be returned, to delay the next phase from begining.",
+                "type": "Promise"
+            },
+            "class": "thrust.Convention",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 50,
+            "description": "This method is called during the thrust stop phase, or an individual module's stop phase",
+            "itemtype": "method",
+            "name": "stop",
+            "optional": 1,
+            "params": [
+                {
+                    "name": "facades",
+                    "description": "The facades for the module.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A promise may be returned, to delay the next phase from begining.",
+                "type": "Promise"
+            },
+            "class": "thrust.Convention",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 58,
+            "description": "This method is called during the thrust destroy phase, or an individual module's destroy phase",
+            "itemtype": "method",
+            "name": "destroy",
+            "optional": 1,
+            "params": [
+                {
+                    "name": "facades",
+                    "description": "The facades for the module.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A promise may be returned, to delay the next phase from begining.",
+                "type": "Promise"
+            },
+            "class": "thrust.Convention",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 66,
+            "description": "This is called during the init phase of a Thrust instance.",
+            "itemtype": "method",
+            "name": "countdown",
+            "optional": 1,
+            "params": [
+                {
+                    "name": "thrust",
+                    "description": "The thrust instance.",
+                    "type": "Thrust"
+                }
+            ],
+            "return": {
+                "description": "A promise may be returned, to delay the next phase from begining.",
+                "type": "Promise"
+            },
+            "class": "thrust.Convention",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 73,
+            "description": "This is called during the start phase of a Thrust instance.",
+            "itemtype": "method",
+            "name": "ignite",
+            "optional": 1,
+            "params": [
+                {
+                    "name": "thrust",
+                    "description": "The thrust instance.",
+                    "type": "Thrust"
+                }
+            ],
+            "return": {
+                "description": "A promise may be returned, to delay the next phase from begining.",
+                "type": "Promise"
+            },
+            "class": "thrust.Convention",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 80,
+            "description": "This is called during the ready phase of a Thrust instance.",
+            "itemtype": "method",
+            "name": "orbit",
+            "optional": 1,
+            "params": [
+                {
+                    "name": "thrust",
+                    "description": "The thrust instance.",
+                    "type": "Thrust"
+                }
+            ],
+            "return": {
+                "description": "A promise may be returned, to delay the next phase from begining.",
+                "type": "Promise"
+            },
+            "class": "thrust.Convention",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 87,
+            "description": "This is called during the stop phase of a Thrust instance.",
+            "itemtype": "method",
+            "name": "deorbit",
+            "optional": 1,
+            "params": [
+                {
+                    "name": "thrust",
+                    "description": "The thrust instance.",
+                    "type": "Thrust"
+                }
+            ],
+            "return": {
+                "description": "A promise may be returned, to delay the next phase from begining.",
+                "type": "Promise"
+            },
+            "class": "thrust.Convention",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\convention.tsdoc",
+            "line": 94,
+            "description": "This is called during the destroy phase of a Thrust instance.",
+            "itemtype": "method",
+            "name": "splashdown",
+            "optional": 1,
+            "params": [
+                {
+                    "name": "thrust",
+                    "description": "The thrust instance.",
+                    "type": "Thrust"
+                }
+            ],
+            "return": {
+                "description": "A promise may be returned, to delay the next phase from begining.",
+                "type": "Promise"
+            },
+            "class": "thrust.Convention",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 9,
             "description": "Normalizes the given events to the expected namespace.",
             "itemtype": "method",
             "name": "normalizeEvents",
@@ -2640,8 +3914,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\events.js",
-            "line": 82,
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 17,
             "description": "Trigger one or many events, firing all bound callbacks. Callbacks are\npassed the same arguments as `trigger` is, apart from the event name\n(unless you're listening on `\"all\"`, which will cause your callback to\nreceive the true name of the event as the first argument).",
             "itemtype": "method",
             "name": "_trigger",
@@ -2655,7 +3929,7 @@
                 },
                 {
                     "name": "events",
-                    "description": "The events to be fired.\ndelimited by a space.",
+                    "description": "The events to be fired.\n    delimited by a space.",
                     "type": "Object"
                 },
                 {
@@ -2666,14 +3940,14 @@
                 }
             ],
             "return": {
-                "description": "If async then returns a Promise, where the first argument contains all the returned values, as an array\nIf sync then returns an array of the return values.\nIf more than one event, returns an object of arrays or promises, with the key for each event."
+                "description": "If async then returns a Promise, where the first argument contains all the returned values, as an array\n         If sync then returns an array of the return values.\n         If more than one event, returns an object of arrays or promises, with the key for each event."
             },
             "class": "thrust.Events",
             "module": "thrust"
         },
         {
-            "file": "thrust\\events.js",
-            "line": 118,
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 33,
             "description": "Triggers all events on a node.\nAlso unbinds any node that is set to only be called once.",
             "itemtype": "method",
             "name": "triggerNodes",
@@ -2710,8 +3984,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\events.js",
-            "line": 147,
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 46,
             "description": "Invokes a trigger callback",
             "itemtype": "method",
             "name": "triggerCallback",
@@ -2740,15 +4014,15 @@
                 }
             ],
             "return": {
-                "description": "The returned value.\nFor async calls, this is a promise\nFor sync calls this is the value from the method.",
+                "description": "The returned value.\n    For async calls, this is a promise\n    For sync calls this is the value from the method.",
                 "type": "Object"
             },
             "class": "thrust.Events",
             "module": "thrust"
         },
         {
-            "file": "thrust\\events.js",
-            "line": 173,
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 59,
             "description": "Creates an async event handler",
             "itemtype": "method",
             "name": "asyncEventFactory",
@@ -2779,8 +4053,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\events.js",
-            "line": 188,
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 69,
             "description": "Resubscribes to the appropriate events",
             "itemtype": "method",
             "name": "_offProcessNode",
@@ -2825,8 +4099,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\events.js",
-            "line": 212,
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 81,
             "description": "Gets the namespace information, the real event to pass back onto the methods.",
             "itemtype": "method",
             "name": "getNamespaceData",
@@ -2847,8 +4121,152 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\facade.js",
-            "line": 66,
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 97,
+            "description": "Bind one or more space separated events, `events`, to a `callback`\nfunction. Passing `\"all\"` will bind the callback to all events fired.",
+            "itemtype": "method",
+            "name": "subscribe",
+            "params": [
+                {
+                    "name": "events",
+                    "description": "Spave seperated events",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "The callback method to be called when the events are fired.",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "The context to bind the calling function to.",
+                    "type": "Object"
+                },
+                {
+                    "name": "once",
+                    "description": "Call this event only once.",
+                    "type": "Boolean"
+                }
+            ],
+            "chainable": 1,
+            "class": "thrust.Events",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 108,
+            "description": "Bind one or more space separated events, `events`, to a `callback`\nfunction. Passing `\"all\"` will bind the callback to all events fired.\n    \nEach event will only be called once.",
+            "itemtype": "method",
+            "name": "once",
+            "params": [
+                {
+                    "name": "events",
+                    "description": "Spave seperated events",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "The callback method to be called when the events are fired.",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "The context to bind the calling function to.",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "thrust.Events",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 120,
+            "description": "Remove one or many callbacks. If `context` is null, removes all callbacks\nwith that function. If `callback` is null, removes all callbacks for the\nevent. If `event` is null, removes all bound callbacks for all events.",
+            "itemtype": "method",
+            "name": "unsubscribe",
+            "params": [
+                {
+                    "name": "events",
+                    "description": "Spave seperated events",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "The callback method to be called when the events are fired.",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "The context to bind the calling function to.",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "thrust.Events",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 131,
+            "description": "Trigger one or many events, firing all bound callbacks. Callbacks are\npassed the same arguments as `trigger` is, apart from the event name\n(unless you're listening on `\"all\"`, which will cause your callback to\nreceive the true name of the event as the first argument).",
+            "itemtype": "method",
+            "name": "fire",
+            "params": [
+                {
+                    "name": "events",
+                    "description": "The events to be fired.\n    delimited by a space.",
+                    "type": "Object"
+                },
+                {
+                    "name": "args",
+                    "description": "The arguments to pass onto the callback methods.",
+                    "optional": true,
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "If more than on event is fired, an Object of Arrays is returned.",
+                "type": "Array of Values"
+            },
+            "class": "thrust.Events",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 143,
+            "description": "Init's the Event module.\nThis is only required if you wish to use fire.async, and namespacing.",
+            "itemtype": "method",
+            "name": "initEvents",
+            "chainable": 1,
+            "class": "thrust.Events",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\events.tsdoc",
+            "line": 150,
+            "description": "Extends Events into the given object.",
+            "itemtype": "method",
+            "name": "extend",
+            "params": [
+                {
+                    "name": "to",
+                    "description": "The object ot extend events onto",
+                    "type": "Object"
+                },
+                {
+                    "name": "init",
+                    "description": "Optionally init the events.",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "class": "thrust.Events",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\facade.tsdoc",
+            "line": 23,
             "description": "Facade init\n\nCalled during the init phase of a module startup.",
             "itemtype": "method",
             "name": "init",
@@ -2859,8 +4277,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\facade.js",
-            "line": 74,
+            "file": "build\\doc\\src\\thrust\\facade.tsdoc",
+            "line": 31,
             "description": "Facade start\n\nCalled during the start phase of a module startup.",
             "itemtype": "method",
             "name": "start",
@@ -2871,8 +4289,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\facade.js",
-            "line": 82,
+            "file": "build\\doc\\src\\thrust\\facade.tsdoc",
+            "line": 39,
             "description": "Facade ready\n\nCalled during the ready phase of a module startup.",
             "itemtype": "method",
             "name": "ready",
@@ -2883,8 +4301,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\facade.js",
-            "line": 90,
+            "file": "build\\doc\\src\\thrust\\facade.tsdoc",
+            "line": 47,
             "description": "Facade stop\n\nCalled during the init phase of a module startup.",
             "itemtype": "method",
             "name": "stop",
@@ -2895,8 +4313,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\facade.js",
-            "line": 98,
+            "file": "build\\doc\\src\\thrust\\facade.tsdoc",
+            "line": 55,
             "description": "Facade destroy\n\nCalled during the destroy phase of a module startup.",
             "itemtype": "method",
             "name": "destroy",
@@ -2907,9 +4325,9 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\facade.js",
-            "line": 106,
-            "description": "AMD API\nload\n\nHandles fetching of a module instance\n\nFormat:\nthrust/capsule!{instance}:{pluginName}:{hashKey}\n\nhasKey: is a unique key, that the module shares with the facade, allows for defining dependencies\nin your define block, and get access to the modules facade.",
+            "file": "build\\doc\\src\\thrust\\facade.tsdoc",
+            "line": 63,
+            "description": "AMD API\nload\n\nHandles fetching of a module instance\n\nFormat:\nthrust/capsule!{instance}:{pluginName}:{hashKey}\n\nhasKey: is a unique key, that the module shares with the facade, allows for defining dependencies\n            in your define block, and get access to the modules facade.",
             "itemtype": "method",
             "name": "load",
             "static": 1,
@@ -2940,8 +4358,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\ignite.js",
-            "line": 43,
+            "file": "build\\doc\\src\\thrust\\ignite.tsdoc",
+            "line": 6,
             "description": "Merges a all the plugins configurations, with the default config, and then finally with\nany customized config from requirejs",
             "itemtype": "method",
             "name": "stageOne",
@@ -2956,8 +4374,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\ignite.js",
-            "line": 75,
+            "file": "build\\doc\\src\\thrust\\ignite.tsdoc",
+            "line": 13,
             "description": "Creates a thrust instance, from the given settings.\nIncluding the plugins.",
             "itemtype": "method",
             "name": "stateTwo",
@@ -2972,8 +4390,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\ignite.js",
-            "line": 183,
+            "file": "build\\doc\\src\\thrust\\ignite.tsdoc",
+            "line": 20,
             "description": "Loads up the default modules as indicated to thrust.",
             "itemtype": "method",
             "name": "stageThree",
@@ -2988,8 +4406,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\instance.js",
-            "line": 14,
+            "file": "build\\doc\\src\\thrust\\instance.tsdoc",
+            "line": 6,
             "description": "The available thrust instances\nindex by name",
             "itemtype": "property",
             "name": "instances",
@@ -2999,8 +4417,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\instance.js",
-            "line": 24,
+            "file": "build\\doc\\src\\thrust\\instance.tsdoc",
+            "line": 14,
             "description": "The loading thurst instances.\nindex by name",
             "itemtype": "property",
             "name": "loadingInstances",
@@ -3010,8 +4428,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\instance.js",
-            "line": 33,
+            "file": "build\\doc\\src\\thrust\\instance.tsdoc",
+            "line": 21,
             "description": "Gets a named thrust stance if it exists.",
             "itemtype": "method",
             "name": "getInstance",
@@ -3031,8 +4449,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\instance.js",
-            "line": 45,
+            "file": "build\\doc\\src\\thrust\\instance.tsdoc",
+            "line": 29,
             "description": "Fetchs a named thrust stance if it exists.\nThis loads asyncronously, as the instance may not be loaded",
             "itemtype": "method",
             "name": "__fetchInstance",
@@ -3054,8 +4472,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\log.js",
-            "line": 53,
+            "file": "build\\doc\\src\\thrust\\log.tsdoc",
+            "line": 14,
             "description": "Logs a debug type message using the console log method",
             "itemtype": "method",
             "name": "debug",
@@ -3063,8 +4481,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\log.js",
-            "line": 74,
+            "file": "build\\doc\\src\\thrust\\log.tsdoc",
+            "line": 19,
             "description": "Logs a info type message using the console info method if available, otherwise it uses the console log method.",
             "itemtype": "method",
             "name": "info",
@@ -3072,8 +4490,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\log.js",
-            "line": 95,
+            "file": "build\\doc\\src\\thrust\\log.tsdoc",
+            "line": 24,
             "description": "Logs a warn type message using the console warn method if available, otherwise it uses the console log method.",
             "itemtype": "method",
             "name": "warn",
@@ -3081,8 +4499,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\log.js",
-            "line": 116,
+            "file": "build\\doc\\src\\thrust\\log.tsdoc",
+            "line": 29,
             "description": "Logs a error type message using the console error method if available, otherwise it uses the console log method.",
             "itemtype": "method",
             "name": "error",
@@ -3090,8 +4508,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\log.js",
-            "line": 137,
+            "file": "build\\doc\\src\\thrust\\log.tsdoc",
+            "line": 34,
             "description": "Logs a time type message using the console time method if available, otherwise it uses the console log method.",
             "itemtype": "method",
             "name": "time",
@@ -3099,8 +4517,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\log.js",
-            "line": 162,
+            "file": "build\\doc\\src\\thrust\\log.tsdoc",
+            "line": 39,
             "description": "Logs a timeEnd type message using the console timeEnd method if available, otherwise it uses the console log method.\nCauses the timer to end, for the given message.",
             "itemtype": "method",
             "name": "timeEnd",
@@ -3108,8 +4526,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\main.js",
-            "line": 169,
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 7,
             "description": "Gets the modules arguments from the registrations.\n\nIf original args contains anything it is passed instead of the registrations.\nIf the registrations are in place it will return them.",
             "itemtype": "method",
             "name": "__getModuleArgs",
@@ -3137,8 +4555,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\main.js",
-            "line": 226,
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 28,
             "description": "Lists the module registrations.",
             "itemtype": "property",
             "name": "__moduleRegistrations",
@@ -3149,8 +4567,38 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\main.js",
-            "line": 270,
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 35,
+            "description": "Creates a new thrust module.",
+            "itemtype": "method",
+            "name": "create",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The unique module name.",
+                    "type": "String"
+                },
+                {
+                    "name": "module",
+                    "description": "The module defintion.",
+                    "type": "Object"
+                },
+                {
+                    "name": "preBuild",
+                    "description": "Has this module been prebuilt, in other words has it been created, by wire.js and needs to be injected.",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "The new module instance.",
+                "type": "Module"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 44,
             "description": "Begins the countdown to thrusts start.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "countdown",
@@ -3170,9 +4618,114 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\main.js",
-            "line": 448,
-            "description": "Begins the initalization process for a module.  This runs as part of the\ncountdown phase, during start up, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 53,
+            "description": "Begins the ingition as thrust starts up.\nLoading can be deferred by returning a promise from any convention, or module method.",
+            "itemtype": "method",
+            "name": "ignite",
+            "async": 1,
+            "params": [
+                {
+                    "name": "ignoreChild",
+                    "description": "Ignores the child instance flag, allows children to be controlled.",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "The promise of when the ingition is completed.",
+                "type": "Promise"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 62,
+            "description": "Thrust prepares for orbit.\nLoading can be deferred by returning a promise from any convention.",
+            "itemtype": "method",
+            "name": "orbit",
+            "async": 1,
+            "params": [
+                {
+                    "name": "ignoreChild",
+                    "description": "Ignores the child instance flag, allows children to be controlled.",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "The promise of when thrust is in orbit.",
+                "type": "Promise"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 71,
+            "description": "Thrust deploys components in orbit\nLoading can be deferred by returning a promise from any module method.",
+            "itemtype": "method",
+            "name": "deploy",
+            "async": 1,
+            "params": [
+                {
+                    "name": "ignoreChild",
+                    "description": "Ignores the child instance flag, allows children to be controlled.",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "The promise of when thrust has fully deployed.",
+                "type": "Promise"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 80,
+            "description": "Begins the deorbit as thrust shutdown.\nShutdown can be deferred by returning a promise from any convention, or module method.",
+            "itemtype": "method",
+            "name": "deorbit",
+            "async": 1,
+            "params": [
+                {
+                    "name": "ignoreChild",
+                    "description": "Ignores the child instance flag, allows children to be controlled.",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "The promise of when the ingition is completed.",
+                "type": "Promise"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 89,
+            "description": "Begins the splashdown as thrust shutdown.\nShutdown can be deferred by returning a promise from any convention, or module method.",
+            "itemtype": "method",
+            "name": "splashdown",
+            "async": 1,
+            "params": [
+                {
+                    "name": "ignoreChild",
+                    "description": "Ignores the child instance flag, allows children to be controlled.",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "The promise of when the ingition is completed.",
+                "type": "Promise"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 98,
+            "description": "Begins the initalization process for a module.  This runs as part of the\n\tcountdown phase, during start up, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "init",
             "params": [
@@ -3191,8 +4744,92 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\main.js",
-            "line": 644,
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 108,
+            "description": "Begins the startup process for a module.  This runs as part of the\n\tignite phase, during start up, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
+            "itemtype": "method",
+            "name": "start",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the module.  If name is null, all modules\nthat return the property autoStart will be started.",
+                    "type": "String|Array of String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "The promise of when the init is completed.",
+                "type": "Promise"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 118,
+            "description": "Begins the ready process for a module.  This runs as part of the\n\torbit phase, during ready, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
+            "itemtype": "method",
+            "name": "ready",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the module.  If name is null, all modules\nthat return the property autoStart will be started.",
+                    "type": "String|Array of String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "The promise of when the init is completed.",
+                "type": "Promise"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 128,
+            "description": "Begins the stop process for a module.  This runs as part of the\n\tdeorbit phase, during stop, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
+            "itemtype": "method",
+            "name": "stop",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the module.  If name is null, all modules\nwill be stopped.",
+                    "type": "String|Array of String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "The promise of when the stop is completed.",
+                "type": "Promise"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 138,
+            "description": "Begins the destroy process for a module.  This runs as part of the\n\tslashdown phase, during destroy, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
+            "itemtype": "method",
+            "name": "destroy",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the module.  If name is null, all modules\nwill be destroyed.",
+                    "type": "String|Array of String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "The promise of when the destroy is completed.",
+                "type": "Promise"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 148,
             "description": "Injects a preconstructed module into the thrust instance.",
             "itemtype": "method",
             "name": "__injectModule",
@@ -3209,8 +4846,87 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\main.js",
-            "line": 757,
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 155,
+            "description": "Creates a module from the given definition object, with the given name.",
+            "itemtype": "method",
+            "name": "createModule",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The module name",
+                    "type": "String"
+                },
+                {
+                    "name": "moduleDefn",
+                    "description": "The module definition",
+                    "type": "Object"
+                }
+            ],
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 162,
+            "description": "Launches another child module for thrust.",
+            "itemtype": "method",
+            "name": "spawn",
+            "params": [
+                {
+                    "name": "settings",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The promise that resolves once the child instance has fully loaded.  Resolves with the context that contains the thrust instance and all plugins that were loaded.",
+                "type": "Promise"
+            },
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 169,
+            "description": "Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.",
+            "itemtype": "method",
+            "name": "registerModule",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The module name to assign the arguments with.",
+                    "type": "String"
+                },
+                {
+                    "name": "arguments,",
+                    "description": "additional arguments that will be passed onto the moudle",
+                    "type": "Object*"
+                }
+            ],
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 176,
+            "description": "Initalizes a new Thrust instance based on the given settings.",
+            "itemtype": "method",
+            "name": "launch",
+            "static": 1,
+            "params": [
+                {
+                    "name": "settings",
+                    "description": "The module to inject",
+                    "type": "Object"
+                }
+            ],
+            "class": "thrust.Thrust",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 183,
             "description": "Gets a named thrust stance if it exists.",
             "itemtype": "method",
             "name": "getInstance",
@@ -3230,8 +4946,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\main.js",
-            "line": 768,
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 191,
             "description": "Fetchs a named thrust stance if it exists.\nThis loads asyncronously, as the instance may not be loaded",
             "itemtype": "method",
             "name": "__fetchInstance",
@@ -3253,8 +4969,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\main.js",
-            "line": 781,
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 201,
             "description": "Creates a new module and hands it off to the given instance, if that instance exists.",
             "itemtype": "method",
             "name": "createModule",
@@ -3280,8 +4996,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\main.js",
-            "line": 798,
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 210,
             "description": "Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.",
             "itemtype": "method",
             "name": "registerModule",
@@ -3307,8 +5023,8 @@
             "module": "thrust"
         },
         {
-            "file": "thrust\\main.js",
-            "line": 828,
+            "file": "build\\doc\\src\\thrust\\main.tsdoc",
+            "line": 219,
             "description": "AMD API\nload\n\nHandles fetching of a current thurst instance, by expected name.\nAdding the : character requests a specific plugin.\nthrust!global = Thrust instance\nthrust!global:dom = The thrust dom plugin instance",
             "itemtype": "method",
             "name": "load",
@@ -3342,163 +5058,343 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\data\\main.js:159"
+            "line": " build\\doc\\src\\thrust\\data\\main.tsdoc:26"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\data\\main.js:191"
+            "line": " build\\doc\\src\\thrust\\data\\main.tsdoc:36"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\data\\main.js:224"
+            "line": " build\\doc\\src\\thrust\\data\\main.tsdoc:48"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\data\\main.js:266"
+            "line": " build\\doc\\src\\thrust\\data\\main.tsdoc:60"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\data\\main.js:306"
+            "line": " build\\doc\\src\\thrust\\data\\main.tsdoc:72"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\data\\response.queue.js:56"
+            "line": " build\\doc\\src\\thrust\\data\\main.tsdoc:84"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\template\\main.js:80"
+            "line": " build\\doc\\src\\thrust\\data\\main.tsdoc:97"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\template\\main.js:88"
+            "line": " build\\doc\\src\\thrust\\data\\main.tsdoc:110"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\template\\main.js:139"
+            "line": " build\\doc\\src\\thrust\\data\\main.tsdoc:123"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\template\\main.js:207"
+            "line": " build\\doc\\src\\thrust\\data\\main.tsdoc:136"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\util\\function.js:77"
+            "line": " build\\doc\\src\\thrust\\data\\main.tsdoc:147"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\util\\function.js:96"
+            "line": " build\\doc\\src\\thrust\\data\\response.queue.tsdoc:14"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\util\\guid.js:16"
+            "line": " build\\doc\\src\\thrust\\data\\response.queue.tsdoc:24"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\util\\guid.js:27"
+            "line": " build\\doc\\src\\thrust\\template\\main.tsdoc:15"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\util\\guid.js:37"
+            "line": " build\\doc\\src\\thrust\\template\\main.tsdoc:23"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\util\\guid.js:48"
+            "line": " build\\doc\\src\\thrust\\template\\main.tsdoc:41"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\util\\type.js:22"
+            "line": " build\\doc\\src\\thrust\\template\\main.tsdoc:49"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\util\\type.js:35"
+            "line": " build\\doc\\src\\thrust\\template\\main.tsdoc:57"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\template\\main.tsdoc:68"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\template\\main.tsdoc:77"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\template\\main.tsdoc:86"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\util\\function.tsdoc:31"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\util\\function.tsdoc:51"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\util\\guid.tsdoc:5"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\util\\guid.tsdoc:12"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\util\\guid.tsdoc:18"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\util\\guid.tsdoc:25"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\util\\object.tsdoc:5"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\util\\type.tsdoc:12"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\util\\type.tsdoc:21"
         },
         {
             "message": "unknown tag: retrusn",
-            "line": " thrust\\util\\url.js:23"
+            "line": " build\\doc\\src\\thrust\\util\\url.tsdoc:11"
         },
         {
             "message": "unknown tag: retrusn",
-            "line": " thrust\\util\\url.js:34"
+            "line": " build\\doc\\src\\thrust\\util\\url.tsdoc:18"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\capsule.js:109"
+            "line": " build\\doc\\src\\thrust\\capsule.tsdoc:19"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\events.js:82"
+            "line": " build\\doc\\src\\thrust\\convention.tsdoc:26"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\events.js:147"
+            "line": " build\\doc\\src\\thrust\\convention.tsdoc:34"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\events.js:173"
+            "line": " build\\doc\\src\\thrust\\convention.tsdoc:42"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\events.js:212"
+            "line": " build\\doc\\src\\thrust\\convention.tsdoc:50"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\facade.js:66"
+            "line": " build\\doc\\src\\thrust\\convention.tsdoc:58"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\facade.js:74"
+            "line": " build\\doc\\src\\thrust\\convention.tsdoc:66"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\facade.js:82"
+            "line": " build\\doc\\src\\thrust\\convention.tsdoc:73"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\facade.js:90"
+            "line": " build\\doc\\src\\thrust\\convention.tsdoc:80"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\facade.js:98"
+            "line": " build\\doc\\src\\thrust\\convention.tsdoc:87"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\convention.tsdoc:94"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\events.tsdoc:17"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\events.tsdoc:46"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\events.tsdoc:59"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\events.tsdoc:81"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\events.tsdoc:131"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\facade.tsdoc:23"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\facade.tsdoc:31"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\facade.tsdoc:39"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\facade.tsdoc:47"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\facade.tsdoc:55"
         },
         {
             "message": "unknown tag: obsolete",
-            "line": " thrust\\facade.js:106"
+            "line": " build\\doc\\src\\thrust\\facade.tsdoc:63"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\instance.js:33"
+            "line": " build\\doc\\src\\thrust\\instance.tsdoc:21"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\instance.js:45"
+            "line": " build\\doc\\src\\thrust\\instance.tsdoc:29"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\main.js:194"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:20"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\main.js:270"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:35"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\main.js:448"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:44"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\main.js:757"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:53"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " thrust\\main.js:768"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:62"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:71"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:80"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:89"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:98"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:108"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:118"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:128"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:138"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:162"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:183"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:191"
+        },
+        {
+            "message": "Missing item type",
+            "line": " build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc:1"
+        },
+        {
+            "message": "Missing item type\nATTRIBUTES",
+            "line": " build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc:2"
+        },
+        {
+            "message": "Missing item type\nCSS",
+            "line": " build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc:5"
+        },
+        {
+            "message": "Missing item type\nDATA",
+            "line": " build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc:8"
+        },
+        {
+            "message": "Missing item type\nEFFECTS",
+            "line": " build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc:11"
+        },
+        {
+            "message": "Missing item type\nEVENTS",
+            "line": " build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc:14"
+        },
+        {
+            "message": "Missing item type\nINTERNALS",
+            "line": " build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc:17"
+        },
+        {
+            "message": "Missing item type\nMANIPULATION",
+            "line": " build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc:20"
+        },
+        {
+            "message": "Missing item type\nMISCELLANEOUS",
+            "line": " build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc:23"
+        },
+        {
+            "message": "Missing item type\nPROPERTIES",
+            "line": " build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc:26"
+        },
+        {
+            "message": "Missing item type\nTRAVERSING",
+            "line": " build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc:29"
         },
         {
             "message": "Missing item type\nConstructor used to beget objects that wire needs to create using new.",
-            "line": " thrust\\util\\function.js:69"
+            "line": " build\\doc\\src\\thrust\\util\\function.tsdoc:21"
         },
         {
             "message": "Missing item type\nCreates an object by either invoking ctor as a function and returning the result,\nor by calling new ctor().  It uses a simple heuristic to try to guess which approach\nis the \"right\" one.",
-            "line": " thrust\\util\\function.js:77"
+            "line": " build\\doc\\src\\thrust\\util\\function.tsdoc:31"
         }
     ]
 }

@@ -1,5 +1,5 @@
 define(["require", "exports", 'lodash', './function', './object', './type', './guid', './url', './string', './when', './lib/camelcase', './l2o'], function(require, exports, ______, __uFunction__, __uObject__, __uType__, __uGuid__, __uUrl__, __uString__, __uWhen__, __uLibCamelCase__, __ul2o__) {
-    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module util {*/
     var __ = ______;

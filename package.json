@@ -31,11 +31,10 @@
     "devDependencies" : {
         "grunt": "~0.4.0",
         "grunt-typescript": "git://github.com/david-driscoll/grunt-typescript.git",
-        "grunt-amd-doc": "*",
         "grunt-benchmark": "*",
         "grunt-bower-task": "*",
-        "grunt-contrib-build": "*",
         "grunt-contrib-clean": "*",
+        "grunt-contrib-copy": "*",
         "grunt-contrib-concat": "*",
         "grunt-contrib-less": "*",
         "grunt-contrib-jasmine": "*",

@@ -49,6 +49,8 @@
             
                 <li><a href="..&#x2F;classes/thrust.data.config.html">thrust.data.config</a></li>
             
+                <li><a href="..&#x2F;classes/thrust.data.convention.html">thrust.data.convention</a></li>
+            
                 <li><a href="..&#x2F;classes/thrust.data.Data.html">thrust.data.Data</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.data.DataFacade.html">thrust.data.DataFacade</a></li>
@@ -91,6 +93,8 @@
             
                 <li><a href="..&#x2F;classes/thrust.template.config.html">thrust.template.config</a></li>
             
+                <li><a href="..&#x2F;classes/thrust.template.convention.html">thrust.template.convention</a></li>
+            
                 <li><a href="..&#x2F;classes/thrust.template.Template.html">thrust.template.Template</a></li>
             
                 <li><a href="..&#x2F;classes/thrust.template.TemplateFacade.html">thrust.template.TemplateFacade</a></li>
@@ -115,6 +119,8 @@
             
                 <li><a href="..&#x2F;modules/thrust.data.config.html">thrust.data.config</a></li>
             
+                <li><a href="..&#x2F;modules/thrust.data.convention.html">thrust.data.convention</a></li>
+            
                 <li><a href="..&#x2F;modules/thrust.dom.html">thrust.dom</a></li>
             
                 <li><a href="..&#x2F;modules/thrust.dom.convention.html">thrust.dom.convention</a></li>
@@ -135,9 +141,13 @@
             
                 <li><a href="..&#x2F;modules/thrust.template.config.html">thrust.template.config</a></li>
             
+                <li><a href="..&#x2F;modules/thrust.template.convention.html">thrust.template.convention</a></li>
+            
                 <li><a href="..&#x2F;modules/thrust.util.html">thrust.util</a></li>
             
                 <li><a href="..&#x2F;modules/thrust.util.func.html">thrust.util.func</a></li>
+            
+                <li><a href="..&#x2F;modules/thrust.util.obj.html">thrust.util.obj</a></li>
             
                 <li><a href="..&#x2F;modules/thrust.util.type.html">thrust.util.type</a></li>
             
@@ -237,6 +247,27 @@
                                 
                             </li>
                         
+                            <li class="index-item property">
+                                <a href="#property_container">container</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_modules">modules</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_subscriptions">subscriptions</a>
+
+                                
+                                
+                            </li>
+                        
                     </ul>
                 </div>
             
@@ -276,7 +307,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;thrust_mediator_convention_autostart.js.html#l14"><code>thrust\mediator\convention\autostart.js:14</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_mediator_convention_autostart.tsdoc.html#l5"><code>build\doc\src\thrust\mediator\convention\autostart.tsdoc:5</code></a>
         
         </p>
 
@@ -293,6 +324,186 @@ included into a thrust instnace, without having to explicity call start on the m
 
 <p>This is useful for certian types of modules, usually persistant ones that always need to load regardless.
 For example a navigation module, or user settings module.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_container" class="property item">
+    <h3 class="name"><code>container</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_mediator_convention_container.tsdoc.html#l5"><code>build\doc\src\thrust\mediator\convention\container.tsdoc:5</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h1><strong>thrust/mediator</strong> Convention - Container</h1>
+
+<p>The <code>container</code> convention allows you to define a virtual <code>container</code>, for your modules to go in.
+Conceptually only one module can be in the box at once, so when one module starts, if the <code>container</code>
+already has a module in it, that module will be shutdown and replaced by this module.</p>
+
+<p>This convention lets you not worry about cleaning up your mess, you can just focus on what modules
+need to start, and if you have any common modules, like a main module area, it will swap automatically.</p>
+
+<pre class="code prettyprint"><code>container: 'main',
+</code></pre>
+
+<p>Any other module that also loads with container <code>main</code> will then get loaded into the container, and the
+currently active module will be stopped.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_modules" class="property item">
+    <h3 class="name"><code>modules</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_mediator_convention_dependent.modules.tsdoc.html#l5"><code>build\doc\src\thrust\mediator\convention\dependent.modules.tsdoc:5</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h1><strong>thrust/mediator</strong> Convention - Dependant Modules</h1>
+
+<p>The dependent module convention introduces two properties to a module.</p>
+
+<p><code>dependentModules</code> {Array}<br />
+These are modules that must be started along side your module, but aren't required to be stopped with your module.
+As an example you have an alerts module, this gives you alerts at the top of your page.  Your account settings module
+may be dependent on alerts, so it can fire events into the module, but alerts is not bound to the life cycle of your settings module.</p>
+
+<p><code>childModules</code> {Array}<br />
+These are modules that must be started and stopped along side your module.  An example of this would be a context module
+that perhaps gives changes state to an object that is clicked in your module.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_subscriptions" class="property item">
+    <h3 class="name"><code>subscriptions</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_mediator_convention_subscription.tsdoc.html#l7"><code>build\doc\src\thrust\mediator\convention\subscription.tsdoc:7</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h1><strong>thrust/mediator</strong> Convention - Subscriptions</h1>
+
+<p>The <code>subscriptions</code> property defines, predefined subscriptions for a module, and their appropriate definition</p>
+
+<p>By default the context of the subscription method, when run, will be your module,
+    it can be optionally defined by passing in an array.</p>
+
+<p>The definition can accept all of the following:</p>
+
+<ul>
+<li><code>function()</code> - This function will be run when the event is invoked.</li>
+<li><code>string</code> - This string must point at a function, that exists on the module definition.</li>
+<li><code>[function(), context]</code> - Where the context is the context that the function will be called with.</li>
+<li><code>[string, context]</code> - Where the context is the context that the function will be called with.</li>
+</ul>
+
+<p>The following is an exmaple of the events block in your module...</p>
+
+<pre class="code prettyprint"><code>subscription: {
+    'event/area/name': myMethodHere,
+    'event/area/name2': 'methodDefinedOnTheModule',
+    'event/area/name3': [myMethodHere, myMethodContext],
+    'event/area/name4': ['methondDefinedOnTheModule', myMethodContext]
+}
+</code></pre>
     </div>
 
     

@@ -13,6 +13,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "thrust.data.DataFacade",
         "thrust.data.ResponseQueue",
         "thrust.data.config",
+        "thrust.data.convention",
         "thrust.dom.config",
         "thrust.dom.convention",
         "thrust.instance",
@@ -29,6 +30,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "thrust.template.Template",
         "thrust.template.TemplateFacade",
         "thrust.template.config",
+        "thrust.template.convention",
         "thrust.util",
         "thrust.util.url",
         "thrust.util.when"
@@ -38,6 +40,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "thrust.config",
         "thrust.data",
         "thrust.data.config",
+        "thrust.data.convention",
         "thrust.dom",
         "thrust.dom.convention",
         "thrust.mediator",
@@ -48,8 +51,10 @@ YUI.add("yuidoc-meta", function(Y) {
         "thrust.spa.convention",
         "thrust.template",
         "thrust.template.config",
+        "thrust.template.convention",
         "thrust.util",
         "thrust.util.func",
+        "thrust.util.obj",
         "thrust.util.type",
         "thrust.util.url",
         "thrust.util.when"
@@ -74,6 +79,10 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "thrust.data.config",
             "name": "thrust.data.config",
             "description": "Provides thrust configuration"
+        },
+        {
+            "displayName": "thrust.data.convention",
+            "name": "thrust.data.convention"
         },
         {
             "displayName": "thrust.dom",
@@ -120,12 +129,20 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "Provides thrust configuration"
         },
         {
+            "displayName": "thrust.template.convention",
+            "name": "thrust.template.convention"
+        },
+        {
             "displayName": "thrust.util",
             "name": "thrust.util"
         },
         {
             "displayName": "thrust.util.func",
             "name": "thrust.util.func"
+        },
+        {
+            "displayName": "thrust.util.obj",
+            "name": "thrust.util.obj"
         },
         {
             "displayName": "thrust.util.type",

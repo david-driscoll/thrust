@@ -1,7 +1,7 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
     /// <reference path="../../interfaces/mediator/mediator.facade.d.ts" />
     /// <reference path="../../interfaces/convention.d.ts" />
-    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
     'use strict';

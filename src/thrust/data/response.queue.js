@@ -2,7 +2,7 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', './event.types
     /// <reference path="../interfaces/data/data.d.ts" />
     /// <reference path="../interfaces/module.d.ts" />
     /// <reference path="../../jquery.d.ts" />
-    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
     'use strict';

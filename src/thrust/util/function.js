@@ -1,5 +1,5 @@
 define(["require", "exports", 'lodash', './when'], function(require, exports, _____, __when__) {
-    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     //export module function {
     'use strict';

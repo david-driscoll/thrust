@@ -33,7 +33,7 @@
     @param {String} url The url to clean
     @retrusn {String} The cleaned url
     **/
-    export function cleanUrl(url) { return url.replace(doubleSlashRegex, '/'); }
+    export function cleanUrl(url : string) : string { return url.replace(doubleSlashRegex, '/'); }
 
     /**
     Checks for existance of application path in the url, or http if the url is supposed to go to another location.
@@ -42,7 +42,7 @@
     @param {String} url The url to fixup
     @retrusn {String} The fixed url
     **/
-    export function fixupUrl(url, urlPath)
+    export function fixupUrl(url : string, urlPath? : string) : string
     {
         if (url.indexOf('http') === -1)
         {

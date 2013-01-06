@@ -1,6 +1,7 @@
-define(["require", "exports", 'thrust/convention', 'thrust/util', 'jquery'], function(require, exports, __c__, __util__, __$__) {
-    /// <reference path="../../interfaces/dom/dom.facade.d.ts" />
-    /// <reference path="../../interfaces/convention.d.ts" />
+define(["require", "exports", 'thrust/convention', 'thrust/util', '../subjquery'], function(require, exports, __c__, __util__, __subjquery__) {
+    /// <reference path="../../interfaces/dom/convention/action.d.ts" />
+    /// <reference path="../../interfaces/dom/dom.d.ts" />
+    /// <reference path="../../interfaces/thrust.d.ts" />
     /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -11,25 +12,26 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', 'jquery'], fun
     var util = __util__;
 
     var _ = util._;
-    var $ = __$__;
+    var subjquery = __subjquery__;
 
-    var format = util.format, ACTIONS = 'actions', STRING = 'string', REGISTRATIONS = '_registrations', isFunction = _.isFunction, isString = _.isString, isArray = _.isArray;
+    var $ = subjquery.tQuery;
+    var format = util.format, ACTIONS = 'config.dom.actions', ACTIONSSINGLE = 'actions', STRING = 'string', REGISTRATIONS = '_registrations', isFunction = _.isFunction, isString = _.isString, isArray = _.isArray;
+    var getActionAttribute = function (eventName) {
+        return 'data-action-' + eventName;
+    };
     var ActionHandler = (function () {
         function ActionHandler() {
             this.events = {
             };
         }
-        ActionHandler.prototype.register = function (eventName, actionName, handler, context) {
+        ActionHandler.prototype.register = function (eventName, actionName, action) {
             var events = this.events;
             if(!events[eventName]) {
                 events[eventName] = {
                 };
             }
             if(!events[eventName][actionName]) {
-                events[eventName][actionName] = handler;
-                if(context) {
-                    events[eventName][actionName].context = context;
-                }
+                events[eventName][actionName] = action;
             } else {
                 throw new Error(format('The action {1} handler "{0}" has already been taken!', actionName, eventName));
             }
@@ -41,13 +43,13 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', 'jquery'], fun
             }
         };
         ActionHandler.prototype.callbackFor = function (eventName, returnResults) {
-            var events = this.events, actionAttribute = 'data-action-' + eventName, returnResultsDefined = typeof returnResults !== 'undefined';
+            var events = this.events, actionAttribute = getActionAttribute(eventName), returnResultsDefined = typeof returnResults !== 'undefined';
             return function () {
                 var attributeValue = $(this).attr(actionAttribute);
                 if(typeof attributeValue === STRING) {
-                    var method = events[eventName][attributeValue];
-                    if(method) {
-                        method.apply(method.context || this, arguments);
+                    var action = events[eventName][attributeValue];
+                    if(action) {
+                        action.handler.apply(action.context || this, arguments);
                     }
                     if(returnResultsDefined) {
                         return returnResults;
@@ -62,65 +64,104 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', 'jquery'], fun
             if(this.actionHandlers[name]) {
                 return this.actionHandlers[name];
             }
-            return new ActionHandler();
+            return (this.actionHandlers[name] = new ActionHandler());
         }
         return ActionHandler;
     })();    
+    var events = {
+        click: [
+            'a', 
+            'button', 
+            'input[type="button"]', 
+            'input[type="submit"]'
+        ],
+        dblclick: [
+            'a', 
+            'button', 
+            'input[type="button"]', 
+            'input[type="submit"]'
+        ],
+        mouseenter: [
+            ''
+        ],
+        mouseleave: [
+            ''
+        ],
+        focus: [
+            'input'
+        ],
+        blur: [
+            'input'
+        ]
+    };
+    var arrayShortHandArgsInOrder = [
+        'name', 
+        'handler', 
+        'context'
+    ];
     var methods = {
         properties: [
             ACTIONS
         ],
         ignite: function (thrust) {
             var actionHandler = ActionHandler.getFor(thrust.name);
-            $(window.document.body).on('click.' + ACTIONS, 'a, button, input[type="button"], input[type="submit"]', actionHandler.callbackFor('click', false));
-            return null;
+            thrust.dom.actionHandler = actionHandler;
+            var $body = $(window.document.body);
+            _.each(events, function (eventSelectors, eventName) {
+                // using thrust name, as callback needs to be per thrust instance
+                // in the event of multiple thrust instances.
+                $body.on(eventName + '.' + ACTIONSSINGLE + thrust.name, eventSelectors.join(getActionAttribute(eventName) + ', '), actionHandler.callbackFor(eventName, true));
+            });
         },
-        ready: function (facade, mod) {
+        deorbit: function (thrust) {
+            var actionHandler = ActionHandler.getFor(thrust.name);
+            var $body = $(window.document.body);
+            _.each(events, function (eventSelectors, eventName) {
+                $body.off('.' + ACTIONSSINGLE + thrust.name);
+            });
+        },
+        ready: function (mod, facade) {
             var actions = mod.convention(ACTIONS), actionHandler = ActionHandler.getFor(mod.thrust.name), dom = facade, moduleInstance = mod.instance;
             if(actions) {
-                for(var actionEvent in actions) {
-                    var actionCollection = actions[actionEvent];
-                    for(var actionName in actionCollection) {
-                        var action = actionCollection[actionName], args;
-                        if(isFunction(action)) {
-                            args = [
-                                actionEvent, 
-                                actionName, 
-                                action
+                _.forOwn(actions, function (actionCollection, eventName) {
+                    if(!isArray(actionCollection)) {
+                        actionCollection = [
+                            actionCollection
+                        ];
+                    } else {
+                        if(actionCollection.length && (!isArray(actionCollection[0]) || isString(actionCollection[0]))) {
+                            actionCollection = [
+                                actionCollection
                             ];
-                        } else {
-                            if(isString(action)) {
-                                args = [
-                                    actionEvent, 
-                                    actionName, 
-                                    moduleInstance[action]
-                                ];
-                            } else {
-                                if(isArray(action)) {
-                                    if(isFunction(action[0])) {
-                                        args = [
-                                            actionEvent, 
-                                            actionName
-                                        ].concat(action);
-                                    } else {
-                                        if(isString(action[0])) {
-                                            action[0] = moduleInstance[action[0]];
-                                            args = [
-                                                actionEvent, 
-                                                actionName
-                                            ].concat(action);
-                                        }
-                                    }
+                        }
+                    }
+                    _.each(actionCollection, function (action) {
+                        if(isArray(action)) {
+                            var newAction = {
+                                name: undefined
+                            };
+                            _.each(arrayShortHandArgsInOrder, function (x, i) {
+                                if(x === 'handler' && isString(action[i])) {
+                                    action[i] = mod.instance[action[i]];
                                 }
+                                newAction[x] = action[i];
+                            });
+                            action = newAction;
+                        }
+                        var actionName = action.name;
+                        if(!action.handler && action.moduleHandler) {
+                            action.handler = mod.instance[action.moduleHandler];
+                        } else {
+                            if(!action.handler) {
+                                throw new Error('Must define either a handler or module handler.');
                             }
                         }
-                        actionHandler.register.apply(actionHandler, args);
-                    }
-                }
+                        actionHandler.register(eventName, actionName, action);
+                    });
+                });
             }
-            return null;
         },
-        stop: function (facade, mod) {
+        stop: function (mod, facade) {
             var actions = mod.convention(ACTIONS), actionHandler = ActionHandler.getFor(mod.thrust.name), moduleInstance = mod.instance;
             if(actions) {
                 for(var actionEvent in actions) {
@@ -130,7 +171,6 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', 'jquery'], fun
                     }
                 }
             }
-            return null;
         }
     };
     exports.action = new Convention(methods);

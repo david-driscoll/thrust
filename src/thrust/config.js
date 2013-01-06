@@ -138,6 +138,18 @@ define(["require", "exports", './instance'], function(require, exports, __thrust
     **/
     exports.autoStart = false;
     /**
+    Define the conventions that unique to thrust, they are not specific to any one plugin.
+    
+    @property conventions
+    @readOnly
+    @type {Array}
+    **/
+    exports.conventions = [
+        'thrust/convention/container', 
+        'thrust/convention/autostart', 
+        'thrust/convention/dependent.modules'
+    ];
+    /**
     AMD API
     load
     

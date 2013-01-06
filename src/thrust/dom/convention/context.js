@@ -1,7 +1,8 @@
-define(["require", "exports", 'thrust/convention', 'thrust/util', '../jquery.interface'], function(require, exports, __c__, __util__, __jQueryInterface__) {
+define(["require", "exports", 'thrust/convention', 'thrust/util', '../subjquery'], function(require, exports, __c__, __util__, __subjquery__) {
+    /// <reference path="../../interfaces/dom/convention/context.d.ts" />
     /// <reference path="../../interfaces/mediator/mediator.d.ts" />
-    /// <reference path="../../interfaces/dom/dom.facade.d.ts" />
-    /// <reference path="../../interfaces/convention.d.ts" />
+    /// <reference path="../../interfaces/dom/dom.d.ts" />
+    /// <reference path="../../interfaces/thrust.d.ts" />
     /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -12,19 +13,19 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', '../jquery.int
     var util = __util__;
 
     var _ = util._;
-    var jQueryInterface = __jQueryInterface__;
+    var subjquery = __subjquery__;
 
-    var CONTEXT = 'context', updatejQueryInternals = jQueryInterface.updatejQueryInternals;
+    var tQuery = subjquery.tQuery;
+    var CONTEXT = 'config.dom.context';
     var methods = {
         properties: [
             CONTEXT
         ],
-        ready: function (facade, mod) {
+        ready: function (mod, facade) {
             var context = mod.convention(CONTEXT);
             if(context) {
-                updatejQueryInternals.call(facade, context);
+                mod.instance.dom = mod.instance.$ = facade.context = tQuery(context, mod.instance.$);
             }
-            return null;
         }
     };
     exports.context = new Convention(methods);

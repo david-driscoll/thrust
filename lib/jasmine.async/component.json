@@ -1,0 +1,51 @@
+{
+  "name": "jasmine.async",
+  "description": "Make Jasmine's asynchronous testing suck less.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/derickbailey/jasmine.async",
+  "keywords": [
+    "jasmine",
+    "async",
+    "unit",
+    "test",
+    "browser"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/derickbailey/jasmine.async/blob/master/readme.md"
+    }
+  ],
+  "author": {
+    "name": "Derick Bailey",
+    "email": "derickbailey@gmail.com",
+    "url": "http://derickbailey.lostechies.com"
+  },
+  "bugs": {
+    "url": "https://github.com/derickbailey/jasmine.async/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/derickbailey/jasmine.async.git"
+  },
+  "github": "https://github.com/derickbailey/jasmine.async",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-rigger": "*"
+  },
+  "volo": {
+    "url": "https://raw.github.com/derickbailey/jasmine.async/v{version}/lib/amd/jasmine.async.js",
+    "dependencies": {}
+  },
+  "jam": {
+    "dependencies": {},
+    "main": "lib/amd/jasmine.async.js",
+    "include": [
+      "lib/amd/jasmine.async.js",
+      "readme.md"
+    ]
+  },
+  "readme": "# Jasmine.Async\r\n\r\nMake Jasmine's asynchronous testing suck less.\r\n\r\n## About Jasmine.Async\r\n\r\nI love [Jasmine](http://pivotal.github.com/jasmine/). It's a great BDD-style testing framework\r\nfor browser based JavaScript, and my preferred tool for doing\r\nthat kind of work. But the asynchronous testing story in Jasmine\r\nis painful at best. \r\n\r\nThus, Jasmine.Async was born out of frustration and little bit\r\nof jealousy in how easy it is to do async tests with [Mocha](http://visionmedia.github.com/mocha/). \r\n\r\n## Basic Usage\r\n\r\n```js\r\ndescribe(\"an async spec\", function(){\r\n\r\n  // set up the async spec\r\n  var async = new AsyncSpec(this);\r\n\r\n  // run an async setup\r\n  async.beforeEach(function(done){\r\n    doSomething();\r\n\r\n    // simulate async stuff and wait 10ms\r\n    setTimeout(function(){\r\n\r\n      // more code here\r\n      doMoreStuff();\r\n \r\n      // when the async stuff is done, call `done()`\r\n      done();\r\n\r\n    }, 10); \r\n  });\r\n\r\n  // run an async cleanup\r\n  async.afterEach(function(done){\r\n    // simulate async cleanup\r\n    setTimeout(function(){\r\n\r\n      done(); // done with the async stuff\r\n\r\n    }, 10);\r\n  });\r\n\r\n  // run an async expectation\r\n  async.it(\"did stuff\", function(done){\r\n\r\n    // simulate async code again\r\n    setTimeout(function(){\r\n\r\n      expect(1).toBe(1);\r\n      \r\n      // all async stuff done, and spec asserted\r\n      done();\r\n\r\n    });    \r\n\r\n  });\r\n\r\n});\r\n```\r\n\r\n## Legal Mumbo-Jumbo (MIT License)\r\n\r\nCopyright &copy;2012 Muted Solutions, LLC. All Rights Reserved.\r\n\r\nPermission is hereby granted, free of charge, to any person \r\nobtaining a copy of this software and associated documentation \r\nfiles (the \"Software\"), to deal in the Software without \r\nrestriction, including without limitation the rights to \r\nuse, copy, modify, merge, publish, distribute, sublicense, \r\nand/or sell copies of the Software, and to permit persons \r\nto whom the Software is furnished to do so, subject to the \r\nfollowing conditions:\r\n\r\nThe above copyright notice and this permission notice shall be \r\nincluded in all copies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, \r\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES \r\nOF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND \r\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT \r\nHOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, \r\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING \r\nFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR \r\nOTHER DEALINGS IN THE SOFTWARE.\r\n",
+  "readmeFilename": "readme.md",
+  "_id": "Jasmine.Async@0.1.0"
+}

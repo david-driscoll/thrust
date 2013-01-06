@@ -1,48 +1,51 @@
 {
-    "name": "thrust-js",
-    "title": "Thrust JS Framework",
-    "author": {
-        "name": "David Driscoll"
-    },
-    "version": "0.1.0",
-    "homepage": "thrust-home",
-    "description": "Launch into a new world with thrust-js getting your application upto speed.",
-    "keywords": ["thrust"],
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "http://www.opensource.org/licenses/mit-license.php"
-        }
-    ],
-    "repositories": [
-        {
-            "type": "git",
-            "url": ""
-        }
-    ],
-    "bugs": "",
-    "maintainers": [
-        {
-            "name": "David Driscoll",
-            "web": "http://blacklite.ca"
-        }
-    ],
-    "main": "./src/main.js",
-    "devDependencies" : {
-        "grunt": "~0.4.0",
-        "grunt-typescript": "git://github.com/david-driscoll/grunt-typescript.git",
-        "grunt-benchmark": "*",
-        "grunt-bower-task": "*",
-        "grunt-contrib-clean": "*",
-        "grunt-contrib-copy": "*",
-        "grunt-contrib-concat": "*",
-        "grunt-contrib-less": "*",
-        "grunt-contrib-jasmine": "*",
-        "grunt-contrib-jshint": "*",
-        "grunt-contrib-nodeunit": "*",
-        "grunt-contrib-requirejs": "*",
-        "grunt-contrib-watch": "*",
-        "grunt-contrib-uglify": "*",
-        "grunt-contrib-yuidoc": "*"
+  "name": "thrust-js",
+  "title": "Thrust JS Framework",
+  "author": {
+    "name": "David Driscoll"
+  },
+  "version": "0.1.5",
+  "homepage": "thrust-home",
+  "description": "Launch into a new world with thrust-js getting your application upto speed.",
+  "keywords": [
+    "thrust"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
     }
-}   
+  ],
+  "repositories": [
+    {
+      "type": "git",
+      "url": ""
+    }
+  ],
+  "bugs": "",
+  "maintainers": [
+    {
+      "name": "David Driscoll",
+      "web": "http://blacklite.ca"
+    }
+  ],
+  "main": "./src/main.js",
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-typescript": "git://github.com/david-driscoll/grunt-typescript.git",
+    "grunt-benchmark": "*",
+    "grunt-bump": "git://github.com/tarcon/grunt-bump.git",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-jasmine": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-nodeunit": "*",
+    "grunt-contrib-requirejs": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-yuidoc": "*",
+    "grunt-contrib-compress": "~0.3.3"
+  }
+}

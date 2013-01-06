@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
+            <em>API Docs for: 0.1.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -195,136 +195,143 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 &#x2F;**
-    Provides thrust configuration
+Provides thrust configuration
+
+@module thrust
+@submodule thrust.config
+**&#x2F;
+&#x2F;**
+This property, tells the framework if it should throw errors or not.
+In production it&#x27;s recommended not to throw errors, that way if a component fails
+there is a chance the application can still recover.
+
+@for thrust.config
+@property throwErrors
+@readOnly
+@type {Boolean}
+@default false
+**&#x2F;
+&#x2F;**
+Tells the framework to run in async mode, this may delay start up, but will make image loading and inital running appear faster.
+
+@property async
+@readOnly
+@type {Boolean}
+@default true
+**&#x2F;
+&#x2F;**
+Tells thrust to expose each instance as a global, this allows legacy components to utilize parts of thrust, or easily
+get at your thrust instance during debugging.
+
+@property exposeGlobals
+@readOnly
+@type {Boolean}
+@default true
+**&#x2F;
+&#x2F;**
+    This property, gives the framework it&#x27;s default path, if different than &#x27;&#x2F;&#x27;
     
-    @module thrust
-    @submodule thrust.config
+    @property url.path
+    @readOnly
+    @type {String}
+    @default &quot;&#x2F;&quot;
     **&#x2F;
 &#x2F;**
-    This property, tells the framework if it should throw errors or not.
-    In production it&#x27;s recommended not to throw errors, that way if a component fails
-    there is a chance the application can still recover.
-
-    @for thrust.config
-    @property throwErrors
+    This property, tells the framework how it should encode array form data.
+    In general, for ASP.NET based applications, traditional should be true.
+    For Ruby&#x2F;Python based applications, this should be false.
+    
+    @property url.traditionalEncoding
     @readOnly
     @type {Boolean}
     @default false
     **&#x2F;
 &#x2F;**
-    Tells the framework to run in async mode, this may delay start up, but will make image loading and inital running appear faster.
+    This lends to the log level of thrust.
 
-    @property async
+        ERROR: 1
+        WARN: 2
+        INFO: 3
+        DEBUG: 4
+    
+    @property log.level
+    @readOnly
+    @type {String}
+    @default 1
+    **&#x2F;
+&#x2F;**
+    This toggles enabling on or off.
+    
+    @property log.enabled
     @readOnly
     @type {Boolean}
-    @default true
+    @default false
     **&#x2F;
 &#x2F;**
-    Tells thrust to expose each instance as a global, this allows legacy components to utilize parts of thrust, or easily
-    get at your thrust instance during debugging.
+Plugins for thrust to load, override with your own set if you have a different set.
 
-    @property exposeGlobals
-    @readOnly
-    @type {Boolean}
-    @default true
-    **&#x2F;
+@property plugins
+@readOnly
+@type {Array}
+**&#x2F;
 &#x2F;**
-        This property, gives the framework it&#x27;s default path, if different than &#x27;&#x2F;&#x27;
-        
-        @property url.path
-        @readOnly
-        @type {String}
-        @default &quot;&#x2F;&quot;
-        **&#x2F;
+* The set of modules to preload with the inital wireup of the Thrust instance.
+*
+* Accepts the module path a string or the module as an object in the following format.
+*   Where args will be handed off to the module life cycle methods.
+*
+*    {
+*        path: &#x27;&#x27;,
+*        args: []
+*    }
+*
+* @property modules
+* @readOnly
+* @type {Array}
+**&#x2F;
 &#x2F;**
-        This property, tells the framework how it should encode array form data.
-        In general, for ASP.NET based applications, traditional should be true.
-        For Ruby&#x2F;Python based applications, this should be false.
-        
-        @property url.traditionalEncoding
-        @readOnly
-        @type {Boolean}
-        @default false
-        **&#x2F;
-&#x2F;**
-        This lends to the log level of thrust.
+Used internally by thrust to determine if the life-cycle is controlled by thrust, or a parent instance.
 
-            ERROR: 1
-            WARN: 2
-            INFO: 3
-            DEBUG: 4
-        
-        @property log.level
-        @readOnly
-        @type {String}
-        @default 1
-        **&#x2F;
+@property childInstance
+@readOnly
+@type {Boolean}
+**&#x2F;
 &#x2F;**
-        This toggles enabling on or off.
-        
-        @property log.enabled
-        @readOnly
-        @type {Boolean}
-        @default false
-        **&#x2F;
-&#x2F;**
-    Plugins for thrust to load, override with your own set if you have a different set.
+Used internally by thrust to determine if thrust should control the life-cycle, or the consumer
 
-    @property plugins
-    @readOnly
-    @type {Array}
-    **&#x2F;
+@property automaticLifecycle
+@readOnly
+@type {Boolean}
+**&#x2F;
 &#x2F;**
-    * The set of modules to preload with the inital wireup of the Thrust instance.
-    *
-    * Accepts the module path a string or the module as an object in the following format.
-    *   Where args will be handed off to the module life cycle methods.
-    *
-    *    {
-    *        path: &#x27;&#x27;,
-    *        args: []
-    *    }
-    *
-    * @property modules
-    * @readOnly
-    * @type {Array}
-    **&#x2F;
+Used internally by thrust to determin if the thrust instance should automatically start upon creation.
+
+@property autoStart
+@readOnly
+@type {Boolean}
+**&#x2F;
 &#x2F;**
-    Used internally by thrust to determine if the life-cycle is controlled by thrust, or a parent instance.
+Define the conventions that unique to thrust, they are not specific to any one plugin.
 
-    @property childInstance
-    @readOnly
-    @type {Boolean}
-    **&#x2F;
+@property conventions
+@readOnly
+@type {Array}
+**&#x2F;
 &#x2F;**
-    Used internally by thrust to determine if thrust should control the life-cycle, or the consumer
+AMD API
+load
 
-    @property automaticLifecycle
-    @readOnly
-    @type {Boolean}
-    **&#x2F;
-&#x2F;**
-	Used internally by thrust to determin if the thrust instance should automatically start upon creation.
+Handles fetching of a current config for the current thrust instance, or the config of the given plugin.
+Adding the : character requests a specific config plugin.
+thrust&#x2F;config!global = thrust!global:config = Thrust instance config from the instance named global.
 
-	@property autoStart
-	@readOnly
-	@type {Boolean}
-	**&#x2F;
-&#x2F;**
-    AMD API
-    load
-
-    Handles fetching of a current config for the current thrust instance, or the config of the given plugin.
-    Adding the : character requests a specific config plugin.
-    thrust&#x2F;config!global = thrust!global:config = Thrust instance config from the instance named global.
-
-    @method load
-    @static
-    @param {String} name The name of the instance that is being fetched
-    @param {Function} parentRequire the require method to be loaded
-    @param {Function} load Allows the load to inform that AMD for the value to hand off
-    @param {Object} config The custom configuration.
-    **&#x2F;
+@method load
+@static
+@param {String} name The name of the instance that is being fetched
+@param {Function} parentRequire the require method to be loaded
+@param {Function} load Allows the load to inform that AMD for the value to hand off
+@param {Object} config The custom configuration.
+**&#x2F;
 
     </pre>
 </div>

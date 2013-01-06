@@ -1,4 +1,4 @@
-/// <reference path="interfaces/facade.d.ts" />
+/// <reference path="interfaces/thrust.d.ts" />
 /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -45,7 +45,7 @@
                 if (m && !((<any> m).convention))
                     m = thrustCache[m.mid].module;
                 if (that.__conventions) {
-                    return util.safeInvoke(that.__conventions, name, that, m);
+                    return util.safeInvoke(that.__conventions, name, m, that);
                 }
             }
         }
@@ -156,7 +156,7 @@
                 return;
             }
 
-            var thrustModuleCacheItem : IThrustModuleCacheInstance = thrustCache[hashKey] || (thrustCache[hashKey] = { facades: <IThrustModuleFacades> {}, instance: <IThrustModuleInstance> {} });
+            var thrustModuleCacheItem : IThrustModuleCacheInstance = thrustCache[hashKey] || (thrustCache[hashKey] = { facades: <IThrustModuleFacades> {}, instance: <IThrustModuleInstancePrivate> {} });
 
             var facade = thrustPlugin.createFacade(thrust, thrustModuleCacheItem.instance, thrustModuleCacheItem.facades);
                 

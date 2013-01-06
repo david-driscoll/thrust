@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
+            <em>API Docs for: 0.1.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -195,38 +195,64 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 &#x2F;**
-    @module thrust.dom
-    @submodule thrust.dom.convention
-    **&#x2F;
+@module thrust.dom
+@submodule thrust.dom.convention
+**&#x2F;
 &#x2F;**
-    * # __thrust&#x2F;dom__ Convention - Events
-    *
-    * The dom events convention, allows you to automatically bind events for your module.  Using this module you can bind common events like
-    * mouse over, click, etc, to a method or handler.
-    *
-    * The definition can accept all of the following:
-    *
-    * * &#x60;function()&#x60; - This function will be run when the event is invoked.
-    * * &#x60;string&#x60; - This string must point at a function, that exists on the module definition.
-    * * &#x60;[function(), context]&#x60; - Where the context is the context that the function will be called with.
-    * * &#x60;[string, context]&#x60; - Where the context is the context that the function will be called with.
-    * * &#x60;[selector, function(), context]&#x60; - Where the selector is a jquery delegate selector.
-    * * &#x60;[selector, string, context]&#x60; - Where the selector is a jquery delegate selector.
-    *
-    *
-    * The following is an example of the events block in your module...
-    *
-    *
-    *      events: {
-    *          &#x27;focus&#x27;: function() { alert(&#x27;Test Function&#x27;); },
-    *          &#x27;mouseover&#x27;: &#x27;mouseOver&#x27;,
-    *          &#x27;click&#x27;: [&#x27;li&#x27;, function() { alert(&#x27;Test function&#x27;); }]
-    *      },
-    *      mouseOver: function() { alert(&#x27;Test Function&#x27;); },
-    *
-    * @for thrust.dom.convention
-    * @property events
-    **&#x2F;
+* # __thrust&#x2F;dom__ Convention - Events
+*
+* The dom events convention, allows you to automatically bind events for your module.  Using this module you can bind common events like
+* mouse over, click, etc, to a method or handler.
+*
+* The definition can accept all of the following:
+*
+*     {
+*         name: &#x27;actionName&#x27;,
+*         handler: Function, the function to be invoked.
+*         moduleHandler: string name of the property on the module that contains this function.
+*         context: context to call the function with (this will override the default context set by the underling dom engine)
+*         selector: Optional the deglegate selector to apply for this event.
+*         data: Optional data that will be available in the event object.
+*     }
+*
+*
+* The definitions also accept a short hand array:
+*
+*     [{, selector} {, data}, handler {, context}]
+*    
+* The following is an example of the events block in your module...
+*
+*     config: {
+*         dom: {
+*             events: {
+*                 &#x27;click&#x27;: [{
+*                     handler:  function()
+*                     {
+*                         alert(&#x27;My awesome alert here!&#x27;);
+*                     }
+*                 }],
+*                 &#x27;focus&#x27;: [{
+*                     moduleHandler: &#x27;mouseOver&#x27;,
+*                 },{
+*                     selector: &#x27;li&#x27;,
+*                     handler: function()
+*                     {
+*                         alert(&#x27;Test function&#x27;);
+*                     },
+*                 },[&#x27;actionString&#x27;, someObject]
+*                 }]
+*             }
+*         }
+*     },
+*     actionString: function()
+*     {
+*         alert(&#x27;My awesome alert here!&#x27;);
+*     }
+*
+*
+* @for thrust.dom.convention
+* @property events
+**&#x2F;
 
     </pre>
 </div>

@@ -1,6 +1,6 @@
 ﻿interface Promise
 {
-	then(onFulfilled?: Function,
+	then(onFulfilled: Function,
 		onRejected?: Function,
 		onProgress?: Function): Promise;
 
@@ -62,13 +62,21 @@ interface IWhen
 		onProgress?: Function): Promise;
 
 	map(promise: Promise,
-		fn: Function): Promise;
+		fn: () => any): Promise;
+	map(promise: Promise,
+		fn: (item) => any): Promise;
 	map(promiseOrValue: any,
-		fn: Function): Promise;
+		fn: () => any): Promise;
+	map(promiseOrValue: any,
+		fn: (item) => any): Promise;
 	map(promises: Promise[],
-		fn: Function): Promise;
+		fn: () => any): Promise;
+	map(promises: Promise[],
+		fn: (item) => any): Promise;
 	map(promisesOrValues: any[],
-		fn: Function): Promise;
+		fn: () => any): Promise;
+	map(promisesOrValues: any[],
+		fn: (item) => any): Promise;
 
 	reduce(promise: Promise,
 		fn: Function,

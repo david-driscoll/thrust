@@ -1,6 +1,7 @@
 ﻿/// <reference path="../when.d.ts" />
 interface WhenDelay
 {
+	(msec: number): Promise;
 	(promise: Promise, msec: number): Promise;
 	(promiseOrValue: any, msec: number): Promise;
 }

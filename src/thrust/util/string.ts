@@ -16,12 +16,11 @@
     @for thrust.util
     @method format
     **/
-    export function format(str, ...args : any[]) : string
+    export function format(str, ...formatArgs : any[]) : string
     {
-        var args = slice.call(arguments, 1);
-        if (typeof args[0] === 'object')
+        if (typeof formatArgs[0] === 'object')
         {
-            var a = args[0];
+            var a = formatArgs[0];
             return str.replace(objectCurlyRegex, function (m, n)
             {
                 if (m == '{{') { return '{'; }
@@ -33,7 +32,7 @@
         {
             if (m == '{{') { return '{'; }
             if (m == '}}') { return '}'; }
-            return args[n] || '';
+            return formatArgs[n] || '';
         });
     }
 

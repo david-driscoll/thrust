@@ -1,7 +1,5 @@
 define(["require", "exports", 'thrust/util', 'thrust', 'thrust/log', 'has', 'flatiron/director', 'thrust/instance', './config'], function(require, exports, __util__, __thrust__, __log__, __has__, __flatironRouter__, __instance__, __config__) {
     /// <reference path="../interfaces/spa/spa.d.ts" />
-    /// <reference path="../interfaces/spa/spa.facade.d.ts" />
-    /// <reference path="../interfaces/spa/spa.config.d.ts" />
     /// <reference path="../interfaces/mediator/mediator.d.ts" />
     /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)

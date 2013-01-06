@@ -12,13 +12,12 @@ define(["require", "exports"], function(require, exports) {
     @method format
     **/
     function format(str) {
-        var args = [];
+        var formatArgs = [];
         for (var _i = 0; _i < (arguments.length - 1); _i++) {
-            args[_i] = arguments[_i + 1];
+            formatArgs[_i] = arguments[_i + 1];
         }
-        var args = slice.call(arguments, 1);
-        if(typeof args[0] === 'object') {
-            var a = args[0];
+        if(typeof formatArgs[0] === 'object') {
+            var a = formatArgs[0];
             return str.replace(objectCurlyRegex, function (m, n) {
                 if(m == '{{') {
                     return '{';
@@ -36,7 +35,7 @@ define(["require", "exports"], function(require, exports) {
             if(m == '}}') {
                 return '}';
             }
-            return args[n] || '';
+            return formatArgs[n] || '';
         });
     }
     exports.format = format;

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
+            <em>API Docs for: 0.1.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -219,7 +219,7 @@
 	 * @param ctor {Function} real constructor to be invoked
 	 * @param args {Array} arguments to be supplied to ctor
 	 *&#x2F;
-    function Begetter(ctor, args)
+    function DynamiclyCreated(ctor, args)
     {
         return ctor.apply(this, args);
     }
@@ -235,12 +235,12 @@
 	 * @returns The result of invoking ctor with args, with or without new, depending on
 	 * the strategy selected.
 	 *&#x2F;
-    export function instantiate(ctor, args)
+    export function instantiate(ctor, args, name)
     {
-        Begetter.prototype = ctor.prototype;
-        Begetter.prototype.constructor = ctor;
-        var begotten = new Begetter(ctor, args);
-        Begetter.prototype = void 0;
+        DynamiclyCreated.prototype = ctor.prototype;
+        DynamiclyCreated.prototype.constructor = ctor;
+        var begotten = new DynamiclyCreated(ctor, args);
+        DynamiclyCreated.prototype = void 0;
         return begotten;
     }
 

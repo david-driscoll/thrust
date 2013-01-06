@@ -1,5 +1,6 @@
-/// <reference path="../../interfaces/dom/dom.facade.d.ts" />
-/// <reference path="../../interfaces/convention.d.ts" />
+/// <reference path="../../interfaces/dom/convention/action.d.ts" />
+/// <reference path="../../interfaces/dom/dom.d.ts" />
+/// <reference path="../../interfaces/thrust.d.ts" />
 /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -12,44 +13,24 @@
 	import util = module('thrust/util');
 	var _ = util._;
 
-	import $ = module('jquery');
+	import subjquery = module('../subjquery');
+	var $ = subjquery.tQuery;
 
     var format     = util.format,
-        ACTIONS    = 'actions',
+        ACTIONS    = 'config.dom.actions',
+        ACTIONSSINGLE = 'actions',
         STRING     = 'string',
 		REGISTRATIONS = '_registrations',
         isFunction = _.isFunction,
         isString   = _.isString,
         isArray    = _.isArray;
 
-    interface IActionHandlerCollection
-    {
-    	[name: string]: IActionHandler;
-    }
-    interface IActionHandler
-    {
-    	register(eventName: string, acionName: string, handler: Function, context: any): void;
-    	unregister(eventName: string, acionName: string): void;
-    	callbackFor(eventName, returnResults): Function;
-    }
+    var getActionAttribute = function (eventName) { return 'data-action-' + eventName; };
 
-    interface IActionHandlerEventCollection
+        class ActionHandler implements IThrustDomActionHandler
     {
-    	[event: string]: IActionHandlerEvent;
-    }
-	interface IActionHandlerEvent
-    {
-		[action: string]: IActionHandlerEventAction;
-    }
-	interface IActionHandlerEventAction extends Function
-	{
-		context: any;
-	}
-
-    class ActionHandler implements IActionHandler
-    {
-    	public events: IActionHandlerEventCollection = {};
-    	public register(eventName: string, actionName: string, handler: Function, context: any): void
+    	public events: IThrustDomActionHandlerEventCollection = {};
+    	public register(eventName: string, actionName: string, action : IDomActionEvent): void
     	{
     		var events = this.events;
 			if (!events[eventName])
@@ -57,9 +38,7 @@
 
     		if (!events[eventName][actionName])
     		{
-    			events[eventName][actionName] = <IActionHandlerEventAction> handler;
-    			if (context)
-					events[eventName][actionName].context = context;
+    			events[eventName][actionName] = action;
     		}
     		else
     			throw new Error(format('The action {1} handler "{0}" has already been taken!', actionName, eventName));
@@ -77,7 +56,7 @@
     	public callbackFor(eventName : string, returnResults): Function
     	{
 			var events = this.events,
-				actionAttribute = 'data-action-' + eventName,
+				actionAttribute = getActionAttribute(eventName),
 				returnResultsDefined = typeof returnResults !== 'undefined';
 
     		return function ()
@@ -85,9 +64,9 @@
     			var attributeValue = $(this).attr(actionAttribute);
     			if (typeof attributeValue === STRING)
     			{
-    				var method = events[eventName][attributeValue];
-    				if (method)
-    					method.apply(method.context || this, arguments);
+    				var action = events[eventName][attributeValue];
+    				if (action)
+    					action.handler.apply(action.context || this, arguments);
     				if (returnResultsDefined)
     					return returnResults;
     				return false;
@@ -95,12 +74,12 @@
     		};
     	}
 
-    	public static actionHandlers: IActionHandlerCollection = {};
-    	public static getFor(name: string) : IActionHandler
+    	public static actionHandlers: IThrustDomActionHandlerCollection = {};
+    	public static getFor(name: string) : IThrustDomActionHandler
     	{
 			if (this.actionHandlers[name])
 				return this.actionHandlers[name];
-			return new ActionHandler();
+			return (this.actionHandlers[name] = new ActionHandler());
     	}
     }
     /**
@@ -116,16 +95,26 @@
     *
     *## Supported events
     * * `click`
+	* * `dblclick`
+	* * `mouseenter`
+	* * `mouseleave`
+	* * `focus`
+	* * `blur`
     *
     * NOTE: More events will be added when they make sense to add them.
     *
     *
-    * The definition can accept all of the following:
+    * The definitions accept an object with the following format.
+	*
+	*     {
+	*         name: 'actionName',
+	*         handler: {Function|string of Function name on the module}
+	*         context: context to call the function with.
+	*     }
     *
-    * * `function()` - This function will be run when the action is invoked.
-    * * `string` - This string must point at a function, that exists on the module definition.
-    * * `[function(), context]` - Where the context is the context that the function will be called with.
-    * * `[string, context]` - Where the context is the context that the function will be called with.
+    * The definitions also accept a short hand array:
+    *
+    *     [name, handler {, context}]
     *
     *
     * The definition that is used to define an action is below...
@@ -133,18 +122,29 @@
     * NOTE: The below is written as if it were part of a module definition.
     *
     *
-    *     actions: {
-    *         'click': {
-    *             'doFunction': function()
-    *             {
-    *                 alert('My awesome alert here!');
-    *             },
-    *             'doString': 'actionString',
-    *             'doContextFunction': [function()
-    *             {
-    *                 alert('My awesome alert here!');
-    *             }, context],
-    *             'doString': ['actionString', context],
+    *     config: {
+    *         dom: {
+	*             actions: {
+    *                'click': [{
+	*                     name: 'doFunction',
+	*                     handler:  function()
+    *                     {
+    *                          alert('My awesome alert here!');
+    *                     }
+	*                 },['doString','actionString'],
+	*                 },{
+    *                     name: 'doContextFunction'
+	*                     handler: function()
+    *                     {
+    *                         alert('My awesome alert here!');
+    *                     },
+	*                     context: someObject
+	*                 },{
+    *                     name: 'doString',
+	*                     handler: 'actionString',
+	*                     context: someObject
+    *                 }]
+    *             }
     *         }
     *     },
     *     actionString: function()
@@ -152,70 +152,108 @@
     *         alert('My awesome alert here!');
     *     }
     *
-    * To utlize the action, simply add a `data-action-{event}` attribute, with the name of the action as the va;ie to any of the following elements:
+    * To utlize the action, simply add a `data-action-{event}` attribute, with the name of the action as the value to any of the following elements:
     *
-    * * `a`
-    * * `button`
-    * * `input[type="button"]`
-    * * `input[type="submit"]`
+	* * click/dblclick:
+    * ** `a`
+    * ** `button`
+    * ** `input[type="button"]`
+    * ** `input[type="submit"]`
+	* * mouseenter/mouseleave:
+	* ** <any>
+	* * focus/blur:
+	* ** input
     *
     * @for thrust.dom.convention
     * @property actions
     **/
-    interface IThrustConventionDomAction extends IThrustConventionProperties, IThrustConventionIgnite, IThrustConventionReady, IThrustConventionStop {}
+    interface IThrustConventionDomAction extends IThrustConvention.Properties,
+        IThrustConvention.Ignite.Void,
+        IThrustConvention.Deorbit.Void,
+        IThrustConvention.Plugin.Ready.Void,
+        IThrustConvention.Plugin.Stop.Void {}
+
+    var events = {
+		click: ['a', 'button', 'input[type="button"]', 'input[type="submit"]'],
+		dblclick: ['a', 'button', 'input[type="button"]', 'input[type="submit"]'],
+		mouseenter: [''],
+		mouseleave: [''],
+		focus: ['input'],
+		blur: ['input'],
+    }
+
+    var arrayShortHandArgsInOrder = ['name', 'handler', 'context'];
 
     var methods : IThrustConventionDomAction = {
         properties: [ACTIONS],
-        ignite: function(thrust: IThrust): Promise
+        ignite: function(thrust: IThrust): void
         {
         	var actionHandler = ActionHandler.getFor(thrust.name);
-        	$(window.document.body).on('click.' + ACTIONS, 'a, button, input[type="button"], input[type="submit"]', actionHandler.callbackFor('click', false));
-            return null;
+        	thrust.dom.actionHandler = actionHandler;
+
+        	var $body = $(window.document.body);
+        	_.each(events, function (eventSelectors : string[], eventName : string)
+        	{
+                // using thrust name, as callback needs to be per thrust instance
+                // in the event of multiple thrust instances.
+				$body.on(eventName + '.' + ACTIONSSINGLE + thrust.name,
+					eventSelectors.join(getActionAttribute(eventName) + ', '),
+					actionHandler.callbackFor(eventName, true)
+				);
+        	});
         },
-        ready: function (facade : IThrustDomFacade, mod: IThrustModule) : Promise
+        deorbit: function(thrust: IThrust): void
         {
-            var actions = mod.convention(ACTIONS),
+        	var actionHandler = ActionHandler.getFor(thrust.name);
+
+        	var $body = $(window.document.body);
+        	_.each(events, function (eventSelectors : string[], eventName : string)
+        	{
+        	    $body.off('.' + ACTIONSSINGLE + thrust.name);
+        	});
+        },
+        ready: function (mod: IThrustModule, facade : IThrustDomFacade) : void
+        {
+            var actions : IDomActionsConfig = mod.convention(ACTIONS),
 				actionHandler = ActionHandler.getFor(mod.thrust.name),
                 dom = facade,
                 moduleInstance = mod.instance;
 
             if (actions)
             {
-                for (var actionEvent in actions)
-                {
-                    var actionCollection = actions[actionEvent];
-                    for (var actionName in actionCollection)
-                    {
-                        var action = actionCollection[actionName],
-                            args;
+            	_.forOwn(actions, function (actionCollection: IDomActionEvent[], eventName : string)
+            	{
+                    if (!isArray(actionCollection))
+                        actionCollection = [<any> actionCollection];
+                    else if (actionCollection.length && (!isArray(actionCollection[0]) || isString(actionCollection[0])))
+                        actionCollection = [<any> actionCollection];
 
-                        if (isFunction(action))
-                        {
-                            args = [actionEvent, actionName, action];
-                        }
-                        else if (isString(action))
-                        {
-                            args = [actionEvent, actionName, moduleInstance[action]];
-                        }
-                        else if (isArray(action))
-                        {
-                            if (isFunction(action[0]))
-                            {
-                                args = [actionEvent, actionName].concat(action);
-                            }
-                            else if (isString(action[0]))
-                            {
-                                action[0] = moduleInstance[action[0]];
-                                args = [actionEvent, actionName].concat(action);
-                            }
-                        }
-                        actionHandler.register.apply(actionHandler, args);
-                    }
-                }
+            		_.each(actionCollection, function (action : IDomActionEvent)
+            		{
+            		    if (isArray(action))
+            		    {
+            		        var newAction : IDomActionEvent = { name: undefined };
+            		        _.each(arrayShortHandArgsInOrder, function (x, i)
+            		        {
+                                if (x === 'handler' && isString(action[i]))
+                                    action[i] = mod.instance[action[i]];
+            		            newAction[x] = action[i];
+            		        });
+            		        action = newAction;
+            		    }
+            		    
+                        var actionName = action.name;
+                        if (!action.handler && action.moduleHandler)
+                            action.handler = mod.instance[action.moduleHandler];
+                        else if (!action.handler)
+                            throw new Error('Must define either a handler or module handler.')
+
+            		    actionHandler.register(eventName, actionName, action);
+            		})
+            	})
             }
-            return null;
         },
-        stop: (facade : IThrustDomFacade, mod: IThrustModule) : Promise
+        stop: (mod: IThrustModule, facade : IThrustDomFacade) : void
         {
             var actions = mod.convention(ACTIONS),
 				actionHandler = ActionHandler.getFor(mod.thrust.name),
@@ -232,7 +270,6 @@
                     }
                 }
             }
-            return null;
         }
     };
     export var action = new Convention(methods);

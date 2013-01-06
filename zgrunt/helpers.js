@@ -228,15 +228,26 @@ function buildTestRequireSettings(grunt, metadata, integrated)
         updatePaths(null, metadata.thrust.fileVersionFormat + '.min');
         grunt.file.write('./require.settings-release-min-test.js', 'require.config(' + JSON.stringify(settings) + ')');
     }
-    else
+    else if (integrated === 'all')
     {
         updatePaths('debug/', 'thrust.all', true);
-        grunt.file.write('./require.settings-debug-integrated-test.js', 'require.config(' + JSON.stringify(settings) + ')');
+        grunt.file.write('./require.settings-debug-all-test.js', 'require.config(' + JSON.stringify(settings) + ')');
 
         updatePaths(null, 'thrust.all' + metadata.thrust.fileVersionFormat, true);
-        grunt.file.write('./require.settings-release-integrated-test.js', 'require.config(' + JSON.stringify(settings) + ')');
+        grunt.file.write('./require.settings-release-all-test.js', 'require.config(' + JSON.stringify(settings) + ')');
 
         updatePaths(null, 'thrust.all' + metadata.thrust.fileVersionFormat + '.min', true);
+        grunt.file.write('./require.settings-release-all-min-test.js', 'require.config(' + JSON.stringify(settings) + ')');
+    }
+    else
+    {
+        updatePaths('debug/', 'thrust.all.libraries', true);
+        grunt.file.write('./require.settings-debug-integrated-test.js', 'require.config(' + JSON.stringify(settings) + ')');
+
+        updatePaths(null, 'thrust.all.libraries' + metadata.thrust.fileVersionFormat, true);
+        grunt.file.write('./require.settings-release-integrated-test.js', 'require.config(' + JSON.stringify(settings) + ')');
+
+        updatePaths(null, 'thrust.all.libraries' + metadata.thrust.fileVersionFormat + '.min', true);
         grunt.file.write('./require.settings-release-integrated-min-test.js', 'require.config(' + JSON.stringify(settings) + ')');
     }
 }
@@ -288,7 +299,7 @@ function buildExampleSettings(grunt, metadata)
         {
             releaseSettings.paths[i] = '../../dist/' + x.replace(/\//gi, '.');
             releaseMinSettings.paths[i] = '../../dist/' + x.replace(/\//gi, '.') + '.min';
-            integratedSettings.paths[i] = grunt.template.process('../../dist/thrust.all.' + metadata.thrust.fileVersionFormat + '.min');
+            integratedSettings.paths[i] = grunt.template.process('../../dist/thrust.all.libraries.' + metadata.thrust.fileVersionFormat + '.min');
         }
     });
 

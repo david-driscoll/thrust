@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
+            <em>API Docs for: 0.1.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -254,6 +254,20 @@
                                 
                             </li>
                         
+                            <li class="index-item property">
+                                <a href="#property_templates">templates</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_templates">templates</a>
+
+                                
+                                
+                            </li>
+                        
                     </ul>
                 </div>
             
@@ -268,6 +282,108 @@
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_templates" class="property item">
+    <h3 class="name"><code>templates</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_interfaces_template_convention_knockout.engine.d.tsdoc.html#l5"><code>build\doc\src\thrust\interfaces\template\convention\knockout.engine.d.tsdoc:5</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h1><strong>thrust/template</strong> Convention - Knockout Engine</h1>
+
+<p>The knockout engine convention is less of a convention and instead introduces a new custom knockout template engine
+This engine takes the the same template path, that you'd use to fetch a template instead of the dom id, to fetch the template
+when using knockout templates by name.</p>
+
+<p>This allows you to follow the same convention in both your modules, as you would your views and templates.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_templates" class="property item">
+    <h3 class="name"><code>templates</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_interfaces_template_convention_template.d.tsdoc.html#l5"><code>build\doc\src\thrust\interfaces\template\convention\template.d.tsdoc:5</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h1><strong>thrust/template</strong> Convention - Templates</h1>
+
+<p>The <code>templates</code> convention takes a list of template paths, that need to be fetched for this module.
+When the module starts, the templates will be fetched automatically by the modules code, in addition
+the template ready method will be held until all the templates have returned with a value.</p>
+
+<p>When the templates have been resolved, your module will have an object on it with the values of the templates location.
+In addition the templates object will have a get, fetch and has method, to get different templates if required further
+down the line.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="property_templates" class="property item">

@@ -1862,6 +1862,7 @@ declare module 'lodash' {
 	* the wrapper to execute code before and after the function runs, adjust the arguments, and execute it
 	* conditionally.
 	**/
+	export function wrap(fn: Function, wrapper: (fn: Function) => any): Function;
 	export function wrap(fn: Function, wrapper: (fn: Function, ...args: any[]) => any): Function;
 
 	/**

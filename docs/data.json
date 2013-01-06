@@ -2,10 +2,39 @@
     "project": {
         "name": "thrust-js",
         "description": "Launch into a new world with thrust-js getting your application upto speed.",
-        "version": "0.1.0",
+        "version": "0.1.5",
         "url": "thrust-home"
     },
     "files": {
+        "build\\doc\\src\\thrust\\convention\\autostart.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\convention\\autostart.tsdoc",
+            "modules": {
+                "thrust.mediator.convention": 1
+            },
+            "classes": {},
+            "fors": {
+                "thrust.mediator.convention": 1
+            },
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\convention\\container.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\convention\\container.tsdoc",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "thrust.mediator.convention": 1
+            },
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\convention\\dependent.modules.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\convention\\dependent.modules.tsdoc",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "thrust.mediator.convention": 1
+            },
+            "namespaces": {}
+        },
         "build\\doc\\src\\thrust\\data\\convention\\start.tsdoc": {
             "name": "build\\doc\\src\\thrust\\data\\convention\\start.tsdoc",
             "modules": {
@@ -118,32 +147,43 @@
             "fors": {},
             "namespaces": {}
         },
-        "build\\doc\\src\\thrust\\mediator\\convention\\autostart.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\mediator\\convention\\autostart.tsdoc",
+        "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\spalink.d.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\spalink.d.tsdoc",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "thrust.dom.convention": 1
+            },
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\start.d.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\start.d.tsdoc",
             "modules": {
-                "thrust.mediator.convention": 1
+                "thrust.spa.convention": 1
             },
             "classes": {},
             "fors": {
-                "thrust.mediator.convention": 1
-            },
-            "namespaces": {}
-        },
-        "build\\doc\\src\\thrust\\mediator\\convention\\container.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\mediator\\convention\\container.tsdoc",
-            "modules": {},
-            "classes": {},
-            "fors": {
-                "thrust.mediator.convention": 1
+                "thrust.spa.convention": 1
             },
             "namespaces": {}
         },
-        "build\\doc\\src\\thrust\\mediator\\convention\\dependent.modules.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\mediator\\convention\\dependent.modules.tsdoc",
+        "build\\doc\\src\\thrust\\interfaces\\template\\convention\\knockout.engine.d.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\knockout.engine.d.tsdoc",
+            "modules": {
+                "thrust.template.convention": 1
+            },
+            "classes": {},
+            "fors": {
+                "thrust.template.convention": 1
+            },
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\interfaces\\template\\convention\\template.d.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\template.d.tsdoc",
             "modules": {},
             "classes": {},
             "fors": {
-                "thrust.mediator.convention": 1
+                "thrust.template.convention": 1
             },
             "namespaces": {}
         },
@@ -191,9 +231,7 @@
         },
         "build\\doc\\src\\thrust\\spa\\convention\\start.tsdoc": {
             "name": "build\\doc\\src\\thrust\\spa\\convention\\start.tsdoc",
-            "modules": {
-                "thrust.spa.convention": 1
-            },
+            "modules": {},
             "classes": {},
             "fors": {
                 "thrust.spa.convention": 1
@@ -225,9 +263,7 @@
         },
         "build\\doc\\src\\thrust\\template\\convention\\knockout.engine.tsdoc": {
             "name": "build\\doc\\src\\thrust\\template\\convention\\knockout.engine.tsdoc",
-            "modules": {
-                "thrust.template.convention": 1
-            },
+            "modules": {},
             "classes": {},
             "fors": {
                 "thrust.template.convention": 1
@@ -293,7 +329,9 @@
         "build\\doc\\src\\thrust\\util\\main.tsdoc": {
             "name": "build\\doc\\src\\thrust\\util\\main.tsdoc",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "thrust.util": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -428,18 +466,47 @@
             },
             "fors": {},
             "namespaces": {}
-        },
-        "build\\doc\\src\\thrust\\util.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\util.tsdoc",
-            "modules": {},
-            "classes": {
-                "thrust.util": 1
-            },
-            "fors": {},
-            "namespaces": {}
         }
     },
     "modules": {
+        "thrust.mediator": {
+            "name": "thrust.mediator",
+            "submodules": {
+                "thrust.mediator.convention": 1,
+                "thrust.mediator.config": 1
+            },
+            "classes": {
+                "thrust.mediator.convention": 1,
+                "thrust.mediator.config": 1,
+                "thrust.mediator": 1,
+                "thrust.mediator.MediatorFacade": 1,
+                "thrust.mediator.Mediator": 1
+            },
+            "fors": {
+                "thrust.mediator.convention": 1,
+                "thrust.mediator.config": 1,
+                "thrust.mediator": 1,
+                "thrust.mediator.MediatorFacade": 1
+            },
+            "namespaces": {},
+            "file": "build\\doc\\src\\thrust\\mediator\\main.tsdoc",
+            "line": 28
+        },
+        "thrust.mediator.convention": {
+            "name": "thrust.mediator.convention",
+            "submodules": {},
+            "classes": {
+                "thrust.mediator.convention": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "thrust.mediator",
+            "namespace": "",
+            "file": "build\\doc\\src\\thrust\\convention\\autostart.tsdoc",
+            "line": 1,
+            "description": "The facade convention, creates the mediator facade for each module."
+        },
         "thrust.data": {
             "name": "thrust.data",
             "submodules": {
@@ -525,59 +592,6 @@
             "file": "build\\doc\\src\\thrust\\dom\\convention\\action.tsdoc",
             "line": 1
         },
-        "thrust.mediator": {
-            "name": "thrust.mediator",
-            "submodules": {
-                "thrust.mediator.convention": 1,
-                "thrust.mediator.config": 1
-            },
-            "classes": {
-                "thrust.mediator.convention": 1,
-                "thrust.mediator.config": 1,
-                "thrust.mediator": 1,
-                "thrust.mediator.MediatorFacade": 1,
-                "thrust.mediator.Mediator": 1
-            },
-            "fors": {
-                "thrust.mediator.convention": 1,
-                "thrust.mediator.config": 1,
-                "thrust.mediator": 1,
-                "thrust.mediator.MediatorFacade": 1
-            },
-            "namespaces": {},
-            "file": "build\\doc\\src\\thrust\\mediator\\main.tsdoc",
-            "line": 28
-        },
-        "thrust.mediator.convention": {
-            "name": "thrust.mediator.convention",
-            "submodules": {},
-            "classes": {
-                "thrust.mediator.convention": 1
-            },
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "thrust.mediator",
-            "namespace": "",
-            "file": "build\\doc\\src\\thrust\\mediator\\convention\\autostart.tsdoc",
-            "line": 1,
-            "description": "The facade convention, creates the mediator facade for each module."
-        },
-        "thrust.mediator.config": {
-            "name": "thrust.mediator.config",
-            "submodules": {},
-            "classes": {
-                "thrust.mediator.config": 1
-            },
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "thrust.mediator",
-            "namespace": "",
-            "file": "build\\doc\\src\\thrust\\mediator\\config.tsdoc",
-            "line": 1,
-            "description": "Provides thrust configuration"
-        },
         "thrust.spa": {
             "name": "thrust.spa",
             "submodules": {
@@ -611,23 +625,8 @@
             "namespaces": {},
             "module": "thrust.spa",
             "namespace": "",
-            "file": "build\\doc\\src\\thrust\\spa\\convention\\start.tsdoc",
+            "file": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\start.d.tsdoc",
             "line": 1
-        },
-        "thrust.spa.config": {
-            "name": "thrust.spa.config",
-            "submodules": {},
-            "classes": {
-                "thrust.spa.config": 1
-            },
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "thrust.spa",
-            "namespace": "",
-            "file": "build\\doc\\src\\thrust\\spa\\config.tsdoc",
-            "line": 1,
-            "description": "Provides thrust configuration"
         },
         "thrust.template": {
             "name": "thrust.template",
@@ -668,8 +667,38 @@
             "namespaces": {},
             "module": "thrust.template",
             "namespace": "",
-            "file": "build\\doc\\src\\thrust\\template\\convention\\knockout.engine.tsdoc",
+            "file": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\knockout.engine.d.tsdoc",
             "line": 1
+        },
+        "thrust.mediator.config": {
+            "name": "thrust.mediator.config",
+            "submodules": {},
+            "classes": {
+                "thrust.mediator.config": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "thrust.mediator",
+            "namespace": "",
+            "file": "build\\doc\\src\\thrust\\mediator\\config.tsdoc",
+            "line": 1,
+            "description": "Provides thrust configuration"
+        },
+        "thrust.spa.config": {
+            "name": "thrust.spa.config",
+            "submodules": {},
+            "classes": {
+                "thrust.spa.config": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "thrust.spa",
+            "namespace": "",
+            "file": "build\\doc\\src\\thrust\\spa\\config.tsdoc",
+            "line": 1,
+            "description": "Provides thrust configuration"
         },
         "thrust.template.config": {
             "name": "thrust.template.config",
@@ -707,7 +736,7 @@
             },
             "namespaces": {},
             "module": "thrust.util",
-            "file": "build\\doc\\src\\thrust\\util.tsdoc",
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
             "line": 1
         },
         "thrust.util.func": {
@@ -780,7 +809,6 @@
                 "thrust.config": 1
             },
             "classes": {
-                "thrust.util": 1,
                 "thrust.Module": 1,
                 "thrust.config": 1,
                 "thrust.Convention": 1,
@@ -836,6 +864,18 @@
         }
     },
     "classes": {
+        "thrust.mediator.convention": {
+            "name": "thrust.mediator.convention",
+            "shortname": "thrust.mediator.convention",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "thrust.mediator",
+            "submodule": "thrust.mediator.convention",
+            "namespace": ""
+        },
         "thrust.data.convention": {
             "name": "thrust.data.convention",
             "shortname": "thrust.data.convention",
@@ -987,16 +1027,28 @@
             "module": "thrust.dom",
             "namespace": ""
         },
-        "thrust.mediator.convention": {
-            "name": "thrust.mediator.convention",
-            "shortname": "thrust.mediator.convention",
+        "thrust.spa.convention": {
+            "name": "thrust.spa.convention",
+            "shortname": "thrust.spa.convention",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "thrust.mediator",
-            "submodule": "thrust.mediator.convention",
+            "module": "thrust.spa",
+            "submodule": "thrust.spa.convention",
+            "namespace": ""
+        },
+        "thrust.template.convention": {
+            "name": "thrust.template.convention",
+            "shortname": "thrust.template.convention",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "thrust.template",
+            "submodule": "thrust.template.convention",
             "namespace": ""
         },
         "thrust.mediator.config": {
@@ -1071,18 +1123,6 @@
                 }
             ]
         },
-        "thrust.spa.convention": {
-            "name": "thrust.spa.convention",
-            "shortname": "thrust.spa.convention",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "thrust.spa",
-            "submodule": "thrust.spa.convention",
-            "namespace": ""
-        },
         "thrust.spa.config": {
             "name": "thrust.spa.config",
             "shortname": "thrust.spa.config",
@@ -1136,18 +1176,6 @@
                     "type": "thrust.mediatorMediator"
                 }
             ]
-        },
-        "thrust.template.convention": {
-            "name": "thrust.template.convention",
-            "shortname": "thrust.template.convention",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "thrust.template",
-            "submodule": "thrust.template.convention",
-            "namespace": ""
         },
         "thrust.template.config": {
             "name": "thrust.template.config",
@@ -1236,10 +1264,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "thrust",
+            "module": "thrust.util",
             "submodule": "thrust.util",
             "namespace": "",
-            "file": "build\\doc\\src\\thrust\\util.tsdoc",
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
             "line": 1,
             "uses": [
                 "thrust-util.array",
@@ -1404,6 +1432,36 @@
         }
     },
     "classitems": [
+        {
+            "file": "build\\doc\\src\\thrust\\convention\\autostart.tsdoc",
+            "line": 5,
+            "description": "# __thrust/mediator__ Convention - Auto Start\n\nThe auto start property allows for a module, to be automatically started once it is\nincluded into a thrust instnace, without having to explicity call start on the module.\n\n\nThis is useful for certian types of modules, usually persistant ones that always need to load regardless.\nFor example a navigation module, or user settings module.",
+            "itemtype": "property",
+            "name": "autoStart",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.mediator",
+            "submodule": "thrust.mediator.convention"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\convention\\container.tsdoc",
+            "line": 5,
+            "description": "# __thrust/mediator__ Convention - Container\n\nThe `container` convention allows you to define a virtual `container`, for your modules to go in.\nConceptually only one module can be in the box at once, so when one module starts, if the `container`\nalready has a module in it, that module will be shutdown and replaced by this module.\n\n\nThis convention lets you not worry about cleaning up your mess, you can just focus on what modules\nneed to start, and if you have any common modules, like a main module area, it will swap automatically.\n\n\n    container: 'main',\n\n\nAny other module that also loads with container `main` will then get loaded into the container, and the\ncurrently active module will be stopped.",
+            "itemtype": "property",
+            "name": "container",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.mediator",
+            "submodule": "thrust.mediator.convention"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\convention\\dependent.modules.tsdoc",
+            "line": 5,
+            "description": "# __thrust/mediator__ Convention - Dependant Modules\n\nThe dependent module convention introduces two properties to a module.\n\n`dependentModules` {Array}<br />\nThese are modules that must be started along side your module, but aren't required to be stopped with your module.\nAs an example you have an alerts module, this gives you alerts at the top of your page.  Your account settings module\nmay be dependent on alerts, so it can fire events into the module, but alerts is not bound to the life cycle of your settings module.\n\n\n`childModules` {Array}<br />\nThese are modules that must be started and stopped along side your module.  An example of this would be a context module\nthat perhaps gives changes state to an object that is clicked in your module.",
+            "itemtype": "property",
+            "name": "modules",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.mediator",
+            "submodule": "thrust.mediator.convention"
+        },
         {
             "file": "build\\doc\\src\\thrust\\data\\convention\\start.tsdoc",
             "line": 5,
@@ -2157,7 +2215,7 @@
         {
             "file": "build\\doc\\src\\thrust\\dom\\convention\\action.tsdoc",
             "line": 5,
-            "description": "# __thrust/dom__ Convention - Actions\n\nThe dom action convention allows you to create custom actions, that execute when a certian event happen.\n\n\n## Supported events\n* `click`\n\nNOTE: More events will be added when they make sense to add them.\n\n\nThe definition can accept all of the following:\n\n* `function()` - This function will be run when the action is invoked.\n* `string` - This string must point at a function, that exists on the module definition.\n* `[function(), context]` - Where the context is the context that the function will be called with.\n* `[string, context]` - Where the context is the context that the function will be called with.\n\n\nThe definition that is used to define an action is below...\n\nNOTE: The below is written as if it were part of a module definition.\n\n\n    actions: {\n        'click': {\n            'doFunction': function()\n            {\n                alert('My awesome alert here!');\n            },\n            'doString': 'actionString',\n            'doContextFunction': [function()\n            {\n                alert('My awesome alert here!');\n            }, context],\n            'doString': ['actionString', context],\n        }\n    },\n    actionString: function()\n    {\n        alert('My awesome alert here!');\n    }\n\nTo utlize the action, simply add a `data-action-{event}` attribute, with the name of the action as the va;ie to any of the following elements:\n\n* `a`\n* `button`\n* `input[type=\"button\"]`\n* `input[type=\"submit\"]`",
+            "description": "# __thrust/dom__ Convention - Actions\n\nThe dom action convention allows you to create custom actions, that execute when a certian event happen.\n\n\n## Supported events\n* `click`\n* `dblclick`\n* `mouseenter`\n* `mouseleave`\n* `focus`\n* `blur`\n\nNOTE: More events will be added when they make sense to add them.\n\n\nThe definitions accept an object with the following format.\n\n    {\n        name: 'actionName',\n        handler: {Function|string of Function name on the module}\n        context: context to call the function with.\n    }\n\nThe definitions also accept a short hand array:\n\n    [name, handler {, context}]\n\n\nThe definition that is used to define an action is below...\n\nNOTE: The below is written as if it were part of a module definition.\n\n\n    config: {\n        dom: {\n            actions: {\n               'click': [{\n                    name: 'doFunction',\n                    handler:  function()\n                    {\n                         alert('My awesome alert here!');\n                    }\n                },['doString','actionString'],\n                },{\n                    name: 'doContextFunction'\n                    handler: function()\n                    {\n                        alert('My awesome alert here!');\n                    },\n                    context: someObject\n                },{\n                    name: 'doString',\n                    handler: 'actionString',\n                    context: someObject\n                }]\n            }\n        }\n    },\n    actionString: function()\n    {\n        alert('My awesome alert here!');\n    }\n\nTo utlize the action, simply add a `data-action-{event}` attribute, with the name of the action as the value to any of the following elements:\n\n* click/dblclick:\n** `a`\n** `button`\n** `input[type=\"button\"]`\n** `input[type=\"submit\"]`\n* mouseenter/mouseleave:\n** <any>\n* focus/blur:\n** input",
             "itemtype": "property",
             "name": "actions",
             "class": "thrust.dom.convention",
@@ -2167,7 +2225,7 @@
         {
             "file": "build\\doc\\src\\thrust\\dom\\convention\\context.tsdoc",
             "line": 5,
-            "description": "# __thrust/dom__ Convention - Context\n\nThe context convention allows you to specific a selector for your module.  This selector can be anything that is compatable with jQuerys Sizzle engine.\n\nThen the default context of your modules `dom()` / `$()` will be that selector.  In addition any internal find `dom.find` / `dom.$` / `$.find` / `dom.$`,\nwill also have the selector as the root context.\n\n\n    {\n        context: '#myDiv'\n    }",
+            "description": "# __thrust/dom__ Convention - Context\n\nThe context convention allows you to specific a selector for your module.  This selector can be anything that is compatable with jQuerys Sizzle engine.\n\nThen the default context of your modules `dom()` / `$()` will be that selector.  In addition any internal find `dom.find` / `dom.$` / `$.find` / `dom.$`,\nwill also have the selector as the root context.\n\n\n    config: {\n        dom: {\n            context: '#myDiv'\n        }\n    }",
             "itemtype": "property",
             "name": "context",
             "class": "thrust.dom.convention",
@@ -2177,7 +2235,7 @@
         {
             "file": "build\\doc\\src\\thrust\\dom\\convention\\event.tsdoc",
             "line": 5,
-            "description": "# __thrust/dom__ Convention - Events\n\nThe dom events convention, allows you to automatically bind events for your module.  Using this module you can bind common events like\nmouse over, click, etc, to a method or handler.\n\nThe definition can accept all of the following:\n\n* `function()` - This function will be run when the event is invoked.\n* `string` - This string must point at a function, that exists on the module definition.\n* `[function(), context]` - Where the context is the context that the function will be called with.\n* `[string, context]` - Where the context is the context that the function will be called with.\n* `[selector, function(), context]` - Where the selector is a jquery delegate selector.\n* `[selector, string, context]` - Where the selector is a jquery delegate selector.\n\n\nThe following is an example of the events block in your module...\n\n\n     events: {\n         'focus': function() { alert('Test Function'); },\n         'mouseover': 'mouseOver',\n         'click': ['li', function() { alert('Test function'); }]\n     },\n     mouseOver: function() { alert('Test Function'); },",
+            "description": "# __thrust/dom__ Convention - Events\n\nThe dom events convention, allows you to automatically bind events for your module.  Using this module you can bind common events like\nmouse over, click, etc, to a method or handler.\n\nThe definition can accept all of the following:\n\n    {\n        name: 'actionName',\n        handler: Function, the function to be invoked.\n        moduleHandler: string name of the property on the module that contains this function.\n        context: context to call the function with (this will override the default context set by the underling dom engine)\n        selector: Optional the deglegate selector to apply for this event.\n        data: Optional data that will be available in the event object.\n    }\n\n\nThe definitions also accept a short hand array:\n\n    [{, selector} {, data}, handler {, context}]\n   \nThe following is an example of the events block in your module...\n\n    config: {\n        dom: {\n            events: {\n                'click': [{\n                    handler:  function()\n                    {\n                        alert('My awesome alert here!');\n                    }\n                }],\n                'focus': [{\n                    moduleHandler: 'mouseOver',\n                },{\n                    selector: 'li',\n                    handler: function()\n                    {\n                        alert('Test function');\n                    },\n                },['actionString', someObject]\n                }]\n            }\n        }\n    },\n    actionString: function()\n    {\n        alert('My awesome alert here!');\n    }",
             "itemtype": "property",
             "name": "events",
             "class": "thrust.dom.convention",
@@ -2211,108 +2269,118 @@
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 1,
-            "class": "thrust.mediator.convention",
+            "class": "thrust.dom.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 2,
             "description": "ATTRIBUTES",
-            "class": "thrust.mediator.convention",
+            "class": "thrust.dom.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 5,
             "description": "CSS",
-            "class": "thrust.mediator.convention",
+            "class": "thrust.dom.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 8,
             "description": "DATA",
-            "class": "thrust.mediator.convention",
+            "class": "thrust.dom.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 11,
             "description": "EFFECTS",
-            "class": "thrust.mediator.convention",
+            "class": "thrust.dom.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 14,
             "description": "EVENTS",
-            "class": "thrust.mediator.convention",
+            "class": "thrust.dom.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 17,
             "description": "INTERNALS",
-            "class": "thrust.mediator.convention",
+            "class": "thrust.dom.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 20,
             "description": "MANIPULATION",
-            "class": "thrust.mediator.convention",
+            "class": "thrust.dom.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 23,
             "description": "MISCELLANEOUS",
-            "class": "thrust.mediator.convention",
+            "class": "thrust.dom.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 26,
             "description": "PROPERTIES",
-            "class": "thrust.mediator.convention",
+            "class": "thrust.dom.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 29,
             "description": "TRAVERSING",
-            "class": "thrust.mediator.convention",
+            "class": "thrust.dom.convention",
             "module": "thrust.dom"
         },
         {
-            "file": "build\\doc\\src\\thrust\\mediator\\convention\\autostart.tsdoc",
+            "file": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\spalink.d.tsdoc",
             "line": 5,
-            "description": "# __thrust/mediator__ Convention - Auto Start\n\nThe auto start property allows for a module, to be automatically started once it is\nincluded into a thrust instnace, without having to explicity call start on the module.\n\n\nThis is useful for certian types of modules, usually persistant ones that always need to load regardless.\nFor example a navigation module, or user settings module.",
+            "description": "# __thrust/dom__ Convention - Single Page App Link\n\nRequires thrust/dom",
             "itemtype": "property",
-            "name": "autoStart",
-            "class": "thrust.mediator.convention",
-            "module": "thrust.mediator",
-            "submodule": "thrust.mediator.convention"
+            "name": "spa;ink",
+            "class": "thrust.dom.convention",
+            "module": "thrust.dom",
+            "submodule": "thrust.dom.convention"
         },
         {
-            "file": "build\\doc\\src\\thrust\\mediator\\convention\\container.tsdoc",
+            "file": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\start.d.tsdoc",
             "line": 5,
-            "description": "# __thrust/mediator__ Convention - Container\n\nThe `container` convention allows you to define a virtual `container`, for your modules to go in.\nConceptually only one module can be in the box at once, so when one module starts, if the `container`\nalready has a module in it, that module will be shutdown and replaced by this module.\n\n\nThis convention lets you not worry about cleaning up your mess, you can just focus on what modules\nneed to start, and if you have any common modules, like a main module area, it will swap automatically.\n\n\n    container: 'main',\n\n\nAny other module that also loads with container `main` will then get loaded into the container, and the\ncurrently active module will be stopped.",
+            "description": "# __thrust/spa__ Convention - Start\n\nThe single page app start convention, does the actual starting of the plugin, in addition it also delays\nfull orbit, until any module it has started has been loaded.",
             "itemtype": "property",
-            "name": "container",
-            "class": "thrust.mediator.convention",
-            "module": "thrust.mediator",
-            "submodule": "thrust.mediator.convention"
+            "name": "start",
+            "class": "thrust.spa.convention",
+            "module": "thrust.spa",
+            "submodule": "thrust.spa.convention"
         },
         {
-            "file": "build\\doc\\src\\thrust\\mediator\\convention\\dependent.modules.tsdoc",
+            "file": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\knockout.engine.d.tsdoc",
             "line": 5,
-            "description": "# __thrust/mediator__ Convention - Dependant Modules\n\nThe dependent module convention introduces two properties to a module.\n\n`dependentModules` {Array}<br />\nThese are modules that must be started along side your module, but aren't required to be stopped with your module.\nAs an example you have an alerts module, this gives you alerts at the top of your page.  Your account settings module\nmay be dependent on alerts, so it can fire events into the module, but alerts is not bound to the life cycle of your settings module.\n\n\n`childModules` {Array}<br />\nThese are modules that must be started and stopped along side your module.  An example of this would be a context module\nthat perhaps gives changes state to an object that is clicked in your module.",
+            "description": "# __thrust/template__ Convention - Knockout Engine\n\nThe knockout engine convention is less of a convention and instead introduces a new custom knockout template engine\nThis engine takes the the same template path, that you'd use to fetch a template instead of the dom id, to fetch the template\nwhen using knockout templates by name.\n\n\nThis allows you to follow the same convention in both your modules, as you would your views and templates.",
             "itemtype": "property",
-            "name": "modules",
-            "class": "thrust.mediator.convention",
-            "module": "thrust.mediator",
-            "submodule": "thrust.mediator.convention"
+            "name": "templates",
+            "class": "thrust.template.convention",
+            "module": "thrust.template",
+            "submodule": "thrust.template.convention"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\template.d.tsdoc",
+            "line": 5,
+            "description": "# __thrust/template__ Convention - Templates\n\nThe `templates` convention takes a list of template paths, that need to be fetched for this module.\nWhen the module starts, the templates will be fetched automatically by the modules code, in addition\nthe template ready method will be held until all the templates have returned with a value.\n\n\nWhen the templates have been resolved, your module will have an object on it with the values of the templates location.\nIn addition the templates object will have a get, fetch and has method, to get different templates if required further\ndown the line.",
+            "itemtype": "property",
+            "name": "templates",
+            "class": "thrust.template.convention",
+            "module": "thrust.template",
+            "submodule": "thrust.template.convention"
         },
         {
             "file": "build\\doc\\src\\thrust\\mediator\\convention\\subscription.tsdoc",
@@ -3097,7 +3165,7 @@
             "line": 25,
             "description": "Checks if the Guid is an Empty Guid",
             "itemtype": "method",
-            "name": "isGuidEmpty",
+            "name": "isEmptyGuid",
             "params": [
                 {
                     "name": "guid",
@@ -3613,6 +3681,18 @@
         {
             "file": "build\\doc\\src\\thrust\\config.tsdoc",
             "line": 117,
+            "description": "Define the conventions that unique to thrust, they are not specific to any one plugin.",
+            "itemtype": "property",
+            "name": "conventions",
+            "readonly": "",
+            "type": "{Array}",
+            "class": "thrust.config",
+            "module": "thrust",
+            "submodule": "thrust.config"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\config.tsdoc",
+            "line": 124,
             "description": "AMD API\nload\n\nHandles fetching of a current config for the current thrust instance, or the config of the given plugin.\nAdding the : character requests a specific config plugin.\nthrust/config!global = thrust!global:config = Thrust instance config from the instance named global.",
             "itemtype": "method",
             "name": "load",
@@ -4378,7 +4458,7 @@
             "line": 13,
             "description": "Creates a thrust instance, from the given settings.\nIncluding the plugins.",
             "itemtype": "method",
-            "name": "stateTwo",
+            "name": "stageTwo",
             "params": [
                 {
                     "name": "settings",
@@ -4453,7 +4533,7 @@
             "line": 29,
             "description": "Fetchs a named thrust stance if it exists.\nThis loads asyncronously, as the instance may not be loaded",
             "itemtype": "method",
-            "name": "__fetchInstance",
+            "name": "fetchInstance",
             "static": 1,
             "access": "private",
             "tagname": "",
@@ -4468,6 +4548,18 @@
                 "description": "To a thrust instance spec",
                 "type": "Promise"
             },
+            "class": "thrust.instance",
+            "module": "thrust"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\instance.tsdoc",
+            "line": 39,
+            "description": "Clears the Thrust Instance cache, this is used for unit testing, and clearing all the cache data each run.",
+            "itemtype": "method",
+            "name": "clearCache",
+            "static": 1,
+            "access": "private",
+            "tagname": "",
             "class": "thrust.instance",
             "module": "thrust"
         },
@@ -4603,13 +4695,6 @@
             "itemtype": "method",
             "name": "countdown",
             "async": 1,
-            "params": [
-                {
-                    "name": "ignoreChild",
-                    "description": "Ignores the child instance flag, allows children to be controlled.",
-                    "type": "Boolean"
-                }
-            ],
             "return": {
                 "description": "The promise of when the countdown is completed.",
                 "type": "Promise"
@@ -4619,18 +4704,11 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 53,
+            "line": 52,
             "description": "Begins the ingition as thrust starts up.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "ignite",
             "async": 1,
-            "params": [
-                {
-                    "name": "ignoreChild",
-                    "description": "Ignores the child instance flag, allows children to be controlled.",
-                    "type": "Boolean"
-                }
-            ],
             "return": {
                 "description": "The promise of when the ingition is completed.",
                 "type": "Promise"
@@ -4640,18 +4718,11 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 62,
+            "line": 60,
             "description": "Thrust prepares for orbit.\nLoading can be deferred by returning a promise from any convention.",
             "itemtype": "method",
             "name": "orbit",
             "async": 1,
-            "params": [
-                {
-                    "name": "ignoreChild",
-                    "description": "Ignores the child instance flag, allows children to be controlled.",
-                    "type": "Boolean"
-                }
-            ],
             "return": {
                 "description": "The promise of when thrust is in orbit.",
                 "type": "Promise"
@@ -4661,18 +4732,11 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 71,
+            "line": 68,
             "description": "Thrust deploys components in orbit\nLoading can be deferred by returning a promise from any module method.",
             "itemtype": "method",
             "name": "deploy",
             "async": 1,
-            "params": [
-                {
-                    "name": "ignoreChild",
-                    "description": "Ignores the child instance flag, allows children to be controlled.",
-                    "type": "Boolean"
-                }
-            ],
             "return": {
                 "description": "The promise of when thrust has fully deployed.",
                 "type": "Promise"
@@ -4682,18 +4746,11 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 80,
+            "line": 76,
             "description": "Begins the deorbit as thrust shutdown.\nShutdown can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "deorbit",
             "async": 1,
-            "params": [
-                {
-                    "name": "ignoreChild",
-                    "description": "Ignores the child instance flag, allows children to be controlled.",
-                    "type": "Boolean"
-                }
-            ],
             "return": {
                 "description": "The promise of when the ingition is completed.",
                 "type": "Promise"
@@ -4703,18 +4760,11 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 89,
+            "line": 84,
             "description": "Begins the splashdown as thrust shutdown.\nShutdown can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "splashdown",
             "async": 1,
-            "params": [
-                {
-                    "name": "ignoreChild",
-                    "description": "Ignores the child instance flag, allows children to be controlled.",
-                    "type": "Boolean"
-                }
-            ],
             "return": {
                 "description": "The promise of when the ingition is completed.",
                 "type": "Promise"
@@ -4724,7 +4774,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 98,
+            "line": 92,
             "description": "Begins the initalization process for a module.  This runs as part of the\n\tcountdown phase, during start up, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "init",
@@ -4745,7 +4795,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 108,
+            "line": 102,
             "description": "Begins the startup process for a module.  This runs as part of the\n\tignite phase, during start up, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "start",
@@ -4766,7 +4816,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 118,
+            "line": 112,
             "description": "Begins the ready process for a module.  This runs as part of the\n\torbit phase, during ready, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "ready",
@@ -4787,7 +4837,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 128,
+            "line": 122,
             "description": "Begins the stop process for a module.  This runs as part of the\n\tdeorbit phase, during stop, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "stop",
@@ -4808,7 +4858,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 138,
+            "line": 132,
             "description": "Begins the destroy process for a module.  This runs as part of the\n\tslashdown phase, during destroy, or in order, when creating modules.\nLoading can be deferred by returning a promise from any convention, or module method.",
             "itemtype": "method",
             "name": "destroy",
@@ -4829,7 +4879,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 148,
+            "line": 142,
             "description": "Injects a preconstructed module into the thrust instance.",
             "itemtype": "method",
             "name": "__injectModule",
@@ -4847,7 +4897,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 155,
+            "line": 149,
             "description": "Creates a module from the given definition object, with the given name.",
             "itemtype": "method",
             "name": "createModule",
@@ -4868,7 +4918,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 162,
+            "line": 156,
             "description": "Launches another child module for thrust.",
             "itemtype": "method",
             "name": "spawn",
@@ -4888,7 +4938,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 169,
+            "line": 163,
             "description": "Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.",
             "itemtype": "method",
             "name": "registerModule",
@@ -4909,7 +4959,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 176,
+            "line": 170,
             "description": "Initalizes a new Thrust instance based on the given settings.",
             "itemtype": "method",
             "name": "launch",
@@ -4926,7 +4976,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 183,
+            "line": 177,
             "description": "Gets a named thrust stance if it exists.",
             "itemtype": "method",
             "name": "getInstance",
@@ -4947,7 +4997,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 191,
+            "line": 185,
             "description": "Fetchs a named thrust stance if it exists.\nThis loads asyncronously, as the instance may not be loaded",
             "itemtype": "method",
             "name": "__fetchInstance",
@@ -4970,7 +5020,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 201,
+            "line": 195,
             "description": "Creates a new module and hands it off to the given instance, if that instance exists.",
             "itemtype": "method",
             "name": "createModule",
@@ -4997,7 +5047,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 210,
+            "line": 204,
             "description": "Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.",
             "itemtype": "method",
             "name": "registerModule",
@@ -5024,7 +5074,7 @@
         },
         {
             "file": "build\\doc\\src\\thrust\\main.tsdoc",
-            "line": 219,
+            "line": 213,
             "description": "AMD API\nload\n\nHandles fetching of a current thurst instance, by expected name.\nAdding the : character requests a specific plugin.\nthrust!global = Thrust instance\nthrust!global:dom = The thrust dom plugin instance",
             "itemtype": "method",
             "name": "load",
@@ -5294,55 +5344,55 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:53"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:52"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:62"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:60"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:71"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:68"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:80"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:76"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:89"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:84"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:98"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:92"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:108"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:102"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:118"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:112"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:128"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:122"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:138"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:132"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:162"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:156"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:183"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:177"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\main.tsdoc:191"
+            "line": " build\\doc\\src\\thrust\\main.tsdoc:185"
         },
         {
             "message": "Missing item type",

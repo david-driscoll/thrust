@@ -12,6 +12,7 @@ import has = module('has');
 
 var type = util.type,
 	format = util.format,
+    each = _.each,
 	isObject = _.isObject,
 	extend = _.extend,
 	when = util.when,
@@ -22,11 +23,12 @@ var type = util.type,
 	__optionalMethods = [     // Optional methods that may be on a module
 		'start',
 		'stop',
-		'ready'
+		'ready',
+        'config',
 	],
 	__requiredMethods = [     // Required methods that must be on every module
 		'init',
-		'destroy'
+		'destroy',
     ];
 /**
 Moves all properties, that should exist outside of the module, into a private object for holding.
@@ -51,15 +53,17 @@ function getEventNamespace(name: string, prefix?: string)
 	if (!prefix) prefix = 'module-'; return '.' + (name === 'global' ? 'global' : prefix + name.replace(/\./g, '-'));
 }
 
-function callFacadeMethods(method, moduleCache)
+function callFacadeMethods(method, moduleCache : IThrustModuleCacheInstance)
 {
-	var results = [];
+    var m = moduleCache.module;
+    var results = [];
 	_.forOwn(moduleCache.facades, (facade, i) =>
 	{
 		has('DEBUG') && log.debug(format('thrust/capsule: Calling facade "{0}" {1}()', i, method));
 		if (facade[method] && isObject(facade))
-			results.push(facade[method].call(facade, moduleCache.module ));
+			results.push(facade[method].call(facade, m));
 	});
+    results.push(util.safeInvoke((<any> m.thrust).__thrustConventions, method, m, moduleCache.facades));
 	return results;
 }
 
@@ -76,9 +80,10 @@ export class Module implements IThrustModule
 {
 	public thrust: IThrust;
 	public name: string;
-	public instance: IThrustModuleInstance;
+	public instance: IThrustModuleInstancePrivate;
 	public mid: string;
 	private __namespace: string;
+	private cache: IThrustModuleCacheInstance;
 
 	public static thrustCache: IThrustModuleCache = thrustCache;
 
@@ -93,6 +98,10 @@ export class Module implements IThrustModule
 		}
 		var mid = this.mid = thrust.name + ':' + name;
 		var tCache = thrustCache[def.hash || mid];
+
+        // Clear any potential cached config objects, to make sure they refresh if the module is redefined.
+        if (tCache)
+            _.keys(tCache).filter((x) => x.indexOf('config.')===0).forEach((x) => delete tCache[x] );
 
 		this.instance = extend(def, tCache && tCache.instance || {});
 		this.instance.name = (this.instance.name || name);
@@ -120,8 +129,8 @@ export class Module implements IThrustModule
 
 		var facades : IThrustModuleFacades = thrustModuleCacheItem.facades || (thrustModuleCacheItem.facades = {});
 		if (!thrust.__conventionPluckPropertiesCache)
-			thrust.__conventionPluckPropertiesCache = flatten(pluck(thrust.__conventions || [], 'properties'));
-
+			thrust.__conventionPluckPropertiesCache = flatten(pluck(thrust.__conventions || [], 'properties')).filter((x) => x.indexOf('config.') !== 0);
+        
 		// Move all special properties off to the thrust's internal method.
 		moveToThrustCache(this.instance, thrustModuleCacheItem, __requiredMethods);
 		moveToThrustCache(this.instance, thrustModuleCacheItem, __optionalMethods);
@@ -132,6 +141,7 @@ export class Module implements IThrustModule
 		this.__namespace = getEventNamespace(this.instance.name);
 
 		this.thrust = thrust;
+		this.cache = thrustCache[mid];
 	}
 
 	/**
@@ -146,13 +156,30 @@ export class Module implements IThrustModule
 	**/
 	public convention(property : string, value? : any) : any
 	{
-		if (typeof value !== 'undefined')
-		{
-			thrustCache[this.mid][property] = value;
-			return;
-		}
-		return thrustCache[this.mid][property];
+	    var tc = thrustCache[this.mid];
+	    if (property.indexOf('config.') === 0)
+	    {
+	        if (typeof tc[property] === 'undefined')
+	        {
+	            tc[property] = this.getValueFromPath(property, tc) || false;
+	        }
+	    }
+	    if (typeof value !== 'undefined')
+	    {
+	        tc[property] = value;
+	        return;
+	    }
+		return tc[property];
 	}
+
+	private getValueFromPath(path: string, object: any)
+	{
+	    var paths = path.split('.'),
+            v = object;
+	    _.each(paths, (p) => { v = v && v[p]; if (!v) return false; });
+	    return v;
+	}
+
 	/**
 	Injects this module into the given thrust instance.
 
@@ -243,7 +270,7 @@ export class Module implements IThrustModule
 	public start()
 	{
 		var that = this;
-		that.thrust.start(that.name);
+		return that.thrust.start(that.name);
 	}
 	/**
 	Stop the module, inside the thrust container it was created on.
@@ -253,7 +280,7 @@ export class Module implements IThrustModule
 	public stop()
 	{
 		var that = this;
-		that.thrust.stop(that.name);
+		return that.thrust.stop(that.name);
 	}
 }
 

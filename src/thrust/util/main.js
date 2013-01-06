@@ -34,7 +34,7 @@ define(["require", "exports", 'lodash', './function', './object', './type', './g
     exports.isArrayOrArrayLike = uType.isArrayOrArrayLike;
     exports.emptyGuid = uGuid.emptyGuid;
     exports.isGuid = uGuid.isGuid;
-    exports.isGuidEmpty = uGuid.isGuidEmpty;
+    exports.isEmptyGuid = uGuid.isEmptyGuid;
     exports.newGuid = uGuid.newGuid;
     exports.getModuleNameForPath = uString.getModuleNameForPath;
     exports.format = uString.format;

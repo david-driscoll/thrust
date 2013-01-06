@@ -1,7 +1,5 @@
 /// <reference path="../../interfaces/template/template.d.ts" />
 /// <reference path="../../interfaces/thrust.d.ts" />
-/// <reference path="../../interfaces/template/template.facade.d.ts" />
-/// <reference path="../../interfaces/convention.d.ts" />
 /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -130,13 +128,12 @@ import ko = module('knockout');
     * @for thrust.template.convention
     * @property templates
     **/
-    interface IThrustConventionTemplateKnockoutEngine extends IThrustConventionCountdown {}
+    interface IThrustConventionTemplateKnockoutEngine extends IThrustConvention.Countdown.Void {}
 
      var methods : IThrustConventionTemplateKnockoutEngine = {
-        countdown: function (thrust : IThrust): Promise
+        countdown: function (thrust : IThrust): void
         {
             initKnockoutIntegration(thrust.template);
-            return null;
         }
 	};
-    export var subscription = new Convention(methods);
+    export var knockoutEngine = new Convention(methods);

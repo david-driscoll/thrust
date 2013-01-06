@@ -1,5 +1,4 @@
-﻿/// <reference path="../module.d.ts" />
-/// <reference path="../thrust.plugin.d.ts" />
+﻿/// <reference path="../thrust.d.ts" />
 interface IEventManager {
     initEvents() : any;
     extend(to : Object, init? : bool) : Object;
@@ -28,4 +27,39 @@ interface IEventNode {
 
 interface IThrustMediator extends IThrustPlugin, IEventManager
 {
+}
+
+// config
+interface IThrustMediatorConfig extends IThrustPluginConfig
+{
+}
+
+interface IThrustConfig
+{
+	mediator?: IThrustMediatorConfig;
+}
+
+// facade
+interface IThrustMediatorFacade extends Function, IThrustFacade, IEventManager
+{
+	prototype: IThrustMediatorFacade;
+}
+
+interface IThrustModuleInstance
+{
+	mediator: IThrustMediatorFacade;
+}
+
+interface IThrustModuleMediatorInstanceConfig
+{
+}
+
+interface IThrustModuleInstanceConfig
+{
+	mediator?: IThrustModuleMediatorInstanceConfig;
+}
+
+interface IThrustModuleFacades
+{
+	mediator?: IThrustMediatorFacade;
 }

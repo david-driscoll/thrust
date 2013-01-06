@@ -1,6 +1,6 @@
 /// <reference path="../../interfaces/spa/spa.d.ts" />
-/// <reference path="../../interfaces/template/template.facade.d.ts" />
-/// <reference path="../../interfaces/convention.d.ts" />
+/// <reference path="../../interfaces/template/template.d.ts" />
+/// <reference path="../../interfaces/thrust.d.ts" />
 /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -26,8 +26,8 @@ var _ = util._;
     * @for thrust.spa.convention
     * @property start
     **/
-    var methods : IThrustConventionOrbit = {
-        orbit: function (thrust : IThrust)
+    var methods : IThrustConvention.Orbit.PromiseObject = {
+        orbit: function (thrust : IThrust) : Promise
         {
             var router = thrust.spa;
             router.start();
@@ -35,4 +35,4 @@ var _ = util._;
             return thrust.spa.startingModulePromise || null;
         }
     };
-    export var subscription = new Convention(methods);
+    export var start = new Convention(methods);

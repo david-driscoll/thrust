@@ -50,8 +50,8 @@
     /**
     Checks if the Guid is an Empty Guid
 
-    @method isGuidEmpty
+    @method isEmptyGuid
     @param {Guid} guid
     @returns {Boolean} If the guid is a guid or not.
     **/
-    export function isGuidEmpty(guid) { return guid === emtptyGuid; }
+    export function isEmptyGuid(guid) { return guid === emtptyGuid; }

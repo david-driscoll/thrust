@@ -1,18 +1,33 @@
-﻿define(['thrust/util'],
-function(util) {
-    return {
+/// <reference path="../../../src/thrust/interfaces/convention/dependent.modules.d.ts" />
+/// <reference path="../../../src/thrust/interfaces/convention/container.d.ts" />
+/// <reference path="../../../src/thrust/interfaces/mediator/convention/subscription.d.ts" />
+/// <reference path="../../../src/thrust/interfaces/mediator/mediator.d.ts" />
+/// <reference path="../../../src/thrust/interfaces/dom/dom.d.ts" />
+/// <reference path="../../../src/thrust/interfaces/dom/convention/event.d.ts" />
+/// <reference path="../../../src/thrust/interfaces/dom/convention/context.d.ts" />
+/// <reference path="../../../src/thrust/interfaces/dom/convention/action.d.ts" />
+/// <reference path="../../../src/thrust/interfaces/data/data.d.ts" />
+/// <reference path="../../../src/thrust/interfaces/thrust.d.ts" />
+/// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+define([
+    'thrust/util'
+], function (util) {
+    var mod = {
+        config: {
+            dom: {
+                context: '#g1'
+            }
+        },
         init: util.noop,
-        start: function ()
-        {
+        start: function () {
         },
-        context: '#g1',
-        ready: function ()
-        {
-            this.$().append('g1 loaded!');
+        ready: function () {
+            this.$.append('g1 loaded!');
         },
-        stop: function ()
-        {
+        stop: function () {
         },
         destroy: util.noop
     };
+    return mod;
 });
+//@ sourceMappingURL=g1.js.map

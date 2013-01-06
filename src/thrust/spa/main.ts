@@ -1,6 +1,4 @@
 /// <reference path="../interfaces/spa/spa.d.ts" />
-/// <reference path="../interfaces/spa/spa.facade.d.ts" />
-/// <reference path="../interfaces/spa/spa.config.d.ts" />
 /// <reference path="../interfaces/mediator/mediator.d.ts" />
 /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 

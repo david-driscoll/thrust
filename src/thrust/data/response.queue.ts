@@ -1,5 +1,5 @@
 /// <reference path="../interfaces/data/data.d.ts" />
-/// <reference path="../interfaces/module.d.ts" />
+/// <reference path="../interfaces/thrust.d.ts" />
 /// <reference path="../../jquery.d.ts" />
 /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 

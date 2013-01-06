@@ -1,5 +1,5 @@
-﻿/// <reference path="../../../jquery.d.ts" />
-/// <reference path="../thrust.d.ts" />
+﻿/// <reference path="../thrust.d.ts" />
+/// <reference path="../../../jquery.d.ts" />
 interface IThrustData extends IThrustPlugin, IEventManager, IThrustDataMethods
 {
 }
@@ -26,4 +26,42 @@ interface IThrust
 
 interface IThrustDataDefaults extends IThrustDataSettings
 {
+}
+
+// config
+interface IThrustDataConfig extends IThrustPluginConfig
+{
+	cache: bool;
+	startTimeout: number;
+	finishTimeout: number;
+}
+
+interface IThrustConfig
+{
+	data?: IThrustDataConfig;
+}
+
+// facade
+interface IThrustDataFacade extends Function, IThrustFacade, IThrustDataMethods
+{
+	prototype: IThrustDataFacade;
+}
+
+interface IThrustModuleInstance
+{
+	data: IThrustDataFacade;
+}
+
+interface IThrustModuleDataInstanceConfig
+{
+}
+
+interface IThrustModuleInstanceConfig
+{
+	data?: IThrustModuleDataInstanceConfig;
+}
+
+interface IThrustModuleFacades
+{
+	data?: IThrustDataFacade;
 }

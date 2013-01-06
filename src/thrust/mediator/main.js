@@ -1,6 +1,6 @@
 define(["require", "exports", 'thrust/util', 'thrust/log', 'thrust/events', 'thrust/facade', 'has', 'thrust/config', './config'], function(require, exports, __util__, __log__, __events__, __facade__, __has__, __config__, __mediatorConfig__) {
     /// <reference path="../../has.d.ts" />
-    /// <reference path="../interfaces/mediator/mediator.facade.d.ts" />
+    /// <reference path="../interfaces/mediator/mediator.d.ts" />
     /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -46,7 +46,7 @@ define(["require", "exports", 'thrust/util', 'thrust/log', 'thrust/events', 'thr
             this.parent = parent;
             this.__conventions = parent.__conventions;
             this._callbacks = parent._callbacks;
-            this.initEvents();
+            this.initEvents(module);
         });
         _.extend(mediatorFacade.prototype, Events);
         /**
@@ -88,7 +88,7 @@ define(["require", "exports", 'thrust/util', 'thrust/log', 'thrust/events', 'thr
                     var sub = this._internalSubscriptions[i];
                     this.unsubscribe(sub.events, sub.callback, sub.context);
                 }
-                delete this._internalSubscriptions;
+                this._internalSubscriptions = null;
             }
             return null;
         };
@@ -129,7 +129,7 @@ define(["require", "exports", 'thrust/util', 'thrust/log', 'thrust/events', 'thr
         Mediator.prototype.once = function (events, callback, context) {
         };
         Mediator.prototype.createFacade = function (thrust, mod, facades) {
-            if((mod).mediator && !(facades.mediator instanceof MediatorFacade)) {
+            if(facades.mediator && !(facades.mediator instanceof MediatorFacade)) {
                 throw new Error('"mediator" is a reserved property');
             }
             var mediator;

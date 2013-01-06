@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
+            <em>API Docs for: 0.1.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -268,6 +268,13 @@
                                 
                             </li>
                         
+                            <li class="index-item property">
+                                <a href="#property_spa;ink">spa;ink</a>
+
+                                
+                                
+                            </li>
+                        
                     </ul>
                 </div>
             
@@ -325,35 +332,56 @@
 
 <ul>
 <li><code>click</code></li>
+<li><code>dblclick</code></li>
+<li><code>mouseenter</code></li>
+<li><code>mouseleave</code></li>
+<li><code>focus</code></li>
+<li><code>blur</code></li>
 </ul>
 
 <p>NOTE: More events will be added when they make sense to add them.</p>
 
-<p>The definition can accept all of the following:</p>
+<p>The definitions accept an object with the following format.</p>
 
-<ul>
-<li><code>function()</code> - This function will be run when the action is invoked.</li>
-<li><code>string</code> - This string must point at a function, that exists on the module definition.</li>
-<li><code>[function(), context]</code> - Where the context is the context that the function will be called with.</li>
-<li><code>[string, context]</code> - Where the context is the context that the function will be called with.</li>
-</ul>
+<pre class="code prettyprint"><code>{
+    name: 'actionName',
+    handler: {Function|string of Function name on the module}
+    context: context to call the function with.
+}
+</code></pre>
+
+<p>The definitions also accept a short hand array:</p>
+
+<pre class="code prettyprint"><code>[name, handler {, context}]
+</code></pre>
 
 <p>The definition that is used to define an action is below...</p>
 
 <p>NOTE: The below is written as if it were part of a module definition.</p>
 
-<pre class="code prettyprint"><code>actions: {
-    'click': {
-        'doFunction': function()
-        {
-            alert('My awesome alert here!');
-        },
-        'doString': 'actionString',
-        'doContextFunction': [function()
-        {
-            alert('My awesome alert here!');
-        }, context],
-        'doString': ['actionString', context],
+<pre class="code prettyprint"><code>config: {
+    dom: {
+        actions: {
+           'click': [{
+                name: 'doFunction',
+                handler:  function()
+                {
+                     alert('My awesome alert here!');
+                }
+            },['doString','actionString'],
+            },{
+                name: 'doContextFunction'
+                handler: function()
+                {
+                    alert('My awesome alert here!');
+                },
+                context: someObject
+            },{
+                name: 'doString',
+                handler: 'actionString',
+                context: someObject
+            }]
+        }
     }
 },
 actionString: function()
@@ -362,13 +390,18 @@ actionString: function()
 }
 </code></pre>
 
-<p>To utlize the action, simply add a <code>data-action-{event}</code> attribute, with the name of the action as the va;ie to any of the following elements:</p>
+<p>To utlize the action, simply add a <code>data-action-{event}</code> attribute, with the name of the action as the value to any of the following elements:</p>
 
 <ul>
-<li><code>a</code></li>
-<li><code>button</code></li>
-<li><code>input[type="button"]</code></li>
-<li><code>input[type="submit"]</code></li>
+<li>click/dblclick:
+<em>* <code>a</code>
+*</em> <code>button</code>
+<em>* <code>input[type="button"]</code>
+*</em> <code>input[type="submit"]</code></li>
+<li>mouseenter/mouseleave:
+** <any></li>
+<li>focus/blur:
+** input</li>
 </ul>
     </div>
 
@@ -420,8 +453,10 @@ actionString: function()
 <p>Then the default context of your modules <code>dom()</code> / <code>$()</code> will be that selector.  In addition any internal find <code>dom.find</code> / <code>dom.$</code> / <code>$.find</code> / <code>dom.$</code>,
 will also have the selector as the root context.</p>
 
-<pre class="code prettyprint"><code>{
-    context: '#myDiv'
+<pre class="code prettyprint"><code>config: {
+    dom: {
+        context: '#myDiv'
+    }
 }
 </code></pre>
     </div>
@@ -474,24 +509,96 @@ mouse over, click, etc, to a method or handler.</p>
 
 <p>The definition can accept all of the following:</p>
 
-<ul>
-<li><code>function()</code> - This function will be run when the event is invoked.</li>
-<li><code>string</code> - This string must point at a function, that exists on the module definition.</li>
-<li><code>[function(), context]</code> - Where the context is the context that the function will be called with.</li>
-<li><code>[string, context]</code> - Where the context is the context that the function will be called with.</li>
-<li><code>[selector, function(), context]</code> - Where the selector is a jquery delegate selector.</li>
-<li><code>[selector, string, context]</code> - Where the selector is a jquery delegate selector.</li>
-</ul>
+<pre class="code prettyprint"><code>{
+    name: 'actionName',
+    handler: Function, the function to be invoked.
+    moduleHandler: string name of the property on the module that contains this function.
+    context: context to call the function with (this will override the default context set by the underling dom engine)
+    selector: Optional the deglegate selector to apply for this event.
+    data: Optional data that will be available in the event object.
+}
+</code></pre>
+
+<p>The definitions also accept a short hand array:</p>
+
+<pre class="code prettyprint"><code>[{, selector} {, data}, handler {, context}]
+</code></pre>
 
 <p>The following is an example of the events block in your module...</p>
 
-<pre class="code prettyprint"><code> events: {
-     'focus': function() { alert('Test Function'); },
-     'mouseover': 'mouseOver',
-     'click': ['li', function() { alert('Test function'); }]
- },
- mouseOver: function() { alert('Test Function'); },
+<pre class="code prettyprint"><code>config: {
+    dom: {
+        events: {
+            'click': [{
+                handler:  function()
+                {
+                    alert('My awesome alert here!');
+                }
+            }],
+            'focus': [{
+                moduleHandler: 'mouseOver',
+            },{
+                selector: 'li',
+                handler: function()
+                {
+                    alert('Test function');
+                },
+            },['actionString', someObject]
+            }]
+        }
+    }
+},
+actionString: function()
+{
+    alert('My awesome alert here!');
+}
 </code></pre>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_spa;ink" class="property item">
+    <h3 class="name"><code>spa;ink</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_interfaces_spa_convention_spalink.d.tsdoc.html#l5"><code>build\doc\src\thrust\interfaces\spa\convention\spalink.d.tsdoc:5</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h1><strong>thrust/dom</strong> Convention - Single Page App Link</h1>
+
+<p>Requires thrust/dom</p>
     </div>
 
     

@@ -1,5 +1,5 @@
 /// <reference path="../../has.d.ts" />
-/// <reference path="../interfaces/mediator/mediator.facade.d.ts" />
+/// <reference path="../interfaces/mediator/mediator.d.ts" />
 /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -49,7 +49,7 @@ export var className = 'Mediator';
     		this.parent = parent;
     		this.__conventions = parent.__conventions;
     		this._callbacks = parent._callbacks;
-    		this.initEvents();
+    		this.initEvents(module);
     	});
     	_.extend(<any> mediatorFacade.prototype, Events);
 
@@ -94,7 +94,7 @@ export var className = 'Mediator';
     				var sub = this._internalSubscriptions[i];
     				this.unsubscribe(sub.events, sub.callback, sub.context);
     			}
-    			delete this._internalSubscriptions;
+    			this._internalSubscriptions = null;
     		}
     		return null;
     	};
@@ -146,7 +146,7 @@ export var className = 'Mediator';
 
     	public createFacade(thrust: IThrust, mod: IThrustModuleInstance, facades: IThrustModuleFacades): IThrustFacade
     	{
-			if ((<any> mod).mediator && !(facades.mediator instanceof MediatorFacade))
+			if (facades.mediator && !(facades.mediator instanceof MediatorFacade))
 				throw new Error('"mediator" is a reserved property');
 
             var mediator;

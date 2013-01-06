@@ -1,128 +1,169 @@
-/*! thrust-js - v0.1.0 - 2013-01-01 */
-define('thrust/dom/jquery.interface',["require", "exports", 'jquery'], function(require, exports, __jQuery__) {
+/*! thrust-js - v0.1.5 - 2013-01-05 */
+define('thrust/dom/subjquery',["require", "exports", 'jquery', 'thrust/util', 'thrust/log', 'has'], function(require, exports, __jQuery__, __util__, __log__, __has__) {
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
+    
     var jQuery = __jQuery__;
 
-    var jQueryMethodBlackList = [
-'constructor', 
-'init', 
-'selector', 
-'jquery', 
-'ready', 
-'extend', 
-'queue', 
-'dequeue', 
-'clearQueue', 
-'promise', 
-'bind', 
-'unbind', 
-'live', 
-'die', 
-'delegate', 
-'undelegate', 
-'blur', 
-'focus', 
-'focusin', 
-'focusout', 
-'load', 
-'resize', 
-'scroll', 
-'unload', 
-'click', 
-'dblclick', 
-'mousedown', 
-'mouseup', 
-'mousemove', 
-'mouseover', 
-'mouseout', 
-'mouseenter', 
-'mouseleave', 
-'change', 
-'select', 
-'submit', 
-'keydown', 
-'keypress', 
-'keyup', 
-'error', 
-'domManip', 
-'serialize', 
-'serializeArray', 
-'ajaxStart', 
-'ajaxStop', 
-'ajaxComplete', 
-'ajaxError', 
-'ajaxSuccess', 
-'ajaxSend', 
-'_toggle', 
-'fadeTo', 
-'stop', 
-'slideDown', 
-'slideUp', 
-'slideToggle', 
-'fadeIn', 
-'fadeOut', 
-'fadeToggle', 
-'on', 
-'off', 
-'one'    ], slice = Array.prototype.slice;
-    //#region jQuery Interface Layer
-    function updatejQueryInternals(selector) {
-        if(selector) {
-            this._context = jQuery(selector);
+    var util = __util__;
+
+    var _ = util._;
+    var log = __log__;
+
+    var has = __has__;
+
+    var format = util.format, each = _.each, extend = _.extend, isObject = _.isObject, isFunction = _.isFunction, slice = Array.prototype.slice, GLOBAL = '.global';
+    var jQueryFnMethodBlackList = [
+        'ready', 
+        'extend', 
+        'queue', 
+        'dequeue', 
+        'clearQueue', 
+        'promise', 
+        'bind', 
+        'unbind', 
+        'live', 
+        'die', 
+        'delegate', 
+        'undelegate', 
+        'blur', 
+        'focus', 
+        'focusin', 
+        'focusout', 
+        'load', 
+        'resize', 
+        'scroll', 
+        'unload', 
+        'click', 
+        'dblclick', 
+        'mousedown', 
+        'mouseup', 
+        'mousemove', 
+        'mouseover', 
+        'mouseout', 
+        'mouseenter', 
+        'mouseleave', 
+        'change', 
+        'select', 
+        'submit', 
+        'keydown', 
+        'keypress', 
+        'keyup', 
+        'error', 
+        'serialize', 
+        'serializeArray', 
+        'ajaxStart', 
+        'ajaxStop', 
+        'ajaxComplete', 
+        'ajaxError', 
+        'ajaxSuccess', 
+        'ajaxSend', 
+        '_toggle', 
+        'fadeTo', 
+        'stop', 
+        'slideDown', 
+        'slideUp', 
+        'slideToggle', 
+        'fadeIn', 
+        'fadeOut', 
+        'fadeToggle'/*, 'on', 'off', 'one'*/ 
+    ];
+    function normalizeEvents(events, namespace) {
+        if(!namespace) {
+            return events;
         }
-        this.context = this._context.context;
-        this.selector = this._context.selector;
-        for(var i = this.length || 0, iLen = this._context.context; i < iLen; i++) {
-            delete this[i];
-        }
-        this.length = this._context.length;
-        for(var i = 0, iLen = this.length; i < iLen; i++) {
-            this[i] = this._context[i];
-        }
-    }
-    exports.updatejQueryInternals = updatejQueryInternals;
-    function initalizeContext(context) {
-        this._context = context instanceof jQuery ? context : jQuery(context);
-        updatejQueryInternals.call(this);
-    }
-    exports.initalizeContext = initalizeContext;
-    function jQueryMethodWrap(method, DomFacade) {
-        return function () {
-            var args = slice.call(arguments);
-            for(var i = 0, iLen = args.length; i < iLen; i++) {
-                if(args[i] instanceof DomFacade) {
-                    args[i] = args[i]._context;
+        if(isObject(events)) {
+            // Create new object, so that original object will not be modified when binding.
+            events = extend({
+            }, events);
+            for(var key in events) {
+                if(key.indexOf('.') === -1) {
+                    events[key + namespace] = events[key];
+                    delete events[key];
                 }
             }
-            if(this._context) {
-                var ret = this._context[method].apply(this._context, args);
-                if(ret instanceof jQuery) {
-                    if(ret.selector === this.selector && ret.context === this.context) {
-                        updatejQueryInternals.call(this, ret);
-                        return this;
-                    }
-                    return new DomFacade(this.module, this, ret, true);
+            return events;
+        } else {
+            if(!events) {
+                return namespace;
+            }
+            events = events.split(' ');
+            for(var i = 0, iLen = events.length; i < iLen; i++) {
+                var evt = events[i];
+                if(evt.indexOf('.') === -1) {
+                    events[i] = evt + namespace;
                 }
-                updatejQueryInternals.call(this);
-                return ret;
             }
+            return events.join(' ');
         }
     }
-    exports.jQueryMethodWrap = jQueryMethodWrap;
-    function updateThrustDomPrototype(proto, DomFacade) {
-        /*jshint loopfunc:true */
-        for(var i in jQuery.fn) {
-            if(Object.hasOwnProperty.call(jQuery.fn, i) && !proto[i] && !jQueryMethodBlackList.some(function (e, index) {
-                return e === i;
-            })) {
-                proto[i] = jQueryMethodWrap(i, DomFacade);
+    /*
+    Clone jquery
+    Remove all excess methods we don't want to expose natively.
+    overrload any methods we want to change behavior of (noteably on, one, and off)
+    
+    Instead of duplicating the jquery behavior we instead realign it to our own.
+    */
+    // jQuery sub
+    function subJQuery() {
+        var tQuery = function (selector, context, namespace) {
+            return new tQuery.prototype.init(selector, context, namespace || (this && this.namespace));
+        };
+        _.merge(tQuery, jQuery);
+        // Do not like
+        // probably needed in some special unique cases
+        tQuery.jQuery = jQuery;
+        // expose events for doing special events as required.
+        tQuery.event = (jQuery).event;
+        tQuery.fn = tQuery.prototype = extend({
+        }, jQuery.fn);
+        tQuery.fn.constructor = tQuery;
+        tQuery.fn.init = function init(selector, context, namespace) {
+            var ioDom = context instanceof tQuery;
+            if(context && context instanceof jQuery && !(ioDom)) {
+                context = tQuery(context);
             }
-        }
-        proto.$ = proto.find;
+            var result = jQuery.fn.init.call(this, selector, context, tQueryRoot);
+            if(namespace) {
+                result.namespace = namespace;
+            } else {
+                if(ioDom) {
+                    result.namespace = context.namespace;
+                }
+            }
+            return result;
+        };
+        tQuery.fn.init.prototype = tQuery.fn;
+        var tQueryRoot = tQuery(document);
+        // remove all not applicable methods off of fn.
+        each(jQueryFnMethodBlackList, function (x) {
+            if(tQuery.fn[x]) {
+                tQuery.fn[x] = null;
+                delete tQuery.fn[x];
+            }
+        });
+        _.each([
+            'on', 
+            'one', 
+            'off'
+        ], function (x) {
+            tQuery.fn[x] = _.wrap(tQuery.fn[x], function (f) {
+                var args = [];
+                for (var _i = 0; _i < (arguments.length - 1); _i++) {
+                    args[_i] = arguments[_i + 1];
+                }
+                true && log.debug(format('tQuery[{0}]: Binding ' + x + ' events...', this.namespace));
+                args[0] = normalizeEvents(args[0], this.namespace);
+                return f.apply(this, args);
+            });
+        });
+        tQuery.fn.query = tQuery.fn.$ = tQuery.fn.find;
+        return tQuery;
     }
-    exports.updateThrustDomPrototype = updateThrustDomPrototype;
-    //#endregion
-    })
-//@ sourceMappingURL=jquery.interface.js.map
+    exports.tQuery = subJQuery();
+})
+//@ sourceMappingURL=subjquery.js.map
 ;
 define('thrust/dom/config',["require", "exports"], function(require, exports) {
     /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
@@ -160,29 +201,22 @@ define('thrust/dom/config',["require", "exports"], function(require, exports) {
 })
 //@ sourceMappingURL=config.js.map
 ;
-define('thrust/dom/main',["require", "exports", 'thrust/util', 'thrust/log', './jquery.interface', 'thrust/facade', 'thrust/events', 'has', 'thrust/instance', './config'], function(require, exports, __util__, __log__, __jQueryInterface__, __facade__, __events__, __has__, __instance__, __config__) {
+define('thrust/dom/main',["require", "exports", './subjquery', 'thrust/util', 'thrust/log', 'thrust/facade', 'has', 'thrust/instance', './config'], function(require, exports, __subjquery__, __util__, __log__, __facade__, __has__, __instance__, __config__) {
     /// <reference path="../interfaces/dom/dom.d.ts" />
-    /// <reference path="../interfaces/module.d.ts" />
-    /// <reference path="../interfaces/dom/dom.facade.d.ts" />
-    /// <reference path="../interfaces/mediator/mediator.d.ts" />
-    /// <reference path="../interfaces/facade.d.ts" />
     /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
     
-    
+    var subjquery = __subjquery__;
+
+    var tQuery = subjquery.tQuery;
     var util = __util__;
 
     var _ = util._;
     var log = __log__;
 
-    var jQueryInterface = __jQueryInterface__;
-
     var facade = __facade__;
 
-    var events = __events__;
-
-    var Events = events.Events;
     var has = __has__;
 
     var instance = __instance__;
@@ -190,131 +224,44 @@ define('thrust/dom/main',["require", "exports", 'thrust/util', 'thrust/log', './
     var config = __config__;
 
     exports.className = 'Dom';
-    //#region Variable declaration
-        var format = util.format, extend = _.extend, bind = _.bind, hasOwn = Object.prototype.hasOwnProperty, isObject = _.isObject, slice = Array.prototype.slice, when = util.when, isArray = _.isArray, initalizeContext = jQueryInterface.initalizeContext, updatejQueryInternals = jQueryInterface.updatejQueryInternals, updateThrustDomPrototype = jQueryInterface.updateThrustDomPrototype, GLOBAL = '.global';
-    //#endregion
-    var createFacade = function (dom) {
-        if(!dom.query) {
-            dom.query = bind(function (context) {
-                if(typeof context !== 'undefined') {
-                    return new DomFacade(dom.module, dom, context, true);
-                }
-                return dom;
-            }, dom);
-        }
-        return dom.query;
-    };
-    var normalizeEvents = function (events, namespace) {
-        if(isObject(events)) {
-            for(var key in events) {
-                events[key + namespace] = events[key];
-                delete events[key];
-            }
-            return events;
-        } else {
-            if(!events) {
-                return namespace;
-            }
-            events = events.split(' ');
-            for(var i = 0, iLen = events.length; i < iLen; i++) {
-                events.push(events[i] + namespace);
-            }
-            return events.slice(events.length / 2).join(' ');
-        }
-    };
+    var format = util.format, extend = _.extend, bind = _.bind, hasOwn = Object.prototype.hasOwnProperty, isObject = _.isObject, slice = Array.prototype.slice, when = util.when, isArray = _.isArray;
     //#region DomFacade
     var DomFacade = (function () {
-        var domFacade = facade.createFacade(function (module, parent, context, fake) {
+        var domFacade = facade.createFacade(function (mod, parent) {
             this.name = parent.name;
-            //this.module = module;
-            //this.parent = parent;
             this.__conventions = parent.__conventions;
-            this.namespace = parent.namespace;
-            //this._callbacks = parent._callbacks;
-            //this.initEvents();
-            // We're building a dom selector, aka jquery wrapper
-            if(context && fake) {
-                // Reference the parent module.
-                this._parentDom = parent._parentDom;
-                if(this._parentDom) {
-                    // Init the context
-                    initalizeContext.call(this, context);
-                }
-            } else {
-                true && log.debug('Dom: Creating new Dom facade');
-                this._parentDom = this;
-                this._rootContext = true;
-                this.changeContext(document);
-                createFacade(this);
-                this._internalEvents = [];
-            }
+            this.context = tQuery(document, undefined, this.name);
         });
         domFacade.prototype.init = function (fake) {
             this._internalEvents = this._internalEvents || [];
-            true && log.debug(format('Dom[{0}]: Initalizing {1}Dom facade', this.namespace, fake ? 'fake ' : ''));
+            true && log.debug(format('Dom[{0}]: Initalizing {1}Dom facade', this.name, fake ? 'fake ' : ''));
             return this;
         };
         domFacade.prototype.start = function (m) {
-            true && log.debug(format('Dom[{0}]: Starting Dom facade', this.namespace));
+            true && log.debug(format('Dom[{0}]: Starting Dom facade', this.name));
             return null;
         };
         domFacade.prototype.stop = function (m) {
-            true && log.debug(format('Dom[{0}]: Stopping Dom facade', this.namespace));
+            true && log.debug(format('Dom[{0}]: Stopping Dom facade', this.name));
             for(var i = this._internalEvents.length - 1; i >= 0; i--) {
                 var sub = this._internalEvents[i];
                 this._internalEvents.splice(i, 1);
-                this.changeContext(sub.context);
-                this.off.apply(this, (isArray(sub)) ? sub : (isArray(sub.args)) ? sub.args : []);
+                sub.context.off.apply(this, (isArray(sub)) ? sub : (isArray(sub.args)) ? sub.args : []);
             }
             return null;
         };
         domFacade.prototype.destroy = function (m) {
-            if(this._rootContext) {
-                true && log.debug(format('Dom[{0}]: Destroying Dom facade', this.namespace));
-                delete this._internalEvents;
-            }
-            this._context = null;
-            delete this._context;
+            true && log.debug(format('Dom[{0}]: Destroying Dom facade', this.name));
+            delete this._internalEvents;
             return null;
         };
         return domFacade;
     })();
     //#endregion
-    var updatedDomPrototype = {
-        changeContext: function (selector) {
-            true && log.info(format('Dom[{0}]: Changing Dom context', this.namespace || GLOBAL));
-            updatejQueryInternals.call(this, selector);
-            return this;
-        },
-        on: function (events) {
-            true && log.debug(format('Dom[{0}]: Binding events...', this.namespace || GLOBAL));
-            var args = slice.call(arguments);
-            args[0] = normalizeEvents(events, this.namespace || GLOBAL);
-            this._context.on.apply(this._context, args);
-            return this;
-        },
-        one: function (events) {
-            true && log.debug(format('Dom[{0}]: Binding one events...', this.namespace || GLOBAL));
-            var args = slice.call(arguments);
-            args[0] = normalizeEvents(events, this.namespace || GLOBAL);
-            this._context.one.apply(this._context, args);
-            return this;
-        },
-        off: function (events) {
-            true && log.debug(format('Dom[{0}]: Unbinding events...', this.namespace || GLOBAL));
-            var args = slice.call(arguments);
-            args[0] = normalizeEvents(events, this.namespace || GLOBAL);
-            this._context.on.apply(this._context, args);
-            return this;
-        }
-    };
-    updateThrustDomPrototype(updatedDomPrototype, DomFacade);
-    extend(DomFacade.prototype, updatedDomPrototype);
-    DomFacade.prototype.$ = DomFacade.prototype.find;
     //#region Dom
-    var UntypedDom = (function () {
+    var Dom = (function () {
         //#endregion
-        function UntypedDom(name, mediator) {
+        function Dom(name, mediator) {
             if(!name) {
                 throw new Error('Dom: module name must be defined.');
             }
@@ -328,54 +275,49 @@ define('thrust/dom/main',["require", "exports", 'thrust/util', 'thrust/log', './
                 var mod = {
                 }, facade = that.createFacade(thrust, mod, {
                 });
-                var aThat = that;
-                aThat.query = aThat.$ = aThat.find = mod.$;
+
             });
         }
-        UntypedDom.prototype.initEvents = //#region Events
+        Dom.prototype.initEvents = //#region Events
         function () {
         };
-        UntypedDom.prototype.extend = function (to, init) {
+        Dom.prototype.extend = function (to, init) {
             return null;
         };
-        UntypedDom.prototype.subscribe = function (events, callback, context, once) {
+        Dom.prototype.subscribe = function (events, callback, context, once) {
         };
-        UntypedDom.prototype.unsubscribe = function (events, callback, context) {
+        Dom.prototype.unsubscribe = function (events, callback, context) {
         };
-        UntypedDom.prototype.once = function (events, callback, context) {
+        Dom.prototype.once = function (events, callback, context) {
         };
-        UntypedDom.config = config;
-        UntypedDom.prototype.createFacade = function (thrust, mod, facades) {
-            if(mod.dom && !(facades.dom instanceof DomFacade)) {
+        Dom.config = config;
+        Dom.prototype.createFacade = function (thrust, mod, facades) {
+            if(facades.dom && !(facades.dom instanceof DomFacade)) {
                 throw new Error('"dom" is a reserved property');
             }
             var dom;
             if(facades.dom) {
-                facades.dom.updateFacade(mod, this, document);
+                facades.dom.updateFacade(mod, this);
                 dom = facades.dom;
             } else {
-                dom = facades.dom = new DomFacade(mod, this, document);
-                mod.dom = mod.$ = dom.query;
-                mod.dom.$ = mod.dom.find = function (selector) {
-                    return dom.find(selector);
-                };
+                dom = facades.dom = new DomFacade(mod, this);
+                mod.dom = mod.$ = dom.context;
             }
             return dom;
         };
-        return UntypedDom;
-    })();    
-    var _dom = UntypedDom;
-    extend(_dom.prototype, updatedDomPrototype, Events);
-    exports.Dom = _dom;
+        return Dom;
+    })();
+    exports.Dom = Dom;    
     //#endregion
     })
 //@ sourceMappingURL=main.js.map
 ;
 define('thrust/dom', ['thrust/dom/main'], function (main) { return main; });
 
-define('thrust/dom/convention/action',["require", "exports", 'thrust/convention', 'thrust/util', 'jquery'], function(require, exports, __c__, __util__, __$__) {
-    /// <reference path="../../interfaces/dom/dom.facade.d.ts" />
-    /// <reference path="../../interfaces/convention.d.ts" />
+define('thrust/dom/convention/action',["require", "exports", 'thrust/convention', 'thrust/util', '../subjquery'], function(require, exports, __c__, __util__, __subjquery__) {
+    /// <reference path="../../interfaces/dom/convention/action.d.ts" />
+    /// <reference path="../../interfaces/dom/dom.d.ts" />
+    /// <reference path="../../interfaces/thrust.d.ts" />
     /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -386,25 +328,26 @@ define('thrust/dom/convention/action',["require", "exports", 'thrust/convention'
     var util = __util__;
 
     var _ = util._;
-    var $ = __$__;
+    var subjquery = __subjquery__;
 
-    var format = util.format, ACTIONS = 'actions', STRING = 'string', REGISTRATIONS = '_registrations', isFunction = _.isFunction, isString = _.isString, isArray = _.isArray;
+    var $ = subjquery.tQuery;
+    var format = util.format, ACTIONS = 'config.dom.actions', ACTIONSSINGLE = 'actions', STRING = 'string', REGISTRATIONS = '_registrations', isFunction = _.isFunction, isString = _.isString, isArray = _.isArray;
+    var getActionAttribute = function (eventName) {
+        return 'data-action-' + eventName;
+    };
     var ActionHandler = (function () {
         function ActionHandler() {
             this.events = {
             };
         }
-        ActionHandler.prototype.register = function (eventName, actionName, handler, context) {
+        ActionHandler.prototype.register = function (eventName, actionName, action) {
             var events = this.events;
             if(!events[eventName]) {
                 events[eventName] = {
                 };
             }
             if(!events[eventName][actionName]) {
-                events[eventName][actionName] = handler;
-                if(context) {
-                    events[eventName][actionName].context = context;
-                }
+                events[eventName][actionName] = action;
             } else {
                 throw new Error(format('The action {1} handler "{0}" has already been taken!', actionName, eventName));
             }
@@ -416,13 +359,13 @@ define('thrust/dom/convention/action',["require", "exports", 'thrust/convention'
             }
         };
         ActionHandler.prototype.callbackFor = function (eventName, returnResults) {
-            var events = this.events, actionAttribute = 'data-action-' + eventName, returnResultsDefined = typeof returnResults !== 'undefined';
+            var events = this.events, actionAttribute = getActionAttribute(eventName), returnResultsDefined = typeof returnResults !== 'undefined';
             return function () {
                 var attributeValue = $(this).attr(actionAttribute);
                 if(typeof attributeValue === STRING) {
-                    var method = events[eventName][attributeValue];
-                    if(method) {
-                        method.apply(method.context || this, arguments);
+                    var action = events[eventName][attributeValue];
+                    if(action) {
+                        action.handler.apply(action.context || this, arguments);
                     }
                     if(returnResultsDefined) {
                         return returnResults;
@@ -437,65 +380,104 @@ define('thrust/dom/convention/action',["require", "exports", 'thrust/convention'
             if(this.actionHandlers[name]) {
                 return this.actionHandlers[name];
             }
-            return new ActionHandler();
+            return (this.actionHandlers[name] = new ActionHandler());
         }
         return ActionHandler;
     })();    
+    var events = {
+        click: [
+            'a', 
+            'button', 
+            'input[type="button"]', 
+            'input[type="submit"]'
+        ],
+        dblclick: [
+            'a', 
+            'button', 
+            'input[type="button"]', 
+            'input[type="submit"]'
+        ],
+        mouseenter: [
+            ''
+        ],
+        mouseleave: [
+            ''
+        ],
+        focus: [
+            'input'
+        ],
+        blur: [
+            'input'
+        ]
+    };
+    var arrayShortHandArgsInOrder = [
+        'name', 
+        'handler', 
+        'context'
+    ];
     var methods = {
         properties: [
             ACTIONS
         ],
         ignite: function (thrust) {
             var actionHandler = ActionHandler.getFor(thrust.name);
-            $(window.document.body).on('click.' + ACTIONS, 'a, button, input[type="button"], input[type="submit"]', actionHandler.callbackFor('click', false));
-            return null;
+            thrust.dom.actionHandler = actionHandler;
+            var $body = $(window.document.body);
+            _.each(events, function (eventSelectors, eventName) {
+                // using thrust name, as callback needs to be per thrust instance
+                // in the event of multiple thrust instances.
+                $body.on(eventName + '.' + ACTIONSSINGLE + thrust.name, eventSelectors.join(getActionAttribute(eventName) + ', '), actionHandler.callbackFor(eventName, true));
+            });
         },
-        ready: function (facade, mod) {
+        deorbit: function (thrust) {
+            var actionHandler = ActionHandler.getFor(thrust.name);
+            var $body = $(window.document.body);
+            _.each(events, function (eventSelectors, eventName) {
+                $body.off('.' + ACTIONSSINGLE + thrust.name);
+            });
+        },
+        ready: function (mod, facade) {
             var actions = mod.convention(ACTIONS), actionHandler = ActionHandler.getFor(mod.thrust.name), dom = facade, moduleInstance = mod.instance;
             if(actions) {
-                for(var actionEvent in actions) {
-                    var actionCollection = actions[actionEvent];
-                    for(var actionName in actionCollection) {
-                        var action = actionCollection[actionName], args;
-                        if(isFunction(action)) {
-                            args = [
-                                actionEvent, 
-                                actionName, 
-                                action
+                _.forOwn(actions, function (actionCollection, eventName) {
+                    if(!isArray(actionCollection)) {
+                        actionCollection = [
+                            actionCollection
+                        ];
+                    } else {
+                        if(actionCollection.length && (!isArray(actionCollection[0]) || isString(actionCollection[0]))) {
+                            actionCollection = [
+                                actionCollection
                             ];
-                        } else {
-                            if(isString(action)) {
-                                args = [
-                                    actionEvent, 
-                                    actionName, 
-                                    moduleInstance[action]
-                                ];
-                            } else {
-                                if(isArray(action)) {
-                                    if(isFunction(action[0])) {
-                                        args = [
-                                            actionEvent, 
-                                            actionName
-                                        ].concat(action);
-                                    } else {
-                                        if(isString(action[0])) {
-                                            action[0] = moduleInstance[action[0]];
-                                            args = [
-                                                actionEvent, 
-                                                actionName
-                                            ].concat(action);
-                                        }
-                                    }
+                        }
+                    }
+                    _.each(actionCollection, function (action) {
+                        if(isArray(action)) {
+                            var newAction = {
+                                name: undefined
+                            };
+                            _.each(arrayShortHandArgsInOrder, function (x, i) {
+                                if(x === 'handler' && isString(action[i])) {
+                                    action[i] = mod.instance[action[i]];
                                 }
+                                newAction[x] = action[i];
+                            });
+                            action = newAction;
+                        }
+                        var actionName = action.name;
+                        if(!action.handler && action.moduleHandler) {
+                            action.handler = mod.instance[action.moduleHandler];
+                        } else {
+                            if(!action.handler) {
+                                throw new Error('Must define either a handler or module handler.');
                             }
                         }
-                        actionHandler.register.apply(actionHandler, args);
-                    }
-                }
+                        actionHandler.register(eventName, actionName, action);
+                    });
+                });
             }
-            return null;
         },
-        stop: function (facade, mod) {
+        stop: function (mod, facade) {
             var actions = mod.convention(ACTIONS), actionHandler = ActionHandler.getFor(mod.thrust.name), moduleInstance = mod.instance;
             if(actions) {
                 for(var actionEvent in actions) {
@@ -505,18 +487,16 @@ define('thrust/dom/convention/action',["require", "exports", 'thrust/convention'
                     }
                 }
             }
-            return null;
         }
     };
     exports.action = new Convention(methods);
 })
 //@ sourceMappingURL=action.js.map
 ;
-define('thrust/dom/convention/animate.container',["require", "exports", 'thrust/convention', 'thrust/util', '../jquery.interface'], function(require, exports, __c__, __util__, __jQueryInterface__) {
-    /// <reference path="../../interfaces/mediator/mediator.facade.d.ts" />
+define('thrust/dom/convention/animate.container',["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
+    /// <reference path="../../interfaces/dom/dom.d.ts" />
     /// <reference path="../../interfaces/mediator/mediator.d.ts" />
-    /// <reference path="../../interfaces/dom/dom.facade.d.ts" />
-    /// <reference path="../../interfaces/convention.d.ts" />
+    /// <reference path="../../interfaces/thrust.d.ts" />
     /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -527,19 +507,16 @@ define('thrust/dom/convention/animate.container',["require", "exports", 'thrust/
     var util = __util__;
 
     var _ = util._;
-    var jQueryInterface = __jQueryInterface__;
-
     var event = {
 anyContainer: 'thrust-convention-container-any',
-changeContainer: 'thrust-convention-container-change'    }, any = _.any, defer = _.defer, bind = _.bind, START = 'start-status', ANIMATE = 'animate', CONTAINER = 'container', CONTEXT = 'context', updatejQueryInternals = jQueryInterface.updatejQueryInternals;
+changeContainer: 'thrust-convention-container-change'    }, any = _.any, defer = _.defer, bind = _.bind, START = 'start-status', ANIMATE = 'animate', CONTAINER = 'container', CONTEXT = 'context';
     var methods = {
         properties: [
             ANIMATE
         ],
-        init: function (facade, mod) {
+        init: function (mod, facade) {
             var that = this, mediator = mod.instance.mediator;
             mediator.subscribe(event.changeContainer, bind(that.change, that, mod));
-            return null;
         },
         change: function (module, container) {
             if(module.convention(CONTAINER) === container) {
@@ -551,17 +528,15 @@ changeContainer: 'thrust-convention-container-change'    }, any = _.any, defer =
                     }
                 }
             }
-            return null;
         },
-        ready: function (facade, mod) {
+        ready: function (mod, facade) {
             var that = this, animate = mod.convention(ANIMATE), container = mod.convention(CONTAINER), context = mod.convention(CONTEXT), dom = facade;
             if(animate && container) {
-                var clone = dom.clone().appendTo(dom.parent());
+                var clone = dom.context.clone().appendTo(dom.context.parent());
                 clone.addClass(animate.replace(/\./g, ' ').trim());
-                updatejQueryInternals.call(dom, clone);
-                setTimeout(bind(that.cleanup, that, dom.parent(), animate, context), 2000);
+                mod.instance.dom = mod.instance.$ = clone;
+                setTimeout(bind(that.cleanup, that, dom.context.parent(), animate, context), 2000);
             }
-            return null;
         },
         cleanup: function (container, animate, context) {
             container.find(context).filter(':not(' + animate + ')').remove();
@@ -571,10 +546,11 @@ changeContainer: 'thrust-convention-container-change'    }, any = _.any, defer =
 })
 //@ sourceMappingURL=animate.container.js.map
 ;
-define('thrust/dom/convention/context',["require", "exports", 'thrust/convention', 'thrust/util', '../jquery.interface'], function(require, exports, __c__, __util__, __jQueryInterface__) {
+define('thrust/dom/convention/context',["require", "exports", 'thrust/convention', 'thrust/util', '../subjquery'], function(require, exports, __c__, __util__, __subjquery__) {
+    /// <reference path="../../interfaces/dom/convention/context.d.ts" />
     /// <reference path="../../interfaces/mediator/mediator.d.ts" />
-    /// <reference path="../../interfaces/dom/dom.facade.d.ts" />
-    /// <reference path="../../interfaces/convention.d.ts" />
+    /// <reference path="../../interfaces/dom/dom.d.ts" />
+    /// <reference path="../../interfaces/thrust.d.ts" />
     /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -585,19 +561,19 @@ define('thrust/dom/convention/context',["require", "exports", 'thrust/convention
     var util = __util__;
 
     var _ = util._;
-    var jQueryInterface = __jQueryInterface__;
+    var subjquery = __subjquery__;
 
-    var CONTEXT = 'context', updatejQueryInternals = jQueryInterface.updatejQueryInternals;
+    var tQuery = subjquery.tQuery;
+    var CONTEXT = 'config.dom.context';
     var methods = {
         properties: [
             CONTEXT
         ],
-        ready: function (facade, mod) {
+        ready: function (mod, facade) {
             var context = mod.convention(CONTEXT);
             if(context) {
-                updatejQueryInternals.call(facade, context);
+                mod.instance.dom = mod.instance.$ = facade.context = tQuery(context, mod.instance.$);
             }
-            return null;
         }
     };
     exports.context = new Convention(methods);
@@ -605,9 +581,10 @@ define('thrust/dom/convention/context',["require", "exports", 'thrust/convention
 //@ sourceMappingURL=context.js.map
 ;
 define('thrust/dom/convention/event',["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
+    /// <reference path="../../interfaces/dom/convention/event.d.ts" />
     /// <reference path="../../interfaces/mediator/mediator.d.ts" />
-    /// <reference path="../../interfaces/dom/dom.facade.d.ts" />
-    /// <reference path="../../interfaces/convention.d.ts" />
+    /// <reference path="../../interfaces/dom/dom.d.ts" />
+    /// <reference path="../../interfaces/thrust.d.ts" />
     /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -618,60 +595,87 @@ define('thrust/dom/convention/event',["require", "exports", 'thrust/convention',
     var util = __util__;
 
     var _ = util._;
-    var CONTEXT = 'context', EVENTS = 'events', isFunction = _.isFunction, isString = _.isString, isArray = _.isArray;
+    var CONTEXT = 'config.dom.context', EVENTS = 'config.dom.events', isFunction = _.isFunction, isString = _.isString, isArray = _.isArray;
+    var eventPropertyLoadOrder = [
+        'selector', 
+        'data', 
+        'handler'
+    ];
     var methods = {
         properties: [
             EVENTS
         ],
-        ready: function (facade, mod) {
-            var events = mod.convention(EVENTS), optionalContext = mod.convention(CONTEXT), dom = optionalContext ? facade.query(optionalContext) : facade, moduleInstance = mod.instance;
+        ready: function (mod, facade) {
+            var events = mod.convention(EVENTS), $context = facade.context, moduleInstance = mod.instance;
             if(events) {
-                for(var event in events) {
-                    var definition = events[event], bindEvent;
-                    if(isFunction(definition)) {
-                        bindEvent = [
-                            event, 
-                            definition
+                _.forIn(events, function (eventsCollection, event) {
+                    //var eventsCollection = events[event];
+                    if(!isArray(eventsCollection)) {
+                        eventsCollection = [
+                            eventsCollection
                         ];
                     } else {
-                        // If the event method is a string, we search to verify that module method exists on the given module
-                        //        then bind it, with the proper context.
-                        if(isString(definition)) {
-                            bindEvent = [
-                                event, 
-                                moduleInstance[definition]
+                        if(eventsCollection.length && (!isArray(eventsCollection[0]) || isString(eventsCollection[0]))) {
+                            eventsCollection = [
+                                eventsCollection
                             ];
-                        } else {
-                            // If the event module is an array, we apply the array as if it were a direct call to subscribe, by pushing the event name on the front.
-                            if(isArray(definition)) {
-                                bindEvent = definition;
-                                for(var i = 0, iLen = definition.length; i < iLen; i++) {
-                                    if(isString(definition[i]) && moduleInstance[definition[i]]) {
-                                        definition[i] = moduleInstance[definition[i]];
-                                    }
-                                }
-                                bindEvent.unshift(0);
-                            }
                         }
                     }
-                    // Call the on method, with our arguments.
-                    dom.on.apply(dom, bindEvent);
-                }
-                //Save a reference of the context, for later unbinding.
-                events.context = (dom)._context[0];
+                    _.each(eventsCollection, function (definition) {
+                        var bindEvent = [
+                            event
+                        ];
+                        if(isArray(definition)) {
+                            bindEvent.push.apply(bindEvent, definition);
+                            // We have one edgecase here
+                            // If the short hand array, has a context that is a string or function
+                            // and it doesnt have information for both selector and data, this will fail
+                            // We can recover when all 5 possible items are defined.
+                            var handler = bindEvent[bindEvent.length - 1];
+                            // We were asked for a method on the module.
+                            if(isString(handler) && bindEvent.length === 2) {
+                                bindEvent[bindEvent.length - 1] = mod.instance[handler];
+                            } else {
+                                // We didnt find a function :(
+                                //  EDGE CASE: If context is a function, we will assume all is well
+                                //              Even if the handler is a string that needs to be referenced.
+                                // Work arrounds:
+                                //      Shorthand: add null/empty values for selector and data
+                                //      Longhand: switch to long hand as it has more explicit syntax.
+                                if(!isString(handler) && !isFunction(handler) && bindEvent.length > 2 || bindEvent.length === 5) {
+                                    handler = bindEvent[bindEvent.length - 2];
+                                    if(isString(handler)) {
+                                        bindEvent[bindEvent.length - 2] = mod.instance[handler];
+                                    }
+                                    bindEvent[bindEvent.length - 2] = _.bind(bindEvent[bindEvent.length - 2], bindEvent.pop());
+                                } else {
+                                    if(isString(handler)) {
+                                        bindEvent[bindEvent.length - 1] = mod.instance[handler];
+                                    }
+                                }
+                            }
+                        } else {
+                            _.each(eventPropertyLoadOrder, function (x) {
+                                if(definition[x]) {
+                                    var value = definition[x];
+                                    if(x === 'handler' && definition.context) {
+                                        value = _.bind(value, definition.context);
+                                    }
+                                    bindEvent.push(value);
+                                }
+                            });
+                        }
+                        // Call the on method, with our arguments.
+                        $context.on.apply($context, bindEvent);
+                    });
+                });
             }
-            return null;
         },
-        stop: function (facade, mod) {
-            var events = mod.convention(EVENTS), dom = facade;
-            if(events) {
-                dom.changeContext(events.context);
-                delete events.context;
-                if((dom)._context) {
-                    dom.off();
-                }
+        stop: function (mod, facade) {
+            var events = mod.convention(EVENTS), $context = facade.context;
+            if($context) {
+                $context.off();
             }
-            return null;
         }
     };
     exports.event = new Convention(methods);

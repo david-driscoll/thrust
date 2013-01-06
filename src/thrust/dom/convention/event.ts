@@ -1,6 +1,7 @@
+/// <reference path="../../interfaces/dom/convention/event.d.ts" />
 /// <reference path="../../interfaces/mediator/mediator.d.ts" />
-/// <reference path="../../interfaces/dom/dom.facade.d.ts" />
-/// <reference path="../../interfaces/convention.d.ts" />
+/// <reference path="../../interfaces/dom/dom.d.ts" />
+/// <reference path="../../interfaces/thrust.d.ts" />
 /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -13,111 +14,154 @@ var Convention = c.Convention;
 import util = module('thrust/util');
 var _ = util._;
 
-    var CONTEXT    = 'context',
-        EVENTS     = 'events',
-        isFunction = _.isFunction,
-        isString   = _.isString,
-        isArray    = _.isArray;
+var CONTEXT = 'config.dom.context',
+    EVENTS = 'config.dom.events',
+    isFunction = _.isFunction,
+    isString = _.isString,
+    isArray = _.isArray;
 
-    /**
-    @module thrust.dom
-    @submodule thrust.dom.convention
-    **/
+/**
+@module thrust.dom
+@submodule thrust.dom.convention
+**/
 
-    /**
-    * # __thrust/dom__ Convention - Events
-    *
-    * The dom events convention, allows you to automatically bind events for your module.  Using this module you can bind common events like
-    * mouse over, click, etc, to a method or handler.
-    *
-    * The definition can accept all of the following:
-    *
-    * * `function()` - This function will be run when the event is invoked.
-    * * `string` - This string must point at a function, that exists on the module definition.
-    * * `[function(), context]` - Where the context is the context that the function will be called with.
-    * * `[string, context]` - Where the context is the context that the function will be called with.
-    * * `[selector, function(), context]` - Where the selector is a jquery delegate selector.
-    * * `[selector, string, context]` - Where the selector is a jquery delegate selector.
-    *
-    *
-    * The following is an example of the events block in your module...
-    *
-    *
-    *      events: {
-    *          'focus': function() { alert('Test Function'); },
-    *          'mouseover': 'mouseOver',
-    *          'click': ['li', function() { alert('Test function'); }]
-    *      },
-    *      mouseOver: function() { alert('Test Function'); },
-    *
-    * @for thrust.dom.convention
-    * @property events
-    **/
-    interface IThrustConventionDomEvent extends IThrustConventionProperties,
-		IThrustConventionReady,
-        IThrustConventionStop {}
+/**
+* # __thrust/dom__ Convention - Events
+*
+* The dom events convention, allows you to automatically bind events for your module.  Using this module you can bind common events like
+* mouse over, click, etc, to a method or handler.
+*
+* The definition can accept all of the following:
+*
+*     {
+*         name: 'actionName',
+*         handler: Function, the function to be invoked.
+*         moduleHandler: string name of the property on the module that contains this function.
+*         context: context to call the function with (this will override the default context set by the underling dom engine)
+*         selector: Optional the deglegate selector to apply for this event.
+*         data: Optional data that will be available in the event object.
+*     }
+*
+*
+* The definitions also accept a short hand array:
+*
+*     [{, selector} {, data}, handler {, context}]
+*    
+* The following is an example of the events block in your module...
+*
+*     config: {
+*         dom: {
+*             events: {
+*                 'click': [{
+*                     handler:  function()
+*                     {
+*                         alert('My awesome alert here!');
+*                     }
+*                 }],
+*                 'focus': [{
+*                     moduleHandler: 'mouseOver',
+*                 },{
+*                     selector: 'li',
+*                     handler: function()
+*                     {
+*                         alert('Test function');
+*                     },
+*                 },['actionString', someObject]
+*                 }]
+*             }
+*         }
+*     },
+*     actionString: function()
+*     {
+*         alert('My awesome alert here!');
+*     }
+*
+*
+* @for thrust.dom.convention
+* @property events
+**/
+interface IThrustConventionDomEvent extends IThrustConvention.Properties,
+    IThrustConvention.Plugin.Ready.Void,
+    IThrustConvention.Plugin.Stop.Void {}
 
-    var methods: IThrustConventionDomEvent = {
-        properties: [EVENTS],
-        ready: function (facade: IThrustDomFacade, mod: IThrustModule): Promise
-        {
-            var events          = mod.convention(EVENTS),
-                optionalContext = mod.convention(CONTEXT),
-                dom             = optionalContext ? facade.query(optionalContext) : facade,
-                moduleInstance  = mod.instance;
+interface IDomEventPrivate extends IDomEvent {
+    $context?: TQuery;
+}
 
-            if (events)
-            {
-                for (var event in events)
-                {
-                    var definition = events[event],
-                        bindEvent;
+var eventPropertyLoadOrder = ['selector', 'data', 'handler'];
 
-                    if (isFunction(definition))
-                    {
-                        bindEvent = [event, definition];
-                    }
-                    // If the event method is a string, we search to verify that module method exists on the given module
-                    //        then bind it, with the proper context.
-                    else if (isString(definition))
-                    {
-                        bindEvent = [event, moduleInstance[definition]];
-                    }
-                        // If the event module is an array, we apply the array as if it were a direct call to subscribe, by pushing the event name on the front.
-                    else if (isArray(definition))
-                    {
-                        bindEvent = definition;
-                        for (var i = 0, iLen = definition.length; i < iLen; i++)
-                        {
-                            if (isString(definition[i]) && moduleInstance[definition[i]])
-                            {
-                                definition[i] = moduleInstance[definition[i]];
-                            }
+var methods: IThrustConventionDomEvent = {
+    properties: [EVENTS],
+    ready: function (mod: IThrustModule, facade: IThrustDomFacade): void {
+        var events: IDomEventsConfig = mod.convention(EVENTS),
+            $context = facade.context,
+            moduleInstance = mod.instance;
+
+        if (events) {
+            _.forIn(events, function (eventsCollection, event) {
+                //var eventsCollection = events[event];
+                if (!isArray(eventsCollection))
+                    eventsCollection = [<any> eventsCollection];
+                else if (eventsCollection.length && (!isArray(eventsCollection[0]) || isString(eventsCollection[0])))
+                    eventsCollection = [<any> eventsCollection];
+
+                _.each(eventsCollection, function (definition: IDomEventPrivate) {
+                    var bindEvent = <any[]> [event];
+
+                    if (isArray(definition)) {
+
+                        bindEvent.push.apply(bindEvent, definition);
+                        // We have one edgecase here
+                        // If the short hand array, has a context that is a string or function
+                        // and it doesnt have information for both selector and data, this will fail
+                        // We can recover when all 5 possible items are defined.
+                        var handler = bindEvent[bindEvent.length - 1];
+
+                        // We were asked for a method on the module.
+                        if (isString(handler) && bindEvent.length === 2) {
+                            bindEvent[bindEvent.length - 1] = mod.instance[handler];
                         }
-                        bindEvent.unshift(0);
+                            // We didnt find a function :(
+                            //  EDGE CASE: If context is a function, we will assume all is well
+                            //              Even if the handler is a string that needs to be referenced.
+                            // Work arrounds:
+                            //      Shorthand: add null/empty values for selector and data
+                            //      Longhand: switch to long hand as it has more explicit syntax.
+                        else if (!isString(handler) && !isFunction(handler) && bindEvent.length > 2 || bindEvent.length === 5) {
+                            handler = bindEvent[bindEvent.length - 2];
+                            if (isString(handler))
+                                bindEvent[bindEvent.length - 2] = mod.instance[handler];
+
+                            bindEvent[bindEvent.length - 2] = _.bind(bindEvent[bindEvent.length - 2], bindEvent.pop());
+                        }
+                        else if (isString(handler)) {
+                            bindEvent[bindEvent.length - 1] = mod.instance[handler];
+                        }
                     }
+                    else {
+                        _.each(eventPropertyLoadOrder, function (x) {
+                            if (definition[x]) {
+                                var value = definition[x];
+                                if (x === 'handler' && definition.context)
+                                    value = _.bind(value, definition.context);
+
+                                bindEvent.push(value);
+                            }
+                        })
+                    }
+
                     // Call the on method, with our arguments.
-                    dom.on.apply(dom, bindEvent);
-                }
-                //Save a reference of the context, for later unbinding.
-                events.context = (<any> dom)._context[0];
-            }
-            return null;
-        },
-        stop: function (facade: IThrustDomFacade, mod: IThrustModule): Promise
-        {
-            var events = mod.convention(EVENTS),
-                dom = facade;
-
-            if (events)
-            {
-                dom.changeContext(events.context);
-                delete events.context;
-
-                if ((<any> dom)._context)
-                    dom.off();
-            }
-            return null;
+                    $context.on.apply($context, bindEvent);
+                })
+            })
         }
-    };
-	export var event = new Convention(methods);
+    },
+    stop: function (mod: IThrustModule, facade: IThrustDomFacade): void {
+        var events: IDomEventsConfig = mod.convention(EVENTS),
+            $context = facade.context;
+
+        if ($context)
+            $context.off();
+    }
+};
+export var event = new Convention(methods);

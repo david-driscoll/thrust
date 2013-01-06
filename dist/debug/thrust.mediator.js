@@ -1,4 +1,4 @@
-/*! thrust-js - v0.1.0 - 2013-01-01 */
+/*! thrust-js - v0.1.5 - 2013-01-05 */
 define('thrust/mediator/config',["require", "exports"], function(require, exports) {
     /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -34,17 +34,14 @@ define('thrust/mediator/config',["require", "exports"], function(require, export
     @type {Array}
     **/
     exports.conventions = [
-        'thrust/mediator/convention/container', 
-        'thrust/mediator/convention/subscription', 
-        'thrust/mediator/convention/autostart', 
-        'thrust/mediator/convention/dependent.modules'
+        'thrust/mediator/convention/subscription'
     ];
 })
 //@ sourceMappingURL=config.js.map
 ;
 define('thrust/mediator/main',["require", "exports", 'thrust/util', 'thrust/log', 'thrust/events', 'thrust/facade', 'has', 'thrust/config', './config'], function(require, exports, __util__, __log__, __events__, __facade__, __has__, __config__, __mediatorConfig__) {
     /// <reference path="../../has.d.ts" />
-    /// <reference path="../interfaces/mediator/mediator.facade.d.ts" />
+    /// <reference path="../interfaces/mediator/mediator.d.ts" />
     /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -90,7 +87,7 @@ define('thrust/mediator/main',["require", "exports", 'thrust/util', 'thrust/log'
             this.parent = parent;
             this.__conventions = parent.__conventions;
             this._callbacks = parent._callbacks;
-            this.initEvents();
+            this.initEvents(module);
         });
         _.extend(mediatorFacade.prototype, Events);
         /**
@@ -132,7 +129,7 @@ define('thrust/mediator/main',["require", "exports", 'thrust/util', 'thrust/log'
                     var sub = this._internalSubscriptions[i];
                     this.unsubscribe(sub.events, sub.callback, sub.context);
                 }
-                delete this._internalSubscriptions;
+                this._internalSubscriptions = null;
             }
             return null;
         };
@@ -173,7 +170,7 @@ define('thrust/mediator/main',["require", "exports", 'thrust/util', 'thrust/log'
         Mediator.prototype.once = function (events, callback, context) {
         };
         Mediator.prototype.createFacade = function (thrust, mod, facades) {
-            if((mod).mediator && !(facades.mediator instanceof MediatorFacade)) {
+            if(facades.mediator && !(facades.mediator instanceof MediatorFacade)) {
                 throw new Error('"mediator" is a reserved property');
             }
             var mediator;
@@ -196,155 +193,10 @@ define('thrust/mediator/main',["require", "exports", 'thrust/util', 'thrust/log'
 ;
 define('thrust/mediator', ['thrust/mediator/main'], function (main) { return main; });
 
-define('thrust/mediator/convention/autostart',["require", "exports", 'thrust/convention'], function(require, exports, __c__) {
-    /// <reference path="../../interfaces/convention.d.ts" />
-    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
-    
-    var c = __c__;
-
-    var Convention = c.Convention;
-    /**
-    @module thrust.mediator
-    @submodule thrust.mediator.convention
-    **/
-    /**
-    * # __thrust/mediator__ Convention - Auto Start
-    *
-    * The auto start property allows for a module, to be automatically started once it is
-    * included into a thrust instnace, without having to explicity call start on the module.
-    *
-    *
-    * This is useful for certian types of modules, usually persistant ones that always need to load regardless.
-    * For example a navigation module, or user settings module.
-    *
-    * @for thrust.mediator.convention
-    * @property autoStart
-    **/
-    var methods = {
-        properties: [
-            'autoStart'
-        ]
-    };
-    exports.autostart = new Convention(methods);
-})
-//@ sourceMappingURL=autostart.js.map
-;
-define('thrust/mediator/convention/container',["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
-    /// <reference path="../../interfaces/mediator/mediator.facade.d.ts" />
-    /// <reference path="../../interfaces/facade.d.ts" />
-    /// <reference path="../../interfaces/convention.d.ts" />
-    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
-    
-    var c = __c__;
-
-    var Convention = c.Convention;
-    var util = __util__;
-
-    var _ = util._;
-    /**
-    @module thrust.mediator
-    @submodule thrust.mediator.convention
-    **/
-        var event = {
-anyContainer: 'thrust/mediator/convention/container/any',
-changeContainer: 'thrust/mediator/convention/container/change'    }, any = _.any, bind = _.bind, CONTAINER = 'container', START = 'start-status', defer = _.defer;
-    var methods = {
-        properties: [
-            CONTAINER
-        ],
-        change: function (mod, container) {
-            var containerValue = mod.convention(CONTAINER);
-            if(containerValue && container && containerValue === container) {
-                if(mod.convention(START)) {
-                    defer(bind(mod.stop, mod));
-                }
-            }
-        },
-        start: function (facade, mod) {
-            var that = this, containerValue = mod.convention(CONTAINER);
-            if(containerValue) {
-                facade.fire(event.changeContainer, containerValue);
-                // Facade subscriptions get unsubscribed when stopping a module, so we need to resubscribe every time here.
-                // This is probably better, as the events will be less chatty.
-                facade.subscribe(event.changeContainer, bind(that.change, that, mod));
-            }
-            return undefined;
-        },
-        stop: function (facade, mod) {
-            return undefined;
-        }
-    };
-    exports.container = new Convention(methods);
-})
-//@ sourceMappingURL=container.js.map
-;
-define('thrust/mediator/convention/dependent.modules',["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
-    /// <reference path="../../interfaces/mediator/mediator.facade.d.ts" />
-    /// <reference path="../../interfaces/convention.d.ts" />
-    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
-    
-    var c = __c__;
-
-    var Convention = c.Convention;
-    var util = __util__;
-
-    var _ = util._;
-    /**
-    @module thrust.mediator
-    @submodule thrust.mediator.convention
-    **/
-        var any = _.any, map = _.map, DMODULES = 'dependentModules', CMODULES = 'childModules', START = 'start-status', defer = _.defer, bind = _.bind;
-    var invokedependentModules = function (module, method) {
-        var requiredModules = module.convention(DMODULES);
-        if(requiredModules) {
-            return module.thrust[method](requiredModules);
-        }
-    };
-    var invokeChildModules = function (module, method) {
-        var requiredModules = module.convention(CMODULES);
-        if(requiredModules) {
-            return module.thrust[method](requiredModules);
-        }
-    };
-    var methods = {
-        properties: [
-            DMODULES, 
-            CMODULES
-        ],
-        start: function (facade, mod) {
-            return util.when.all(util.flattenToPromises([
-                invokedependentModules(mod, 'start'), 
-                invokeChildModules(mod, 'start')
-            ]));
-        },
-        ready: function (facade, mod) {
-            if(!mod.thrust.started) {
-                return util.when.all(util.flattenToPromises([
-                    invokedependentModules(mod, 'ready'), 
-                    invokeChildModules(mod, 'ready')
-                ]));
-            }
-        },
-        stop: function (facade, mod) {
-            return invokeChildModules(mod, 'stop');
-        },
-        destroy: function (facade, mod) {
-            return invokeChildModules(mod, 'destroy');
-        }
-    };
-    exports.dependentModules = new Convention(methods);
-})
-//@ sourceMappingURL=dependent.modules.js.map
-;
 define('thrust/mediator/convention/subscription',["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
-    /// <reference path="../../interfaces/mediator/mediator.facade.d.ts" />
-    /// <reference path="../../interfaces/convention.d.ts" />
+    /// <reference path="../../interfaces/mediator/convention/subscription.d.ts" />
+    /// <reference path="../../interfaces/mediator/mediator.d.ts" />
+    /// <reference path="../../interfaces/thrust.d.ts" />
     /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -361,51 +213,87 @@ define('thrust/mediator/convention/subscription',["require", "exports", 'thrust/
     @module thrust.mediator
     @submodule thrust.mediator.convention
     **/
-        var SUBSCRIPTIONS = 'subscriptions', isFunction = _.isFunction, isString = _.isString, isArray = _.isArray;
+        var SUBSCRIPTIONS = 'config.mediator.subscriptions', isFunction = _.isFunction, isString = _.isString, isArray = _.isArray, isObject = _.isObject, isPlainObject = _.isPlainObject, forOwn = _.forOwn, each = _.each;
+    var arrayShortHandArgsInOrder = [
+        'handler', 
+        'context'
+    ];
     var methods = {
         properties: [
             SUBSCRIPTIONS
         ],
-        start: function (facade, mod) {
+        start: function (mod, facade) {
             var subscriptions = mod.convention(SUBSCRIPTIONS);
-            if(subscriptions && !subscriptions._subscriptionsSet) {
+            if(subscriptions && !(subscriptions)._subscriptionsSet) {
                 var moduleInstance = mod.instance;
-                for(var subscription in subscriptions) {
-                    var definition = subscriptions[subscription];
-                    if(isFunction(definition)) {
-                        definition = [
-                            subscription, 
-                            definition, 
-                            moduleInstance
+                forOwn(subscriptions, function (subscriptionCollection, subscriptionName) {
+                    if(!isArray(subscriptionCollection)) {
+                        subscriptionCollection = [
+                            [
+                                subscriptionCollection
+                            ]
                         ];
                     } else {
-                        if(isString(definition)) {
-                            definition = [
-                                subscription, 
-                                moduleInstance[definition], 
-                                moduleInstance
+                        if(subscriptionCollection.length && (!isArray(subscriptionCollection[0]) || isString(subscriptionCollection[0]))) {
+                            subscriptionCollection = [
+                                subscriptionCollection
                             ];
-                        } else {
-                            if(isArray(definition)) {
-                                if(isString(definition[0])) {
-                                    definition[0] = moduleInstance[definition[0]];
-                                }
-                                definition.unshift(subscription);
-                            }
                         }
                     }
-                    facade.subscribe.apply(facade, definition);
-                }
+                    each(subscriptionCollection, function (subscription) {
+                        if(isArray(subscription)) {
+                            //newSubscription.push.apply(newSubscription, subscription);
+                            each(subscription, function (handlerObject, i) {
+                                var newSubscription = [
+                                    subscriptionName
+                                ];
+                                if(isString(handlerObject)) {
+                                    newSubscription.push(mod.instance[handlerObject]);
+                                    if(subscription[i + 1]) {
+                                        newSubscription.push(subscription[i + 1]);
+                                    }
+                                    //return false;
+                                                                    } else {
+                                    if(isFunction(handlerObject)) {
+                                        newSubscription.push(handlerObject);
+                                        if(subscription[i + 1]) {
+                                            newSubscription.push(subscription[i + 1]);
+                                        }
+                                        //return false;
+                                                                            } else {
+                                        if(isPlainObject(handlerObject) && ('moduleHandler' in handlerObject || 'handler' in handlerObject)) {
+                                            //newSubscription = [subscriptionName];
+                                            if('moduleHandler' in handlerObject) {
+                                                newSubscription.push(mod.instance[handlerObject.moduleHandler]);
+                                            }
+                                            if('handler' in handlerObject) {
+                                                if(isString(handlerObject)) {
+                                                    newSubscription.push(mod.instance[handlerObject.handler]);
+                                                } else {
+                                                    newSubscription.push(handlerObject.handler);
+                                                }
+                                            }
+                                            if('context' in handlerObject) {
+                                                newSubscription.push(handlerObject.context);
+                                            }
+                                        }
+                                    }
+                                }
+                                if(newSubscription.length > 1) {
+                                    facade.subscribe.apply(facade, newSubscription);
+                                }
+                            });
+                        }
+                    });
+                });
                 mod.convention(SUBSCRIPTIONS)._subscriptionsSet = true;
             }
-            return null;
         },
-        stop: function (facade, mod) {
+        stop: function (mod, facade) {
             var subscriptions = mod.convention(SUBSCRIPTIONS);
             if(subscriptions && subscriptions._subscriptionsSet) {
                 mod.convention(SUBSCRIPTIONS)._subscriptionsSet = false;
             }
-            return null;
         }
     };
     exports.subscription = new Convention(methods);

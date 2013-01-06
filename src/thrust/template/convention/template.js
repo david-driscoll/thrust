@@ -1,6 +1,6 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
-    /// <reference path="../../interfaces/template/template.facade.d.ts" />
-    /// <reference path="../../interfaces/convention.d.ts" />
+    /// <reference path="../../interfaces/template/template.d.ts" />
+    /// <reference path="../../interfaces/thrust.d.ts" />
     /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -16,7 +16,7 @@ define(["require", "exports", 'thrust/convention', 'thrust/util'], function(requ
         properties: [
             TEMPLATES
         ],
-        init: function (facade, mod) {
+        init: function (mod, facade) {
             var defer = when.defer();
             var templates = mod.convention(TEMPLATES), invertedTemplates = util.invert(templates), moduleInstance = mod.instance;
             if(templates) {
@@ -36,12 +36,11 @@ define(["require", "exports", 'thrust/convention', 'thrust/util'], function(requ
                     });
                 });
             }
-            return null;
         },
-        ready: function (facade, mod) {
+        ready: function (mod, facade) {
             return facade.loadingPromise || undefined;
         }
     };
-    exports.subscription = new Convention(methods);
+    exports.template = new Convention(methods);
 })
 //@ sourceMappingURL=template.js.map

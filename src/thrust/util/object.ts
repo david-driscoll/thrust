@@ -21,7 +21,7 @@
     **/
 
     var hasOwn = Object.prototype.hasOwnProperty;
-    export function invert(obj)
+    export function invert(obj : any) : any
     {
         var result = {};
         for (var i in obj)

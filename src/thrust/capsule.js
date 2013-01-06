@@ -10,15 +10,18 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
 
     var has = __has__;
 
-    var type = util.type, format = util.format, isObject = _.isObject, extend = _.extend, when = util.when, flatten = _.flatten, pluck = _.pluck, flattenToPromises = util.flattenToPromises, thrustCache = {
+    var type = util.type, format = util.format, each = _.each, isObject = _.isObject, extend = _.extend, when = util.when, flatten = _.flatten, pluck = _.pluck, flattenToPromises = util.flattenToPromises, thrustCache = {
     }, __optionalMethods = [
         // Optional methods that may be on a module
         'start', 
 'stop', 
-'ready'    ], __requiredMethods = [
+'ready', 
+'config', 
+    ], __requiredMethods = [
         // Required methods that must be on every module
         'init', 
-'destroy'    ];
+'destroy', 
+    ];
     /**
     Moves all properties, that should exist outside of the module, into a private object for holding.
     
@@ -41,13 +44,15 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
         return '.' + (name === 'global' ? 'global' : prefix + name.replace(/\./g, '-'));
     }
     function callFacadeMethods(method, moduleCache) {
+        var m = moduleCache.module;
         var results = [];
         _.forOwn(moduleCache.facades, function (facade, i) {
             has('DEBUG') && log.debug(format('thrust/capsule: Calling facade "{0}" {1}()', i, method));
             if(facade[method] && isObject(facade)) {
-                results.push(facade[method].call(facade, moduleCache.module));
+                results.push(facade[method].call(facade, m));
             }
         });
+        results.push(util.safeInvoke((m.thrust).__thrustConventions, method, m, moduleCache.facades));
         return results;
     }
     /**
@@ -69,6 +74,14 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
             }
             var mid = this.mid = thrust.name + ':' + name;
             var tCache = thrustCache[def.hash || mid];
+            // Clear any potential cached config objects, to make sure they refresh if the module is redefined.
+            if(tCache) {
+                _.keys(tCache).filter(function (x) {
+                    return x.indexOf('config.') === 0;
+                }).forEach(function (x) {
+                    return delete tCache[x];
+                });
+            }
             this.instance = extend(def, tCache && tCache.instance || {
             });
             this.instance.name = (this.instance.name || name);
@@ -96,7 +109,9 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
             var facades = thrustModuleCacheItem.facades || (thrustModuleCacheItem.facades = {
             });
             if(!thrust.__conventionPluckPropertiesCache) {
-                thrust.__conventionPluckPropertiesCache = flatten(pluck(thrust.__conventions || [], 'properties'));
+                thrust.__conventionPluckPropertiesCache = flatten(pluck(thrust.__conventions || [], 'properties')).filter(function (x) {
+                    return x.indexOf('config.') !== 0;
+                });
             }
             // Move all special properties off to the thrust's internal method.
             moveToThrustCache(this.instance, thrustModuleCacheItem, __requiredMethods);
@@ -105,6 +120,7 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
             util.safeInvoke(thrust, 'createFacade', thrust, this.instance, facades);
             this.__namespace = getEventNamespace(this.instance.name);
             this.thrust = thrust;
+            this.cache = thrustCache[mid];
         }
         /**
         Getter/Setter for convention methods.
@@ -118,11 +134,27 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
         **/
                 Module.thrustCache = thrustCache;
         Module.prototype.convention = function (property, value) {
+            var tc = thrustCache[this.mid];
+            if(property.indexOf('config.') === 0) {
+                if(typeof tc[property] === 'undefined') {
+                    tc[property] = this.getValueFromPath(property, tc) || false;
+                }
+            }
             if(typeof value !== 'undefined') {
-                thrustCache[this.mid][property] = value;
+                tc[property] = value;
                 return;
             }
-            return thrustCache[this.mid][property];
+            return tc[property];
+        };
+        Module.prototype.getValueFromPath = function (path, object) {
+            var paths = path.split('.'), v = object;
+            _.each(paths, function (p) {
+                v = v && v[p];
+                if(!v) {
+                    return false;
+                }
+            });
+            return v;
         }/**
         Injects this module into the given thrust instance.
         
@@ -201,7 +233,7 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
         ;
         Module.prototype.start = function () {
             var that = this;
-            that.thrust.start(that.name);
+            return that.thrust.start(that.name);
         }/**
         Stop the module, inside the thrust container it was created on.
         
@@ -210,7 +242,7 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
         ;
         Module.prototype.stop = function () {
             var that = this;
-            that.thrust.stop(that.name);
+            return that.thrust.stop(that.name);
         };
         return Module;
     })();

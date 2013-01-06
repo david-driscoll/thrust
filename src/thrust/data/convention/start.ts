@@ -1,6 +1,4 @@
-/// <reference path="../../interfaces/data/data.config.d.ts" />
 /// <reference path="../../interfaces/data/data.d.ts" />
-/// <reference path="../../interfaces/convention.d.ts" />
 /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -72,15 +70,15 @@ var _ = util._;
     * @for thrust.data.convention
     * @property start
     **/
-    interface IThrustConventionDataStart extends IThrustConventionCountdown, IThrustConventionOrbit {}
+    interface IThrustConventionDataStart extends IThrustConvention.Countdown.Void,
+        IThrustConvention.Orbit.PromiseObject {}
 
     var methods : IThrustConventionDataStart = {
-    	countdown: function (thrust: IThrust): Promise
+    	countdown: function (thrust: IThrust): void
         {
             // Subscribe to the wait and stop events
             thrust.data.subscribe('thrust/data/wait', waitCallback);
             thrust.data.subscribe('thrust/data/stop', stopCallback);
-			return null;
         },
         orbit: function (thrust: IThrust): Promise
         {

@@ -1,11 +1,6 @@
-﻿/// <reference path="../module.d.ts" />
+﻿/// <reference path="../thrust.d.ts" />
 /// <reference path="../../../jquery.d.ts" />
-/// <reference path="../thrust.plugin.d.ts" />
-interface IThrustUntypedDom extends IThrustPlugin, IEventManager
-{
-}
-
-interface IThrustDom extends IThrustUntypedDom, IThrustDomInstance
+interface IThrustDom extends IThrustPlugin, IEventManager
 {
 }
 
@@ -14,73 +9,103 @@ interface IThrust
 	dom?: IThrustDom;
 }
 
-interface IThrustDomStaticInstance extends IThrustDomStatic, IThrustDomInstance
+//config
+interface IThrustDomConfig extends IThrustPluginConfig
 {
 }
 
-interface IThrustDomStatic
+interface IThrustConfig
 {
-	(selector: string, context?: any): IThrustDomInstance;
-    (element: Element): IThrustDomInstance;
-    (elementArray: Element[]): IThrustDomInstance;
-    (object: IThrustDomInstance): IThrustDomInstance;
-    (object: JQuery): IThrustDomInstance;
-    (): IThrustDomInstance;
+	dom?: IThrustDomConfig;
 }
 
-interface IThrustDomEventObject extends JQueryEventObject {}
+// facade
 
-interface IThrustDomInstance
+interface IThrustDomFacade extends Function, IThrustFacade
 {
-    query(selector?: string): IThrustDomInstance;
-    query(element?: any): IThrustDomInstance;
-    query(obj?: IThrustDomInstance): IThrustDomInstance;
-    query(obj?: JQuery): IThrustDomInstance;
-    $(selector?: string): IThrustDomInstance;
-    $(element?: any): IThrustDomInstance;
-    $(obj?: IThrustDomInstance): IThrustDomInstance;
-    $(obj?: JQuery): IThrustDomInstance;
-	changeContext(selector) : IThrustDomInstance;
+	prototype: IThrustDomFacade;
+	namespace: string;
+	context: TQuery;
+}
+
+interface IThrustModuleDomInstanceConfig
+{
+}
+
+interface IThrustModuleInstanceConfig
+{
+	dom?: IThrustModuleDomInstanceConfig;
+}
+
+interface IThrustModuleFacades
+{
+	dom?: IThrustDomFacade;
+}
+
+// tquery
+interface TQueryStatic
+{
+	(selector: string, context?: any, namespace?: string): TQuery;
+    (element: Element, context?: any, namespace?: string): TQuery;
+    (elementArray: Element[], context?: any, namespace?: string): TQuery;
+    (object: TQuery, context?: any, namespace?: string): TQuery;
+    (object: JQuery, context?: any, namespace?: string): TQuery;
+    (): TQuery;
+}
+
+interface TQueryEventObject extends JQueryEventObject {}
+
+interface TQuery
+{
+	//alias to find.
+    query(selector?: string): TQuery;
+    query(element?: any): TQuery;
+    query(obj?: TQuery): TQuery;
+    query(obj?: JQuery): TQuery;
+    $(selector?: string): TQuery;
+    $(element?: any): TQuery;
+    $(obj?: TQuery): TQuery;
+    $(obj?: JQuery): TQuery;
 
 	/******* jQuery *******/
     /**********
      ATTRIBUTES
     ***********/
-    addClass(classNames: string): IThrustDomInstance;
-    addClass(func: (index: any, currentClass: any) => string): IThrustDomInstance;
+    addClass(classNames: string): TQuery;
+    addClass(func: (index: any, currentClass: any) => string): TQuery;
 
     attr(attributeName: string): string;
-    attr(attributeName: string, value: any): IThrustDomInstance;
-    attr(map: { [key: string]: any; }): IThrustDomInstance;
-    attr(attributeName: string, func: (index: any, attr: any) => any): IThrustDomInstance;
+    attr(attributeName: string, value: any): TQuery;
+    attr(map: { [key: string]: any; }): TQuery;
+    attr(attributeName: string, func: (index: any, attr: any) => any): TQuery;
 
     hasClass(className: string): bool;
 
     html(): string;
-    html(htmlString: string): IThrustDomInstance;
-    html(htmlContent: (index: number, oldhtml: string) => string): IThrustDomInstance;
+    html(htmlString: string): TQuery;
+    html(htmlContent: (index: number, oldhtml: string) => string): TQuery;
 
     prop(propertyName: string): any;
-    prop(propertyName: string, value: any): IThrustDomInstance;
-    prop(map: any): IThrustDomInstance;
-    prop(propertyName: string, func: (index: any, oldPropertyValue: any) => any): IThrustDomInstance;
+    prop(propertyName: string, value: any): TQuery;
+    prop(map: any): TQuery;
+    prop(propertyName: string, func: (index: any, oldPropertyValue: any) => any): TQuery;
 
-    removeAttr(attributeName: any): IThrustDomInstance;
+    removeAttr(attributeName: any): TQuery;
 
-    removeClass(className?: any): IThrustDomInstance;
-    removeClass(func: (index: any, cls: any) => any): IThrustDomInstance;
+    removeClass(className?: any): TQuery;
+    removeClass(func: (index: any, cls: any) => any): TQuery;
 
-    removeProp(propertyName: any): IThrustDomInstance;
+    removeProp(propertyName: any): TQuery;
 
-    toggleClass(className: any, swtch?: bool): IThrustDomInstance;
-    toggleClass(swtch?: bool): IThrustDomInstance;
-    toggleClass(func: (index: any, cls: any, swtch: any) => any): IThrustDomInstance;
+    toggleClass(className: any, swtch?: bool): TQuery;
+    toggleClass(swtch?: bool): TQuery;
+    toggleClass(func: (index: any, cls: any, swtch: any) => any): TQuery;
 
     val(): any;
-    val(value: string[]): IThrustDomInstance;
-    val(value: string): IThrustDomInstance;
-    val(value: number): IThrustDomInstance;
-    val(func: (index: any, value: any) => any): IThrustDomInstance;
+    val(value: string[]): TQuery;
+    val(value: string): TQuery;
+    val(value: number): TQuery;
+    val(func: (index: any, value: any) => any): TQuery;
 
     /***
      CSS
@@ -89,16 +114,16 @@ interface IThrustDomInstance
     css(propertyName: any, value?: any): any;
 
     height(): number;
-    height(value: number): IThrustDomInstance;
-    height(value: string): IThrustDomInstance;
-    height(func: (index: any, height: any) => any): IThrustDomInstance;
+    height(value: number): TQuery;
+    height(value: string): TQuery;
+    height(func: (index: any, height: any) => any): TQuery;
 
     innerHeight(): number;
     innerWidth(): number;
 
     offset(): { left: number; top: number; };
-    offset(coordinates: any): IThrustDomInstance;
-    offset(func: (index: any, coords: any) => any): IThrustDomInstance;
+    offset(coordinates: any): TQuery;
+    offset(func: (index: any, coords: any) => any): TQuery;
 
     outerHeight(includeMargin?: bool): number;
     outerWidth(includeMargin?: bool): number;
@@ -106,60 +131,60 @@ interface IThrustDomInstance
     position(): { top: number; left: number; };
 
     scrollLeft(): number;
-    scrollLeft(value: number): IThrustDomInstance;
+    scrollLeft(value: number): TQuery;
 
     scrollTop(): number;
-    scrollTop(value: number): IThrustDomInstance;
+    scrollTop(value: number): TQuery;
 
     width(): number;
-    width(value: number): IThrustDomInstance;
-    width(value: string): IThrustDomInstance;
-    width(func: (index: any, height: any) => any): IThrustDomInstance;
+    width(value: number): TQuery;
+    width(value: string): TQuery;
+    width(func: (index: any, height: any) => any): TQuery;
 
     /****
      DATA
     *****/
-    data(key: string, value: any): IThrustDomInstance;
-    data(obj: { [key: string]: any; }): IThrustDomInstance;
+    data(key: string, value: any): TQuery;
+    data(obj: { [key: string]: any; }): TQuery;
     data(key?: string): any;
 
-    removeData(nameOrList?: any): IThrustDomInstance;
+    removeData(nameOrList?: any): TQuery;
 
     /*******
      EFFECTS
     ********/
-    animate(properties: any, duration?: any, complete?: Function): IThrustDomInstance;
-    animate(properties: any, duration?: any, easing?: string, complete?: Function): IThrustDomInstance;
+    animate(properties: any, duration?: any, complete?: Function): TQuery;
+    animate(properties: any, duration?: any, easing?: string, complete?: Function): TQuery;
     animate(properties: any, options: { duration?: any; easing?: string; complete?: Function; step?: Function; queue?: bool; specialEasing?: any; });
 
-    delay(duration: number, queueName?: string): IThrustDomInstance;
+    delay(duration: number, queueName?: string): TQuery;
 
-    hide(): IThrustDomInstance;
+    hide(): TQuery;
 
-    show(): IThrustDomInstance;
+    show(): TQuery;
 
-    toggle(): IThrustDomInstance;
-    toggle(showOrHide: bool): IThrustDomInstance;
+    toggle(): TQuery;
+    toggle(showOrHide: bool): TQuery;
 
     /******
      EVENTS
     *******/
-    bind(eventType: string, eventData?: any, handler?: (eventObject: IThrustDomEventObject) => any): IThrustDomInstance;
-    bind(eventType: string, eventData: any, preventBubble:bool): IThrustDomInstance;
-    bind(eventType: string, preventBubble:bool): IThrustDomInstance;
+    bind(eventType: string, eventData?: any, handler?: (eventObject: TQueryEventObject) => any): TQuery;
+    bind(eventType: string, eventData: any, preventBubble:bool): TQuery;
+    bind(eventType: string, preventBubble:bool): TQuery;
     bind(...events: any[]);
 
-    off(events?: string, selector?: any, handler?: (eventObject: IThrustDomEventObject) => any): IThrustDomInstance;
-    off(eventsMap: { [key: string]: any; }, selector?: any): IThrustDomInstance;
+    off(events?: string, selector?: any, handler?: (eventObject: TQueryEventObject) => any): TQuery;
+    off(eventsMap: { [key: string]: any; }, selector?: any): TQuery;
 
-    on(events: string, selector?: any, data?: any, handler?: (eventObject: IThrustDomEventObject) => any): IThrustDomInstance;
-    on(eventsMap: { [key: string]: any; }, selector?: any, data?: any): IThrustDomInstance;
+    on(events: string, selector?: any, data?: any, handler?: (eventObject: TQueryEventObject) => any): TQuery;
+    on(eventsMap: { [key: string]: any; }, selector?: any, data?: any): TQuery;
 
-    one(events: string, selector?: any, data?: any, handler?: (eventObject: IThrustDomEventObject) => any): IThrustDomInstance;
-    one(eventsMap: { [key: string]: any; }, selector?: any, data?: any): IThrustDomInstance;
+    one(events: string, selector?: any, data?: any, handler?: (eventObject: TQueryEventObject) => any): TQuery;
+    one(eventsMap: { [key: string]: any; }, selector?: any, data?: any): TQuery;
 
-    trigger(eventType: string, ...extraParameters: any[]): IThrustDomInstance;
-    trigger(event: IThrustDomEventObject): IThrustDomInstance;
+    trigger(eventType: string, ...extraParameters: any[]): TQuery;
+    trigger(event: TQueryEventObject): TQuery;
 
     triggerHandler(eventType: string, ...extraParameters: any[]): Object;
 
@@ -169,58 +194,58 @@ interface IThrustDomInstance
     context: Element;
     jquery: string;
 
-    pushStack(elements: any[]): IThrustDomInstance;
-    pushStack(elements: any[], name: any, arguments: any): IThrustDomInstance;
+    pushStack(elements: any[]): TQuery;
+    pushStack(elements: any[], name: any, arguments: any): TQuery;
 
     /************
      MANIPULATION
     *************/
-    after(...content: any[]): IThrustDomInstance;
+    after(...content: any[]): TQuery;
     after(func: (index: any) => any);
 
-    append(...content: any[]): IThrustDomInstance;
+    append(...content: any[]): TQuery;
     append(func: (index: any, html: any) => any);
 
-    appendTo(target: any): IThrustDomInstance;
+    appendTo(target: any): TQuery;
 
-    before(...content: any[]): IThrustDomInstance;
+    before(...content: any[]): TQuery;
     before(func: (index: any) => any);
 
-    clone(withDataAndEvents?: bool, deepWithDataAndEvents?: bool): IThrustDomInstance;
+    clone(withDataAndEvents?: bool, deepWithDataAndEvents?: bool): TQuery;
 
-    detach(selector?: any): IThrustDomInstance;
+    detach(selector?: any): TQuery;
 
-    empty(): IThrustDomInstance;
+    empty(): TQuery;
 
-    insertAfter(target: any): IThrustDomInstance;
-    insertBefore(target: any): IThrustDomInstance;
+    insertAfter(target: any): TQuery;
+    insertBefore(target: any): TQuery;
 
-    prepend(...content: any[]): IThrustDomInstance;
-    prepend(func: (index: any, html: any) =>any): IThrustDomInstance;
+    prepend(...content: any[]): TQuery;
+    prepend(func: (index: any, html: any) =>any): TQuery;
 
-    prependTo(target: any): IThrustDomInstance;
+    prependTo(target: any): TQuery;
 
-    remove(selector?: any): IThrustDomInstance;
+    remove(selector?: any): TQuery;
 
-    replaceAll(target: any): IThrustDomInstance;
+    replaceAll(target: any): TQuery;
 
-    replaceWith(func: any): IThrustDomInstance;
+    replaceWith(func: any): TQuery;
 
     text(): string;
-    text(textString: any): IThrustDomInstance;
-    text(textString: (index: number, text: string) => string): IThrustDomInstance;
+    text(textString: any): TQuery;
+    text(textString: (index: number, text: string) => string): TQuery;
 
     toArray(): any[];
 
-    unwrap(): IThrustDomInstance;
+    unwrap(): TQuery;
 
-    wrap(wrappingElement: any): IThrustDomInstance;
-    wrap(func: (index: any) =>any): IThrustDomInstance;
+    wrap(wrappingElement: any): TQuery;
+    wrap(func: (index: any) =>any): TQuery;
 
-    wrapAll(wrappingElement: any): IThrustDomInstance;
+    wrapAll(wrappingElement: any): TQuery;
 
-    wrapInner(wrappingElement: any): IThrustDomInstance;
-    wrapInner(func: (index: any) =>any): IThrustDomInstance;
+    wrapInner(wrappingElement: any): TQuery;
+    wrapInner(func: (index: any) =>any): TQuery;
 
     /*************
      MISCELLANEOUS
@@ -237,91 +262,93 @@ interface IThrustDomInstance
      PROPERTIES
     ***********/
     length: number;
+    selector: string;
+    namespace: string;
     [x: string]: HTMLElement;
     [x: number]: HTMLElement;
 
     /**********
      TRAVERSING
     ***********/
-    add(selector: string, context?: any): IThrustDomInstance;
-    add(...elements: any[]): IThrustDomInstance;
-    add(html: string): IThrustDomInstance;
-    add(obj: IThrustDomInstance): IThrustDomInstance;
-    add(obj: JQuery): IThrustDomInstance;
+    add(selector: string, context?: any): TQuery;
+    add(...elements: any[]): TQuery;
+    add(html: string): TQuery;
+    add(obj: TQuery): TQuery;
+    add(obj: JQuery): TQuery;
 
-    andSelf(): IThrustDomInstance;
+    andSelf(): TQuery;
 
-    children(selector?: any): IThrustDomInstance;
+    children(selector?: any): TQuery;
 
-    closest(selector: string): IThrustDomInstance;
-    closest(selector: string, context?: Element): IThrustDomInstance;
-    closest(obj: IThrustDomInstance): IThrustDomInstance;
-    closest(obj: JQuery): IThrustDomInstance;
-    closest(element: any): IThrustDomInstance;
+    closest(selector: string): TQuery;
+    closest(selector: string, context?: Element): TQuery;
+    closest(obj: TQuery): TQuery;
+    closest(obj: JQuery): TQuery;
+    closest(element: any): TQuery;
     closest(selectors: any, context?: Element): any[];
 
-    contents(): IThrustDomInstance;
+    contents(): TQuery;
 
-    end(): IThrustDomInstance;
+    end(): TQuery;
 
-    eq(index: number): IThrustDomInstance;
+    eq(index: number): TQuery;
 
-    filter(selector: string): IThrustDomInstance;
-    filter(func: (index: any) =>any): IThrustDomInstance;
-    filter(element: any): IThrustDomInstance;
-    filter(obj: IThrustDomInstance): IThrustDomInstance;
-    filter(obj: JQuery): IThrustDomInstance;
+    filter(selector: string): TQuery;
+    filter(func: (index: any) =>any): TQuery;
+    filter(element: any): TQuery;
+    filter(obj: TQuery): TQuery;
+    filter(obj: JQuery): TQuery;
 
-    find(selector?: string): IThrustDomInstance;
-    find(element?: any): IThrustDomInstance;
-    find(obj?: IThrustDomInstance): IThrustDomInstance;
-    find(obj?: JQuery): IThrustDomInstance;
+    find(selector?: string): TQuery;
+    find(element?: any): TQuery;
+    find(obj?: TQuery): TQuery;
+    find(obj?: JQuery): TQuery;
 
-    first(): IThrustDomInstance;
+    first(): TQuery;
 
-    has(selector: string): IThrustDomInstance;
-    has(contained: Element): IThrustDomInstance;
+    has(selector: string): TQuery;
+    has(contained: Element): TQuery;
 
     is(selector: string): bool;
     is(func: (index: any) =>any): bool;
     is(element: any): bool;
-    is(obj: IThrustDomInstance): bool;
+    is(obj: TQuery): bool;
     is(obj: JQuery): bool;
 
-    last(): IThrustDomInstance;
+    last(): TQuery;
 
-    map(callback: (index: any, domElement: Element) =>any): IThrustDomInstance;
+    map(callback: (index: any, domElement: Element) =>any): TQuery;
 
-    next(selector?: string): IThrustDomInstance;
+    next(selector?: string): TQuery;
 
-    nextAll(selector?: string): IThrustDomInstance;
+    nextAll(selector?: string): TQuery;
 
-    nextUntil(selector?: string, filter?: string): IThrustDomInstance;
-    nextUntil(element?: Element, filter?: string): IThrustDomInstance;
+    nextUntil(selector?: string, filter?: string): TQuery;
+    nextUntil(element?: Element, filter?: string): TQuery;
 
-    not(selector: string): IThrustDomInstance;
-    not(func: (index: any) =>any): IThrustDomInstance;
-    not(element: any): IThrustDomInstance;
-    not(obj: IThrustDomInstance): IThrustDomInstance;
-	not(obj: JQuery): IThrustDomInstance;
+    not(selector: string): TQuery;
+    not(func: (index: any) =>any): TQuery;
+    not(element: any): TQuery;
+    not(obj: TQuery): TQuery;
+	not(obj: JQuery): TQuery;
 
-    offsetParent(): IThrustDomInstance;
+    offsetParent(): TQuery;
 
-    parent(selector?: string): IThrustDomInstance;
+    parent(selector?: string): TQuery;
 
-    parents(selector?: string): IThrustDomInstance;
+    parents(selector?: string): TQuery;
 
-    parentsUntil(selector?: string, filter?: string): IThrustDomInstance;
-    parentsUntil(element?: Element, filter?: string): IThrustDomInstance;
+    parentsUntil(selector?: string, filter?: string): TQuery;
+    parentsUntil(element?: Element, filter?: string): TQuery;
 
-    prev(selector?: string): IThrustDomInstance;
+    prev(selector?: string): TQuery;
 
-    prevAll(selector?: string): IThrustDomInstance;
+    prevAll(selector?: string): TQuery;
 
-    prevUntil(selector?: string, filter?:string): IThrustDomInstance;
-    prevUntil(element?: Element, filter?:string): IThrustDomInstance;
+    prevUntil(selector?: string, filter?:string): TQuery;
+    prevUntil(element?: Element, filter?:string): TQuery;
 
-    siblings(selector?: string): IThrustDomInstance;
+    siblings(selector?: string): TQuery;
 
-    slice(start: number, end?: number): IThrustDomInstance;
+    slice(start: number, end?: number): TQuery;
 }

@@ -1,4 +1,4 @@
-define(["require", "exports", 'module', 'thrust/util', './config', './capsule'], function(require, exports, __requireModule__, __util__, __config__, __tm__) {
+define(["require", "exports", 'module', 'thrust/util', './config', './capsule', './instance'], function(require, exports, __requireModule__, __util__, __config__, __tm__, __instance__) {
     /// <reference path="interfaces/thrust.d.ts" />
     /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -14,27 +14,62 @@ define(["require", "exports", 'module', 'thrust/util', './config', './capsule'],
 
     var tm = __tm__;
 
-    var slice = Array.prototype.slice, isArray = _.isArray, toArray = _.toArray, isFunction = _.isFunction, each = _.each, map = _.map, any = _.any, all = _.all, when = util.when, extend = _.extend, flatten = _.flatten, pluck = _.pluck, isObject = _.isObject, keys = _.keys, union = _.union, stageOneComplete = {
-    };
-    function reconcileArrays(config, settings, to) {
-        var keys = _.keys(config);
-        if(settings) {
-            keys = union(_.keys(settings), keys);
-        } else {
-            settings = {
-            };
-        }
-        each(keys, function (i) {
-            var x = settings[i] || config[i];
-            if(isArray(x)) {
-                to[i] = toArray(settings[i] || to[i]);
-            } else {
-                if(isObject(x) && !isFunction(x)) {
-                    reconcileArrays(x, null, to[i]);
-                }
-            }
-        });
+    var instance = __instance__;
+
+    var slice = Array.prototype.slice, isArray = _.isArray, toArray = _.toArray, isFunction = _.isFunction, each = _.each, map = _.map, any = _.any, all = _.all, when = util.when, extend = _.extend, flatten = _.flatten, pluck = _.pluck, isObject = _.isObject, keys = _.keys, union = _.union;
+    /*function reconcileArrays(config, settings, to)
+    {
+    var keys = _.keys(config);
+    if (settings)
+    {
+    keys = union(_.keys(settings), keys);
     }
+    else
+    {
+    settings = {};
+    }
+    each(keys, function (i)
+    {
+    var x = settings[i] || config[i];
+    if (isArray(x))
+    {
+    to[i] = toArray(settings[i] || to[i]);
+    }
+    else if (isObject(x) && !isFunction(x))
+    {
+    reconcileArrays(x, null, to[i]);
+    }
+    });
+    }*/
+    function mergeSettings(settings) {
+        if((settings).__settingsMerged) {
+            return settings;
+        }
+        var requireConfig = requireModule.config(), plugins = [
+'thrust/mediator'        ].concat(settings.plugins || requireConfig.plugins || config.plugins || []), conventions = [].concat(settings.conventions || requireModule.config().conventions || config.plugins || []);
+        _.merge(settings, config, requireModule.config(), settings, {
+            __settingsMerged: true,
+            plugins: plugins,
+            conventions: conventions
+        });
+        settings.plugins = plugins;
+        settings.conventions = conventions;
+    }
+    exports.mergeSettings = mergeSettings;
+    function fuse(settings) {
+        /*jshint validthis:true */
+        var pipe = [];
+        settings = mergeSettings(settings);
+        if(!instance.instances[settings.name]) {
+            pipe.push(stageOne);
+        }
+        pipe.push(stageTwo);
+        if(settings.modules && settings.modules.length) {
+            pipe.push(stageThree);
+        }
+        return when.pipeline(pipe, settings);
+    }
+    exports.fuse = fuse;
     /**
     Contructs a wire spec for thrust to launch from.
     
@@ -49,26 +84,30 @@ define(["require", "exports", 'module', 'thrust/util', './config', './capsule'],
     **/
     function stageOne(settings) {
         /*jshint validthis:true */
-        var that = this;
-        if(stageOneComplete[settings.name]) {
-            return that.stateTwo(settings);
-        }
-        var plugins = [
-'thrust/mediator'        ].concat(settings.plugins || requireModule.config().plugins || config.plugins || []), defer = when.defer();
+                var plugins = settings.plugins, requireConfig = requireModule.config(), defer = when.defer();
         settings.plugins = plugins;
         require(plugins.map(function (x) {
             return x;
         }), function () {
             var args = arguments;
             plugins.forEach(function (plugin, i) {
-                var name = plugin.substring(plugin.lastIndexOf('/') + 1);
-                var pluginClass = args[i][args[i].className];
-                config[name] = pluginClass.config;
+                var name = plugin.substring(plugin.lastIndexOf('/') + 1), pluginSettings = settings[name] || {
+                }, pluginRequireConfig = requireConfig[name] || {
+                }, pluginClass = args[i][args[i].className];
+                if(!config[name]) {
+                    config[name] = _.merge(pluginClass.config, pluginRequireConfig || {
+                    });
+                }
+                var conventions = [].concat(pluginSettings.conventions || pluginRequireConfig.conventions || config[name].conventions || []);
+                settings[name] = _.merge({
+                }, config[name], pluginSettings || {
+                }, {
+                    conventions: conventions
+                });
+                settings[name].conventions = conventions;
             });
-            _.merge(config, requireModule.config());
-            when.chain(that.stateTwo(settings), defer);
-        });
-        stageOneComplete[settings.name] = true;
+            defer.resolve(settings);
+        }, defer.reject);
         return defer.promise;
     }
     exports.stageOne = stageOne;
@@ -76,19 +115,16 @@ define(["require", "exports", 'module', 'thrust/util', './config', './capsule'],
     Creates a thrust instance, from the given settings.
     Including the plugins.
     
-    @method stateTwo
+    @method stageTwo
     @param {Object} settings The settints to pass onto the thrust instance being created.
     **/
-    function stateTwo(settings) {
+    function stageTwo(settings) {
         /*jshint loopfunc:true */
         // Get the configuration
-                var localConfig = _.merge({
-        }, config, settings), defer = when.defer();
-        // Reconicle the arrays so they are properly arrays
-        reconcileArrays(config, settings, localConfig);
+                var localConfig = settings, defer = when.defer();
         // Mediator is a required plugin, include all the others in addition to it.
                 var plugins = localConfig.plugins, modulesToLoad = // The modules to load
-        [], modulesConfigurations = // The module configuration object
+        [], thrustConventions = settings.conventions || [], modulesConfigurations = // The module configuration object
         {
 thrust: 'thrust'        };
         // Loop through all the plugins, creating a proper dependancy list.
@@ -109,7 +145,7 @@ thrust: 'thrust'        };
                         var plugin = modulesToLoad[i], name = // The implied plugin name
             plugin.substring(plugin.lastIndexOf('/') + 1), pluginConfig = // The plugins configuration
             localConfig[name];
-            // Check if the plugin has to resolve anything.
+            // Check if the plugin has to resolve any other plugins
             if(pluginConfig && pluginConfig.resolve && pluginConfig.resolve.length > 0 && !all(pluginConfig.resolve, function (x) {
                 return any(orderedPlugins, function (z) {
                     return x === z || x === z;
@@ -128,7 +164,8 @@ thrust: 'thrust'        };
         var modules = localConfig.modules || [];
         // Thrust and thrust/capsule also need to be loaded.
         modulesToLoad.push.apply(modulesToLoad, [
-            'thrust'
+            'thrust', 
+            settings.conventions || []
         ]);
         // Flatten the resultant array
         modulesToLoad = flatten(modulesToLoad);
@@ -139,16 +176,20 @@ thrust: 'thrust'        };
         };
         // Load everything
         require(modulesToLoad, function () {
+            var args = [];
+            for (var _i = 0; _i < (arguments.length - 0); _i++) {
+                args[_i] = arguments[_i + 0];
+            }
             // Get ready to loop
                         var currentPlugin = null, allConventions = [];
             // Loop through all the modules being loaded
-            for(var i = 0, iLen = modulesToLoad.length; i < iLen; i++) {
+            for(var i = 0, iLen = modulesToLoad.length; i < iLen - thrustConventions.length; i++) {
                 // Get plugin and configuration
                                 var plugin = modulesToLoad[i], mConfig = modulesConfigurations[plugin];
                 // Check if we have a configuration object
                 if(mConfig) {
                     // Load a new plugin.
-                                        var pluginObject = arguments[i], name = // Get the plugin name
+                                        var pluginObject = args[i], name = // Get the plugin name
                     plugin.substring(plugin.lastIndexOf('/') + 1), resolveItems = // Resolve all the required items.
                     map(mConfig.resolve, function (x) {
 return spec[x];                    });
@@ -161,11 +202,11 @@ return spec[x];                    });
                     // Load all the conventions
                     if(currentPlugin) {
                         // Load the conventions into the plugin
-                        _.forOwn(arguments[i], function (x) {
+                        _.forOwn(args[i], function (x) {
                             return currentPlugin.__conventions.push(x);
                         });
                         // Load the conventions into the thrust instance.
-                        _.forOwn(arguments[i], function (x) {
+                        _.forOwn(args[i], function (x) {
                             return allConventions.push(x);
                         });
                     }
@@ -173,13 +214,21 @@ return spec[x];                    });
             }
             // The last current plugin, will always be thrust.
             currentPlugin.__conventions = allConventions;
+            var thrustConventionDefinitions = args.slice(modulesToLoad.length - thrustConventions.length);
+            thrustConventionDefinitions = flatten(map(thrustConventionDefinitions, function (x) {
+                return map(x, function (z) {
+                    return z;
+                });
+            }));
+            currentPlugin.__thrustConventions = thrustConventionDefinitions;
+            allConventions.push.apply(allConventions, thrustConventionDefinitions);
             // Extend thrust with the spec
             extend(currentPlugin, spec);
             defer.resolve(spec);
         }, defer.reject);
         return defer.promise;
     }
-    exports.stateTwo = stateTwo;
+    exports.stageTwo = stageTwo;
     /**
     Loads up the default modules as indicated to thrust.
     
@@ -206,7 +255,7 @@ return spec[x];                    });
                 // Inject it into the thrust instance
                 moduleInstance.thrustCreate(thrust);
             }
-            defer.resolve();
+            defer.resolve(context);
         }, defer.reject);
         return defer.promise;
     }

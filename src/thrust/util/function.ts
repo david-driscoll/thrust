@@ -79,7 +79,7 @@
 	 * @param ctor {Function} real constructor to be invoked
 	 * @param args {Array} arguments to be supplied to ctor
 	 */
-    function Begetter(ctor, args)
+    function DynamiclyCreated(ctor, args)
     {
         return ctor.apply(this, args);
     }
@@ -95,12 +95,12 @@
 	 * @returns The result of invoking ctor with args, with or without new, depending on
 	 * the strategy selected.
 	 */
-    export function instantiate(ctor, args)
+    export function instantiate(ctor, args, name)
     {
-        Begetter.prototype = ctor.prototype;
-        Begetter.prototype.constructor = ctor;
-        var begotten = new Begetter(ctor, args);
-        Begetter.prototype = void 0;
+        DynamiclyCreated.prototype = ctor.prototype;
+        DynamiclyCreated.prototype.constructor = ctor;
+        var begotten = new DynamiclyCreated(ctor, args);
+        DynamiclyCreated.prototype = void 0;
         return begotten;
     }
 
@@ -111,7 +111,7 @@
 	@param {Array} Array to flatten, and filter.
 	@returns {Array of Promises} 
 	**/
-    export function flattenToPromises(array)
+    export function flattenToPromises(array : any[]) : Promise[]
 	{
 		return _.flatten(array).filter(function (x)
 		{

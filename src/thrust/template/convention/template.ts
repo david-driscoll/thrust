@@ -1,5 +1,5 @@
-/// <reference path="../../interfaces/template/template.facade.d.ts" />
-/// <reference path="../../interfaces/convention.d.ts" />
+/// <reference path="../../interfaces/template/template.d.ts" />
+/// <reference path="../../interfaces/thrust.d.ts" />
 /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -37,18 +37,20 @@ var _ = util._;
     * @for thrust.template.convention
     * @property templates
     **/
-    interface IThrustConventionTemplateTemplate extends IThrustConventionProperties, IThrustConventionInit, IThrustConventionReady {}
+    interface IThrustConventionTemplateTemplate extends IThrustConvention.Properties,
+        IThrustConvention.Plugin.Init.Void,
+        IThrustConvention.Plugin.Ready.PromiseObject {}
 
     var methods : IThrustConventionTemplateTemplate = {
         properties: [TEMPLATES],
-        init: function(facade : IThrustTemplateFacade, mod: IThrustModule) : Promise
+        init: function(mod: IThrustModule, facade : IThrustTemplateFacade) : void
         {
             var defer = when.defer();
 
             var templates = mod.convention(TEMPLATES),
-                invertedTemplates = util.invert(templates),
+                invertedTemplates : Object = util.invert(templates),
                 moduleInstance = mod.instance;
-
+            
             if (templates)
             {
                 var defers = [];
@@ -62,18 +64,17 @@ var _ = util._;
                 facade.loadingPromise = when.all(defers).then(function (loadedTemplates : IThrustTemplateInstance[])
                 {
                     /*jshint loopfunc:true */
-                    _.each(invertedTemplates, function(x, i)
+                    _.each(invertedTemplates , function(x, i)
                     {
                         var template = _.find(loadedTemplates, function (x) { return x.shortName === i || x.name === i; });
                         moduleInstance.templates[i] = template.compiled;
                     });
                 });
             }
-            return null;
         },
-        ready: function (facade : IThrustTemplateFacade, mod: IThrustModule) : Promise
+        ready: function (mod: IThrustModule, facade : IThrustTemplateFacade) : Promise
         {
             return facade.loadingPromise || undefined;
         }
     };
-    export var subscription = new Convention(methods);
+    export var template = new Convention(methods);

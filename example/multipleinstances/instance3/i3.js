@@ -10,14 +10,14 @@ function (util)
         ready: function ()
         {
             var that = this;
-            this.$().show().on('click', '.btn', function ()
+            this.$.show().on('click', '.btn', function ()
             {
                 window.instance3.deorbit(true);
             });
         },
         stop: function ()
         {
-            this.$().hide();
+            this.$.hide();
         },
         destroy: util.noop
     };

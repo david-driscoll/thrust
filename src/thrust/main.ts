@@ -1,4 +1,3 @@
-/// <reference path="interfaces/thrust.plugin.d.ts" />
 /// <reference path="interfaces/thrust.d.ts" />
 /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 
@@ -91,7 +90,7 @@ var runRunnerFactory = memoize(function (method: string)
 					that.createModule(moduleDefn && moduleDefn.name || name, moduleDefn);
 
 					var result = runRunnerFactory(method).apply(that, [moduleDefn.name].concat(args));
-					when.chain(when.all(flatten(result)), loaderDefer);
+					when.chain( when.all(flatten(result)), loaderDefer);
 				}, function ()
 				{
 					that.failedModules[name] = true;
@@ -126,7 +125,7 @@ var runRunnerFactory = memoize(function (method: string)
 
 var runnerFactory = memoize(function (method: string, conventionName: string, conventionValue: any, unsetReady: bool)
 {
-	var eventName = format('thrust/capsule/{0}', method),
+	var eventName = format('thrust/module/{0}', method),
 		infoFormat = format('Thrust: {0}ing module "{{0}}"', method.charAt(0).toUpperCase() + method.substring(1)),
 		debugFormat = format('Thrust: Calling module "{{0}}" {0}()', method),
 		compAfter = method === STOP || method === DESTROY || false;
@@ -147,7 +146,7 @@ var runnerFactory = memoize(function (method: string, conventionName: string, co
 var allRunnerFactory = memoize(function (method: string)
 {
 	var infoFormat = format('Thrust: {0}ing all modules... [{{0}}]', method.charAt(0).toUpperCase() + method.substring(1)),
-		pluralName = format('thrust/capsule/all/{0}', method),
+		pluralName = format('thrust/module/all/{0}', method),
 		checkAutoStart = method === INIT || method === START;
 
 	return function (that: IThrust)
@@ -202,7 +201,7 @@ function childrenCallMethod(that: IThrust, method: string, stopping?: bool)
 		return when.all(items);
 }
 
-function flattenWithAsync(that, arr)
+function flattenWithAsync(that, arr : any[])
 {
 	return util.flattenToPromises(arr.concat(that.cfg.async && [when.delay(0)] || []));
 }
@@ -286,8 +285,9 @@ export class Thrust implements IThrust
 	public startingModules: string[];
 	public __previousState: bool;
 	public started: bool;
-	public __conventions: IThrustConvention[] = [];
+	public __conventions: ThrustConvention[] = [];
 	public __conventionPluckPropertiesCache: any[] = null;
+	public __thrustConventions: ThrustConvention[] = [];
 
 	public cfg: IThrustConfig = merge(tConfig, {
 		autoStart: false,
@@ -331,7 +331,7 @@ export class Thrust implements IThrust
 	@param {Boolean} preBuild Has this module been prebuilt, in other words has it been created, by wire.js and needs to be injected.
 	@returns {Module} The new module instance.
 	**/
-	public create(name: string, mod: any, preBuilt: bool)
+	public create(name: string, mod: any, preBuilt?: bool) : IThrustModule
 	{
 		has('DEBUG') && log.debug(format('Thrust: Creating new instance of "{0}"', name));
 
@@ -356,28 +356,19 @@ export class Thrust implements IThrust
 
 		has('DEBUG') && log.info(format('Thrust: Created module "{0}"', name));
 		// Notify the mediator that a module has been created.
-		that.mediator.fire('thrust/capsule/create', name);
+		that.mediator.fire('thrust/module/create', name);
 
 		if (that && that.started && mod.convention('autoStart'))
 			that.start(mod.name);
 
-		return mod;
+		return <IThrustModule> mod;
 	}
 	//#region Global Runners
-	/**
-		Begins the countdown to thrusts start.
-		Loading can be deferred by returning a promise from any convention, or module method.
 
-	@method countdown
-	@async
-	@param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
-	@returns {Promise} The promise of when the countdown is completed.
-	**/
-	public countdown(ignoreChild: bool, calledByParent: bool): Promise
-	{
-		var that = this;
-		if (!thrustShouldExecute(that, calledByParent))
-			return;
+    public _countdown(calledByParent: bool): Promise {
+	    var that = this;
+	    if (!thrustShouldExecute(that, calledByParent))
+	        return;
 
 		has('DEBUG') && thrustLogEvent('Launch instance "{0}" in 5... 4... 3... 2... 1...', that.name);
 
@@ -389,10 +380,26 @@ export class Thrust implements IThrust
 
 		has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" has been initalized.', that.name));
 
-		if (that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild))
-			stageOne.then(bind(that.ignite, that, ignoreChild, calledByParent));
-
 		return stageOne;
+	}
+	/**
+		Begins the countdown to thrusts start.
+		Loading can be deferred by returning a promise from any convention, or module method.
+
+	@method countdown
+	@async
+	@returns {Promise} The promise of when the countdown is completed.
+	**/
+	public countdown(calledByParent: bool): Promise {
+	    var that = this;
+	    if (!thrustShouldExecute(that, calledByParent))
+	        return;
+
+        if (that.cfg.automaticLifecycle && (!that.cfg.childInstance))
+        {
+            return Thrust.launchSequence(that, calledByParent);
+	    }
+        return that._countdown(calledByParent);
 	}
 	/**
 		Begins the ingition as thrust starts up.
@@ -400,10 +407,9 @@ export class Thrust implements IThrust
 
 	@method ignite
 	@async
-	@param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
 	@returns {Promise} The promise of when the ingition is completed.
 	**/
-	public ignite(ignoreChild: bool, calledByParent: bool): Promise
+	public ignite(calledByParent: bool): Promise
 	{
 		var that = this;
 		if (!thrustShouldExecute(that, calledByParent))
@@ -419,9 +425,6 @@ export class Thrust implements IThrust
 
 		has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" has been started.', that.name));
 
-		if (that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild))
-			stageOne.then(bind(that.orbit, that, ignoreChild, calledByParent));
-
 		return stageOne;
 	}
 	/**
@@ -430,10 +433,9 @@ export class Thrust implements IThrust
 
 	@method orbit
 	@async
-	@param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
 	@returns {Promise} The promise of when thrust is in orbit.
 	**/
-	public orbit(ignoreChild: bool, calledByParent: bool): Promise
+	public orbit(calledByParent: bool): Promise
 	{
 		var that = this;
 		if (!thrustShouldExecute(that, calledByParent))
@@ -453,9 +455,6 @@ export class Thrust implements IThrust
 
 		has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is almost ready.', that.name));
 
-		if (that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild))
-			stageOne.then(bind(that.deploy, that, ignoreChild, calledByParent));
-
 		return stageOne;
 	}
 	/**
@@ -464,10 +463,9 @@ export class Thrust implements IThrust
 
 	@method deploy
 	@async
-	@param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
 	@returns {Promise} The promise of when thrust has fully deployed.
 	**/
-	public deploy(ignoreChild, calledByParent: bool): Promise
+	public deploy(calledByParent: bool): Promise
 	{
 		var that = this;
 		if (!thrustShouldExecute(that, calledByParent))
@@ -490,9 +488,6 @@ export class Thrust implements IThrust
 		])).then(fireThrustEvent(that, 'thrust/ready'));
 
 		has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is now ready.', that.name));
-
-		if (that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild))
-			stageOne.then(bind(that.inOrbit, that));
 
 		return stageOne;
 	}
@@ -517,16 +512,8 @@ export class Thrust implements IThrust
 				ttrDiv.innerHTML = startTime + 'ms';
 		}
 	}
-	/**
-		Begins the deorbit as thrust shutdown.
-		Shutdown can be deferred by returning a promise from any convention, or module method.
 
-	@method deorbit
-	@async
-	@param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
-	@returns {Promise} The promise of when the ingition is completed.
-	**/
-	public deorbit(ignoreChild, calledByParent): Promise
+    public _deorbit(calledByParent): Promise
 	{
 		var that = this;
 		if (!thrustShouldExecute(that, calledByParent, true))
@@ -542,10 +529,29 @@ export class Thrust implements IThrust
 
 		has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is now stopped.', that.name));
 
-		if (that.cfg.automaticLifecycle && (!that.cfg.childInstance || ignoreChild))
-			stageOne.then(bind(that.splashdown, that, ignoreChild, calledByParent));
-
 		return stageOne;
+	}
+	/**
+		Begins the deorbit as thrust shutdown.
+		Shutdown can be deferred by returning a promise from any convention, or module method.
+
+	@method deorbit
+	@async
+	@returns {Promise} The promise of when the ingition is completed.
+	**/
+    public deorbit(calledByParent: bool): Promise {
+	    var that = this;
+	    if (!thrustShouldExecute(that, calledByParent))
+	        return;
+
+        if (that.cfg.automaticLifecycle && (!that.cfg.childInstance))
+        {
+	        return when.sequence([
+                _.bind(that._deorbit, that),
+                _.bind(that.splashdown, that)
+                ], calledByParent);
+	    }
+        return that._deorbit(calledByParent);
 	}
 	/**
 		Begins the splashdown as thrust shutdown.
@@ -553,10 +559,9 @@ export class Thrust implements IThrust
 
 	@method splashdown
 	@async
-	@param {Boolean} ignoreChild Ignores the child instance flag, allows children to be controlled.
 	@returns {Promise} The promise of when the ingition is completed.
 	**/
-	public splashdown(ignoreChild: bool, calledByParent: bool): Promise
+	public splashdown(calledByParent: bool): Promise
 	{
 		var that = this;
 		if (!thrustShouldExecute(that, calledByParent, true))
@@ -839,6 +844,16 @@ export class Thrust implements IThrust
 		Thrust.registerModule.apply(Thrust, [that.name].concat(toArray(arguments)));
 	}
 
+	public static launchSequence(instance: IThrust, calledByParent: bool) {
+        return when.sequence([
+                _.bind(instance._countdown, instance, calledByParent),
+                _.bind(instance.ignite, instance, calledByParent),
+                _.bind(instance.orbit, instance, calledByParent),
+                _.bind(instance.deploy, instance, calledByParent),
+                _.bind(instance.inOrbit, instance, calledByParent)],
+                calledByParent);
+	}
+
 	/**
 	Initalizes a new Thrust instance based on the given settings.
 
@@ -846,7 +861,7 @@ export class Thrust implements IThrust
 	@static
 	@param {Object} settings The module to inject
 	**/
-	public static launch(settings: IThrustConfig, calledByParent: bool)
+	public static launch(settings: IThrustConfig, calledByParent?: bool)
 	{
 		if (!settings)
 			settings = { name: 'global' };
@@ -859,48 +874,40 @@ export class Thrust implements IThrust
 			settings.debug = { timeStart: new Date().getTime() };
 		}
 
-		var setupDefer = Thrust.__fetchInstance(settings.name);
+		igniteSpec.mergeSettings(settings);
 
-		setupDefer.promise.then(function (context)
+		var pipe : Function[] = [igniteSpec.fuse];
+
+		var setupDefer = Thrust.__fetchInstance(settings.name);
+        
+		pipe.push((context) =>
 		{
-			var thrust = context.thrust,
+		    var thrust = context.thrust,
 				modules = thrust.startingModules = context.cfg.modules,
 				config = thrust.config = thrust.cfg;
-			instances[thrust.name] = thrust;
-
-			if (config.modules && config.modules.length)
-			{
-				var newModules = modules.map(function (x)
-				{
-					if (typeof x === 'string')
-					{
-						return x;
-					}
-				});
-				var stage3 = igniteSpec.stageThree(context);
-				if (config.automaticLifecycle)
-					stage3.then(bind(thrust.countdown, thrust, null, calledByParent));
-			}
-			else if (config.automaticLifecycle)
-			{
-				thrust.countdown(null, calledByParent);
-			}
-
-			return context;
+		    instances[thrust.name] = thrust;
+		    return context;
 		});
 
+        if (settings.automaticLifecycle)
+            pipe.push((context) => {
+                var thrust : IThrust = context.thrust,
+                    d = when.defer();
+
+                launchSequence(thrust, calledByParent).then(() => d.resolve(context));
+                return d.promise;
+            });
+
+        var pipeline = when.pipeline(pipe, settings)
+            .then((context) => setupDefer.resolve(context));
 		// We're only going to expose globals if requested.  This is a potential usecase that may be needed for some teams.
 		if (tConfig.exposeGlobals)
 		{
 			if (!window['Thrust']) window['Thrust'] = Thrust;
-			setupDefer.promise.then(function (context)
-			{
-				window[settings.name] = context.thrust;
-			});
+			pipeline.then((context) => { window[settings.name] = context });
 		}
-		when.chain(igniteSpec.stageOne(settings), setupDefer);
 
-		return setupDefer.promise;
+		return pipeline;
 	}
 
 	/**
@@ -911,7 +918,7 @@ export class Thrust implements IThrust
 	@param {String} name The instance name
 	@returns {Thrust} The thrust instance
 	**/
-	public static getInstance(name)
+	public static getInstance(name : string) : IThrust
 	{
 		return thrustInstance.getInstance(name);
 	}

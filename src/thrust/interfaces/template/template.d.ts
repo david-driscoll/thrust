@@ -1,6 +1,4 @@
-﻿/// <reference path="template.config.d.ts" />
-/// <reference path="../data/data.d.ts" />
-/// <reference path="../thrust.d.ts" />
+﻿/// <reference path="../thrust.d.ts" />
 interface IThrustTemplate extends IThrustPlugin
 {
 	templateTypes: any;
@@ -46,4 +44,54 @@ interface IThrustTemmplateContainer
 interface IThrustTemplateDictionary
 {
 	[name : string] : IThrustTemplateInstance;
+}
+
+// config
+interface IThrustTemplateConfig extends IThrustPluginConfig
+{
+	types: Object;
+	evaluators: Object;
+	defaultType: string;
+	baseUrl: string;
+	extension: string;
+	templatePaths: Object;
+}
+
+interface IThrustConfig
+{
+	template?: IThrustTemplateConfig;
+}
+
+// facade
+interface IThrustTemplateFacade extends Function, IThrustFacade, IThrustTemplateMethods
+{
+	prototype: IThrustTemplateFacade;
+	loadingPromise: Promise;
+}
+
+interface IThrustTemplateMethods
+{
+	[name: string]: (x : any) => string;
+	fetch(name: string, type?: string) : Promise;
+	get (name: string): IThrustTemplate;
+	has(name: string): bool;
+}
+
+interface IThrustModuleFacades
+{
+	template?: IThrustTemplateFacade;
+}
+
+interface IThrustModuleInstance
+{
+	templates?: IThrustTemplateMethods;
+}
+
+interface IThrustModuleTemplateInstanceConfig
+{
+}
+
+interface IThrustModuleInstanceConfig
+{
+	template?: IThrustModuleTemplateInstanceConfig;
 }

@@ -1,6 +1,7 @@
+/// <reference path="../../interfaces/dom/convention/context.d.ts" />
 /// <reference path="../../interfaces/mediator/mediator.d.ts" />
-/// <reference path="../../interfaces/dom/dom.facade.d.ts" />
-/// <reference path="../../interfaces/convention.d.ts" />
+/// <reference path="../../interfaces/dom/dom.d.ts" />
+/// <reference path="../../interfaces/thrust.d.ts" />
 /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -13,10 +14,10 @@ var Convention = c.Convention;
 import util = module('thrust/util');
 var _ = util._;
 
-import jQueryInterface = module('../jquery.interface');
+import subjquery = module('../subjquery');
+var tQuery = subjquery.tQuery;
 
-    var CONTEXT         = 'context',
-        updatejQueryInternals = jQueryInterface.updatejQueryInternals;
+var CONTEXT = 'config.dom.context';
 
     /**
     @module thrust.dom
@@ -32,8 +33,10 @@ import jQueryInterface = module('../jquery.interface');
     * will also have the selector as the root context.
     *
     *
-    *     {
-    *         context: '#myDiv'
+    *     config: {
+	*         dom: {
+	*             context: '#myDiv'
+    *         }
     *     }
     *
     *
@@ -41,21 +44,19 @@ import jQueryInterface = module('../jquery.interface');
     * @for thrust.dom.convention
     * @property context
     **/
-    interface IThrustConventionDomContext extends IThrustConventionProperties,
-		IThrustConventionReady {}
+    interface IThrustConventionDomContext extends IThrustConvention.Properties,
+		IThrustConvention.Plugin.Ready.Void {}
 
     var methods: IThrustConventionDomContext = {
         properties: [CONTEXT],
-        ready: function (facade: IThrustDomFacade, mod: IThrustModule): Promise
+        ready: function (mod: IThrustModule, facade: IThrustDomFacade): void
         {
         	var context = mod.convention(CONTEXT);
 
             if (context)
             {
-                updatejQueryInternals.call(facade, context);
+            	mod.instance.dom = mod.instance.$ = facade.context = tQuery(context, mod.instance.$);
             }
-
-            return null;
         }
     };
 	export var context = new Convention(methods);

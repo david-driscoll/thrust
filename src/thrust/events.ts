@@ -86,7 +86,8 @@
         var eventsArray = events.split(eventSplitter);
         for (var i = 0, iLen = eventsArray.length; i < iLen; i++)
         {
-            eventsArray[i] = eventsArray[i] + namespace;
+            if (eventsArray[i].indexOf('.') === -1)
+                eventsArray[i] = eventsArray[i] + namespace;
         }
         return eventsArray.join(' ');
     }
@@ -292,7 +293,7 @@
                     list = list[nd.namespace];
                     node = list ? list.tail : new EventNode();
                     node.next = tail = new EventNode();
-                    node.context = context;
+                    node.context = context || this.__defaultContext || undefined;
                     node.callback = callback;
                     if (nd.namespace)
                         node.namespace = nd.namespace;
@@ -427,11 +428,12 @@
             @method initEvents
             @chainable
             **/
-            initEvents: function () {
+            initEvents: function (defaultContext? : any) {
                 this.fire = this.publish = createAsyncEvent(this);
                 this.initEvents = noop;
                 this.__pubSubName = this.name || 'Events';
                 if (this.name && !this.__namespace) this.__namespace = '.' + this.name;
+                this.__defaultContext = defaultContext;
 
                 return this;
             },

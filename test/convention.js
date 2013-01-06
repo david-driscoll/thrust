@@ -1,26 +1,30 @@
-﻿/// <reference path="../lib/jasmine/lib/jasmine-1.3.1/jasmine.js" />
-
-/*global jasmine:true, describe:true, it:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
-(function ()
-{
+/// <reference path="helpers/thrust.ts" />
+/// <reference path="../src/thrust/interfaces/util/util.d.ts" />
+/// <reference path="../src/thrust/interfaces/thrust.d.ts" />
+/// <reference path="../lib/DefinitelyTyped/jasmine.async/jasmine.async.d.ts" />
+/// <reference path="../lib/DefinitelyTyped/jasmine/jasmine-1.2.d.ts" />
+/// <reference path="../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+/*global jasmine:true, AsyncSpec:true, describe:true, it:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
+(function () {
     'use strict';
-    var convention = require('thrust/convention'),
-        util = require('thrust/util');
-
-    describe('Convention', function ()
-    {
-        it('creates', function ()
-        {
-            var c = new convention.Convention();
+    var convention = require('thrust/convention'), Convention = convention.Convention, util = require('thrust/util');
+    describe('Convention', function () {
+        it('overloads methods', function () {
+            var newMethod = function () {
+            };
+            var c = new Convention({
+                start: function () {
+                    return null;
+                },
+                deorbit: function () {
+                    return null;
+                },
+                newMethod: newMethod
+            });
             expect(c).toBeDefined();
-        });
-
-        it('overloads methods', function ()
-        {
-            var c = new convention.Convention({ start: function () { }, deorbit: function () { } });
-            expect(c).toBeDefined();
-            expect(c.start).not.toBe(convention.Convention.prototype.start);
-            expect(c.deorbit).not.toBe(convention.Convention.prototype.deorbit);
+            expect(c.start).not.toBe(Convention.prototype.start);
+            expect(c.deorbit).not.toBe(Convention.prototype.deorbit);
+            expect(c.newMethod).toBe(newMethod);
         });
     });
-})()
+})();

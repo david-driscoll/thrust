@@ -1,5 +1,5 @@
 define(["require", "exports", 'thrust/util', './capsule'], function(require, exports, __util__, __tm__) {
-    /// <reference path="interfaces/facade.d.ts" />
+    /// <reference path="interfaces/thrust.d.ts" />
     /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -48,7 +48,7 @@ define(["require", "exports", 'thrust/util', './capsule'], function(require, exp
                 m = thrustCache[m.mid].module;
             }
             if(that.__conventions) {
-                return util.safeInvoke(that.__conventions, name, that, m);
+                return util.safeInvoke(that.__conventions, name, m, that);
             }
         }
     }

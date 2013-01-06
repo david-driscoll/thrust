@@ -5,9 +5,10 @@
 
     'use strict';
     import _ = module('lodash');
+    import has = module('has');
 
-    //import when = module('when');
-    import w = module('when/debug');
+    import w = module('when');
+    //import w = module('when/debug');
     import whenApply = module('when/apply');
     import whenDelay = module('when/delay');
     import whenTimeout = module('when/timeout');

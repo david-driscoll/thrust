@@ -1,6 +1,6 @@
 /// <reference path="../../interfaces/dom/dom.d.ts" />
 /// <reference path="../../interfaces/spa/spa.d.ts" />
-/// <reference path="../../interfaces/convention.d.ts" />
+/// <reference path="../../interfaces/thrust.d.ts" />
 /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -11,6 +11,9 @@ export import c = module('thrust/convention');
 var Convention = c.Convention;
 import util = module('thrust/util');
 var _ = util._;
+
+import subjquery = module('thrust/dom/subjquery');
+var $ = subjquery.tQuery;
 
     var parseFullHref = function (href)
     {
@@ -40,14 +43,13 @@ var _ = util._;
     * @for thrust.dom.convention
     * @property spa;ink
     **/
-    var methods : IThrustConventionOrbit = {
-        orbit: function (thrust : IThrust) : Promise
+    var methods : IThrustConvention.Orbit.Void = {
+        orbit: function (thrust : IThrust) : void 
         {
             var config = thrust.config,
-                spa = thrust.spa,
-                $ = thrust.dom.$;
+                spa = thrust.spa;
 
-            $().on('click', 'a', function (e)
+            $.on('click', 'a', function (e)
             {
                 var link = parseFullHref(this.getAttribute('href'));
                 if (link.indexOf(config.url.path) === 0)
@@ -59,7 +61,6 @@ var _ = util._;
                     return false;
                 }
             });
-            return null;
         }
     };
-    export var subscription = new Convention(methods);
+    export var spalink = new Convention(methods);

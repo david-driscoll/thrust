@@ -71,7 +71,7 @@ define(["require", "exports", 'lodash', './when'], function(require, exports, __
     * @param ctor {Function} real constructor to be invoked
     * @param args {Array} arguments to be supplied to ctor
     */
-    function Begetter(ctor, args) {
+    function DynamiclyCreated(ctor, args) {
         return ctor.apply(this, args);
     }
     /**
@@ -85,11 +85,11 @@ define(["require", "exports", 'lodash', './when'], function(require, exports, __
     * @returns The result of invoking ctor with args, with or without new, depending on
     * the strategy selected.
     */
-    function instantiate(ctor, args) {
-        Begetter.prototype = ctor.prototype;
-        Begetter.prototype.constructor = ctor;
-        var begotten = new Begetter(ctor, args);
-        Begetter.prototype = void 0;
+    function instantiate(ctor, args, name) {
+        DynamiclyCreated.prototype = ctor.prototype;
+        DynamiclyCreated.prototype.constructor = ctor;
+        var begotten = new DynamiclyCreated(ctor, args);
+        DynamiclyCreated.prototype = void 0;
         return begotten;
     }
     exports.instantiate = instantiate;

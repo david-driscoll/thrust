@@ -1,0 +1,1 @@
+node --debug-brk C:\Users\Sithy\AppData\Roaming\npm\node_modules\grunt-cli\bin\grunt %*

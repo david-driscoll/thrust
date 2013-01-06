@@ -9,11 +9,11 @@ function (util)
         context: '#i2',
         ready: function ()
         {
-            this.$().show();
+            this.$.show();
         },
         stop: function ()
         {
-            this.$().hide();
+            this.$.hide();
         },
         destroy: util.noop
     };

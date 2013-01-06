@@ -43,7 +43,7 @@
 
     export var emptyGuid = uGuid.emptyGuid;
     export var isGuid = uGuid.isGuid;
-    export var isGuidEmpty = uGuid.isGuidEmpty;
+    export var isEmptyGuid = uGuid.isEmptyGuid;
     export var newGuid = uGuid.newGuid;
 
     export var getModuleNameForPath = uString.getModuleNameForPath;

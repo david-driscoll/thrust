@@ -1,5 +1,5 @@
 ﻿require.config({
-    baseUrl : './src',
+    baseUrl: './src',
     paths: {
         'require': '../lib/requirejs/require',
         'lodash': '../lib/lodash/lodash',
@@ -23,7 +23,7 @@
         { name: 'thrust/template', location: 'thrust/template' },
         { name: 'thrust/spa', location: 'thrust/spa' },
     ],
-    shim: { 
+    shim: {
         'flatiron/director': { exports: 'Router' }
     },
 })

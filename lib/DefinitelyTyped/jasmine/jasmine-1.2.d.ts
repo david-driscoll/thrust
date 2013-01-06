@@ -29,8 +29,8 @@ declare module jasmine {
     var Clock: Clock;
 
     function any(aclass: any);
-    function createSpy(name: string): any;
-    function createSpyObj(baseName: string, methodNames: any[]): any;
+    function createSpy(name: string): Spy;
+    function createSpyObj(baseName: string, methodNames: any[]): Spy;
 
     function getEnv(): Env;
 
@@ -229,7 +229,7 @@ declare module jasmine {
         removeAllSpies();
     }
 
-    interface Spy {
+    interface Spy extends Function {
         identity: string;
         calls: any[];
         mostRecentCall: { args: any[]; };

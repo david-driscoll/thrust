@@ -1,4 +1,4 @@
-/*! thrust-js - v0.1.0 - 2013-01-01 */
+/*! thrust-js - v0.1.5 - 2013-01-05 */
 define('thrust/data/config',["require", "exports"], function(require, exports) {
     /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -319,7 +319,7 @@ define('thrust/data/event.factory',["require", "exports", 'thrust/convention', '
 ;
 define('thrust/data/response.queue',["require", "exports", 'thrust/convention', 'thrust/util', './event.types', 'jquery', 'thrust/log', 'has'], function(require, exports, __c__, __util__, __eventTypes__, __jQuery__, __log__, __has__) {
     /// <reference path="../interfaces/data/data.d.ts" />
-    /// <reference path="../interfaces/module.d.ts" />
+    /// <reference path="../interfaces/thrust.d.ts" />
     /// <reference path="../../jquery.d.ts" />
     /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -471,7 +471,6 @@ that.module.fire(dataEventStatus, queryId, type, ++returnCount);                
 ;
 define('thrust/data/main',["require", "exports", 'thrust/convention', 'thrust/util', 'jquery', 'thrust/log', './config', 'thrust/config', './event.factory', './response.queue', 'thrust/events', 'thrust/facade', './event.types', 'has'], function(require, exports, __c__, __util__, __jQuery__, __log__, __config__, __tConfig__, __eventFactory__, __responseQueue__, __events__, __facade__, __eventTypes__, __has__) {
     /// <reference path="../interfaces/data/data.d.ts" />
-    /// <reference path="../interfaces/data/data.facade.d.ts" />
     /// <reference path="../../jquery.d.ts" />
     /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
@@ -833,9 +832,7 @@ return method(_.toArray(arguments));        }    };
 define('thrust/data', ['thrust/data/main'], function (main) { return main; });
 
 define('thrust/data/convention/start',["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
-    /// <reference path="../../interfaces/data/data.config.d.ts" />
     /// <reference path="../../interfaces/data/data.d.ts" />
-    /// <reference path="../../interfaces/convention.d.ts" />
     /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -868,7 +865,6 @@ define('thrust/data/convention/start',["require", "exports", 'thrust/convention'
             // Subscribe to the wait and stop events
             thrust.data.subscribe('thrust/data/wait', waitCallback);
             thrust.data.subscribe('thrust/data/stop', stopCallback);
-            return null;
         },
         orbit: function (thrust) {
             // Unsubscribe from the wait and stop events

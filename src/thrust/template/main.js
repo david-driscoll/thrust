@@ -1,7 +1,6 @@
 define(["require", "exports", 'thrust/util', 'domReady', 'thrust/facade', './config'], function(require, exports, __util__, __domReady__, __facade__, __config__) {
+    /// <reference path="../interfaces/data/data.d.ts" />
     /// <reference path="../interfaces/template/template.d.ts" />
-    /// <reference path="../interfaces/template/template.facade.d.ts" />
-    /// <reference path="../interfaces/template/template.config.d.ts" />
     /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -302,5 +301,42 @@ return memo.replace('.' + x.toLowerCase() + that.config.extension, '');        }
         });
         return templateFacade;
     })();
+    /**
+    AMD API
+    load
+    
+    Handles fetching of a thrust/template by path.
+    Requires the instance, that the template is expected to come from.
+    thrustInstance[:engineName]:templatePath
+    
+    Prefix with <engineName>: to select a specific template engine.
+    thrust/template!global:templates/myTemplate.tmpl = Specific template
+    thrust/template!instance2:templates/myTemplate = Uses default extension from config
+    thrust/template!instance2:kendo:templates/myTemplate.tmpl = Uses the kendo template engine.
+    thrust/template!instance3:kendo:templates/myTemplate.tmpl = Uses the kendo template engine with the default extension
+    
+    
+    @method load
+    @static
+    @param {String} name The name of the template that is being fetched
+    @param {Function} parentRequire the require method to be loaded
+    @param {Function} load Allows the load to inform that AMD for the value to hand off
+    @param {Object} config The custom configuration.
+    **/
+    function load(name, parentRequire, load, config) {
+        var templatePath = name, templateEngine, colon = templatePath.indexOf(':');
+        var parts = name.split(':'), instanceName = parts[0], templateEngine = parts[1], templatePath = parts[2] || templateEngine;
+        if(parts.length === 2) {
+            templateEngine = null;
+        }
+        //var instancePromise = Thrust.__fetchInstance(realName);
+        // Get the data plugin.
+        parentRequire([
+            'thrust!data:' + instanceName
+        ], function (dataPlugin) {
+            var dataPlugin = dataPlugin;
+        });
+    }
+    exports.load = load;
 })
 //@ sourceMappingURL=main.js.map

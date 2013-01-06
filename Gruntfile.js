@@ -1,5 +1,4 @@
-module.exports = function (grunt)
-{
+module.exports = function (grunt) {
     var helpers = require('./zgrunt/helpers'),
         _ = grunt.util._,
         requireSettings = helpers.getRequireSettings(grunt);
@@ -16,9 +15,7 @@ module.exports = function (grunt)
                 'src/thrust/*.js',
                 '!src/thrust/util.js',
                 '!src/thrust/main.js',
-                /*'thrust/mediator',
-                'src/thrust/mediator/*.js',
-                'src/thrust/mediator/convention/*.js',*/
+                'src/thrust/convention/*.js',
             ],
             mainExclusions: ['!src/thrust/**/*main.*'],
             mainInclusions: ['src/thrust/**/*main.*'],
@@ -63,7 +60,9 @@ module.exports = function (grunt)
         },
         tests: {
             thrustScripts: ['src/thrust/**/*.js', '!src/thrust.js', '!src/thrust/util.js'],
-            scripts: ['test/**/*.js'],
+            helpers: ['lib/jasmine.async/lib/jasmine.async.js', 'test/helpers/**/*.js'],
+            scripts: ['test/**/*.js', '!test/helpers/**/*.js'],
+            typeScripts: ['test/**/*.ts'],
             //specFile: 'TestRunner.html',
         },
         buildTests: {
@@ -74,8 +73,7 @@ module.exports = function (grunt)
     };
 
     metadata.thrust.inclusions.push(metadata.thrust.mainExclusions);
-    _.each(metadata.thrust.plugin, function (x)
-    {
+    _.each(metadata.thrust.plugin, function (x) {
         x.inclusions.push.apply(x.inclusions, metadata.thrust.mainExclusions);
         x.exclusions.push.apply(x.exclusions, metadata.thrust.pluginExclusions);
     });
@@ -114,18 +112,30 @@ module.exports = function (grunt)
                 stripBanners: true,
             }
         },
-        'debug-integrated': {
+        'debug-all': {
             files: helpers.buildCopyPaths(grunt, metadata, true, 'debug/', '.all', true),
             options: {
                 stripBanners: false,
             }
         },
-        'release-integrated': {
+        'release-all': {
             files: helpers.buildCopyPaths(grunt, metadata, true, null, '.all' + metadata.thrust.fileVersionFormat, true),
             options: {
                 stripBanners: true,
             }
-        }
+        },
+        'debug-integrated': {
+            files: helpers.buildCopyPaths(grunt, metadata, true, 'debug/', '.all.libraries', true),
+            options: {
+                stripBanners: false,
+            }
+        },
+        'release-integrated': {
+            files: helpers.buildCopyPaths(grunt, metadata, true, null, '.all.libraries' + metadata.thrust.fileVersionFormat, true),
+            options: {
+                stripBanners: true,
+            }
+        },
     };
 
     var uglifyConfig = {
@@ -138,15 +148,17 @@ module.exports = function (grunt)
         release: {
             files: helpers.buildUglifyPaths(grunt, metadata, null, metadata.thrust.fileVersionFormat)
         },
-        'release-integrated': {
+        'release-all': {
             files: helpers.buildUglifyPaths(grunt, metadata, null, '.all' + metadata.thrust.fileVersionFormat, true)
-        }
+        },
+        'release-integrated': {
+            files: helpers.buildUglifyPaths(grunt, metadata, null, '.all.libraries' + metadata.thrust.fileVersionFormat, true)
+        },
     };
 
 
     var jasmineGetSettingsMethod = function (from) { return helpers.getRequireSettingsFrom(grunt, from); },
-        buildVBOptions = function (type)
-        {
+        buildVBOptions = function (type) {
             return {
                 src: ['<%= meta.tests.thrustScripts %>'],
                 options: {
@@ -164,6 +176,7 @@ module.exports = function (grunt)
     var jasmineConfig = {
         options: {
             template: './zgrunt/RequireJSRunner.tmpl',
+            helpers: ['<%= meta.tests.helpers %>']
         },
         thrust: {
             src: ['<%= meta.tests.thrustScripts %>'],
@@ -178,6 +191,9 @@ module.exports = function (grunt)
         'vb-debug': buildVBOptions('debug'),
         'vb-release': buildVBOptions('release'),
         'vb-release-min': buildVBOptions('release-min'),
+        'vb-debug-all': buildVBOptions('debug-all'),
+        'vb-release-all': buildVBOptions('release-all'),
+        'vb-release-min-all': buildVBOptions('release-all-min'),
         'vb-debug-integrated': buildVBOptions('debug-integrated'),
         'vb-release-integrated': buildVBOptions('release-integrated'),
         'vb-release-min-integrated': buildVBOptions('release-integrated-min'),
@@ -192,8 +208,7 @@ module.exports = function (grunt)
         }
     };
 
-    var rjsConfig = (function ()
-    {
+    var rjsConfig = (function () {
         var c = helpers.getRequireSettings(grunt);
         return _.merge({}, c, {
             appDir: './src',
@@ -237,8 +252,41 @@ module.exports = function (grunt)
                 }),
             })
         },
-        'debug-integrated': {
+        'debug-all': {
             options: _.merge({}, rjsConfig, {
+                modules: [{
+                    name: 'thrust',
+                    include: integratedInclusions,
+                    exclude: metadata.libraryExclusions,
+                    override: {
+                        generateSourceMaps: false,
+                        preserveLicenseComments: true,
+                        has: {
+                            DEBUG: true
+                        },
+                    }
+                }],
+            })
+        },
+        'release-all': {
+            options: _.merge({}, rjsConfig, {
+                modules: [{
+                    name: 'thrust',
+                    include: integratedInclusions,
+                    exclude: ['jquery'],
+                    override: {},
+                }],
+            })
+        },
+        'debug-integrated': {
+            options: _.merge({}, (function () {
+                var cfg = _.clone(rjsConfig, true);
+                // configure for debug version of cujojs/when
+                // Optimizer currently fails on this one :(
+                /*wPackage = _.find(cfg.packages, function (x) { return x.name === 'when' });
+                wPackage.main = 'debug';*/
+                return cfg;
+            })(), {
                 modules: [{
                     name: 'thrust',
                     include: integratedInclusions,
@@ -281,14 +329,26 @@ module.exports = function (grunt)
                     emitComments: true
                 }
             }
-        }
+        },
+        /*tests: {
+            src: ['<%= meta.tests.typeScripts %>'],
+            dest: '.',
+            options: {
+                module: 'local',
+                target: 'es5',
+                compiler: {
+                    emitComments: true,
+                }
+            }
+        }*/
     };
 
     var watchConfig = {
         scripts: {
-            files: ['<%= meta.thrust.typeScripts %>'],
+            files: ['<%= meta.thrust.typeScripts %>', '<%= meta.tests.typeScripts %>'],
             tasks: [
-                'typescript',
+                'typescript:thrust',
+                'typescript:tests',
                 'bom',
                 'jshint'
             ],
@@ -318,12 +378,17 @@ module.exports = function (grunt)
         }
     }
 
+    var compressConfig = {
+
+    };
+
     //#region Config
     var gruntConfig = {
         pkg: grunt.file.readJSON('package.json'),
         meta: metadata,
         bom: bomConfig,
         copy: copyConfig,
+        compress: compressConfig,
         concat: concatConfig,
         clean: cleanConfig,
         jasmine: jasmineConfig,
@@ -345,37 +410,44 @@ module.exports = function (grunt)
     //#endregion
 
     //#region Tasks
-    grunt.registerTask('build-test-settings', 'Rebuilds test settings js files', function ()
-    {
+    grunt.registerTask('build-test-settings', 'Rebuilds test settings js files', function () {
         helpers.buildTestRequireSettings(grunt, metadata);
     });
 
-    grunt.registerTask('build-test-integrated-settings', 'Rebuilds test settings js files', function ()
-    {
+    grunt.registerTask('build-test-all-settings', 'Rebuilds test settings js files', function () {
+        helpers.buildTestRequireSettings(grunt, metadata, 'all');
+    });
+
+    grunt.registerTask('build-test-integrated-settings', 'Rebuilds test settings js files', function () {
         helpers.buildTestRequireSettings(grunt, metadata, true);
     });
 
-    grunt.registerTask('build-example-settings', 'Creates or Updates the example settings files.', function ()
-    {
+    grunt.registerTask('build-example-settings', 'Creates or Updates the example settings files.', function () {
         helpers.buildExampleSettings(grunt, metadata);
     });
 
+    grunt.registerTask('kill-phantomjs-windows', 'kills all phantomjs instances, as they are currently left behind after running unit tests', function () {
+        var isWin = !!process.platform.match(/^win/);
+        if (isWin) {
+            grunt.util.spawn({ cmd: 'taskkill.exe', args: ['/F', '/IM', 'phantomjs.exe', '/T'], fallback: true }, function () {
+                done(true);
+            });
+        }
+    });
 
-    grunt.registerMultiTask('jsdocextract', '', function ()
-    {
+
+    grunt.registerMultiTask('jsdocextract', '', function () {
         debugger;
         var options = this.options({}),
             r = /(\/\*\*[\s\S]*?\*\*\/)/gi,
             dest = this.file.dest;
 
-        this.file.src.forEach(function (x)
-        {
+        this.file.src.forEach(function (x) {
             var file = grunt.file.read(x).toString();
             var result = null,
                 fileResult = '';
 
-            while ((result = r.exec(file)))
-            {
+            while ((result = r.exec(file))) {
                 fileResult += result[1] + '\n';
             }
 
@@ -390,10 +462,12 @@ module.exports = function (grunt)
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-benchmark');
+    grunt.loadNpmTasks('grunt-bump');
     //grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-bom');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
@@ -411,14 +485,29 @@ module.exports = function (grunt)
         'requirejs:release', // compile require js for release mode
         'concat:release', // move and add our header to the file.
         'uglify:release', // minify the files
-        'clean:build' // clean up the build dir
+        'clean:build', // clean up the build dir
     ]);
 
     // Build our debug scripts (includes logging, etc)
     grunt.registerTask('debug', [
         'requirejs:debug', // compile require js for debug mode
         'concat:debug', // move and add our header to the file
-        'clean:build' // clean up the build dir
+        'clean:build', // clean up the build dir
+    ]);
+
+    // Build our release all scripts (identical to release, except this concats all the files together)
+    grunt.registerTask('release-all', [
+        'requirejs:release-all', // compile require js for release mode
+        'concat:release-all', // move and add our header to the file.
+        'uglify:release-all', // minify the files
+        'clean:build', // clean up the build dir
+    ]);
+
+    // Build our debug all scripts (identical to debug, except this concats all the files together)
+    grunt.registerTask('debug-all', [
+        'requirejs:debug-all', // compile require js for debug mode
+        'concat:debug-all', // move and add our header to the file
+        'clean:build', // clean up the build dir
     ]);
 
     // Build our release integrated scripts (identical to release, except this also integrats any third party libraries)
@@ -427,7 +516,7 @@ module.exports = function (grunt)
         'requirejs:release-integrated', // compile require js for release mode
         'concat:release-integrated', // move and add our header to the file.
         'uglify:release-integrated', // minify the files
-        'clean:build' // clean up the build dir
+        'clean:build', // clean up the build dir
     ]);
 
     // Build our debug integrated scripts (identical to debug, except this also integrats any third party libraries)
@@ -435,14 +524,14 @@ module.exports = function (grunt)
     grunt.registerTask('debug-integrated', [
         'requirejs:debug-integrated', // compile require js for debug mode
         'concat:debug-integrated', // move and add our header to the file
-        'clean:build' // clean up the build dir
+        'clean:build', // clean up the build dir
     ]);
 
     // Build our docs
     grunt.registerTask('docs', [
         'jsdocextract', // Extract jsdoc comments into their own file
         'yuidoc',  // process the doc comments
-        'clean:build' // we drop the jsdocs in the build folder, clean that up now
+        'clean:build', // we drop the jsdocs in the build folder, clean that up now
     ]);
 
     // Validate our builds
@@ -451,7 +540,16 @@ module.exports = function (grunt)
         'build-test-settings', // compile our config settings file, based off the common settings file.
         'jasmine:vb-debug', // Valdiate our debug build pass our build tests and our normal test suite.
         'jasmine:vb-release', // Valdiate our release build pass our build tests and our normal test suite.
-        'jasmine:vb-release-min' // Valdiate our release minified build pass our build tests and our normal test suite.
+        'jasmine:vb-release-min', // Valdiate our release minified build pass our build tests and our normal test suite.
+    ]);
+
+    // Validate our builds
+    // We want to make sure that nothing was lost in translation between compiling with r.js and minifying with uglify.
+    grunt.registerTask('validate-build-all', [
+        'build-test-all-settings', // compile our config settings file, based off the common settings file.
+        'jasmine:vb-debug-all', // Valdiate our debug build pass our build tests and our normal test suite.
+        'jasmine:vb-release-all', // Valdiate our release build pass our build tests and our normal test suite.
+        'jasmine:vb-release-min-all', // Valdiate our release minified build pass our build tests and our normal test suite.
     ]);
 
     // Validate our builds
@@ -460,28 +558,31 @@ module.exports = function (grunt)
         'build-test-integrated-settings', // compile our config settings file, based off the common settings file.
         'jasmine:vb-debug-integrated', // Valdiate our debug build pass our build tests and our normal test suite.
         'jasmine:vb-release-integrated', // Valdiate our release build pass our build tests and our normal test suite.
-        'jasmine:vb-release-min-integrated' // Valdiate our release minified build pass our build tests and our normal test suite.
+        'jasmine:vb-release-min-integrated', // Valdiate our release minified build pass our build tests and our normal test suite.
     ]);
 
-    // Validate the code
+    // Validate the code 
     grunt.registerTask('code-validation', [
         'typescript', // Compile all type script module
         'bom', // watch for boms (when using VS 2012)
         'jshint', // check for linting
-        'jasmine:thrust' // run unit tests against base code
+        'jasmine:thrust', // run unit tests against base code
     ]);
     // Potentially integrate test runners so they always persist.  Right not easy enought to run the proper jasmine call from the console.
     //grunt.registerTask('jasmine-build-runners', ['jasmine:thrust:build', 'jasmine:vb-debug:build', 'jasmine:vb-release:build', 'jasmine:vb-release-min:build']);
 
     // Default task(s).
     grunt.registerTask('__default-partial__', ['debug', 'release'])
-    grunt.registerTask('default', ['clean:dist', '__default-partial__', 'docs']);
+    grunt.registerTask('default', ['code-validation', '__default-partial__', 'kill-phantomjs-windows']);
+
+    grunt.registerTask('__all-partial__', ['debug-all', 'release-all'])
+    grunt.registerTask('all', ['code-validation', '__all-partial__', 'kill-phantomjs-windows']);
 
     grunt.registerTask('__integrated-partial__', ['debug-integrated', 'release-integrated'])
-    grunt.registerTask('integrated', ['code-validation', '__integrated-partial__']);
+    grunt.registerTask('integrated', ['code-validation', '__integrated-partial__', 'kill-phantomjs-windows']);
 
     // by default we don't build or test integrated.
     // full should be run though before every push, just as a sanity check.
     // integrated before default to hand a strange exception from r.js
-    grunt.registerTask('full', ['clean:dist', 'code-validation', '__integrated-partial__', '__default-partial__', 'validate-build', 'validate-build-integrated', 'build-example-settings', 'clean:require.settings', 'docs']);
+    grunt.registerTask('full', ['clean:dist', 'code-validation', '__integrated-partial__', '__all-partial__', '__default-partial__', 'validate-build', 'validate-build-all', 'validate-build-integrated', 'build-example-settings', 'clean:require.settings', 'docs', 'kill-phantomjs-windows']);
 }

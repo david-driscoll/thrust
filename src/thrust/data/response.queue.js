@@ -1,6 +1,6 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util', './event.types', 'jquery', 'thrust/log', 'has'], function(require, exports, __c__, __util__, __eventTypes__, __jQuery__, __log__, __has__) {
     /// <reference path="../interfaces/data/data.d.ts" />
-    /// <reference path="../interfaces/module.d.ts" />
+    /// <reference path="../interfaces/thrust.d.ts" />
     /// <reference path="../../jquery.d.ts" />
     /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)

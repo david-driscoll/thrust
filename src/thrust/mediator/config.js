@@ -33,10 +33,7 @@ define(["require", "exports"], function(require, exports) {
     @type {Array}
     **/
     exports.conventions = [
-        'thrust/mediator/convention/container', 
-        'thrust/mediator/convention/subscription', 
-        'thrust/mediator/convention/autostart', 
-        'thrust/mediator/convention/dependent.modules'
+        'thrust/mediator/convention/subscription'
     ];
 })
 //@ sourceMappingURL=config.js.map

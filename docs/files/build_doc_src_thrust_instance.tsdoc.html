@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
+            <em>API Docs for: 0.1.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -226,11 +226,18 @@
     Fetchs a named thrust stance if it exists.
     This loads asyncronously, as the instance may not be loaded
     
-    @method __fetchInstance
+    @method fetchInstance
     @static
     @private
     @param {String} name The instance name
     @returns {Promise} To a thrust instance spec
+    **&#x2F;
+&#x2F;**
+    Clears the Thrust Instance cache, this is used for unit testing, and clearing all the cache data each run.
+
+    @method clearCache
+    @static
+    @private
     **&#x2F;
 
     </pre>

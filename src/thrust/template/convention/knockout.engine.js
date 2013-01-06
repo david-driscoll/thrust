@@ -1,8 +1,6 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util', 'knockout'], function(require, exports, __c__, __util__, __ko__) {
     /// <reference path="../../interfaces/template/template.d.ts" />
     /// <reference path="../../interfaces/thrust.d.ts" />
-    /// <reference path="../../interfaces/template/template.facade.d.ts" />
-    /// <reference path="../../interfaces/convention.d.ts" />
     /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
     // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
     /*export module instance {*/
@@ -89,9 +87,8 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', 'knockout'], f
     var methods = {
         countdown: function (thrust) {
             initKnockoutIntegration(thrust.template);
-            return null;
         }
     };
-    exports.subscription = new Convention(methods);
+    exports.knockoutEngine = new Convention(methods);
 })
 //@ sourceMappingURL=knockout.engine.js.map

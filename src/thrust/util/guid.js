@@ -48,13 +48,13 @@ define(["require", "exports", 'lodash'], function(require, exports, _____) {
     /**
     Checks if the Guid is an Empty Guid
     
-    @method isGuidEmpty
+    @method isEmptyGuid
     @param {Guid} guid
     @returns {Boolean} If the guid is a guid or not.
     **/
-    function isGuidEmpty(guid) {
+    function isEmptyGuid(guid) {
         return guid === emtptyGuid;
     }
-    exports.isGuidEmpty = isGuidEmpty;
+    exports.isEmptyGuid = isEmptyGuid;
 })
 //@ sourceMappingURL=guid.js.map

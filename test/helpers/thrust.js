@@ -10,21 +10,27 @@
         global.helpers = {
         };
     }
-    global.helpers.launchThrustInstance = function (self, settings, resultObject) {
+    global.helpers.launchThrustInstance = function (self, settings, resultObject, doneEarly) {
         var has = require('has').add('DEBUG', false);
         var exports = {
         }, thrust = require('thrust'), Thrust = thrust.Thrust, util = require('thrust/util'), _ = util._, thrustMediator = require('thrust/mediator'), thrustInstance = require('thrust/instance');
         var async = new AsyncSpec(self), t;
         async.beforeEach(function (done) {
-            Thrust.launch(settings).then(function (instance) {
+            resultObject.promise = Thrust.launch(settings).then(function (instance) {
                 _.keys(instance).forEach(function (x) {
                     resultObject[x] = instance[x];
                 });
-                done();
+                if(!doneEarly) {
+                    done();
+                }
             });
+            if(doneEarly) {
+                done();
+            }
         });
         afterEach(function () {
             thrustInstance.clearCache();
         });
     };
 })(this);
+//@ sourceMappingURL=thrust.js.map

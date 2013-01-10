@@ -98,7 +98,6 @@ define(["require", "exports", './subjquery', 'thrust/util', 'thrust/log', 'thrus
                 dom = facades.dom;
             } else {
                 dom = facades.dom = new DomFacade(mod, this);
-                mod.dom = mod.$ = dom.context;
             }
             return dom;
         };

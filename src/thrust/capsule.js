@@ -134,7 +134,7 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
         **/
                 Module.thrustCache = thrustCache;
         Module.prototype.convention = function (property, value) {
-            var tc = thrustCache[this.mid];
+            var tc = this.cache;
             if(property.indexOf('config.') === 0) {
                 if(typeof tc[property] === 'undefined') {
                     tc[property] = this.getValueFromPath(property, tc) || false;
@@ -181,7 +181,7 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
         Module.prototype.thrustCall = function (method, facadeAfter, args) {
             var defer = when.defer(), results, that = this;
             has('DEBUG') && log.debug(format('thrust/capsule: Calling facades for "{0}"', that.name));
-            var cache = thrustCache[that.mid], m = cache[method];
+            var cache = this.cache, m = cache[method];
             if(!facadeAfter) {
                 results = callFacadeMethods(method, cache);
                 if(results) {
@@ -202,7 +202,7 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
                     defer = newDefer;
                 }
             } else {
-                var m = thrustCache[that.mid][method];
+                var m = this.cache[method];
                 if(m) {
                     results = m.apply(that.instance, args);
                     if(results) {

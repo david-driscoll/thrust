@@ -51,7 +51,30 @@ thrust: undefined            };
                     done();
                 });
             });
+            async.it('context should be correct after multiple starts and stops', function (done) {
+                var seq = [
+                    function () {
+                        return mod.start();
+                    }, 
+                    function () {
+                        return mod.stop();
+                    }, 
+                    function () {
+                        return mod.start();
+                    }                ];
+                when.sequence(seq).then(function () {
+                    expect(mod.instance.$).toBeDefined();
+                    expect(mod.instance.dom).toBeDefined();
+                    expect(mod.instance.$[0]).toBe(tQuery('body')[0]);
+                    expect(mod.instance.dom[0]).toBe(tQuery('body')[0]);
+                    expect(mod.instance.$).toBe(mod.instance.dom);
+                    expect(mod.instance.$.query).toBeDefined();
+                    expect(mod.instance.$.$).toBeDefined();
+                    done();
+                });
+            });
             // need to do tests that support async data nonsense... sigh
                     });
     });
 })();
+//@ sourceMappingURL=context.js.map

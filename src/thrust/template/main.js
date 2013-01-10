@@ -323,20 +323,25 @@ return memo.replace('.' + x.toLowerCase() + that.config.extension, '');        }
     @param {Function} load Allows the load to inform that AMD for the value to hand off
     @param {Object} config The custom configuration.
     **/
-    function load(name, parentRequire, load, config) {
-        var templatePath = name, templateEngine, colon = templatePath.indexOf(':');
-        var parts = name.split(':'), instanceName = parts[0], templateEngine = parts[1], templatePath = parts[2] || templateEngine;
-        if(parts.length === 2) {
-            templateEngine = null;
-        }
-        //var instancePromise = Thrust.__fetchInstance(realName);
-        // Get the data plugin.
-        parentRequire([
-            'thrust!data:' + instanceName
-        ], function (dataPlugin) {
-            var dataPlugin = dataPlugin;
-        });
-    }
-    exports.load = load;
-})
+    // Not completed yet
+    // Should behave similarly to text!
+    //export function load(name: string, parentRequire, load, config)
+    //{
+    //    var templatePath = name,
+    //        templateEngine,
+    //        colon = templatePath.indexOf(':');
+    //	var parts = name.split(':'),
+    //        instanceName = parts[0],
+    //		templateEngine = parts[1],
+    //		templatePath = parts[2] || templateEngine;
+    //    if (parts.length === 2)
+    //        templateEngine = null;
+    //	//var instancePromise = Thrust.__fetchInstance(realName);
+    //    // Get the data plugin.
+    //    parentRequire(['thrust!data:' + instanceName], (dataPlugin) =>
+    //    {
+    //        var dataPlugin = dataPlugin
+    //    });
+    //}
+    })
 //@ sourceMappingURL=main.js.map

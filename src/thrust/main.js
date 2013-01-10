@@ -268,19 +268,29 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             return mod;
         }//#region Global Runners
         ;
+        Thrust.prototype.startup = function (event, eventType) {
+            var that = this;
+            var promise = when.all(flattenWithAsync(that, [
+                safeInvoke(that.__conventions, event, that), 
+                that[eventType](), 
+                childrenCallMethod(that, event)
+            ]));
+            when.any([
+                promise
+            ]).then(fireThrustEvent(that, 'thrust/' + eventType));
+            return promise;
+        };
         Thrust.prototype._countdown = function (calledByParent) {
             var that = this;
             if(!thrustShouldExecute(that, calledByParent)) {
                 return;
             }
             has('DEBUG') && thrustLogEvent('Launch instance "{0}" in 5... 4... 3... 2... 1...', that.name);
-            var stageOne = when.all(flattenWithAsync(that, [
-                safeInvoke(that.__conventions, COUNTDOWN, that), 
-                that.init(), 
-                childrenCallMethod(that, COUNTDOWN)
-            ])).then(fireThrustEvent(that, 'thrust/init'));
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" has been initalized.', that.name));
-            return stageOne;
+            var promise = this.startup(COUNTDOWN, INIT);
+            has('DEBUG') && when.any([
+                promise
+            ]).then(thrustLogEvent('Thrust instance "{0}" has been initalized.', that.name));
+            return promise;
         }/**
         Begins the countdown to thrusts start.
         Loading can be deferred by returning a promise from any convention, or module method.
@@ -314,13 +324,11 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                 return;
             }
             has('DEBUG') && thrustLogEvent('Firing rockets for thurst instance "{0}".', that.name);
-            var stageOne = when.all(flattenWithAsync(that, [
-                safeInvoke(that.__conventions, IGNITE, that), 
-                that.start(), 
-                childrenCallMethod(that, IGNITE)
-            ])).then(fireThrustEvent(that, 'thrust/start'));
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" has been started.', that.name));
-            return stageOne;
+            var promise = this.startup(IGNITE, START);
+            has('DEBUG') && when.any([
+                promise
+            ]).then(thrustLogEvent('Thrust instance "{0}" has been started.', that.name));
+            return promise;
         }/**
         Thrust prepares for orbit.
         Loading can be deferred by returning a promise from any convention.
@@ -339,13 +347,15 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             var domReadyDefer = when.defer();
             domReadyDefer.promise.then(fireThrustEvent(that, 'thrust/dom/ready'));
             domReady(domReadyDefer.resolve);
-            var stageOne = when.all(flattenWithAsync(that, [
+            var promise = when.all(flattenWithAsync(that, [
                 domReadyDefer.promise, 
                 safeInvoke(that.__conventions, ORBIT, that), 
                 childrenCallMethod(that, ORBIT)
             ]));
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is almost ready.', that.name));
-            return stageOne;
+            has('DEBUG') && when.any([
+                promise
+            ]).then(thrustLogEvent('Thrust instance "{0}" is almost ready.', that.name));
+            return promise;
         }/**
         Thrust deploys components in orbit
         Loading can be deferred by returning a promise from any module method.
@@ -366,12 +376,14 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                     ttoDiv.innerHTML = startTime + 'ms';
                 }
             }
-            var stageOne = when.all(flattenWithAsync(that, [
+            var promise = when.all(flattenWithAsync(that, [
                 that.ready(), 
                 childrenCallMethod(that, DEPLOY)
             ])).then(fireThrustEvent(that, 'thrust/ready'));
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is now ready.', that.name));
-            return stageOne;
+            has('DEBUG') && when.any([
+                promise
+            ]).then(thrustLogEvent('Thrust instance "{0}" is now ready.', that.name));
+            return promise;
         };
         Thrust.prototype.inOrbit = function () {
             var that = this;
@@ -386,19 +398,29 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                 }
             }
         };
+        Thrust.prototype.shutdown = function (event, eventType) {
+            var that = this;
+            var promise = when.all(flattenWithAsync(that, [
+                childrenCallMethod(that, event, true), 
+                that[eventType](), 
+                safeInvoke(that.__conventions, event, that)
+            ]));
+            when.any([
+                promise
+            ]).then(fireThrustEvent(that, 'thrust/' + eventType));
+            return promise;
+        };
         Thrust.prototype._deorbit = function (calledByParent) {
             var that = this;
             if(!thrustShouldExecute(that, calledByParent, true)) {
                 return;
             }
             has('DEBUG') && thrustLogEvent('Reentering earths atmosphere for thrust instance "{0}".', that.name);
-            var stageOne = when.all(flattenWithAsync(that, [
-                childrenCallMethod(that, DEORBIT, true), 
-                that.stop(), 
-                safeInvoke(that.__conventions, DEORBIT, that)
-            ])).then(fireThrustEvent(that, 'thrust/stop'));
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is now stopped.', that.name));
-            return stageOne;
+            var promise = this.shutdown(DEORBIT, STOP);
+            has('DEBUG') && when.any([
+                promise
+            ]).then(thrustLogEvent('Thrust instance "{0}" is now stopped.', that.name));
+            return promise;
         }/**
         Begins the deorbit as thrust shutdown.
         Shutdown can be deferred by returning a promise from any convention, or module method.
@@ -435,16 +457,71 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                 return;
             }
             has('DEBUG') && thrustLogEvent('Landing in the middle of the atlantic for thrust instance "{0}".', that.name);
-            var stageOne = when.all(flattenWithAsync(that, [
-                childrenCallMethod(that, SPLASHDOWN, true), 
-                that.destroy(), 
-                safeInvoke(that.__conventions, SPLASHDOWN, that)
-            ])).then(fireThrustEvent(that, 'thrust/destroy'));
-            has('DEBUG') && stageOne.then(thrustLogEvent('Thrust instance "{0}" is now being destroyed', that.name));
-            stageOne.then(function () {
+            var promise = this.shutdown(SPLASHDOWN, DESTROY);
+            has('DEBUG') && when.any([
+                promise
+            ]).then(thrustLogEvent('Thrust instance "{0}" is now being destroyed', that.name));
+            promise.then(function () {
                 that.started = false;
             });
-            return stageOne;
+            return promise;
+        };
+        Thrust.prototype.moduleMethod = function (method, name, args, reverse, dependentMethods, startedMethods) {
+            var that = this, pipe = [];
+            var result = !name && allRunnerFactory(method)(that);
+            if(result) {
+                return result;
+            }
+            var names = [];
+            if(!isArray(name)) {
+                names = [
+                    name
+                ];
+            } else {
+                names = (name);
+            }
+            if(dependentMethods && dependentMethods.length) {
+                var items = {
+                };
+                for(var i = 0, iLen = names.length; i < iLen; i++) {
+                    var n = names[i], mod = that.modules[n];
+                    each(dependentMethods, function (x) {
+                        if(!items[x]) {
+                            items[x] = [];
+                        }
+                        if(!reverse && (!mod || !mod.convention(x + '-status')) || (reverse && mod.convention(x + '-status'))) {
+                            items[x].push(n);
+                        }
+                    });
+                }
+                each(dependentMethods, function (x) {
+                    if(items[x] && items[x].length) {
+                        pipe.push(function () {
+                            return when.all(flatten(that[x].apply(that, [
+                                items[x]
+                            ].concat(args))));
+                        });
+                    }
+                });
+            }
+            pipe.push(function () {
+                return when.all(flatten(runRunnerFactory(method).apply(that, [
+                    names
+                ].concat(args))));
+            });
+            if(that.started && startedMethods && startedMethods.length) {
+                each(startedMethods, function (x) {
+                    pipe.push(function () {
+                        return when.all(flatten(that[x].apply(that, [
+                            names
+                        ].concat(args))));
+                    });
+                });
+            }
+            if(pipe.length === 1) {
+                return pipe[0]();
+            }
+            return when.pipeline(pipe);
         }//#endregion
         //#region Module runners
         /**
@@ -463,22 +540,8 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             for (var _i = 0; _i < (arguments.length - 1); _i++) {
                 args[_i] = arguments[_i + 1];
             }
-            var that = this, method = INIT;
-            var result = !name && allRunnerFactory(method)(that);
-            if(result) {
-                return result;
-            }
-            var args = toArray(arguments).slice(1);
-            if(isArray(name)) {
-                result = map(name, function (x) {
-                    return that.init.apply(that, [
-                        x
-                    ].concat(args));
-                });
-            } else {
-                result = runRunnerFactory(method).apply(that, arguments);
-            }
-            return when.all(flatten(result));
+            var that = this;
+            return that.moduleMethod(INIT, name, args, false);
         }/**
         Begins the startup process for a module.  This runs as part of the
         ignite phase, during start up, or in order, when creating modules.
@@ -495,50 +558,12 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             for (var _i = 0; _i < (arguments.length - 1); _i++) {
                 args[_i] = arguments[_i + 1];
             }
-            var that = this, method = START;
-            var result = !name && allRunnerFactory(method)(that);
-            if(result) {
-                return result;
-            }
-            var names = [];
-            if(!isArray(name)) {
-                names = [
-                    name
-                ];
-            } else {
-                names = (name);
-            }
-            var items = [], origionalArgs = arguments, args = toArray(arguments).slice(1);
-            for(var i = 0, iLen = names.length; i < iLen; i++) {
-                var n = names[i], mod = that.modules[n];
-                if(!mod) {
-                    items.push(that.init.call(that, [
-                        n
-                    ].concat(args)));
-                } else {
-                    if(!mod.convention(INIT + '-status')) {
-                        items.push(that.init.call(that, [
-                            n
-                        ].concat(args)));
-                    }
-                }
-            }
-            var startDefer = when.defer();
-            when.all(flatten(items)).then(function () {
-                var results = [];
-                var result = runRunnerFactory(method).apply(that, origionalArgs);
-                results.push(result);
-                var resultsDefer = when.all(flatten(results));
-                if(that.started) {
-                    var runReady = function () {
-                        when.chain(that.ready.apply(that, origionalArgs), startDefer);
-                    };
-                    resultsDefer.then(runReady);
-                } else {
-                    when.chain(resultsDefer, startDefer);
-                }
-            });
-            return startDefer.promise;
+            var that = this;
+            return that.moduleMethod(START, name, args, false, [
+                INIT
+            ], [
+                READY
+            ]);
         }/**
         Begins the ready process for a module.  This runs as part of the
         orbit phase, during ready, or in order, when creating modules.
@@ -555,30 +580,11 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             for (var _i = 0; _i < (arguments.length - 1); _i++) {
                 args[_i] = arguments[_i + 1];
             }
-            var that = this, method = READY;
-            var result = !name && allRunnerFactory(method)(that);
-            if(result) {
-                return result;
-            }
-            var names = [];
-            if(!isArray(name)) {
-                names = [
-                    name
-                ];
-            } else {
-                names = (name);
-            }
-            var items = [], args = toArray(arguments).slice(1);
-            for(var i = 0, iLen = names.length; i < iLen; i++) {
-                var n = names[i], mod = that.modules[n];
-                if(!mod.convention(START + '-status') && !that.started) {
-                    items.push(that.start.apply(that, [
-                        n
-                    ].concat(args)));
-                }
-            }
-            items.push(runRunnerFactory(method).apply(that, arguments));
-            return when.all(flatten(items));
+            var that = this;
+            return that.moduleMethod(READY, name, args, false, [
+                INIT, 
+                START
+            ]);
         }/**
         Begins the stop process for a module.  This runs as part of the
         deorbit phase, during stop, or in order, when creating modules.
@@ -595,13 +601,8 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             for (var _i = 0; _i < (arguments.length - 1); _i++) {
                 args[_i] = arguments[_i + 1];
             }
-            var that = this, method = STOP;
-            var result = !name && allRunnerFactory(method)(that);
-            if(result) {
-                return result;
-            }
-            result = runRunnerFactory(method).apply(that, arguments);
-            return when.all(flatten(result));
+            var that = this;
+            return that.moduleMethod(STOP, name, args, true);
         }/**
         Begins the destroy process for a module.  This runs as part of the
         slashdown phase, during destroy, or in order, when creating modules.
@@ -619,29 +620,9 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                 args[_i] = arguments[_i + 1];
             }
             var that = this, method = DESTROY;
-            var result = !name && allRunnerFactory(method)(that);
-            if(result) {
-                return result;
-            }
-            var names = [];
-            if(!isArray(name)) {
-                names = [
-                    name
-                ];
-            } else {
-                names = (name);
-            }
-            var items = [], args = toArray(arguments).slice(1);
-            for(var i = 0, iLen = names.length; i < iLen; i++) {
-                var n = names[i], mod = that.modules[n];
-                if(mod.convention(START + '-status')) {
-                    items.push(that.stop.call(that, [
-                        n
-                    ].concat(args)));
-                }
-            }
-            items.push(runRunnerFactory(method).apply(that, arguments));
-            return when.all(flatten(items));
+            return that.moduleMethod(DESTROY, name, args, true, [
+                STOP
+            ]);
         }//#endregion
         /**
         Injects a preconstructed module into the thrust instance.
@@ -704,11 +685,11 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
         };
         Thrust.launchSequence = function launchSequence(instance, calledByParent) {
             return when.sequence([
-                _.bind(instance._countdown, instance, calledByParent), 
-                _.bind(instance.ignite, instance, calledByParent), 
-                _.bind(instance.orbit, instance, calledByParent), 
-                _.bind(instance.deploy, instance, calledByParent), 
-                _.bind(instance.inOrbit, instance, calledByParent)
+                _.bind(instance._countdown, instance), 
+                _.bind(instance.ignite, instance), 
+                _.bind(instance.orbit, instance), 
+                _.bind(instance.deploy, instance), 
+                _.bind(instance.inOrbit, instance)
             ], calledByParent);
         }
         /**

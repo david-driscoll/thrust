@@ -6,7 +6,11 @@ function (util)
         start: function ()
         {
         },
-        context: '#i3active',
+        config: {
+            dom: {
+                context: '#i3active',
+            }
+        },
         ready: function ()
         {
             var that = this;

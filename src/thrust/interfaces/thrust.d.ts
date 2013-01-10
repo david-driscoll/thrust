@@ -22,14 +22,14 @@ interface IThrust
 	__injectModule(mod: IThrustModule): void;
 	
 	create(name: string, mod: any, preBuilt?: bool) : IThrustModule;
-	_countdown(calledByParent: bool) : Promise;
-	countdown(calledByParent: bool) : Promise;
-	ignite(calledByParent: bool) : Promise;
-	orbit(calledByParent: bool) : Promise;
-	deploy(calledByParent: bool) : Promise;
+	_countdown(calledByParent?: bool) : Promise;
+	countdown(calledByParent?: bool) : Promise;
+	ignite(calledByParent?: bool) : Promise;
+	orbit(calledByParent?: bool) : Promise;
+	deploy(calledByParent?: bool) : Promise;
 	inOrbit();
-	deorbit(calledByParent: bool) : Promise;
-	splashdown(calledByParent: bool) : Promise;
+	deorbit(calledByParent?: bool) : Promise;
+	splashdown(calledByParent?: bool) : Promise;
 	init(name?: string[]): Promise;
 	init(name?: string): Promise;
 	init(name?: string[], ...args : any[]): Promise;

@@ -68,9 +68,10 @@ export function mergeSettings(settings: IThrustSettings): IThrustSettings {
 }
 
 export function fuse(settings: IThrustSettings): Promise {
-    /*jshint validthis:true */
     var pipe = [];
     settings = mergeSettings(settings);
+
+
     if (!instance.instances[settings.name]) {
         pipe.push(stageOne);
     }
@@ -80,8 +81,9 @@ export function fuse(settings: IThrustSettings): Promise {
 	if (settings.modules && settings.modules.length) {
 		pipe.push(stageThree);
 	}
-
-	return when.pipeline(pipe, settings);
+    
+	var promise = when.pipeline(pipe, settings);
+	return promise;
 }
 
 /**
@@ -260,6 +262,8 @@ export function stageThree(context): Promise {
     var thrust = context.thrust,
         defer = when.defer(),
         modules = context.cfg.modules;
+
+    modules = _.filter(modules, (x) => !thrust.modules[x]);
 
     require(modules, (...args: any[]) =>
     {

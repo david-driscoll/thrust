@@ -24,7 +24,7 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', '../subjquery'
         ready: function (mod, facade) {
             var context = mod.convention(CONTEXT);
             if(context) {
-                mod.instance.dom = mod.instance.$ = facade.context = tQuery(context, mod.instance.$);
+                mod.instance.dom = mod.instance.$ = tQuery(context, facade.context);
             }
         }
     };

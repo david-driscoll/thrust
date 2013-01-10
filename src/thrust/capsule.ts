@@ -156,7 +156,7 @@ export class Module implements IThrustModule
 	**/
 	public convention(property : string, value? : any) : any
 	{
-	    var tc = thrustCache[this.mid];
+	    var tc = this.cache;
 	    if (property.indexOf('config.') === 0)
 	    {
 	        if (typeof tc[property] === 'undefined')
@@ -210,7 +210,7 @@ export class Module implements IThrustModule
 			that = this;
 
 		has('DEBUG') && log.debug(format('thrust/capsule: Calling facades for "{0}"', that.name));
-		var cache = thrustCache[that.mid],
+		var cache = this.cache,
 			m = cache[method];
 		if (!facadeAfter)
 		{
@@ -236,7 +236,7 @@ export class Module implements IThrustModule
 		}
 		else
 		{
-			var m = thrustCache[that.mid][method];
+			var m = this.cache[method];
 			if (m)
 			{
 				results = m.apply(that.instance, args);

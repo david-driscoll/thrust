@@ -9,7 +9,7 @@
     if (!global.helpers)
         global.helpers = {};
 
-    global.helpers.launchThrustInstance = (self, settings, resultObject) =>
+    global.helpers.launchThrustInstance = (self, settings, resultObject, doneEarly?) =>
     {
         var has = require('has').add('DEBUG', false);
 
@@ -26,10 +26,15 @@
 
         async.beforeEach((done) =>
         {
-            Thrust.launch(settings).then((instance) => {
-                _.keys(instance).forEach((x) => { resultObject[x] = instance[x] })
-                done();
+            resultObject.promise = Thrust.launch(settings).then((instance) => {
+                _.keys(instance).forEach((x) => {
+                    resultObject[x] = instance[x];
+                })
+                if (!doneEarly)
+                    done();
             });
+            if (doneEarly)
+                done();
         });
 
         afterEach(() =>

@@ -64,6 +64,24 @@
                 });
             });
 
+            async.it('context should be correct after multiple starts and stops', (done) =>            {
+                var seq = [() => mod.start(), () => mod.stop(), () => mod.start()];
+                when.sequence(seq).then(() => {
+                    expect(mod.instance.$).toBeDefined();
+                    expect(mod.instance.dom).toBeDefined();
+
+                    expect(mod.instance.$[0]).toBe(tQuery('body')[0]);
+                    expect(mod.instance.dom[0]).toBe(tQuery('body')[0]);
+
+                    expect(mod.instance.$).toBe(mod.instance.dom);
+
+                    expect(mod.instance.$.query).toBeDefined();
+                    expect(mod.instance.$.$).toBeDefined();
+
+                    done();
+                });
+            })
+
             // need to do tests that support async data nonsense... sigh
             });
     });

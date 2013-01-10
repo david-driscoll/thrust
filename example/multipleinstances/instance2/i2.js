@@ -6,7 +6,11 @@ function (util)
         start: function ()
         {
         },
-        context: '#i2',
+        config: {
+            dom: {
+                context: '#i2',
+            }
+        },
         ready: function ()
         {
             this.$.show();

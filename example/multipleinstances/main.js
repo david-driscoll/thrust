@@ -67,13 +67,13 @@ function (thrust, ko)
 
         setInterval(function ()
         {
-            if (window.instance2.started)
+            if (window.instance2.thrust.started)
             {
-                window.instance2.deorbit();
+                window.instance2.thrust.deorbit();
             }
             else
             {
-                window.instance2.countdown();
+                window.instance2.thrust.countdown();
             }
         }, 5000);
     };
@@ -107,20 +107,17 @@ function (thrust, ko)
                 clearInterval(interval);
             });
 
-            context.mediator.subscribe('thrust/init', function ()
+            interval = setInterval(function ()
             {
-                interval = setInterval(function ()
+                if (window.instance2.thrust.started)
                 {
-                    if (window.instance2.started)
-                    {
-                        window.instance2.deorbit(true);
-                    }
-                    else
-                    {
-                        window.instance2.countdown(true);
-                    }
-                }, 5000);
-            });
+                    window.instance2.thrust.deorbit(true);
+                }
+                else
+                {
+                    window.instance2.thrust.countdown(true);
+                }
+            }, 5000);
 
             /*interval = setInterval(function ()
             {

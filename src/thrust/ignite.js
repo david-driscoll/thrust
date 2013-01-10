@@ -57,7 +57,6 @@ define(["require", "exports", 'module', 'thrust/util', './config', './capsule', 
     }
     exports.mergeSettings = mergeSettings;
     function fuse(settings) {
-        /*jshint validthis:true */
         var pipe = [];
         settings = mergeSettings(settings);
         if(!instance.instances[settings.name]) {
@@ -67,7 +66,8 @@ define(["require", "exports", 'module', 'thrust/util', './config', './capsule', 
         if(settings.modules && settings.modules.length) {
             pipe.push(stageThree);
         }
-        return when.pipeline(pipe, settings);
+        var promise = when.pipeline(pipe, settings);
+        return promise;
     }
     exports.fuse = fuse;
     /**
@@ -237,6 +237,9 @@ return spec[x];                    });
     **/
     function stageThree(context) {
         var thrust = context.thrust, defer = when.defer(), modules = context.cfg.modules;
+        modules = _.filter(modules, function (x) {
+            return !thrust.modules[x];
+        });
         require(modules, function () {
             var args = [];
             for (var _i = 0; _i < (arguments.length - 0); _i++) {

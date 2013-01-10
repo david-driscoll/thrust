@@ -1,341 +1,273 @@
-﻿/// <reference path="../lib/jasmine/lib/jasmine-1.3.1/jasmine.js" />
-/// <reference path="../lib/requirejs/require.js" />
-/// <reference path="./require.test.settings.js" />
-
+/// <reference path="helpers/thrust.ts" />
+/// <reference path="../src/thrust/interfaces/util/util.d.ts" />
+/// <reference path="../src/thrust/interfaces/thrust.d.ts" />
+/// <reference path="../lib/DefinitelyTyped/jasmine.async/jasmine.async.d.ts" />
+/// <reference path="../lib/DefinitelyTyped/jasmine/jasmine-1.2.d.ts" />
+/// <reference path="../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
 /*global jasmine:true, describe:true, it:true, xdescribe:true, xit:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
-(function ()
-{
+(function () {
     'use strict';
-    var thrust = require('thrust'),
-        thrustMediator = require('thrust/mediator'),
-        util = require('thrust/util'),
-        convention = require('thrust/convention'),
-        Thrust = thrust.Thrust,
-        ThrustMediator = thrustMediator.Mediator,
-        Convention = convention.Convention;
-
-    describe('Thrust', function ()
-    {
-        describe('constructor', function ()
-        {
-            it('Assigns values properly', function ()
-            {
-                var t = new Thrust('test');
-                expect(t.name).toBe('test');
-                expect(t.modules).toEqual({});
-            });
-        });
-
-        describe('launch', function ()
-        {
-            it('begins launching', function ()
-            {
-                var launchDefer = Thrust.launch();
-                expect(launchDefer).not.toBeFalsy();
-                expect(launchDefer).toBeTruthy();
-                expect(typeof launchDefer.then).toBe('function');
-            });
-        });
-
-        describe('create', function ()
-        {
-            var t = new Thrust('test');
-            t.mediator = new ThrustMediator('test');
-
-            it('creates a module', function ()
-            {
-                var module = t.create('name', { init: util.noop, destroy: util.noop });
-
-                expect(module).toBeTruthy();
-                expect(t.modules['name']).toBeTruthy();
-            });
-        });
-
-        var t, c1, c2;
-        beforeEach(function ()
-        {
-            t = new Thrust('test'),
-            c1 = new Convention(),
-            c2 = new Convention();
-            t.mediator = new ThrustMediator('test');
-        });
-
-        describe('countdown', function ()
-        {
-            it('begins countdown', function ()
-            {
-                spyOn(c1, 'countdown').andCallThrough();
-                spyOn(c2, 'countdown').andCallThrough();
-
-                t.__conventions = [c1, c2];
-
-                var cd = t.countdown();
-
-                expect(c1.countdown).toHaveBeenCalled();
-                expect(c2.countdown).toHaveBeenCalled();
-            });
-
-            it('fires thrust/init event', function ()
-            {
-                var cd, started = false;
-                runs(function ()
-                {
-                    t.mediator.subscribe('thrust/init', function ()
-                    {
-                        started = true;
+    var thrust = require('thrust'), Thrust = thrust.Thrust, thrustMediator = require('thrust/mediator'), util = require('thrust/util'), m = require('thrust/capsule'), thrustInstance = require('thrust/instance'), ignite = require('thrust/ignite'), when = util.when, convention = require('thrust/convention'), _ = util._;
+    describe('Thrust', function () {
+        var async = new AsyncSpec(this), result = {
+thrust: undefined,
+mediator: undefined,
+promise: undefined        };
+        window['helpers'].launchThrustInstance(this, {
+            async: false,
+            automaticLifecycle: false
+        }, result);
+        describe('create', function () {
+            async.it('creates a module', function (done) {
+                result.promise.then(function () {
+                    var mod = result.thrust.create('name', {
+                        init: util.noop,
+                        destroy: util.noop
                     });
-                    cd = t.countdown();
-                });
-
-                waitsFor(function ()
-                {
-                    return started;
-                }, 'Thrust failed to fire thrust/init event', 100);
-
-                runs(function ()
-                {
-                    expect(started).toBe(true);
+                    expect(mod).toBeTruthy();
+                    expect(result.thrust.modules['name']).toBeTruthy();
+                    done();
                 });
             });
         });
-
-        describe('ignite', function ()
-        {
-            it('begins ignite', function ()
+        [
             {
-                spyOn(c1, 'ignite').andCallThrough();
-                spyOn(c2, 'ignite').andCallThrough();
-
-                t.__conventions = [c1, c2];
-
-                var cd = t.ignite();
-
-                expect(c1.ignite).toHaveBeenCalled();
-                expect(c2.ignite).toHaveBeenCalled();
-            });
-
-            it('fires thrust/start event', function ()
+                tEvent: 'countdown',
+                mEvent: 'init'
+            }, 
             {
-                var cd, started = false;
-                runs(function ()
-                {
-                    t.mediator.subscribe('thrust/start', function ()
-                    {
-                        started = true;
+                tEvent: 'ignite',
+                mEvent: 'start'
+            }, 
+            {
+                tEvent: 'orbit',
+                mEvent: 'ready'
+            }, 
+            
+        ].forEach(function (z) {
+            describe(z.tEvent, function () {
+                async.it('begins ' + z.tEvent, function (done) {
+                    var conventions = result.thrust.__conventions;
+                    conventions.forEach(function (x) {
+                        spyOn(x, z.tEvent).andCallThrough();
                     });
-                    cd = t.ignite();
-                });
-
-                waitsFor(function ()
-                {
-                    return started;
-                }, 'Thrust failed to fire thrust/start event', 100);
-
-                runs(function ()
-                {
-                    expect(started).toBe(true);
-                });
-            });
-        });
-
-        describe('orbit', function ()
-        {
-            it('begins orbit', function ()
-            {
-                spyOn(c1, 'orbit').andCallThrough();
-                spyOn(c2, 'orbit').andCallThrough();
-
-                t.__conventions = [c1, c2];
-
-                var cd = t.orbit();
-
-                expect(c1.orbit).toHaveBeenCalled();
-                expect(c2.orbit).toHaveBeenCalled();
-            });
-
-            xit('fires thrust/ready event', function ()
-            {
-                var cd, started = false;
-                runs(function ()
-                {
-                    t.mediator.subscribe('thrust/ready', function ()
-                    {
-                        started = true;
+                    Thrust.launchSequence(result.thrust).then(function () {
+                        conventions.forEach(function (x) {
+                            expect(x[z.tEvent]).toHaveBeenCalled();
+                        });
+                        done();
                     });
-                    cd = t.orbit();
                 });
-
-                waitsFor(function ()
-                {
-                    return started;
-                }, 'Thrust failed to fire thrust/ready event', 200);
-
-                runs(function ()
-                {
-                    expect(started).toBe(true);
-                });
-            });
-        });
-
-        xdescribe('deorbit', function ()
-        {
-            it('begins deorbit', function ()
-            {
-                spyOn(c1, 'deorbit').andCallThrough();
-                spyOn(c2, 'deorbit').andCallThrough();
-
-                t.__conventions = [c1, c2];
-
-                var cd = t.deorbit();
-
-                expect(c1.deorbit).toHaveBeenCalled();
-                expect(c2.deorbit).toHaveBeenCalled();
-            });
-
-            it('fires thrust/stop event', function ()
-            {
-                var cd, started = false;
-                runs(function ()
-                {
-                    t.mediator.subscribe('thrust/stop', function ()
-                    {
-                        started = true;
+                async.it('fires thrust/' + z.mEvent + ' event', function (done) {
+                    var spy = jasmine.createSpy(z.mEvent);
+                    result.mediator.subscribe('thrust/' + z.mEvent, spy);
+                    Thrust.launchSequence(result.thrust).then(function () {
+                        expect(spy).toHaveBeenCalled();
+                        done();
                     });
-                    cd = t.deorbit();
-                });
-
-                waitsFor(function ()
-                {
-                    return started;
-                }, 'Thrust failed to fire thrust/stop event', 100);
-
-                runs(function ()
-                {
-                    expect(started).toBe(true);
                 });
             });
         });
-
-        xdescribe('splashdown', function ()
-        {
-            it('begins splashdown', function ()
+        [
             {
-                spyOn(c1, 'splashdown').andCallThrough();
-                spyOn(c2, 'splashdown').andCallThrough();
-
-                t.__conventions = [c1, c2];
-
-                var cd = t.splashdown();
-
-                expect(c1.splashdown).toHaveBeenCalled();
-                expect(c2.splashdown).toHaveBeenCalled();
-            });
-
-            it('fires thrust/destroy event', function ()
+                tEvent: 'deorbit',
+                mEvent: 'stop'
+            }, 
             {
-                var cd, started = false;
-                runs(function ()
-                {
-                    t.mediator.subscribe('thrust/destroy', function ()
-                    {
-                        started = true;
+                tEvent: 'splashdown',
+                mEvent: 'destroy'
+            }, 
+            
+        ].forEach(function (z) {
+            describe(z.tEvent, function () {
+                async.it('begins ' + z.tEvent, function (done) {
+                    var conventions = result.thrust.__conventions;
+                    conventions.forEach(function (x) {
+                        spyOn(x, z.tEvent).andCallThrough();
                     });
-                    cd = t.splashdown();
+                    var seq = [
+                        function () {
+                            return Thrust.launchSequence(result.thrust);
+                        }, 
+                        function () {
+                            return result.thrust.deorbit();
+                        }                    ];
+                    when.sequence(seq).then(function () {
+                        conventions.forEach(function (x) {
+                            expect(x[z.tEvent]).toHaveBeenCalled();
+                        });
+                        done();
+                    });
                 });
-
-                waitsFor(function ()
-                {
-                    return started;
-                }, 'Thrust failed to fire thrust/destroy event', 100);
-
-                runs(function ()
-                {
-                    expect(started).toBe(true);
+                async.it('fires thrust/' + z.mEvent + ' event', function (done) {
+                    var spy = jasmine.createSpy(z.mEvent);
+                    result.mediator.subscribe('thrust/' + z.mEvent, spy);
+                    var seq = [
+                        function () {
+                            return Thrust.launchSequence(result.thrust);
+                        }, 
+                        function () {
+                            return result.thrust.deorbit();
+                        }                    ];
+                    when.sequence(seq).then(function () {
+                        expect(spy).toHaveBeenCalled();
+                        done();
+                    });
                 });
             });
         });
-
+        describe('module events', function () {
+            var m1, m2, m3, s1, s2, s3;
+            beforeEach(function (done) {
+                s1 = jasmine.createSpy('s1');
+                s2 = jasmine.createSpy('s2');
+                s3 = jasmine.createSpy('s3');
+                m1 = result.thrust.create('test-module1', {
+                    init: s1,
+                    destroy: s1
+                });
+                m2 = result.thrust.create('test-module2', {
+                    init: s2,
+                    destroy: s2
+                });
+                m3 = result.thrust.create('test-module3', {
+                    init: s3,
+                    destroy: s3
+                });
+            });
+            [
+                {
+                    action: 'init'
+                }, 
+                {
+                    action: 'start'
+                }, 
+                {
+                    action: 'ready'
+                }
+            ].forEach(function (z) {
+                describe(z.action, function () {
+                    async.it(z.action + 's all modules in settings', function (done) {
+                        Thrust.launchSequence(result.thrust).then(function () {
+                            result.thrust[z.action]().then(function () {
+                                expect(m2.cache[z.action + '-status']).toBe(true);
+                                expect(m3.cache[z.action + '-status']).toBe(true);
+                                expect(s2).toHaveBeenCalled();
+                                expect(s3).toHaveBeenCalled();
+                                done();
+                            });
+                        });
+                    });
+                    async.it(z.action + 's a single module', function (done) {
+                        Thrust.launchSequence(result.thrust).then(function () {
+                            result.thrust[z.action]('test-module1').then(function () {
+                                expect(m1.cache[z.action + '-status']).toBe(true);
+                                expect(s1).toHaveBeenCalled();
+                                done();
+                            });
+                        });
+                    });
+                    async.it(z.action + 's multiple modules', function (done) {
+                        Thrust.launchSequence(result.thrust).then(function () {
+                            result.thrust[z.action]([
+                                'test-module1', 
+                                'test-module2', 
+                                'test-module3'
+                            ]).then(function () {
+                                expect(m1.cache[z.action + '-status']).toBe(true);
+                                expect(m2.cache[z.action + '-status']).toBe(true);
+                                expect(m3.cache[z.action + '-status']).toBe(true);
+                                expect(s1).toHaveBeenCalled();
+                                expect(s2).toHaveBeenCalled();
+                                expect(s3).toHaveBeenCalled();
+                                done();
+                            });
+                        });
+                    });
+                });
+            });
+        });
         //TODO:
         //init
         //start
         //ready
         //stop
         //destroy
-
         /*describe('child instances', function ()
         {
-            var started, t, childStarted;
-            beforeEach(function()
-            {
-                started = false;
-                childStarted = false;
-                t = Thrust.launch({
-                    })
-                    .then(function (context)
-                    {
-                        context.thrust.spawn({ name: 'child' })
-                        .then(function(childContext)
-                        {
-                            childStarted = true;
-
-                            childContext.mediator.subscribe('thrust/destroy', function ()
-                            {
-                                childStarted = false;
-                            });
-                        });
-
-                        context.mediator.subscribe('thrust/destroy', function ()
-                        {
-                            started = false;
-                        });
-                    });
-            });
-
-            afterEach(function ()
-            {
-                t.deorbit();
-            });
-            it('must spawn child instances', function ()
-            {
-                runs(function(){});
-
-                waitsFor(function ()
-                {
-                    return started;
-                }, 300);
-
-                runs(function ()
-                {
-                    expect(started).toBe(true);
-                    expect(childStarted).toBe(true);
-                });
-            });
-
-            it('controls child instances', function ()
-            {
-                runs(function () { });
-
-                waitsFor(function ()
-                {
-                    return started && childStarted;
-                }, 300);
-
-                runs(function ()
-                {
-                    t.deorbit();
-                });
-
-                waitsFor(function ()
-                {
-                    return (!started && !childStarted);
-                }, 300);
-
-                runs(function ()
-                {
-                    expect(started).toBe(false);
-                    expect(childStarted).toBe(false);
-                });
-            });
+        var started, t, childStarted;
+        beforeEach(function()
+        {
+        started = false;
+        childStarted = false;
+        t = Thrust.launch({
+        })
+        .then(function (context)
+        {
+        context.thrust.spawn({ name: 'child' })
+        .then(function(childContext)
+        {
+        childStarted = true;
+        
+        childContext.mediator.subscribe('thrust/destroy', function ()
+        {
+        childStarted = false;
+        });
+        });
+        
+        context.mediator.subscribe('thrust/destroy', function ()
+        {
+        started = false;
+        });
+        });
+        });
+        
+        afterEach(function ()
+        {
+        t.deorbit();
+        });
+        it('must spawn child instances', function ()
+        {
+        runs(function(){});
+        
+        waitsFor(function ()
+        {
+        return started;
+        }, 300);
+        
+        runs(function ()
+        {
+        expect(started).toBe(true);
+        expect(childStarted).toBe(true);
+        });
+        });
+        
+        it('controls child instances', function ()
+        {
+        runs(function () { });
+        
+        waitsFor(function ()
+        {
+        return started && childStarted;
+        }, 300);
+        
+        runs(function ()
+        {
+        t.deorbit();
+        });
+        
+        waitsFor(function ()
+        {
+        return (!started && !childStarted);
+        }, 300);
+        
+        runs(function ()
+        {
+        expect(started).toBe(false);
+        expect(childStarted).toBe(false);
+        });
+        });
         });*/
-    });
+            });
 })();
+//@ sourceMappingURL=thrust.js.map

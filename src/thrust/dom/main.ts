@@ -126,7 +126,6 @@ export class Dom implements IThrustDom
 		else
 		{
 			dom = facades.dom = new DomFacade(mod, this);
-			mod.dom = mod.$ = dom.context;
 		}
 		return dom;
 	}

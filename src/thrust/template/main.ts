@@ -387,23 +387,25 @@ thrust/template!instance3:kendo:templates/myTemplate.tmpl = Uses the kendo templ
 @param {Function} load Allows the load to inform that AMD for the value to hand off
 @param {Object} config The custom configuration.
 **/
-export function load(name: string, parentRequire, load, config)
-{
-    var templatePath = name,
-        templateEngine,
-        colon = templatePath.indexOf(':');
+// Not completed yet
+// Should behave similarly to text!
+//export function load(name: string, parentRequire, load, config)
+//{
+//    var templatePath = name,
+//        templateEngine,
+//        colon = templatePath.indexOf(':');
 
-	var parts = name.split(':'),
-        instanceName = parts[0],
-		templateEngine = parts[1],
-		templatePath = parts[2] || templateEngine;
-    if (parts.length === 2)
-        templateEngine = null;
+//	var parts = name.split(':'),
+//        instanceName = parts[0],
+//		templateEngine = parts[1],
+//		templatePath = parts[2] || templateEngine;
+//    if (parts.length === 2)
+//        templateEngine = null;
 
-	//var instancePromise = Thrust.__fetchInstance(realName);
-    // Get the data plugin.
-    parentRequire(['thrust!data:' + instanceName], (dataPlugin) =>
-    {
-        var dataPlugin = dataPlugin
-    });
-}
+//	//var instancePromise = Thrust.__fetchInstance(realName);
+//    // Get the data plugin.
+//    parentRequire(['thrust!data:' + instanceName], (dataPlugin) =>
+//    {
+//        var dataPlugin = dataPlugin
+//    });
+//}

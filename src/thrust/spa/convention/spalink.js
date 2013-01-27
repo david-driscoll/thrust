@@ -1,4 +1,10 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util', 'thrust/dom/subjquery'], function(require, exports, __c__, __util__, __subjquery__) {
+    /// <reference path="../../interfaces/dom/dom.d.ts" />
+    /// <reference path="../../interfaces/spa/spa.d.ts" />
+    /// <reference path="../../interfaces/thrust.d.ts" />
+    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
     'use strict';
     var c = __c__;
 
@@ -18,6 +24,18 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', 'thrust/dom/su
         }
         return baseUrl + href;
     };
+    /**
+    @module thrust.dom
+    @submodule thrust.dom.convention
+    **/
+    /**
+    * # __thrust/dom__ Convention - Single Page App Link
+    *
+    * Requires thrust/dom
+    *
+    * @for thrust.dom.convention
+    * @property spa;ink
+    **/
     var methods = {
         orbit: function (thrust) {
             var config = thrust.config, spa = thrust.spa;

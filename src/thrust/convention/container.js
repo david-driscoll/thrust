@@ -1,4 +1,9 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
+    /// <reference path="../interfaces/mediator/mediator.d.ts" />
+    /// <reference path="../interfaces/thrust.d.ts" />
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
     'use strict';
     var c = __c__;
 
@@ -6,9 +11,14 @@ define(["require", "exports", 'thrust/convention', 'thrust/util'], function(requ
     var util = __util__;
 
     var _ = util._;
-    var event = {
-anyContainer: 'thrust/convention/container/any',
-changeContainer: 'thrust/convention/container/change'    }, any = _.any, bind = _.bind, CONTAINER = 'config.container', START = 'start-status', defer = _.defer;
+    /**
+    @module thrust.mediator
+    @submodule thrust.mediator.convention
+    **/
+        var event = {
+        anyContainer: 'thrust/convention/container/any',
+        changeContainer: 'thrust/convention/container/change'
+    }, any = _.any, bind = _.bind, CONTAINER = 'config.container', START = 'start-status', defer = _.defer;
     var methods = {
         properties: [
             CONTAINER
@@ -25,6 +35,8 @@ changeContainer: 'thrust/convention/container/change'    }, any = _.any, bind = 
             var that = this, containerValue = mod.convention(CONTAINER);
             if(containerValue) {
                 facades.mediator.fire(event.changeContainer, containerValue);
+                // Subscriptions get unsubscribed when stopping a module, so we need to resubscribe every time here.
+                // This is probably better, as the events will be less chatty.
                 facades.mediator.subscribe(event.changeContainer, bind(that.change, that, mod));
             }
         }

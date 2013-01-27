@@ -5,7 +5,7 @@
 /// <reference path="../lib/DefinitelyTyped/jasmine/jasmine.d.ts" />
 /// <reference path="../lib/DefinitelyTyped/requirejs/require.d.ts" />
 
-/*global jasmine:true, describe:true, it:true, xdescribe:true, xit:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
+/*global jasmine:true, describe:true, it:true, xdescribe:true, xit:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true, AsyncSpec:true */
 (() => {
     'use strict';
     var thrust = require('thrust'),

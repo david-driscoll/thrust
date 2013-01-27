@@ -27,7 +27,6 @@ config;
     // Variable declaration.
     var format          = util.format,
         extend          = _.extend,
-        type            = util.type,
         when            = util.when,
         slice           = Array.prototype.slice,
         ajax            = jQuery.ajax,

@@ -1,4 +1,7 @@
 define(["require", "exports", 'thrust/util', './log', 'has'], function(require, exports, __util__, __log__, __has__) {
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
     'use strict';
     var util = __util__;
 
@@ -7,16 +10,29 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
 
     var has = __has__;
 
-    var type = util.type, format = util.format, each = _.each, isObject = _.isObject, extend = _.extend, when = util.when, flatten = _.flatten, pluck = _.pluck, flattenToPromises = util.flattenToPromises, thrustCache = {
+    var format = util.format, each = _.each, isObject = _.isObject, extend = _.extend, when = util.when, flatten = _.flatten, pluck = _.pluck, flattenToPromises = util.flattenToPromises, thrustCache = {
     }, __optionalMethods = [
-'start', 
-'stop', 
-'ready', 
-'config', 
+        // Optional methods that may be on a module
+        'start', 
+        'stop', 
+        'ready', 
+        'config', 
+        
     ], __requiredMethods = [
-'init', 
-'destroy', 
+        // Required methods that must be on every module
+        'init', 
+        'destroy', 
+        
     ];
+    /**
+    Moves all properties, that should exist outside of the module, into a private object for holding.
+    
+    @method moveToThrustCache
+    @private
+    @param {Object} from Object to extract items from
+    @param {Object} to Object to place items on
+    @param {Array} list Items to move from to the other object
+    **/
     function moveToThrustCache(from, to, list) {
         for(var i = 0, iLen = list.length; i < iLen; i++) {
             to[list[i]] = from[list[i]];
@@ -41,7 +57,17 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
         results.push(util.safeInvoke((m.thrust).__thrustConventions, method, m, moduleCache.facades));
         return results;
     }
+    /**
+    The module is the heart of the thrust, every module gets one facade per module.
+    
+    @module thrust
+    @class thrust.Module
+    @param {Thrust} thrust The thrust instance
+    @param {Object} def The module definition
+    @param {String} [name] The module name.
+    **/
     var Module = (function () {
+        //var Module =
         function Module(thrust, def, name) {
             name = this.name = (name || def.name);
             if(typeof def === 'function') {
@@ -50,6 +76,7 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
             }
             var mid = this.mid = thrust.name + ':' + name;
             var tCache = thrustCache[def.hash || mid];
+            // Clear any potential cached config objects, to make sure they refresh if the module is redefined.
             if(tCache) {
                 _.keys(tCache).filter(function (x) {
                     return x.indexOf('config.') === 0;
@@ -64,11 +91,13 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
             if(!this.instance.name) {
                 throw new Error('All Modules must have a name!');
             }
+            // Modules must have an init method and a destroy method, it's up to the module developer to populate these methods.
             for(var i = 0, iLen = __requiredMethods.length; i < iLen; i++) {
                 if(!def[__requiredMethods[i]]) {
                     throw new Error(format('Required "{0}" method not found on module "{1}"!', __requiredMethods[i], name));
                 }
             }
+            // If the module name is undefined, bring the name into the module.
             if(typeof def.name === 'undefined') {
                 def.name = name;
             }
@@ -86,6 +115,7 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
                     return x.indexOf('config.') !== 0;
                 });
             }
+            // Move all special properties off to the thrust's internal method.
             moveToThrustCache(this.instance, thrustModuleCacheItem, __requiredMethods);
             moveToThrustCache(this.instance, thrustModuleCacheItem, __optionalMethods);
             moveToThrustCache(this.instance, thrustModuleCacheItem, thrust.__conventionPluckPropertiesCache);
@@ -95,7 +125,17 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
             this.cache = thrustCache[mid];
         }
         Module.thrustCache = thrustCache;
-        Module.prototype.convention = function (property, value) {
+        Module.prototype.convention = /**
+        Getter/Setter for convention methods.
+        Gets the value convention property (defined in the properties array of a facade).
+        Sets the value of a convention property (for storing convention configuration)
+        
+        @param {String} property The property to get or set
+        @param {object} [value] The value to set
+        @method convention
+        @returns {Object} The valaue.
+        **/
+        function (property, value) {
             var tc = this.cache;
             if(property.indexOf('config.') === 0) {
                 if(typeof tc[property] === 'undefined') {
@@ -118,10 +158,29 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
             });
             return v;
         };
-        Module.prototype.thrustCreate = function (thrust) {
+        Module.prototype.thrustCreate = /**
+        Injects this module into the given thrust instance.
+        
+        @method thrustCreate
+        @param {Thrust} thrust The thrust instance.
+        **/
+        function (thrust) {
             thrust.__injectModule(this);
         };
-        Module.prototype.thrustCall = function (method, facadeAfter, args) {
+        Module.prototype.thrustCall = /**
+        Makes a call to all the modules facades
+        The order of the call depends on the order required.
+        During the startup stage (init, start, ready) facades are called first.
+        During the shutdown state (stop, destroy) facades are called last.
+        This allows modules to startup and shutdown will all the tools it had to begin with.
+        
+        @method thrustCall
+        @protected
+        @param {String} method the method to call
+        @param {Boolean} facadeAfter calls facade methods before or after module method.
+        @param {Array} args Args to be passed onto the module method.
+        **/
+        function (method, facadeAfter, args) {
             var seq = [], that = this;
             has('DEBUG') && log.debug(format('thrust/capsule: Calling facades for "{0}"', that.name));
             var cache = this.cache, m = cache[method];
@@ -144,17 +203,42 @@ define(["require", "exports", 'thrust/util', './log', 'has'], function(require, 
             }
             return when.sequence(seq);
         };
-        Module.prototype.start = function () {
+        Module.prototype.start = /**
+        Start the module, inside the thrust container it was created on.
+        
+        @method start
+        **/
+        function () {
             var that = this;
             return that.thrust.start(that.name);
         };
-        Module.prototype.stop = function () {
+        Module.prototype.stop = /**
+        Stop the module, inside the thrust container it was created on.
+        
+        @method start
+        **/
+        function () {
             var that = this;
             return that.thrust.stop(that.name);
         };
         return Module;
     })();
     exports.Module = Module;    
+    /**
+    AMD API
+    load
+    
+    Handles fetching of a module instance.
+    Format:
+    thrust/capsule!{instance}:{moduleName}
+    
+    @method load
+    @static
+    @param {String} name The name of the instance that is being fetched
+    @param {Function} parentRequire the require method to be loaded
+    @param {Function} load Allows the load to inform that AMD for the value to hand off
+    @param {Object} config The custom configuration.
+    **/
     function load(name, parentRequire, load, config) {
         var parts = name.split(':'), instanceName = parts[0], moduleName = parts[1];
         require([

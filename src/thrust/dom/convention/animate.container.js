@@ -1,4 +1,11 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
+    /// <reference path="../../interfaces/dom/convention/context.d.ts" />
+    /// <reference path="../../interfaces/dom/dom.d.ts" />
+    /// <reference path="../../interfaces/mediator/mediator.d.ts" />
+    /// <reference path="../../interfaces/thrust.d.ts" />
+    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
     'use strict';
     var c = __c__;
 
@@ -7,8 +14,9 @@ define(["require", "exports", 'thrust/convention', 'thrust/util'], function(requ
 
     var _ = util._;
     var event = {
-anyContainer: 'thrust-convention-container-any',
-changeContainer: 'thrust-convention-container-change'    }, any = _.any, defer = _.defer, bind = _.bind, START = 'start-status', ANIMATE = 'animate', CONTAINER = 'container', CONTEXT = 'context';
+        anyContainer: 'thrust-convention-container-any',
+        changeContainer: 'thrust-convention-container-change'
+    }, any = _.any, defer = _.defer, bind = _.bind, START = 'start-status', ANIMATE = 'animate', CONTAINER = 'container', CONTEXT = 'context';
     var methods = {
         properties: [
             ANIMATE

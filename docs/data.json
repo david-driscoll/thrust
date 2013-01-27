@@ -298,80 +298,17 @@
             },
             "namespaces": {}
         },
-        "build\\doc\\src\\thrust\\util\\function.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\util\\function.tsdoc",
-            "modules": {
-                "thrust.util.func": 1
-            },
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "build\\doc\\src\\thrust\\util\\guid.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\util\\guid.tsdoc",
-            "modules": {
-                "thrust.util": 1
-            },
-            "classes": {},
-            "fors": {
-                "thrust.util": 1
-            },
-            "namespaces": {}
-        },
         "build\\doc\\src\\thrust\\util\\main.tsdoc": {
             "name": "build\\doc\\src\\thrust\\util\\main.tsdoc",
-            "modules": {},
-            "classes": {
-                "thrust.util": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "build\\doc\\src\\thrust\\util\\object.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\util\\object.tsdoc",
-            "modules": {
-                "thrust.util.obj": 1
-            },
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "build\\doc\\src\\thrust\\util\\string.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\util\\string.tsdoc",
-            "modules": {},
-            "classes": {},
-            "fors": {
-                "thrust.util": 1
-            },
-            "namespaces": {}
-        },
-        "build\\doc\\src\\thrust\\util\\type.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\util\\type.tsdoc",
-            "modules": {
-                "thrust.util.type": 1
-            },
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "build\\doc\\src\\thrust\\util\\url.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\util\\url.tsdoc",
-            "modules": {
-                "thrust.util.url": 1
-            },
-            "classes": {},
-            "fors": {
-                "thrust.util.url": 1
-            },
-            "namespaces": {}
-        },
-        "build\\doc\\src\\thrust\\util\\when.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\util\\when.tsdoc",
             "modules": {
                 "thrust.util.when": 1
             },
-            "classes": {},
+            "classes": {
+                "thrust.util": 1
+            },
             "fors": {
+                "thrust.util": 1,
+                "thrust.util.url": 1,
                 "thrust.util.when": 1
             },
             "namespaces": {}
@@ -661,19 +598,22 @@
                 "thrust.template.config": 1,
                 "thrust.template": 1,
                 "thrust.template.Template": 1,
-                "thrust.template.TemplateFacade": 1
+                "thrust.template.TemplateFacade": 1,
+                "thrust.util": 1
             },
             "fors": {
                 "thrust.template.convention": 1,
                 "thrust.template.config": 1,
                 "thrust.template": 1,
                 "thrust.template.Template": 1,
-                "thrust.template.TemplateFacade": 1
+                "thrust.template.TemplateFacade": 1,
+                "thrust.util": 1,
+                "thrust.util.url": 1
             },
             "namespaces": {},
             "tag": "module",
-            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
-            "line": 111,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 1,
             "requires": [
                 "thrust.data"
             ]
@@ -710,81 +650,22 @@
         "thrust.util": {
             "name": "thrust.util",
             "submodules": {
-                "thrust.util.func": 1,
-                "thrust.util.obj": 1,
-                "thrust.util.type": 1,
-                "thrust.util.url": 1,
                 "thrust.util.when": 1
             },
             "classes": {
-                "thrust.util": 1,
                 "thrust.util.url": 1,
                 "thrust.util.when": 1
             },
             "fors": {
-                "thrust.util": 1,
-                "thrust.util.url": 1,
                 "thrust.util.when": 1
             },
-            "namespaces": {},
-            "module": "thrust.util",
-            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
-            "line": 1
-        },
-        "thrust.util.func": {
-            "name": "thrust.util.func",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "thrust.util",
-            "namespace": "",
-            "file": "build\\doc\\src\\thrust\\util\\function.tsdoc",
-            "line": 1
-        },
-        "thrust.util.obj": {
-            "name": "thrust.util.obj",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "thrust.util",
-            "namespace": "",
-            "file": "build\\doc\\src\\thrust\\util\\object.tsdoc",
-            "line": 1
-        },
-        "thrust.util.type": {
-            "name": "thrust.util.type",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "thrust.util",
-            "namespace": "",
-            "file": "build\\doc\\src\\thrust\\util\\type.tsdoc",
-            "line": 1
-        },
-        "thrust.util.url": {
-            "name": "thrust.util.url",
-            "submodules": {},
-            "classes": {
-                "thrust.util.url": 1
-            },
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "thrust.util",
-            "namespace": "",
-            "file": "build\\doc\\src\\thrust\\util\\url.tsdoc",
-            "line": 1
+            "namespaces": {}
         },
         "thrust.util.when": {
             "name": "thrust.util.when",
             "submodules": {},
             "classes": {
+                "thrust.util.url": 1,
                 "thrust.util.when": 1
             },
             "fors": {},
@@ -792,8 +673,8 @@
             "namespaces": {},
             "module": "thrust.util",
             "namespace": "",
-            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
-            "line": 1
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 132
         },
         "thrust": {
             "name": "thrust",
@@ -1256,20 +1137,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "thrust.util",
-            "submodule": "thrust.util",
+            "module": "thrust.template",
             "namespace": "",
             "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
-            "line": 1,
-            "uses": [
-                "thrust-util.array",
-                "thrust-util.collection",
-                "thrust-util.func",
-                "thrust-util.obj",
-                "thrust-util.type",
-                "thrust-util.url",
-                "thrust-util.when"
-            ]
+            "line": 1
         },
         "thrust.util.url": {
             "name": "thrust.util.url",
@@ -1280,8 +1151,8 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "thrust.util",
-            "submodule": "thrust.util.url",
-            "namespace": ""
+            "namespace": "",
+            "submodule": "thrust.util.when"
         },
         "thrust.util.when": {
             "name": "thrust.util.when",
@@ -3049,18 +2920,17 @@
             "module": "thrust.template"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\function.tsdoc",
-            "line": 5,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 4,
             "description": "A function that does nothing, or no operation.  Hence the name noop.",
             "itemtype": "method",
             "name": "noop",
             "class": "thrust.util",
-            "module": "thrust.util",
-            "submodule": "thrust.util.func"
+            "module": "thrust.template"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\function.tsdoc",
-            "line": 10,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 9,
             "description": "Attempts to invoke, similar to _.invoke, but in this case it verifies that the property exist,\n    and also verifies that it is a function, and not the noop method available in thrust.\n\n    The intent is a method that allows override of functions, without creating custom code.",
             "itemtype": "method",
             "name": "saveInvoke",
@@ -3084,12 +2954,11 @@
                 }
             ],
             "class": "thrust.util",
-            "module": "thrust.util",
-            "submodule": "thrust.util.func"
+            "module": "thrust.template"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\function.tsdoc",
-            "line": 21,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 20,
             "description": "Constructor used to beget objects that wire needs to create using new.",
             "params": [
                 {
@@ -3104,12 +2973,11 @@
                 }
             ],
             "class": "thrust.util",
-            "module": "thrust.util",
-            "submodule": "thrust.util.func"
+            "module": "thrust.template"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\function.tsdoc",
-            "line": 31,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 29,
             "description": "Creates an object by either invoking ctor as a function and returning the result,\nor by calling new ctor().  It uses a simple heuristic to try to guess which approach\nis the \"right\" one.",
             "params": [
                 {
@@ -3127,12 +2995,11 @@
                 "description": "The result of invoking ctor with args, with or without new, depending on\nthe strategy selected."
             },
             "class": "thrust.util",
-            "module": "thrust.util",
-            "submodule": "thrust.util.func"
+            "module": "thrust.template"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\function.tsdoc",
-            "line": 51,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 48,
             "description": "Flatten and filter arrays down to just the existing promises.",
             "itemtype": "method",
             "name": "flattenToPromises",
@@ -3148,82 +3015,11 @@
                 "type": "Array of Promises"
             },
             "class": "thrust.util",
-            "module": "thrust.util",
-            "submodule": "thrust.util.func"
+            "module": "thrust.template"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\guid.tsdoc",
-            "line": 5,
-            "description": "Returns a new sudo guid, limiations in JavaScript make must more reliable guids fairly difficult to create.",
-            "itemtype": "method",
-            "name": "newGuid",
-            "return": {
-                "description": "The new guid.",
-                "type": "Guid"
-            },
-            "class": "thrust.util",
-            "module": "thrust.util",
-            "submodule": "thrust.util"
-        },
-        {
-            "file": "build\\doc\\src\\thrust\\util\\guid.tsdoc",
-            "line": 12,
-            "description": "Returns an empty guid.",
-            "itemtype": "method",
-            "name": "emptyGuid",
-            "return": {
-                "description": "The emtpty guid.",
-                "type": "Guid"
-            },
-            "class": "thrust.util",
-            "module": "thrust.util",
-            "submodule": "thrust.util"
-        },
-        {
-            "file": "build\\doc\\src\\thrust\\util\\guid.tsdoc",
-            "line": 18,
-            "description": "Checks if the given string is a guid.",
-            "itemtype": "method",
-            "name": "isGuid",
-            "params": [
-                {
-                    "name": "guid",
-                    "description": "",
-                    "type": "Guid"
-                }
-            ],
-            "return": {
-                "description": "If the guid is a guid or not.",
-                "type": "Boolean"
-            },
-            "class": "thrust.util",
-            "module": "thrust.util",
-            "submodule": "thrust.util"
-        },
-        {
-            "file": "build\\doc\\src\\thrust\\util\\guid.tsdoc",
-            "line": 25,
-            "description": "Checks if the Guid is an Empty Guid",
-            "itemtype": "method",
-            "name": "isEmptyGuid",
-            "params": [
-                {
-                    "name": "guid",
-                    "description": "",
-                    "type": "Guid"
-                }
-            ],
-            "return": {
-                "description": "If the guid is a guid or not.",
-                "type": "Boolean"
-            },
-            "class": "thrust.util",
-            "module": "thrust.util",
-            "submodule": "thrust.util"
-        },
-        {
-            "file": "build\\doc\\src\\thrust\\util\\object.tsdoc",
-            "line": 5,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 55,
             "description": "Inverts an object.  The keys become values, and the values become keys.\nDoes not do any copying.",
             "itemtype": "method",
             "name": "invert",
@@ -3239,31 +3035,11 @@
                 "type": "Object"
             },
             "class": "thrust.util",
-            "module": "thrust.util",
-            "submodule": "thrust.util.obj"
+            "module": "thrust.template"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\string.tsdoc",
-            "line": 1,
-            "description": "C# style string format.",
-            "itemtype": "method",
-            "name": "format",
-            "class": "thrust.util",
-            "module": "thrust.util"
-        },
-        {
-            "file": "build\\doc\\src\\thrust\\util\\type.tsdoc",
-            "line": 5,
-            "description": "Returns the type of the given Object\n\nNOTE: currently this type has been loaded from jQuery source code.",
-            "itemtype": "method",
-            "name": "type",
-            "class": "thrust.util.url",
-            "module": "thrust.util",
-            "submodule": "thrust.util.type"
-        },
-        {
-            "file": "build\\doc\\src\\thrust\\util\\type.tsdoc",
-            "line": 12,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 63,
             "description": "Checks is the object is array like, like the aruguments object, but not a string, oe array.\njQuery objects for example would report as array like.\nAs well as knockout observable arrays report as array like.",
             "itemtype": "method",
             "name": "isArrayLike",
@@ -3278,13 +3054,12 @@
                 "description": "Is it true or false.",
                 "type": "Boolean"
             },
-            "class": "thrust.util.url",
-            "module": "thrust.util",
-            "submodule": "thrust.util.type"
+            "class": "thrust.util",
+            "module": "thrust.template"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\type.tsdoc",
-            "line": 21,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 72,
             "description": "Checks if the given object is array or array like.",
             "itemtype": "method",
             "name": "isArrayOrArrayLike",
@@ -3299,23 +3074,96 @@
                 "description": "Is it true or false.",
                 "type": "Boolean"
             },
-            "class": "thrust.util.url",
-            "module": "thrust.util",
-            "submodule": "thrust.util.type"
+            "class": "thrust.util",
+            "module": "thrust.template"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\url.tsdoc",
-            "line": 5,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 79,
+            "description": "Returns a new sudo guid, limiations in JavaScript make must more reliable guids fairly difficult to create.",
+            "itemtype": "method",
+            "name": "newGuid",
+            "return": {
+                "description": "The new guid.",
+                "type": "Guid"
+            },
+            "class": "thrust.util",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 86,
+            "description": "Returns an empty guid.",
+            "itemtype": "method",
+            "name": "emptyGuid",
+            "return": {
+                "description": "The emtpty guid.",
+                "type": "Guid"
+            },
+            "class": "thrust.util",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 92,
+            "description": "Checks if the given string is a guid.",
+            "itemtype": "method",
+            "name": "isGuid",
+            "params": [
+                {
+                    "name": "guid",
+                    "description": "",
+                    "type": "Guid"
+                }
+            ],
+            "return": {
+                "description": "If the guid is a guid or not.",
+                "type": "Boolean"
+            },
+            "class": "thrust.util",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 99,
+            "description": "Checks if the Guid is an Empty Guid",
+            "itemtype": "method",
+            "name": "isEmptyGuid",
+            "params": [
+                {
+                    "name": "guid",
+                    "description": "",
+                    "type": "Guid"
+                }
+            ],
+            "return": {
+                "description": "If the guid is a guid or not.",
+                "type": "Boolean"
+            },
+            "class": "thrust.util",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 106,
+            "description": "C# style string format.",
+            "itemtype": "method",
+            "name": "format",
+            "class": "thrust.util",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 112,
             "description": "jQuery param method to encode form parameters.",
             "itemtype": "method",
             "name": "param",
             "class": "thrust.util.url",
-            "module": "thrust.util",
-            "submodule": "thrust.util.url"
+            "module": "thrust.template"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\url.tsdoc",
-            "line": 11,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 118,
             "description": "Cleans up double slashs in a url, used by thrust/data",
             "itemtype": "method",
             "name": "cleanUrl",
@@ -3328,12 +3176,11 @@
             ],
             "retrusn": "{String} The cleaned url",
             "class": "thrust.util.url",
-            "module": "thrust.util",
-            "submodule": "thrust.util.url"
+            "module": "thrust.template"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\url.tsdoc",
-            "line": 18,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 125,
             "description": "Checks for existance of application path in the url, or http if the url is supposed to go to another location.",
             "itemtype": "method",
             "name": "fixupUrl",
@@ -3346,12 +3193,11 @@
             ],
             "retrusn": "{String} The fixed url",
             "class": "thrust.util.url",
-            "module": "thrust.util",
-            "submodule": "thrust.util.url"
+            "module": "thrust.template"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
-            "line": 5,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 136,
             "description": "when.apply, used to apply when results over a function, similar to jQuerys Deferred.\nSee for more information: [https://github.com/cujojs/when/wiki/when-apply](https://github.com/cujojs/when/wiki/when-apply)",
             "itemtype": "method",
             "name": "when.apply",
@@ -3360,8 +3206,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
-            "line": 12,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 143,
             "description": "when.delay, creates a promise that resolves in x ms, using setTimeout.\nSee for more information: [https://github.com/cujojs/when/wiki/when-delay](https://github.com/cujojs/when/wiki/when-delay)",
             "itemtype": "method",
             "name": "when.delay",
@@ -3370,8 +3216,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
-            "line": 18,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 149,
             "description": "when.timeout, creates a promise that will timeout if x ms if not resolved.\nSee for more information: [https://github.com/cujojs/when/wiki/when-timeout](https://github.com/cujojs/when/wiki/when-timeout)",
             "itemtype": "method",
             "name": "when.timeout",
@@ -3380,8 +3226,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
-            "line": 24,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 155,
             "description": "when.parallel\nSee for more information: [https://github.com/cujojs/when/wiki/when-parallel](https://github.com/cujojs/when/wiki/when-parallel)",
             "itemtype": "method",
             "name": "when.parallel",
@@ -3390,8 +3236,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
-            "line": 30,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 161,
             "description": "when.pipeline\nSee for more information: [https://github.com/cujojs/when/wiki/when-pipeline](https://github.com/cujojs/when/wiki/when-pipeline)",
             "itemtype": "method",
             "name": "when.pipeline",
@@ -3400,8 +3246,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
-            "line": 36,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 167,
             "description": "when.sequence\nSee for more information: [https://github.com/cujojs/when/wiki/when-sequence](https://github.com/cujojs/when/wiki/when-sequence)",
             "itemtype": "method",
             "name": "when.sequence",
@@ -3410,8 +3256,8 @@
             "submodule": "thrust.util.when"
         },
         {
-            "file": "build\\doc\\src\\thrust\\util\\when.tsdoc",
-            "line": 42,
+            "file": "build\\doc\\src\\thrust\\util\\main.tsdoc",
+            "line": 173,
             "description": "when.cancelable\nSee for more information: [https://github.com/cujojs/when/wiki/when-cancelable](https://github.com/cujojs/when/wiki/when-cancelable)",
             "itemtype": "method",
             "name": "when.cancelable",
@@ -5232,47 +5078,47 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\util\\function.tsdoc:31"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:29"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\util\\function.tsdoc:51"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:48"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\util\\guid.tsdoc:5"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:55"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\util\\guid.tsdoc:12"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:63"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\util\\guid.tsdoc:18"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:72"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\util\\guid.tsdoc:25"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:79"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\util\\object.tsdoc:5"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:86"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\util\\type.tsdoc:12"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:92"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " build\\doc\\src\\thrust\\util\\type.tsdoc:21"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:99"
         },
         {
             "message": "unknown tag: retrusn",
-            "line": " build\\doc\\src\\thrust\\util\\url.tsdoc:11"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:118"
         },
         {
             "message": "unknown tag: retrusn",
-            "line": " build\\doc\\src\\thrust\\util\\url.tsdoc:18"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:125"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -5512,11 +5358,11 @@
         },
         {
             "message": "Missing item type\nConstructor used to beget objects that wire needs to create using new.",
-            "line": " build\\doc\\src\\thrust\\util\\function.tsdoc:21"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:20"
         },
         {
             "message": "Missing item type\nCreates an object by either invoking ctor as a function and returning the result,\nor by calling new ctor().  It uses a simple heuristic to try to guess which approach\nis the \"right\" one.",
-            "line": " build\\doc\\src\\thrust\\util\\function.tsdoc:31"
+            "line": " build\\doc\\src\\thrust\\util\\main.tsdoc:29"
         }
     ]
 }

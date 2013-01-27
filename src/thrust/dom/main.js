@@ -1,4 +1,8 @@
 define(["require", "exports", './subjquery', 'thrust/util', 'thrust/log', 'thrust/facade', 'has', 'thrust/instance', './config'], function(require, exports, __subjquery__, __util__, __log__, __facade__, __has__, __instance__, __config__) {
+    /// <reference path="../interfaces/dom/dom.d.ts" />
+    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
     'use strict';
     var subjquery = __subjquery__;
 
@@ -18,6 +22,7 @@ define(["require", "exports", './subjquery', 'thrust/util', 'thrust/log', 'thrus
 
     exports.className = 'Dom';
     var format = util.format, extend = _.extend, bind = _.bind, hasOwn = Object.prototype.hasOwnProperty, isObject = _.isObject, slice = Array.prototype.slice, when = util.when, isArray = _.isArray;
+    //#region DomFacade
     var DomFacade = (function () {
         var domFacade = facade.createFacade(function (mod, parent) {
             this.name = parent.name;
@@ -49,7 +54,10 @@ define(["require", "exports", './subjquery', 'thrust/util', 'thrust/log', 'thrus
         };
         return domFacade;
     })();
+    //#endregion
+    //#region Dom
     var Dom = (function () {
+        //#endregion
         function Dom(name, mediator) {
             if(!name) {
                 throw new Error('Dom: module name must be defined.');
@@ -67,7 +75,8 @@ define(["require", "exports", './subjquery', 'thrust/util', 'thrust/log', 'thrus
 
             });
         }
-        Dom.prototype.initEvents = function () {
+        Dom.prototype.initEvents = //#region Events
+        function () {
         };
         Dom.prototype.extend = function (to, init) {
             return null;
@@ -95,5 +104,6 @@ define(["require", "exports", './subjquery', 'thrust/util', 'thrust/log', 'thrus
         return Dom;
     })();
     exports.Dom = Dom;    
-})
+    //#endregion
+    })
 //@ sourceMappingURL=main.js.map

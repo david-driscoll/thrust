@@ -3,7 +3,7 @@
 /// <reference path="../../lib/DefinitelyTyped/jasmine/jasmine.d.ts" />
 /// <reference path="../../lib/DefinitelyTyped/requirejs/require.d.ts" />
 
-/*global jasmine:true, AsyncSpec:true, describe:true, it:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
+/*global jasmine:true, AsyncSpec:true, describe:true, xit:true, it:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
 (() =>
 {
     var tQuery/* : TQueryStatic*/ = require('thrust/dom/subjquery').tQuery;

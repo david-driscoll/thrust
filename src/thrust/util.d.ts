@@ -9,7 +9,6 @@ declare module 'thrust/util'
 
     export function invert(obj : any) : any;
 
-    export function type(obj : any) : string;
     export function isArrayLike(obj : any) : bool;
     export function isArrayOrArrayLike(obj : any) : bool;
 

@@ -12,6 +12,8 @@
         'has': '../lib/has/has',
         'backbone': '../lib/backbone/backbone',
         'knockout': '../lib/knockout/build/output/knockout-latest.debug',
+        'uuid': '../lib/node-uuid/uuid',
+        'underscore.string': '../lib/underscore.string/lib/underscore.string',
     },
     packages: [
         { name: 'when', main: 'when', location: '../lib/when' },

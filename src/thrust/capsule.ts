@@ -10,8 +10,7 @@ var _ = util._;
 import log = module('./log');
 import has = module('has');
 
-var type = util.type,
-    format = util.format,
+var format = util.format,
     each = _.each,
     isObject = _.isObject,
     extend = _.extend,

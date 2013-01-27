@@ -22,7 +22,6 @@ export var className = 'Mediator';
     // Variable declaration.
     var format  = util.format,   // string format method
         extend  = _.extend,   // object extension method
-        type    = util.type,       // object type method
         when    = util.when,
         memoize = _.memoize,
         mediator,

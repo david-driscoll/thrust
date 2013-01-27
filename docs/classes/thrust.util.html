@@ -145,14 +145,6 @@
             
                 <li><a href="..&#x2F;modules/thrust.util.html">thrust.util</a></li>
             
-                <li><a href="..&#x2F;modules/thrust.util.func.html">thrust.util.func</a></li>
-            
-                <li><a href="..&#x2F;modules/thrust.util.obj.html">thrust.util.obj</a></li>
-            
-                <li><a href="..&#x2F;modules/thrust.util.type.html">thrust.util.type</a></li>
-            
-                <li><a href="..&#x2F;modules/thrust.util.url.html">thrust.util.url</a></li>
-            
                 <li><a href="..&#x2F;modules/thrust.util.when.html">thrust.util.when</a></li>
             
             </ul>
@@ -193,27 +185,6 @@
                         <h1>thrust.util Class</h1>
 <div class="box meta">
     
-        <div class="uses">
-            Uses
-            <ul class="inline commas">
-                
-                    <li><a href="thrust-util.array.html">thrust-util.array</a></li>
-                
-                    <li><a href="thrust-util.collection.html">thrust-util.collection</a></li>
-                
-                    <li><a href="thrust-util.func.html">thrust-util.func</a></li>
-                
-                    <li><a href="thrust-util.obj.html">thrust-util.obj</a></li>
-                
-                    <li><a href="thrust-util.type.html">thrust-util.type</a></li>
-                
-                    <li><a href="thrust-util.url.html">thrust-util.url</a></li>
-                
-                    <li><a href="thrust-util.when.html">thrust-util.when</a></li>
-                
-            </ul>
-        </div>
-    
 
     
 
@@ -225,8 +196,7 @@
 
     
         
-            Module: <a href="../modules/thrust.util.html">thrust.util</a><br>
-            Parent Module: <a href="../modules/thrust.util.html">thrust.util</a>
+            Module: <a href="../modules/thrust.template.html">thrust.template</a>
         
     
 
@@ -286,6 +256,20 @@
                         
                             <li class="index-item method">
                                 <a href="#method_invert">invert</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_isArrayLike">isArrayLike</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_isArrayOrArrayLike">isArrayOrArrayLike</a>
 
                                 
                                 
@@ -378,7 +362,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_guid.tsdoc.html#l12"><code>build\doc\src\thrust\util\guid.tsdoc:12</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_main.tsdoc.html#l86"><code>build\doc\src\thrust\util\main.tsdoc:86</code></a>
         
         </p>
 
@@ -452,8 +436,6 @@
         
             
                 
-                    <p>Provided by the <a href="../modules/thrust.util.func.html">thrust.util.func</a> module.</p>
-                
                 <p>
                 
                 Defined in
@@ -461,7 +443,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_function.tsdoc.html#l51"><code>build\doc\src\thrust\util\function.tsdoc:51</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_main.tsdoc.html#l48"><code>build\doc\src\thrust\util\main.tsdoc:48</code></a>
         
         </p>
 
@@ -550,7 +532,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_string.tsdoc.html#l1"><code>build\doc\src\thrust\util\string.tsdoc:1</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_main.tsdoc.html#l106"><code>build\doc\src\thrust\util\main.tsdoc:106</code></a>
         
         </p>
 
@@ -611,8 +593,6 @@
         
             
                 
-                    <p>Provided by the <a href="../modules/thrust.util.obj.html">thrust.util.obj</a> module.</p>
-                
                 <p>
                 
                 Defined in
@@ -620,7 +600,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_object.tsdoc.html#l5"><code>build\doc\src\thrust\util\object.tsdoc:5</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_main.tsdoc.html#l55"><code>build\doc\src\thrust\util\main.tsdoc:55</code></a>
         
         </p>
 
@@ -679,6 +659,216 @@ Does not do any copying.</p>
 </div>
 
                 
+                    <div id="method_isArrayLike" class="method item">
+    <h3 class="name"><code>isArrayLike</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>o</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_main.tsdoc.html#l63"><code>build\doc\src\thrust\util\main.tsdoc:63</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Checks is the object is array like, like the aruguments object, but not a string, oe array.
+jQuery objects for example would report as array like.
+As well as knockout observable arrays report as array like.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">o</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The object to check</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    
+                    Is it true or false.
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_isArrayOrArrayLike" class="method item">
+    <h3 class="name"><code>isArrayOrArrayLike</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>o</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_main.tsdoc.html#l72"><code>build\doc\src\thrust\util\main.tsdoc:72</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Checks if the given object is array or array like.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">o</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The object to check</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    
+                    Is it true or false.
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_isEmptyGuid" class="method item">
     <h3 class="name"><code>isEmptyGuid</code></h3>
 
@@ -725,7 +915,7 @@ Does not do any copying.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_guid.tsdoc.html#l25"><code>build\doc\src\thrust\util\guid.tsdoc:25</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_main.tsdoc.html#l99"><code>build\doc\src\thrust\util\main.tsdoc:99</code></a>
         
         </p>
 
@@ -829,7 +1019,7 @@ Does not do any copying.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_guid.tsdoc.html#l18"><code>build\doc\src\thrust\util\guid.tsdoc:18</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_main.tsdoc.html#l92"><code>build\doc\src\thrust\util\main.tsdoc:92</code></a>
         
         </p>
 
@@ -923,7 +1113,7 @@ Does not do any copying.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_guid.tsdoc.html#l5"><code>build\doc\src\thrust\util\guid.tsdoc:5</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_main.tsdoc.html#l79"><code>build\doc\src\thrust\util\main.tsdoc:79</code></a>
         
         </p>
 
@@ -983,8 +1173,6 @@ Does not do any copying.</p>
         
             
                 
-                    <p>Provided by the <a href="../modules/thrust.util.func.html">thrust.util.func</a> module.</p>
-                
                 <p>
                 
                 Defined in
@@ -992,7 +1180,7 @@ Does not do any copying.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_function.tsdoc.html#l5"><code>build\doc\src\thrust\util\function.tsdoc:5</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_main.tsdoc.html#l4"><code>build\doc\src\thrust\util\main.tsdoc:4</code></a>
         
         </p>
 
@@ -1061,8 +1249,6 @@ Does not do any copying.</p>
         
             
                 
-                    <p>Provided by the <a href="../modules/thrust.util.func.html">thrust.util.func</a> module.</p>
-                
                 <p>
                 
                 Defined in
@@ -1070,7 +1256,7 @@ Does not do any copying.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_function.tsdoc.html#l10"><code>build\doc\src\thrust\util\function.tsdoc:10</code></a>
+        <a href="..&#x2F;files&#x2F;build_doc_src_thrust_util_main.tsdoc.html#l9"><code>build\doc\src\thrust\util\main.tsdoc:9</code></a>
         
         </p>
 

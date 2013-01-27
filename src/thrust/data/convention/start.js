@@ -1,4 +1,8 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
+    /// <reference path="../../interfaces/data/data.d.ts" />
+    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
     'use strict';
     var c = __c__;
 
@@ -25,12 +29,15 @@ define(["require", "exports", 'thrust/convention', 'thrust/util'], function(requ
     }
     var methods = {
         countdown: function (thrust) {
+            // Subscribe to the wait and stop events
             thrust.data.subscribe('thrust/data/wait', waitCallback);
             thrust.data.subscribe('thrust/data/stop', stopCallback);
         },
         orbit: function (thrust) {
+            // Unsubscribe from the wait and stop events
             thrust.data.unsubscribe('thrust/data/wait', waitCallback);
             thrust.data.unsubscribe('thrust/data/stop', stopCallback);
+            // defer until any of the events that were captured are resolved, or the delay passes.
             var defer = when.defer();
             if(thrust.cfg.data.finishTimeout === 0) {
                 return when.all(whenQueue);

@@ -31,8 +31,9 @@
   ],
   "main": "./src/main.js",
   "devDependencies": {
-    "grunt": "~0.4.0",
-    "grunt-typescript": "git://github.com/david-driscoll/grunt-typescript.git",
+    "grunt": "~0.4.x",
+    "typescript": "~0.8.x",
+    "grunt-typescript": "git://github.com/digitalcreations/grunt-typescript.git",
     "grunt-benchmark": "*",
     "grunt-bump": "git://github.com/tarcon/grunt-bump.git",
     "grunt-contrib-clean": "*",

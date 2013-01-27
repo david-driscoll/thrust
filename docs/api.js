@@ -53,10 +53,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "thrust.template.config",
         "thrust.template.convention",
         "thrust.util",
-        "thrust.util.func",
-        "thrust.util.obj",
-        "thrust.util.type",
-        "thrust.util.url",
         "thrust.util.when"
     ],
     "allModules": [
@@ -135,22 +131,6 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "thrust.util",
             "name": "thrust.util"
-        },
-        {
-            "displayName": "thrust.util.func",
-            "name": "thrust.util.func"
-        },
-        {
-            "displayName": "thrust.util.obj",
-            "name": "thrust.util.obj"
-        },
-        {
-            "displayName": "thrust.util.type",
-            "name": "thrust.util.type"
-        },
-        {
-            "displayName": "thrust.util.url",
-            "name": "thrust.util.url"
         },
         {
             "displayName": "thrust.util.when",

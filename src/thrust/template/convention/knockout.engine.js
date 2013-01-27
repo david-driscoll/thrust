@@ -1,4 +1,9 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util', 'knockout'], function(require, exports, __c__, __util__, __ko__) {
+    /// <reference path="../../interfaces/template/template.d.ts" />
+    /// <reference path="../../interfaces/thrust.d.ts" />
+    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
     'use strict';
     var c = __c__;
 
@@ -21,7 +26,8 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', 'knockout'], f
                     return that.template.html;
                 } else {
                     that.template.html = arguments[0];
-                }
+                    //throw new Error('Thrust Template does not support rewriting...');
+                                    }
             },
             data: function (key) {
                 var that = this;
@@ -36,6 +42,7 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', 'knockout'], f
                 }
             }
         };
+        // Begin integration of template plugin, with Knockout.
         var oldEngine = (ko).nativeTemplateEngine.instance;
         var conventionTemplateEngine = (ko).conventionTemplateEngine = function () {
         };
@@ -51,6 +58,7 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', 'knockout'], f
                         precompiled = templateManager.compile('{{ with($data) { }} ' + templateSource.text() + " {{ } }}");
                         templateSource['data']('precompiled', precompiled);
                     }
+                    // Run the template and parse its output into an array of DOM elements
                     var renderedMarkup = templateSource.template.compiled(bindingContext).replace(/\s+/g, " ");
                     return (ko).utils.parseHtmlFragment(renderedMarkup);
                 }
@@ -64,6 +72,7 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', 'knockout'], f
                 return this.evaluatorCache;
             },
             makeTemplateSource: function (template, templateDocument) {
+                // Named template
                 if(typeof template == "string") {
                     var definition = templateManager.get(template);
                     if(definition) {

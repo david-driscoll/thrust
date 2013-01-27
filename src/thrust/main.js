@@ -1,4 +1,8 @@
 define(["require", "exports", 'thrust/util', './log', './instance', './ignite', './capsule', 'domReady', 'has', 'thrust/config'], function(require, exports, __util__, __log__, __thrustInstance__, __igniteSpec__, __m__, __domReady__, __has__, __tConfig__) {
+    /// <reference path="interfaces/thrust.d.ts" />
+    /// <reference path="../../lib/DefinitelyTyped/requirejs/require.d.ts" />
+    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
+    /*export module instance {*/
     'use strict';
     
     var util = __util__;
@@ -20,12 +24,20 @@ define(["require", "exports", 'thrust/util', './log', './instance', './ignite', 
     var tConfig = __tConfig__;
 
     exports.className = 'Thrust';
-    var INIT = 'init', START = 'start', READY = 'ready', STOP = 'stop', DESTROY = 'destroy', COUNTDOWN = 'countdown', IGNITE = 'ignite', ORBIT = 'orbit', DEPLOY = 'deploy', DEORBIT = 'deorbit', SPLASHDOWN = 'splashdown', INORBIT = 'inOrbit', memoize = _.memoize, each = _.each, map = _.map, extend = _.extend, when = util.when, bind = _.bind, isArray = _.isArray, slice = Array.prototype.slice, toArray = _.toArray, merge = _.merge, flatten = _.flatten, format = util.format, resolveMethods = [
-INIT, 
-START, 
-READY, 
-STOP, 
-DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustInstance.loadingInstances, safeInvoke = util.safeInvoke;
+    /**
+    The thrust application!
+    
+    @module thrust
+    @main thrust
+    **/
+        var INIT = 'init', START = 'start', READY = 'ready', STOP = 'stop', DESTROY = 'destroy', COUNTDOWN = 'countdown', IGNITE = 'ignite', ORBIT = 'orbit', DEPLOY = 'deploy', DEORBIT = 'deorbit', SPLASHDOWN = 'splashdown', INORBIT = 'inOrbit', memoize = _.memoize, each = _.each, map = _.map, extend = _.extend, when = util.when, bind = _.bind, isArray = _.isArray, slice = Array.prototype.slice, toArray = _.toArray, merge = _.merge, flatten = _.flatten, format = util.format, resolveMethods = [
+        INIT, 
+        START, 
+        READY, 
+        STOP, 
+        DESTROY
+    ], instances = thrustInstance.instances, loadingInstances = thrustInstance.loadingInstances, safeInvoke = util.safeInvoke;
+    //#region Runner Factories
     var runRunnerFactory = memoize(function (method) {
         var conventionMethod = (method === STOP && START) || (method === DESTROY && INIT) || method, conventionValue = !(method === STOP || method === DESTROY), unsetReady = method === STOP, conventionCheck = conventionMethod !== method, conventionName = format('{0}-status', conventionMethod), runner = runnerFactory(method, conventionName, conventionValue, unsetReady), logMessage = format('Thrust: {0}ing module "{{0}}" failed!', method), runningMessage = format('Thrust: Running {0} for module "{{0}}".', method);
         return function (names) {
@@ -44,6 +56,8 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                 has('DEBUG') && log.debug(format(runningMessage, name));
                 var mod = that.modules[name];
                 if(!mod && !that.failedModules[name]) {
+                    // try to fetch the module.
+                    // returning the proper defer in it's place
                     var loaderDefer = when.defer();
                     require([
                         name
@@ -58,22 +72,20 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                         loaderDefer.resolve();
                     });
                     results.push(loaderDefer.promise);
-                } else {
-                    if((conventionCheck && mod.convention(conventionName)) || !mod.convention(conventionName)) {
-                        if(has('DEBUG') && tConfig.throwErrors) {
+                } else if((conventionCheck && mod.convention(conventionName)) || !mod.convention(conventionName)) {
+                    if(has('DEBUG') && tConfig.throwErrors) {
+                        results.push(runner(that, name, mod, args));
+                    } else {
+                        try  {
                             results.push(runner(that, name, mod, args));
-                        } else {
-                            try  {
-                                results.push(runner(that, name, mod, args));
-                            } catch (e) {
-                                has('DEBUG') && log.error(format(logMessage, name), e, e.stack);
-                            }
+                        } catch (e) {
+                            has('DEBUG') && log.error(format(logMessage, name), e, e.stack);
                         }
                     }
                 }
             });
             return results.length && results;
-        }
+        };
     });
     var runnerFactory = memoize(function (method, conventionName, conventionValue, unsetReady) {
         var eventName = format('thrust/module/{0}', method), infoFormat = format('Thrust: {0}ing module "{{0}}"', method.charAt(0).toUpperCase() + method.substring(1)), debugFormat = format('Thrust: Calling module "{{0}}" {0}()', method), compAfter = method === STOP || method === DESTROY || false;
@@ -87,7 +99,7 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                     mod.convention(READY + '-status', false);
                 }
             });
-        }
+        };
     });
     var allRunnerFactory = memoize(function (method) {
         var infoFormat = format('Thrust: {0}ing all modules... [{{0}}]', method.charAt(0).toUpperCase() + method.substring(1)), pluralName = format('thrust/module/all/{0}', method), checkAutoStart = method === INIT || method === START || method === READY;
@@ -107,12 +119,12 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                 that[method](that.startingModules);
             }
             return when.all(results);
-        }
+        };
     });
     function fireThrustEvent(that, event) {
         return function () {
             that.mediator && that.mediator.fire(event);
-        }
+        };
     }
     function childrenCallMethod(that, method, stopping) {
         var items = [];
@@ -140,7 +152,7 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                 log.debug(format.apply(format, [
                     message
                 ].concat(toArray(arguments))));
-            }
+            };
         };
     } else {
         thrustLogEvent = function () {
@@ -156,6 +168,19 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
         }
         return true;
     };
+    /**
+    Gets the modules arguments from the registrations.
+    
+    If original args contains anything it is passed instead of the registrations.
+    If the registrations are in place it will return them.
+    
+    @method __getModuleArgs
+    @static
+    @private
+    @param {String} instanceName The thrust instance
+    @param {String} name The module name
+    @param {Array} originalArgs The original arguments passed into the calling method.
+    **/
     function __getModuleArgs(instanceName, name, originalArgs) {
         var args = toArray(originalArgs);
         if(args.length) {
@@ -167,6 +192,15 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
         }
         return args;
     }
+    //#endregion
+    /**
+    The primary thrust class.
+    
+    @class thrust.Thrust
+    @constructor
+    @param {String} name The name of this thrust instance
+    @returns {Thrust}
+    **/
     var Thrust = (function () {
         function Thrust(name) {
             this.__conventions = [];
@@ -194,7 +228,16 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
         }
         Thrust.__moduleRegistrations = {
         };
-        Thrust.prototype.create = function (name, mod, preBuilt) {
+        Thrust.prototype.create = /**
+        Creates a new thrust module.
+        
+        @method create
+        @param {String} name The unique module name.
+        @param {Object} module The module defintion.
+        @param {Boolean} preBuild Has this module been prebuilt, in other words has it been created, by wire.js and needs to be injected.
+        @returns {Module} The new module instance.
+        **/
+        function (name, mod, preBuilt) {
             has('DEBUG') && log.debug(format('Thrust: Creating new instance of "{0}"', name));
             var oldModule, that = this;
             if(preBuilt) {
@@ -206,18 +249,22 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             } else {
                 mod = oldModule;
             }
+            // Modules cannot have duplicate names, choose a new one.
             if(that.modules[mod.name]) {
                 throw new Error(format('Duplicate module name "{0}".', name));
             }
+            // m is the mediators internal module.
             that.modules[mod.name] = mod;
             has('DEBUG') && log.info(format('Thrust: Created module "{0}"', name));
+            // Notify the mediator that a module has been created.
             that.mediator.fire('thrust/module/create', name);
             if(that && that.started && mod.convention('autoStart')) {
                 that.start(mod.name);
             }
             return mod;
         };
-        Thrust.prototype.startup = function (event, eventType) {
+        Thrust.prototype.startup = //#region Global Runners
+        function (event, eventType) {
             var that = this;
             var promise = when.all(flattenWithAsync(that, [
                 safeInvoke(that.__conventions, event, that), 
@@ -241,7 +288,15 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             ]).then(thrustLogEvent('Thrust instance "{0}" has been initalized.', that.name));
             return promise;
         };
-        Thrust.prototype.countdown = function (calledByParent) {
+        Thrust.prototype.countdown = /**
+        Begins the countdown to thrusts start.
+        Loading can be deferred by returning a promise from any convention, or module method.
+        
+        @method countdown
+        @async
+        @returns {Promise} The promise of when the countdown is completed.
+        **/
+        function (calledByParent) {
             var that = this;
             if(!thrustShouldExecute(that, calledByParent)) {
                 return;
@@ -251,7 +306,15 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             }
             return that._countdown(calledByParent);
         };
-        Thrust.prototype.ignite = function (calledByParent) {
+        Thrust.prototype.ignite = /**
+        Begins the ingition as thrust starts up.
+        Loading can be deferred by returning a promise from any convention, or module method.
+        
+        @method ignite
+        @async
+        @returns {Promise} The promise of when the ingition is completed.
+        **/
+        function (calledByParent) {
             var that = this;
             if(!thrustShouldExecute(that, calledByParent)) {
                 return;
@@ -263,7 +326,15 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             ]).then(thrustLogEvent('Thrust instance "{0}" has been started.', that.name));
             return promise;
         };
-        Thrust.prototype.orbit = function (calledByParent) {
+        Thrust.prototype.orbit = /**
+        Thrust prepares for orbit.
+        Loading can be deferred by returning a promise from any convention.
+        
+        @method orbit
+        @async
+        @returns {Promise} The promise of when thrust is in orbit.
+        **/
+        function (calledByParent) {
             var that = this;
             if(!thrustShouldExecute(that, calledByParent)) {
                 return;
@@ -282,7 +353,15 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             ]).then(thrustLogEvent('Thrust instance "{0}" is almost ready.', that.name));
             return promise;
         };
-        Thrust.prototype.deploy = function (calledByParent) {
+        Thrust.prototype.deploy = /**
+        Thrust deploys components in orbit
+        Loading can be deferred by returning a promise from any module method.
+        
+        @method deploy
+        @async
+        @returns {Promise} The promise of when thrust has fully deployed.
+        **/
+        function (calledByParent) {
             var that = this;
             if(!thrustShouldExecute(that, calledByParent)) {
                 return;
@@ -339,7 +418,15 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             ]).then(thrustLogEvent('Thrust instance "{0}" is now stopped.', that.name));
             return promise;
         };
-        Thrust.prototype.deorbit = function (calledByParent) {
+        Thrust.prototype.deorbit = /**
+        Begins the deorbit as thrust shutdown.
+        Shutdown can be deferred by returning a promise from any convention, or module method.
+        
+        @method deorbit
+        @async
+        @returns {Promise} The promise of when the ingition is completed.
+        **/
+        function (calledByParent) {
             var that = this;
             if(!thrustShouldExecute(that, calledByParent, true)) {
                 return;
@@ -352,7 +439,15 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             }
             return that._deorbit(calledByParent);
         };
-        Thrust.prototype.splashdown = function (calledByParent) {
+        Thrust.prototype.splashdown = /**
+        Begins the splashdown as thrust shutdown.
+        Shutdown can be deferred by returning a promise from any convention, or module method.
+        
+        @method splashdown
+        @async
+        @returns {Promise} The promise of when the ingition is completed.
+        **/
+        function (calledByParent) {
             var that = this;
             if(!thrustShouldExecute(that, calledByParent, true)) {
                 return;
@@ -472,10 +567,25 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                 STOP
             ]);
         };
-        Thrust.prototype.__injectModule = function (module) {
+        Thrust.prototype.__injectModule = //#endregion
+        /**
+        Injects a preconstructed module into the thrust instance.
+        
+        @method __injectModule
+        @private
+        @param {Module} module The module to inject.
+        **/
+        function (module) {
             this.create(module.name, module, true);
         };
-        Thrust.prototype.createModule = function (name, moduleDefn) {
+        Thrust.prototype.createModule = /**
+        Creates a module from the given definition object, with the given name.
+        
+        @method createModule
+        @param {String} name The module name
+        @param {Object} moduleDefn The module definition
+        **/
+        function (name, moduleDefn) {
             var that = this;
             if(that.modules[name]) {
                 return that.modules[name];
@@ -484,7 +594,14 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             that.__injectModule(module);
             return module;
         };
-        Thrust.prototype.spawn = function (settings) {
+        Thrust.prototype.spawn = /**
+        Launches another child module for thrust.
+        
+        @method spawn
+        @param {Object} settings
+        @returns {Promise} The promise that resolves once the child instance has fully loaded.  Resolves with the context that contains the thrust instance and all plugins that were loaded.
+        **/
+        function (settings) {
             var that = this;
             return Thrust.launch(extend({
             }, {
@@ -496,7 +613,14 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                 return context;
             });
         };
-        Thrust.prototype.registerModule = function (name) {
+        Thrust.prototype.registerModule = /**
+        Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.
+        
+        @method registerModule
+        @param {String} name The module name to assign the arguments with.
+        @param {Object*} arguments, additional arguments that will be passed onto the moudle
+        **/
+        function (name) {
             var that = this;
             Thrust.registerModule.apply(Thrust, [
                 that.name
@@ -510,8 +634,15 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                 _.bind(instance.deploy, instance), 
                 _.bind(instance.inOrbit, instance)
             ], calledByParent);
-        }
-        Thrust.launch = function launch(settings, calledByParent) {
+        };
+        Thrust.launch = /**
+        Initalizes a new Thrust instance based on the given settings.
+        
+        @method launch
+        @static
+        @param {Object} settings The module to inject
+        **/
+        function launch(settings, calledByParent) {
             if(!settings) {
                 settings = {
                     name: 'global'
@@ -547,6 +678,7 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
             var pipeline = when.pipeline(pipe, settings).then(function (context) {
                 return setupDefer.resolve(context);
             });
+            // We're only going to expose globals if requested.  This is a potential usecase that may be needed for some teams.
             if(tConfig.exposeGlobals) {
                 if(!window['Thrust']) {
                     window['Thrust'] = Thrust;
@@ -556,22 +688,58 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                 });
             }
             return pipeline;
-        }
-        Thrust.getInstance = function getInstance(name) {
+        };
+        Thrust.getInstance = /**
+        Gets a named thrust stance if it exists.
+        
+        @method getInstance
+        @static
+        @param {String} name The instance name
+        @returns {Thrust} The thrust instance
+        **/
+        function getInstance(name) {
             return thrustInstance.getInstance(name);
-        }
-        Thrust.__fetchInstance = function __fetchInstance(name) {
+        };
+        Thrust.__fetchInstance = /**
+        Fetchs a named thrust stance if it exists.
+        This loads asyncronously, as the instance may not be loaded
+        
+        @method __fetchInstance
+        @static
+        @private
+        @param {String} name The instance name
+        @returns {Promise} To a thrust instance spec
+        **/
+        function __fetchInstance(name) {
             return thrustInstance.fetchInstance(name);
-        }
-        Thrust.createModule = function createModule(instanceName, name, moduleDefn) {
+        };
+        Thrust.createModule = /**
+        Creates a new module and hands it off to the given instance, if that instance exists.
+        
+        @method createModule
+        @static
+        @param {String} instanceName The thrust instance name
+        @param {String} name The module name
+        @param {Object} moduleDefn The module definition
+        **/
+        function createModule(instanceName, name, moduleDefn) {
             var instance = Thrust.getInstance(instanceName);
             if(instance) {
                 var module = new Module(instance, moduleDefn, name);
                 instance.__injectModule(module);
                 return module;
             }
-        }
-        Thrust.registerModule = function registerModule(instanceName, name) {
+        };
+        Thrust.registerModule = /**
+        Registers a specific module name, and arguments.  The arguments will be used when initantiating the module.
+        
+        @method registerModule
+        @static
+        @param {String} instanceName The thrust instance the module is to be associated with.
+        @param {String} name The module name to assign the arguments with.
+        @param {Object*} arguments, additional arguments that will be passed onto the moudle
+        **/
+        function registerModule(instanceName, name) {
             if(!instanceName) {
                 throw new Error('instanceName is required!');
             }
@@ -587,11 +755,27 @@ DESTROY    ], instances = thrustInstance.instances, loadingInstances = thrustIns
                 throw new Error(format('Module "{0}" already registered to instance "{1}"', name, instanceName));
             }
             Thrust.__moduleRegistrations[instanceName][name] = args || [];
-        }
+        };
         Thrust.__getModuleArgs = __getModuleArgs;
         return Thrust;
     })();
     exports.Thrust = Thrust;    
+    /**
+    AMD API
+    load
+    
+    Handles fetching of a current thurst instance, by expected name.
+    Adding the : character requests a specific plugin.
+    thrust!global = Thrust instance
+    thrust!global:dom = The thrust dom plugin instance
+    
+    @method load
+    @static
+    @param {String} name The name of the instance that is being fetched
+    @param {Function} parentRequire the require method to be loaded
+    @param {Function} load Allows the load to inform that AMD for the value to hand off
+    @param {Object} config The custom configuration.
+    **/
     function load(name, parentRequire, load, config) {
         var parts = name.split(':'), realName = parts[0], pluginName = parts[1] || 'thrust';
         var instancePromise = Thrust.__fetchInstance(realName);

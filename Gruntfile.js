@@ -160,7 +160,7 @@ module.exports = function (grunt) {
     var jasmineGetSettingsMethod = function (from) { return helpers.getRequireSettingsFrom(grunt, from); },
         buildVBOptions = function (type) {
             return {
-                src: metadata.tests.thrustScripts,
+                src: [metadata.tests.thrustScripts],
                 options: {
                     specs: metadata.buildTests.scripts.concat(metadata.tests.scripts),
                     //outfile: metadata.buildTests.debugSpecFile,
@@ -176,10 +176,10 @@ module.exports = function (grunt) {
     var jasmineConfig = {
         options: {
             template: './zgrunt/RequireJSRunner.tmpl',
-            helpers: metadata.tests.helpers
+            helpers: [metadata.tests.helpers]
         },
         thrust: {
-            src: metadata.tests.thrustScripts,
+            src: [metadata.tests.thrustScripts],
             options: {
                 specs: metadata.tests.scripts,
                 templateOptions: {
@@ -201,7 +201,7 @@ module.exports = function (grunt) {
 
     var jshintConfig = {
         thrust: {
-            src: metadata.thrust.scripts.concat(metadata.tests.scripts).concat(metadata.buildTests.scripts)
+            src: [metadata.thrust.scripts, metadata.tests.scripts, metadata.buildTests.scripts]
         },
         options: {
             jshintrc: '.jshintrc',
@@ -322,13 +322,7 @@ module.exports = function (grunt) {
                 module: 'amd',
                 target: 'es3',
                 sourcemap: true,
-                compiler: //base_path: '.'
-                {
-                    styleSettings: {
-                    },
-                    propagateConstants: false,
-                    emitComments: true
-                }
+                comments: true
             }
         },
         /*tests: {

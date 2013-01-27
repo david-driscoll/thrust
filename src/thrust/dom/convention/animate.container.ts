@@ -1,13 +1,14 @@
+/// <reference path="../../interfaces/dom/convention/context.d.ts" />
 /// <reference path="../../interfaces/dom/dom.d.ts" />
 /// <reference path="../../interfaces/mediator/mediator.d.ts" />
 /// <reference path="../../interfaces/thrust.d.ts" />
-/// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+/// <reference path="../../../../lib/DefinitelyTyped/requirejs/require.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
 /*export module instance {*/
 
 'use strict';
-export import c = module('thrust/convention');
+import c = module('thrust/convention');
 var Convention = c.Convention;
 
 import util = module('thrust/util');

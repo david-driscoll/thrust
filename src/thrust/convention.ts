@@ -1,12 +1,11 @@
 /// <reference path="interfaces/thrust.d.ts" />
-/// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+/// <reference path="../../lib/DefinitelyTyped/requirejs/require.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
 /*export module instance {*/
 
 import util = module('thrust/util');
 var _ = util._;
-
 /**
 	A Convention allows thrust to be as extendable as possible, by giving extension points at every step along the way.
 

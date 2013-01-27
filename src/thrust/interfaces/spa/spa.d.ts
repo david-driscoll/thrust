@@ -38,7 +38,7 @@ interface IThrustModuleFacades
 
 interface IThrustModuleInstance
 {
-	navigate(location: string);
+	navigate?(location: string);
 }
 
 interface IThrustModuleSpaInstanceConfig

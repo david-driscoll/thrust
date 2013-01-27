@@ -6,6 +6,6 @@ interface IThrustModuleDomInstanceConfig
 
 interface IThrustModuleInstance
 {
-	dom: TQuery;
-	$: TQuery;
+	dom?: TQuery;
+	$?: TQuery;
 }

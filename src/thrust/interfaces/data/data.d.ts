@@ -49,7 +49,7 @@ interface IThrustDataFacade extends Function, IThrustFacade, IThrustDataMethods
 
 interface IThrustModuleInstance
 {
-	data: IThrustDataFacade;
+	data?: IThrustDataFacade;
 }
 
 interface IThrustModuleDataInstanceConfig

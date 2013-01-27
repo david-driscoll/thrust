@@ -1,10 +1,4 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util', '../subjquery'], function(require, exports, __c__, __util__, __subjquery__) {
-    /// <reference path="../../interfaces/dom/convention/action.d.ts" />
-    /// <reference path="../../interfaces/dom/dom.d.ts" />
-    /// <reference path="../../interfaces/thrust.d.ts" />
-    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     'use strict';
     var c = __c__;
 
@@ -108,8 +102,6 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', '../subjquery'
             thrust.dom.actionHandler = actionHandler;
             var $body = $(window.document.body);
             _.each(events, function (eventSelectors, eventName) {
-                // using thrust name, as callback needs to be per thrust instance
-                // in the event of multiple thrust instances.
                 $body.on(eventName + '.' + ACTIONSSINGLE + thrust.name, eventSelectors.join(getActionAttribute(eventName) + ', '), actionHandler.callbackFor(eventName, true));
             });
         },

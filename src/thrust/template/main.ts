@@ -1,6 +1,6 @@
 /// <reference path="../interfaces/data/data.d.ts" />
 /// <reference path="../interfaces/template/template.d.ts" />
-/// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+/// <reference path="../../../lib/DefinitelyTyped/requirejs/require.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
 /*export module instance {*/
@@ -13,7 +13,7 @@
     import tConfig = module('thrust/config');
     import domReady = module('domReady');
     import facade = module('thrust/facade');
-    export import config = module('./config');
+    import config = module('./config');
 	export var className = 'Template';
 	config;
 

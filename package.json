@@ -47,5 +47,8 @@
     "grunt-contrib-uglify": "*",
     "grunt-contrib-yuidoc": "*",
     "grunt-contrib-compress": "~0.3.3"
+  },
+  "dependencies": {
+    "grunt-typescript": "git://github.com/david-driscoll/grunt-typescript.git"
   }
 }

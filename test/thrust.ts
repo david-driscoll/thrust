@@ -1,9 +1,9 @@
 ﻿/// <reference path="helpers/thrust.ts" />
 /// <reference path="../src/thrust/interfaces/util/util.d.ts" />
 /// <reference path="../src/thrust/interfaces/thrust.d.ts" />
-/// <reference path="../lib/DefinitelyTyped/jasmine.async/jasmine.async.d.ts" />
-/// <reference path="../lib/DefinitelyTyped/jasmine/jasmine-1.2.d.ts" />
-/// <reference path="../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+/// <reference path="../src/jasmine.async.d.ts" />
+/// <reference path="../lib/DefinitelyTyped/jasmine/jasmine.d.ts" />
+/// <reference path="../lib/DefinitelyTyped/requirejs/require.d.ts" />
 
 /*global jasmine:true, describe:true, it:true, xdescribe:true, xit:true, expect:true, beforeEach:true, afterEach:true, spyOn:true, runs:true, waits:true, waitsFor:true */
 (() => {
@@ -29,7 +29,7 @@
 
         window['helpers'].launchThrustInstance(this, {
             async: false,
-            automaticLifecycle: false,
+            automaticLifecycle: true,
         }, result);
 
         describe('create', () => {
@@ -118,276 +118,297 @@
             });
         });
 
-        describe('module events', () => {
+    });
+    describe('Thrust module events', () => {
+        var async = new AsyncSpec(this),
+           result = {
+               thrust: <IThrust> undefined,
+               mediator: <IThrustMediator> undefined,
+               promise: <Promise> undefined,
+           };
 
-            var m1: IThrustModuleInternal, m2: IThrustModuleInternal, m3: IThrustModuleInternal,
-                s1i: Function, s1s: Function, s1r: Function, s1t: Function, s1d: Function,
-                s2i: Function, s2s: Function, s2r: Function, s2t: Function, s2d: Function,
-                s3i: Function, s3s: Function, s3r: Function, s3t: Function, s3d: Function;
+        window['helpers'].launchThrustInstance(this, {
+            async: false,
+            automaticLifecycle: false,
+        }, result);
 
-            beforeEach(() => {
-                s1i = jasmine.createSpy('s1i');
-                s1s = jasmine.createSpy('s1s');
-                s1r = jasmine.createSpy('s1r');
-                s1t = jasmine.createSpy('s1t');
-                s1d = jasmine.createSpy('s1d');
-                s2i = jasmine.createSpy('s2i');
-                s2s = jasmine.createSpy('s2s');
-                s2r = jasmine.createSpy('s2r');
-                s2t = jasmine.createSpy('s2t');
-                s2d = jasmine.createSpy('s2d');
-                s3i = jasmine.createSpy('s3i');
-                s3s = jasmine.createSpy('s3s');
-                s3r = jasmine.createSpy('s3r');
-                s3t = jasmine.createSpy('s3t');
-                s3d = jasmine.createSpy('s3d');
 
-                m1 = <IThrustModuleInternal> result.thrust.create('test-module1', {
-                    init: s1i,
-                    start: s1s,
-                    ready: s1r,
-                    stop: s1t,
-                    destroy: s1d
-                });
+        var m1: IThrustModuleInternal, m2: IThrustModuleInternal, m3: IThrustModuleInternal,
+            s1i: Function, s1s: Function, s1r: Function, s1t: Function, s1d: Function,
+            s2i: Function, s2s: Function, s2r: Function, s2t: Function, s2d: Function,
+            s3i: Function, s3s: Function, s3r: Function, s3t: Function, s3d: Function;
 
-                m2 = <IThrustModuleInternal> result.thrust.create('test-module2', {
-                    init: s2i,
-                    start: s2s,
-                    ready: s2r,
-                    stop: s2t,
-                    destroy: s2d
-                });
+        beforeEach(() => {
+            s1i = jasmine.createSpy('s1i');
+            s1s = jasmine.createSpy('s1s');
+            s1r = jasmine.createSpy('s1r');
+            s1t = jasmine.createSpy('s1t');
+            s1d = jasmine.createSpy('s1d');
+            s2i = jasmine.createSpy('s2i');
+            s2s = jasmine.createSpy('s2s');
+            s2r = jasmine.createSpy('s2r');
+            s2t = jasmine.createSpy('s2t');
+            s2d = jasmine.createSpy('s2d');
+            s3i = jasmine.createSpy('s3i');
+            s3s = jasmine.createSpy('s3s');
+            s3r = jasmine.createSpy('s3r');
+            s3t = jasmine.createSpy('s3t');
+            s3d = jasmine.createSpy('s3d');
 
-                m3 = <IThrustModuleInternal> result.thrust.create('test-module3', {
-                    init: s3i,
-                    start: s3s,
-                    ready: s3r,
-                    stop: s3t,
-                    destroy: s3d
-                });
+            m1 = <IThrustModuleInternal> result.thrust.create('test-module1', {
+                init: s1i,
+                start: s1s,
+                ready: s1r,
+                stop: s1t,
+                destroy: s1d,
             });
 
-            [{ action: 'init' }/*, { action: 'start' }, { action: 'ready' }*/].forEach((z) => {
-                describe(z.action, () => {
-                    async.it(z.action + 's all modules in settings', (done) => {
-
-                        var m = result.thrust.modules;
-                        delete result.thrust.modules;
-                        result.thrust.cfg.modules = ['test-module2', 'test-module3'];
-                        Thrust.launchSequence(result.thrust).then(() => {
-                            result.thrust[z.action]().then(() => {
-                                expect(m2.cache[z.action + '-status']).toBe(true);
-                                expect(m3.cache[z.action + '-status']).toBe(true);
-                                expect(m1.cache[z.action + '-status']).toBe(false);
-
-                                expect(s2i).toHaveBeenCalled();
-                                expect(s2s).toHaveBeenCalled();
-                                expect(s2r).toHaveBeenCalled();
-                                expect(s3i).toHaveBeenCalled();
-                                expect(s3s).toHaveBeenCalled();
-                                expect(s3r).toHaveBeenCalled();
-
-                                done();
-                            })
-                        })
-                    });
-
-                    async.it(z.action + 's a single module', (done) => {
-                        var m = result.thrust.modules;
-                        result.thrust.modules = {};
-
-                        Thrust.launchSequence(result.thrust).then(() => {
-                            result.thrust.modules = m;
-
-                            result.thrust[z.action]('test-module1').then(() => {
-                                expect(m1.cache[z.action + '-status']).toBe(true);
-
-                                expect(s1i).toHaveBeenCalled();
-                                if (z.action !== 'init') {
-                                    expect(s1s).toHaveBeenCalled();
-                                    expect(s1r).toHaveBeenCalled();
-                                }
-                                done();
-                            });
-                        });
-                    });
-
-                    async.it(z.action + 's multiple modules', (done) => {
-                        var m = result.thrust.modules;
-                        result.thrust.modules = {};
-
-                        Thrust.launchSequence(result.thrust).then(() => {
-                            result.thrust.modules = m;
-                            result.thrust[z.action](['test-module1', 'test-module2', 'test-module3']).then(() => {
-                                expect(m1.cache[z.action + '-status']).toBe(true);
-                                expect(m2.cache[z.action + '-status']).toBe(true);
-                                expect(m3.cache[z.action + '-status']).toBe(true);
-
-                                expect(s1i).toHaveBeenCalled();
-                                expect(s2i).toHaveBeenCalled();
-                                expect(s3i).toHaveBeenCalled();
-                                if (z.action !== 'init') {
-                                    expect(s1s).toHaveBeenCalled();
-                                    expect(s1r).toHaveBeenCalled();
-                                    expect(s2s).toHaveBeenCalled();
-                                    expect(s2r).toHaveBeenCalled();
-                                    expect(s3s).toHaveBeenCalled();
-                                    expect(s3r).toHaveBeenCalled();
-                                }
-                                done();
-                            });
-                        });
-                    });
-
-                    async.it(z.action + ' sends arguments to module methods', (done) => {
-                        var a1 = 'a1', a2 = 2, a3 = { a3: true };
-
-                        var m = result.thrust.modules;
-                        result.thrust.modules = {};
-
-                        Thrust.launchSequence(result.thrust).then(() => {
-                            result.thrust.modules = m;
-                            result.thrust[z.action]('test-module1', a1, a2, a3).then(() => {
-
-                                expect(s1i).toHaveBeenCalledWith(a1, a2, a3);
-                                expect(s1s).toHaveBeenCalledWith(a1, a2, a3);
-                                expect(s1r).toHaveBeenCalledWith(a1, a2, a3);
-                                done();
-                            });
-                        });
-                    });
-                });
-
+            m2 = <IThrustModuleInternal> result.thrust.create('test-module2', {
+                init: s2i,
+                start: s2s,
+                ready: s2r,
+                stop: s2t,
+                destroy: s2d
             });
 
-            //[{ action: 'stop' }, { action: 'destroy' }].forEach((z) => {
-            //    describe(z.action, () => {
-            //        async.it(z.action + 's all modules in settings', (done) => {
-            //            Thrust.launchSequence(result.thrust).then(() => {
-            //                result.thrust[z.action]().then(() => {
-            //                    expect(m2.cache[z.action + '-status']).toBe(true);
-            //                    expect(m3.cache[z.action + '-status']).toBe(true);
-
-            //                    expect(s2).toHaveBeenCalled();
-            //                    expect(s3).toHaveBeenCalled();
-
-            //                    done();
-            //                })
-            //            })
-            //        });
-
-            //        async.it(z.action + 's a single module', (done) => {
-
-            //            Thrust.launchSequence(result.thrust).then(() => {
-            //                result.thrust[z.action]('test-module1').then(() => {
-            //                    expect(m1.cache[z.action + '-status']).toBe(true);
-
-            //                    expect(s1).toHaveBeenCalled();
-            //                    done();
-            //                });
-            //            });
-            //        });
-
-            //        async.it(z.action + 's multiple modules', (done) => {
-            //            Thrust.launchSequence(result.thrust).then(() => {
-            //                result.thrust[z.action](['test-module1', 'test-module2', 'test-module3']).then(() => {
-            //                    expect(m1.cache[z.action + '-status']).toBe(true);
-            //                    expect(m2.cache[z.action + '-status']).toBe(true);
-            //                    expect(m3.cache[z.action + '-status']).toBe(true);
-
-            //                    expect(s1).toHaveBeenCalled();
-            //                    expect(s2).toHaveBeenCalled();
-            //                    expect(s3).toHaveBeenCalled();
-            //                    done();
-            //                });
-            //            });
-            //        });
-            //    });
-
-            //});
+            m3 = <IThrustModuleInternal> result.thrust.create('test-module3', {
+                init: s3i,
+                start: s3s,
+                ready: s3r,
+                stop: s3t,
+                destroy: s3d
+            });
         });
 
-        //TODO:
-        //init
-        //start
-        //ready
-        //stop
-        //destroy
+        [{ action: 'init' }, { action: 'start' }, { action: 'ready' }].forEach((z) => {
+            describe(z.action, () => {
+                async.it(z.action + 's all modules in settings', (done) => {
 
-        /*describe('child instances', function ()
-        {
-            var started, t, childStarted;
-            beforeEach(function()
-            {
-                started = false;
-                childStarted = false;
-                t = Thrust.launch({
+                    //var m = result.thrust.modules;
+                    //result.thrust.modules = {};
+                    result.thrust.startingModules = ['test-module2', 'test-module3'];
+
+                    Thrust.launchSequence(result.thrust).then(() => {
+                        result.thrust[z.action]().then(() => {
+                            expect(m1.cache[z.action + '-status']).not.toBeDefined();
+                            expect(m2.cache[z.action + '-status']).toBe(true);
+                            expect(m3.cache[z.action + '-status']).toBe(true);
+
+                            expect(s1i).not.toHaveBeenCalled();
+                            expect(s1s).not.toHaveBeenCalled();
+                            expect(s1r).not.toHaveBeenCalled();
+                            expect(s2i).toHaveBeenCalled();
+                            expect(s2s).toHaveBeenCalled();
+                            expect(s2r).toHaveBeenCalled();
+                            expect(s3i).toHaveBeenCalled();
+                            expect(s3s).toHaveBeenCalled();
+                            expect(s3r).toHaveBeenCalled();
+
+                            result.thrust.startingModules = [];
+
+                            done();
+                        })
                     })
-                    .then(function (context)
-                    {
-                        context.thrust.spawn({ name: 'child' })
-                        .then(function(childContext)
-                        {
-                            childStarted = true;
+                });
 
-                            childContext.mediator.subscribe('thrust/destroy', function ()
-                            {
-                                childStarted = false;
-                            });
-                        });
+                async.it(z.action + 's a single module', (done) => {
+                    var m = result.thrust.modules;
+                    result.thrust.modules = {};
 
-                        context.mediator.subscribe('thrust/destroy', function ()
-                        {
-                            started = false;
+                    Thrust.launchSequence(result.thrust).then(() => {
+                        result.thrust.modules = m;
+
+                        result.thrust[z.action]('test-module1').then(() => {
+                            expect(m1.cache[z.action + '-status']).toBe(true);
+
+                            expect(s1i).toHaveBeenCalled();
+                            if (z.action !== 'init') {
+                                expect(s1s).toHaveBeenCalled();
+                                expect(s1r).toHaveBeenCalled();
+                            }
+                            done();
                         });
                     });
+                });
+
+                async.it(z.action + 's multiple modules', (done) => {
+                    var m = result.thrust.modules;
+                    result.thrust.modules = {};
+
+                    Thrust.launchSequence(result.thrust).then(() => {
+                        result.thrust.modules = m;
+                        result.thrust[z.action](['test-module1', 'test-module2', 'test-module3']).then(() => {
+                            expect(m1.cache[z.action + '-status']).toBe(true);
+                            expect(m2.cache[z.action + '-status']).toBe(true);
+                            expect(m3.cache[z.action + '-status']).toBe(true);
+
+                            expect(s1i).toHaveBeenCalled();
+                            expect(s2i).toHaveBeenCalled();
+                            expect(s3i).toHaveBeenCalled();
+                            if (z.action !== 'init') {
+                                expect(s1s).toHaveBeenCalled();
+                                expect(s1r).toHaveBeenCalled();
+                                expect(s2s).toHaveBeenCalled();
+                                expect(s2r).toHaveBeenCalled();
+                                expect(s3s).toHaveBeenCalled();
+                                expect(s3r).toHaveBeenCalled();
+                            }
+                            done();
+                        });
+                    });
+                });
+
+                async.it(z.action + ' sends arguments to module methods', (done) => {
+                    var a1 = 'a1', a2 = 2, a3 = { a3: true };
+
+                    var m = result.thrust.modules;
+                    result.thrust.modules = {};
+
+                    Thrust.launchSequence(result.thrust).then(() => {
+                        result.thrust.modules = m;
+                        result.thrust[z.action]('test-module1', a1, a2, a3).then(() => {
+
+                            expect(s1i).toHaveBeenCalledWith(a1, a2, a3);
+                            if (z.action !== 'init') {
+                                expect(s1s).toHaveBeenCalledWith(a1, a2, a3);
+                                if (z.action !== 'start')
+                                    expect(s1r).toHaveBeenCalledWith(a1, a2, a3);
+                            }
+                            done();
+                        });
+                    });
+                });
             });
 
-            afterEach(function ()
+        });
+
+        //[{ action: 'stop' }, { action: 'destroy' }].forEach((z) => {
+        //    describe(z.action, () => {
+        //        async.it(z.action + 's all modules in settings', (done) => {
+        //            Thrust.launchSequence(result.thrust).then(() => {
+        //                result.thrust[z.action]().then(() => {
+        //                    expect(m2.cache[z.action + '-status']).toBe(true);
+        //                    expect(m3.cache[z.action + '-status']).toBe(true);
+
+        //                    expect(s2).toHaveBeenCalled();
+        //                    expect(s3).toHaveBeenCalled();
+
+        //                    done();
+        //                })
+        //            })
+        //        });
+
+        //        async.it(z.action + 's a single module', (done) => {
+
+        //            Thrust.launchSequence(result.thrust).then(() => {
+        //                result.thrust[z.action]('test-module1').then(() => {
+        //                    expect(m1.cache[z.action + '-status']).toBe(true);
+
+        //                    expect(s1).toHaveBeenCalled();
+        //                    done();
+        //                });
+        //            });
+        //        });
+
+        //        async.it(z.action + 's multiple modules', (done) => {
+        //            Thrust.launchSequence(result.thrust).then(() => {
+        //                result.thrust[z.action](['test-module1', 'test-module2', 'test-module3']).then(() => {
+        //                    expect(m1.cache[z.action + '-status']).toBe(true);
+        //                    expect(m2.cache[z.action + '-status']).toBe(true);
+        //                    expect(m3.cache[z.action + '-status']).toBe(true);
+
+        //                    expect(s1).toHaveBeenCalled();
+        //                    expect(s2).toHaveBeenCalled();
+        //                    expect(s3).toHaveBeenCalled();
+        //                    done();
+        //                });
+        //            });
+        //        });
+        //    });
+
+        //});
+    });
+
+    //TODO:
+    //init
+    //start
+    //ready
+    //stop
+    //destroy
+
+    /*describe('child instances', function ()
+    {
+        var started, t, childStarted;
+        beforeEach(function()
+        {
+            started = false;
+            childStarted = false;
+            t = Thrust.launch({
+                })
+                .then(function (context)
+                {
+                    context.thrust.spawn({ name: 'child' })
+                    .then(function(childContext)
+                    {
+                        childStarted = true;
+
+                        childContext.mediator.subscribe('thrust/destroy', function ()
+                        {
+                            childStarted = false;
+                        });
+                    });
+
+                    context.mediator.subscribe('thrust/destroy', function ()
+                    {
+                        started = false;
+                    });
+                });
+        });
+
+        afterEach(function ()
+        {
+            t.deorbit();
+        });
+        it('must spawn child instances', function ()
+        {
+            runs(function(){});
+
+            waitsFor(function ()
+            {
+                return started;
+            }, 300);
+
+            runs(function ()
+            {
+                expect(started).toBe(true);
+                expect(childStarted).toBe(true);
+            });
+        });
+
+        it('controls child instances', function ()
+        {
+            runs(function () { });
+
+            waitsFor(function ()
+            {
+                return started && childStarted;
+            }, 300);
+
+            runs(function ()
             {
                 t.deorbit();
             });
-            it('must spawn child instances', function ()
+
+            waitsFor(function ()
             {
-                runs(function(){});
+                return (!started && !childStarted);
+            }, 300);
 
-                waitsFor(function ()
-                {
-                    return started;
-                }, 300);
-
-                runs(function ()
-                {
-                    expect(started).toBe(true);
-                    expect(childStarted).toBe(true);
-                });
-            });
-
-            it('controls child instances', function ()
+            runs(function ()
             {
-                runs(function () { });
-
-                waitsFor(function ()
-                {
-                    return started && childStarted;
-                }, 300);
-
-                runs(function ()
-                {
-                    t.deorbit();
-                });
-
-                waitsFor(function ()
-                {
-                    return (!started && !childStarted);
-                }, 300);
-
-                runs(function ()
-                {
-                    expect(started).toBe(false);
-                    expect(childStarted).toBe(false);
-                });
+                expect(started).toBe(false);
+                expect(childStarted).toBe(false);
             });
-        });*/
-    });
+        });
+    });*/
 })();

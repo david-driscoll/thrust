@@ -147,44 +147,32 @@
             "fors": {},
             "namespaces": {}
         },
-        "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\spalink.d.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\spalink.d.tsdoc",
+        "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\todo.spalink.d.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\todo.spalink.d.tsdoc",
             "modules": {},
             "classes": {},
-            "fors": {
-                "thrust.dom.convention": 1
-            },
+            "fors": {},
             "namespaces": {}
         },
-        "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\start.d.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\start.d.tsdoc",
-            "modules": {
-                "thrust.spa.convention": 1
-            },
-            "classes": {},
-            "fors": {
-                "thrust.spa.convention": 1
-            },
-            "namespaces": {}
-        },
-        "build\\doc\\src\\thrust\\interfaces\\template\\convention\\knockout.engine.d.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\knockout.engine.d.tsdoc",
-            "modules": {
-                "thrust.template.convention": 1
-            },
-            "classes": {},
-            "fors": {
-                "thrust.template.convention": 1
-            },
-            "namespaces": {}
-        },
-        "build\\doc\\src\\thrust\\interfaces\\template\\convention\\template.d.tsdoc": {
-            "name": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\template.d.tsdoc",
+        "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\todo.start.d.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\todo.start.d.tsdoc",
             "modules": {},
             "classes": {},
-            "fors": {
-                "thrust.template.convention": 1
-            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\interfaces\\template\\convention\\todo.knockout.engine.d.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\todo.knockout.engine.d.tsdoc",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "build\\doc\\src\\thrust\\interfaces\\template\\convention\\todo.template.d.tsdoc": {
+            "name": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\todo.template.d.tsdoc",
+            "modules": {},
+            "classes": {},
+            "fors": {},
             "namespaces": {}
         },
         "build\\doc\\src\\thrust\\mediator\\convention\\subscription.tsdoc": {
@@ -231,7 +219,9 @@
         },
         "build\\doc\\src\\thrust\\spa\\convention\\start.tsdoc": {
             "name": "build\\doc\\src\\thrust\\spa\\convention\\start.tsdoc",
-            "modules": {},
+            "modules": {
+                "thrust.spa.convention": 1
+            },
             "classes": {},
             "fors": {
                 "thrust.spa.convention": 1
@@ -263,7 +253,9 @@
         },
         "build\\doc\\src\\thrust\\template\\convention\\knockout.engine.tsdoc": {
             "name": "build\\doc\\src\\thrust\\template\\convention\\knockout.engine.tsdoc",
-            "modules": {},
+            "modules": {
+                "thrust.template.convention": 1
+            },
             "classes": {},
             "fors": {
                 "thrust.template.convention": 1
@@ -592,6 +584,21 @@
             "file": "build\\doc\\src\\thrust\\dom\\convention\\action.tsdoc",
             "line": 1
         },
+        "thrust.mediator.config": {
+            "name": "thrust.mediator.config",
+            "submodules": {},
+            "classes": {
+                "thrust.mediator.config": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "thrust.mediator",
+            "namespace": "",
+            "file": "build\\doc\\src\\thrust\\mediator\\config.tsdoc",
+            "line": 1,
+            "description": "Provides thrust configuration"
+        },
         "thrust.spa": {
             "name": "thrust.spa",
             "submodules": {
@@ -625,8 +632,23 @@
             "namespaces": {},
             "module": "thrust.spa",
             "namespace": "",
-            "file": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\start.d.tsdoc",
+            "file": "build\\doc\\src\\thrust\\spa\\convention\\start.tsdoc",
             "line": 1
+        },
+        "thrust.spa.config": {
+            "name": "thrust.spa.config",
+            "submodules": {},
+            "classes": {
+                "thrust.spa.config": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "thrust.spa",
+            "namespace": "",
+            "file": "build\\doc\\src\\thrust\\spa\\config.tsdoc",
+            "line": 1,
+            "description": "Provides thrust configuration"
         },
         "thrust.template": {
             "name": "thrust.template",
@@ -667,38 +689,8 @@
             "namespaces": {},
             "module": "thrust.template",
             "namespace": "",
-            "file": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\knockout.engine.d.tsdoc",
+            "file": "build\\doc\\src\\thrust\\template\\convention\\knockout.engine.tsdoc",
             "line": 1
-        },
-        "thrust.mediator.config": {
-            "name": "thrust.mediator.config",
-            "submodules": {},
-            "classes": {
-                "thrust.mediator.config": 1
-            },
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "thrust.mediator",
-            "namespace": "",
-            "file": "build\\doc\\src\\thrust\\mediator\\config.tsdoc",
-            "line": 1,
-            "description": "Provides thrust configuration"
-        },
-        "thrust.spa.config": {
-            "name": "thrust.spa.config",
-            "submodules": {},
-            "classes": {
-                "thrust.spa.config": 1
-            },
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "thrust.spa",
-            "namespace": "",
-            "file": "build\\doc\\src\\thrust\\spa\\config.tsdoc",
-            "line": 1,
-            "description": "Provides thrust configuration"
         },
         "thrust.template.config": {
             "name": "thrust.template.config",
@@ -1027,30 +1019,6 @@
             "module": "thrust.dom",
             "namespace": ""
         },
-        "thrust.spa.convention": {
-            "name": "thrust.spa.convention",
-            "shortname": "thrust.spa.convention",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "thrust.spa",
-            "submodule": "thrust.spa.convention",
-            "namespace": ""
-        },
-        "thrust.template.convention": {
-            "name": "thrust.template.convention",
-            "shortname": "thrust.template.convention",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "thrust.template",
-            "submodule": "thrust.template.convention",
-            "namespace": ""
-        },
         "thrust.mediator.config": {
             "name": "thrust.mediator.config",
             "shortname": "thrust.mediator.config",
@@ -1123,6 +1091,18 @@
                 }
             ]
         },
+        "thrust.spa.convention": {
+            "name": "thrust.spa.convention",
+            "shortname": "thrust.spa.convention",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "thrust.spa",
+            "submodule": "thrust.spa.convention",
+            "namespace": ""
+        },
         "thrust.spa.config": {
             "name": "thrust.spa.config",
             "shortname": "thrust.spa.config",
@@ -1176,6 +1156,18 @@
                     "type": "thrust.mediatorMediator"
                 }
             ]
+        },
+        "thrust.template.convention": {
+            "name": "thrust.template.convention",
+            "shortname": "thrust.template.convention",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "thrust.template",
+            "submodule": "thrust.template.convention",
+            "namespace": ""
         },
         "thrust.template.config": {
             "name": "thrust.template.config",
@@ -2269,118 +2261,134 @@
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 1,
-            "class": "thrust.dom.convention",
+            "class": "thrust.mediator.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 2,
             "description": "ATTRIBUTES",
-            "class": "thrust.dom.convention",
+            "class": "thrust.mediator.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 5,
             "description": "CSS",
-            "class": "thrust.dom.convention",
+            "class": "thrust.mediator.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 8,
             "description": "DATA",
-            "class": "thrust.dom.convention",
+            "class": "thrust.mediator.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 11,
             "description": "EFFECTS",
-            "class": "thrust.dom.convention",
+            "class": "thrust.mediator.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 14,
             "description": "EVENTS",
-            "class": "thrust.dom.convention",
+            "class": "thrust.mediator.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 17,
             "description": "INTERNALS",
-            "class": "thrust.dom.convention",
+            "class": "thrust.mediator.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 20,
             "description": "MANIPULATION",
-            "class": "thrust.dom.convention",
+            "class": "thrust.mediator.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 23,
             "description": "MISCELLANEOUS",
-            "class": "thrust.dom.convention",
+            "class": "thrust.mediator.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 26,
             "description": "PROPERTIES",
-            "class": "thrust.dom.convention",
+            "class": "thrust.mediator.convention",
             "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc",
             "line": 29,
             "description": "TRAVERSING",
-            "class": "thrust.dom.convention",
+            "class": "thrust.mediator.convention",
             "module": "thrust.dom"
         },
         {
-            "file": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\spalink.d.tsdoc",
-            "line": 5,
-            "description": "# __thrust/dom__ Convention - Single Page App Link\n\nRequires thrust/dom",
-            "itemtype": "property",
-            "name": "spa;ink",
-            "class": "thrust.dom.convention",
-            "module": "thrust.dom",
-            "submodule": "thrust.dom.convention"
+            "file": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\todo.spalink.d.tsdoc",
+            "line": 1,
+            "description": "//    @module thrust.dom\n//    @submodule thrust.dom.convention",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
         },
         {
-            "file": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\start.d.tsdoc",
+            "file": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\todo.spalink.d.tsdoc",
             "line": 5,
-            "description": "# __thrust/spa__ Convention - Start\n\nThe single page app start convention, does the actual starting of the plugin, in addition it also delays\nfull orbit, until any module it has started has been loaded.",
-            "itemtype": "property",
-            "name": "start",
-            "class": "thrust.spa.convention",
-            "module": "thrust.spa",
-            "submodule": "thrust.spa.convention"
+            "description": "//    * # __thrust/dom__ Convention - Single Page App Link\n//    *\n//    * Requires thrust/dom\n//    *\n//    * @for thrust.dom.convention\n//    * @property spa;ink",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
         },
         {
-            "file": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\knockout.engine.d.tsdoc",
-            "line": 5,
-            "description": "# __thrust/template__ Convention - Knockout Engine\n\nThe knockout engine convention is less of a convention and instead introduces a new custom knockout template engine\nThis engine takes the the same template path, that you'd use to fetch a template instead of the dom id, to fetch the template\nwhen using knockout templates by name.\n\n\nThis allows you to follow the same convention in both your modules, as you would your views and templates.",
-            "itemtype": "property",
-            "name": "templates",
-            "class": "thrust.template.convention",
-            "module": "thrust.template",
-            "submodule": "thrust.template.convention"
+            "file": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\todo.start.d.tsdoc",
+            "line": 1,
+            "description": "//    @module thrust.spa\n//    @submodule thrust.spa.convention",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
         },
         {
-            "file": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\template.d.tsdoc",
+            "file": "build\\doc\\src\\thrust\\interfaces\\spa\\convention\\todo.start.d.tsdoc",
             "line": 5,
-            "description": "# __thrust/template__ Convention - Templates\n\nThe `templates` convention takes a list of template paths, that need to be fetched for this module.\nWhen the module starts, the templates will be fetched automatically by the modules code, in addition\nthe template ready method will be held until all the templates have returned with a value.\n\n\nWhen the templates have been resolved, your module will have an object on it with the values of the templates location.\nIn addition the templates object will have a get, fetch and has method, to get different templates if required further\ndown the line.",
-            "itemtype": "property",
-            "name": "templates",
-            "class": "thrust.template.convention",
-            "module": "thrust.template",
-            "submodule": "thrust.template.convention"
+            "description": "//    * # __thrust/spa__ Convention - Start\n//    *\n//    * The single page app start convention, does the actual starting of the plugin, in addition it also delays\n//    * full orbit, until any module it has started has been loaded.\n//    *\n//    * @for thrust.spa.convention\n//    * @property start",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\todo.knockout.engine.d.tsdoc",
+            "line": 1,
+            "description": "//    @module thrust.template\n//    @submodule thrust.template.convention",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\todo.knockout.engine.d.tsdoc",
+            "line": 5,
+            "description": "//    * # __thrust/template__ Convention - Knockout Engine\n//    *\n//    * The knockout engine convention is less of a convention and instead introduces a new custom knockout template engine\n//    * This engine takes the the same template path, that you'd use to fetch a template instead of the dom id, to fetch the template\n//    * when using knockout templates by name.\n//    *\n//    *\n//    * This allows you to follow the same convention in both your modules, as you would your views and templates.\n//    *\n//    * @for thrust.template.convention\n//    * @property templates",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\todo.template.d.tsdoc",
+            "line": 1,
+            "description": "//    @module thrust.template\n//    @submodule thrust.template.convention",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\interfaces\\template\\convention\\todo.template.d.tsdoc",
+            "line": 5,
+            "description": "//    * # __thrust/template__ Convention - Templates\n//    *\n//    * The `templates` convention takes a list of template paths, that need to be fetched for this module.\n//    * When the module starts, the templates will be fetched automatically by the modules code, in addition\n//    * the template ready method will be held until all the templates have returned with a value.\n//    *\n//    *\n//    * When the templates have been resolved, your module will have an object on it with the values of the templates location.\n//    * In addition the templates object will have a get, fetch and has method, to get different templates if required further\n//    * down the line.\n//    *\n//    * @for thrust.template.convention\n//    * @property templates",
+            "class": "thrust.mediator.convention",
+            "module": "thrust.dom"
         },
         {
             "file": "build\\doc\\src\\thrust\\mediator\\convention\\subscription.tsdoc",
@@ -3006,6 +3014,38 @@
                 }
             ],
             "class": "thrust.template.Template",
+            "module": "thrust.template"
+        },
+        {
+            "file": "build\\doc\\src\\thrust\\template\\main.tsdoc",
+            "line": 119,
+            "description": "AMD API\nload\n\nHandles fetching of a thrust/template by path.\nRequires the instance, that the template is expected to come from.\nthrustInstance[:engineName]:templatePath\n\nPrefix with <engineName>: to select a specific template engine.\nthrust/template!global:templates/myTemplate.tmpl = Specific template\nthrust/template!instance2:templates/myTemplate = Uses default extension from config\nthrust/template!instance2:kendo:templates/myTemplate.tmpl = Uses the kendo template engine.\nthrust/template!instance3:kendo:templates/myTemplate.tmpl = Uses the kendo template engine with the default extension",
+            "itemtype": "method",
+            "name": "load",
+            "static": 1,
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the template that is being fetched",
+                    "type": "String"
+                },
+                {
+                    "name": "parentRequire",
+                    "description": "the require method to be loaded",
+                    "type": "Function"
+                },
+                {
+                    "name": "load",
+                    "description": "Allows the load to inform that AMD for the value to hand off",
+                    "type": "Function"
+                },
+                {
+                    "name": "config",
+                    "description": "The custom configuration.",
+                    "type": "Object"
+                }
+            ],
+            "class": "thrust.template.TemplateFacade",
             "module": "thrust.template"
         },
         {
@@ -5437,6 +5477,38 @@
         {
             "message": "Missing item type\nTRAVERSING",
             "line": " build\\doc\\src\\thrust\\interfaces\\dom\\dom.d.tsdoc:29"
+        },
+        {
+            "message": "Missing item type\n//    @module thrust.dom\n//    @submodule thrust.dom.convention",
+            "line": " build\\doc\\src\\thrust\\interfaces\\spa\\convention\\todo.spalink.d.tsdoc:1"
+        },
+        {
+            "message": "Missing item type\n//    * # __thrust/dom__ Convention - Single Page App Link\n//    *\n//    * Requires thrust/dom\n//    *\n//    * @for thrust.dom.convention\n//    * @property spa;ink",
+            "line": " build\\doc\\src\\thrust\\interfaces\\spa\\convention\\todo.spalink.d.tsdoc:5"
+        },
+        {
+            "message": "Missing item type\n//    @module thrust.spa\n//    @submodule thrust.spa.convention",
+            "line": " build\\doc\\src\\thrust\\interfaces\\spa\\convention\\todo.start.d.tsdoc:1"
+        },
+        {
+            "message": "Missing item type\n//    * # __thrust/spa__ Convention - Start\n//    *\n//    * The single page app start convention, does the actual starting of the plugin, in addition it also delays\n//    * full orbit, until any module it has started has been loaded.\n//    *\n//    * @for thrust.spa.convention\n//    * @property start",
+            "line": " build\\doc\\src\\thrust\\interfaces\\spa\\convention\\todo.start.d.tsdoc:5"
+        },
+        {
+            "message": "Missing item type\n//    @module thrust.template\n//    @submodule thrust.template.convention",
+            "line": " build\\doc\\src\\thrust\\interfaces\\template\\convention\\todo.knockout.engine.d.tsdoc:1"
+        },
+        {
+            "message": "Missing item type\n//    * # __thrust/template__ Convention - Knockout Engine\n//    *\n//    * The knockout engine convention is less of a convention and instead introduces a new custom knockout template engine\n//    * This engine takes the the same template path, that you'd use to fetch a template instead of the dom id, to fetch the template\n//    * when using knockout templates by name.\n//    *\n//    *\n//    * This allows you to follow the same convention in both your modules, as you would your views and templates.\n//    *\n//    * @for thrust.template.convention\n//    * @property templates",
+            "line": " build\\doc\\src\\thrust\\interfaces\\template\\convention\\todo.knockout.engine.d.tsdoc:5"
+        },
+        {
+            "message": "Missing item type\n//    @module thrust.template\n//    @submodule thrust.template.convention",
+            "line": " build\\doc\\src\\thrust\\interfaces\\template\\convention\\todo.template.d.tsdoc:1"
+        },
+        {
+            "message": "Missing item type\n//    * # __thrust/template__ Convention - Templates\n//    *\n//    * The `templates` convention takes a list of template paths, that need to be fetched for this module.\n//    * When the module starts, the templates will be fetched automatically by the modules code, in addition\n//    * the template ready method will be held until all the templates have returned with a value.\n//    *\n//    *\n//    * When the templates have been resolved, your module will have an object on it with the values of the templates location.\n//    * In addition the templates object will have a get, fetch and has method, to get different templates if required further\n//    * down the line.\n//    *\n//    * @for thrust.template.convention\n//    * @property templates",
+            "line": " build\\doc\\src\\thrust\\interfaces\\template\\convention\\todo.template.d.tsdoc:5"
         },
         {
             "message": "Missing item type\nConstructor used to beget objects that wire needs to create using new.",

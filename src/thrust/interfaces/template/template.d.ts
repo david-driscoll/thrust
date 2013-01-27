@@ -1,4 +1,5 @@
-﻿/// <reference path="../thrust.d.ts" />
+﻿/// <reference path="../data/data.d.ts" />
+/// <reference path="../thrust.d.ts" />
 interface IThrustTemplate extends IThrustPlugin
 {
 	templateTypes: any;

@@ -1,6 +1,6 @@
 /// <reference path="../../has.d.ts" />
 /// <reference path="../interfaces/mediator/mediator.d.ts" />
-/// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+/// <reference path="../../../lib/DefinitelyTyped/requirejs/require.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
 /*export module instance {*/
@@ -15,8 +15,8 @@ import events = module('thrust/events');
 var Events = events.Events;
 import facade = module('thrust/facade');
 import has = module('has');
-export import config = module('thrust/config');
-export import mediatorConfig = module('./config');
+import config = module('thrust/config');
+import mediatorConfig = module('./config');
 export var className = 'Mediator';
 
     // Variable declaration.

@@ -8,7 +8,7 @@
 /// <reference path="../../../src/thrust/interfaces/dom/convention/action.d.ts" />
 /// <reference path="../../../src/thrust/interfaces/data/data.d.ts" />
 /// <reference path="../../../src/thrust/interfaces/thrust.d.ts" />
-/// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+/// <reference path="../../../lib/DefinitelyTyped/requirejs/require.d.ts" />
 define(['thrust/util'],
 function(util) {
     var mod : IThrustModuleInstance = {

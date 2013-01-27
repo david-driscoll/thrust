@@ -1,7 +1,4 @@
 define(["require", "exports"], function(require, exports) {
-    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    //export module guid {
     'use strict';
     
     var hasOwn = Object.prototype.hasOwnProperty;

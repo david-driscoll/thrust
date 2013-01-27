@@ -1,8 +1,4 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util', './event.types'], function(require, exports, __c__, __util__, __eventTypes__) {
-    /// <reference path="../../jquery.d.ts" />
-    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     'use strict';
     var c = __c__;
 
@@ -13,15 +9,8 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', './event.types
     var eventTypes = __eventTypes__;
 
     var camelCase = util.camelCase, format = util.format, bind = _.bind, dataEvents = eventTypes.event, slice = Array.prototype.slice, memoize = _.memoize;
-    /**
-    The event factory links jQuery Events up to thrust centric events.
-    The event factory would be replaced if we were ever moved off of the jQuery dependancy.
-    
-    @module thrust.data
-    **/
     var eventHandlers = {
-        'before-send': // Supported event handlers
-        true,
+        'before-send': true,
         'send': true,
         'error': true,
         'success': true,
@@ -29,14 +18,7 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', './event.types
         'start': true,
         'stop': true
     };
-    /**
-    Wraps beforeSend, which is a custom property on the jQuery ajax data call.
-    
-    @method beforeSendMethod
-    @private
-    **/
     function beforeSendMethod(jqXHR, settings) {
-        /*jshint validthis:true */
         this.fire(dataEvents['beforeSend'], jqXHR, settings);
     }
     exports.beforeSendMethod = beforeSendMethod;
@@ -60,7 +42,6 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', './event.types
     };
     var sendEventFactory = function (i) {
         return function (event, jqXHR, settings) {
-            /*jshint validthis:true */
             if(!settings.__mediator_data_fired__) {
                 jqXHR.abort();
                 throw new Error('Request aborted, all ajax calls must pass through thrust-data.');
@@ -70,16 +51,7 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', './event.types
             }
         }
     };
-    /**
-    Binds all the jQuery data events and creates event native thrust events out of them.
-    
-    @for thrust.data
-    @private
-    @method init
-    @param {jQuery} A jQuery instance wrapping 'document'
-    **/
     function init(jDoc) {
-        /*jshint validthis:true */
         for(var i in eventHandlers) {
             var jqEvt = 'ajax-' + i, method = eventFactory(i);
             if(i === 'send') {

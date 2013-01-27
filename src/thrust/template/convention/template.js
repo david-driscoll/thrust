@@ -1,9 +1,4 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
-    /// <reference path="../../interfaces/template/template.d.ts" />
-    /// <reference path="../../interfaces/thrust.d.ts" />
-    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     'use strict';
     var c = __c__;
 
@@ -27,7 +22,6 @@ define(["require", "exports", 'thrust/convention', 'thrust/util'], function(requ
                     }
                 });
                 facade.loadingPromise = when.all(defers).then(function (loadedTemplates) {
-                    /*jshint loopfunc:true */
                     _.each(invertedTemplates, function (x, i) {
                         var template = _.find(loadedTemplates, function (x) {
                             return x.shortName === i || x.name === i;

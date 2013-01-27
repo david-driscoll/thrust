@@ -20,6 +20,8 @@ interface IThrust
 	__conventions: ThrustConvention[];
 
 	__injectModule(mod: IThrustModule): void;
+
+	createModule(name: string, moduleDefn: any): IThrustModule;
 	
 	create(name: string, mod: any, preBuilt?: bool) : IThrustModule;
 	_countdown(calledByParent?: bool) : Promise;
@@ -91,7 +93,7 @@ interface IThrustModuleInternal extends IThrustModule {
 
 interface IThrustModuleInstanceConfig
 {
-    autoStart: bool;
+    autoStart?: bool;
 }
 
 interface IThrustModuleInstance

@@ -1,4 +1,4 @@
-/// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+/// <reference path="../../../lib/DefinitelyTyped/requirejs/require.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
 /*export module util {*/
@@ -12,7 +12,6 @@
     import uString = module('./string');
     import uWhen = module('./when');
     import uLibCamelCase = module('./lib/camelcase');
-    import ul2o = module('./l2o');
 
     'use strict';
     /**
@@ -29,7 +28,6 @@
     declare var arguments;
 
     export var _ : ILodash = __;
-    export var linq = ul2o;
 
     export var instantiate = uFunction.instantiate;
     export var noop = uFunction.noop;

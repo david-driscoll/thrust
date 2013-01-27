@@ -1,16 +1,7 @@
 define(["require", "exports"], function(require, exports) {
-    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    //export module guid {
     'use strict';
     
     var objectCurlyRegex = /\{\{|\}\}|\{(.*?)\}/g, numberCurlyRegex = /\{\{|\}\}|\{(\d+)\}/g, slice = Array.prototype.slice;
-    /**
-    C# style string format.
-    
-    @for thrust.util
-    @method format
-    **/
     function format(str) {
         var formatArgs = [];
         for (var _i = 0; _i < (arguments.length - 1); _i++) {

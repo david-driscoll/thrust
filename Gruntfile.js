@@ -82,7 +82,7 @@ module.exports = function (grunt) {
         thrust: {
             src: [
                 'Gruntfile.js',
-                '<%= meta.thrust.scripts %>',
+                metadata.thrust.scripts,
             ]
         }
     };
@@ -160,10 +160,10 @@ module.exports = function (grunt) {
     var jasmineGetSettingsMethod = function (from) { return helpers.getRequireSettingsFrom(grunt, from); },
         buildVBOptions = function (type) {
             return {
-                src: ['<%= meta.tests.thrustScripts %>'],
+                src: metadata.tests.thrustScripts,
                 options: {
-                    specs: ['<%= meta.buildTests.scripts %>', '<%= meta.tests.scripts %>'],
-                    //outfile: '<%= meta.buildTests.debugSpecFile %>',
+                    specs: metadata.buildTests.scripts.concat(metadata.tests.scripts),
+                    //outfile: metadata.buildTests.debugSpecFile,
                     templateOptions: {
                         requirejs: './src/' + requireSettings.paths.require + '.js',
                         requireConfig: './require.settings-' + type + '-test.js',
@@ -176,12 +176,12 @@ module.exports = function (grunt) {
     var jasmineConfig = {
         options: {
             template: './zgrunt/RequireJSRunner.tmpl',
-            helpers: ['<%= meta.tests.helpers %>']
+            helpers: metadata.tests.helpers
         },
         thrust: {
-            src: ['<%= meta.tests.thrustScripts %>'],
+            src: metadata.tests.thrustScripts,
             options: {
-                specs: '<%= meta.tests.scripts %>',
+                specs: metadata.tests.scripts,
                 templateOptions: {
                     requirejs: './src/' + requireSettings.paths.require + '.js',
                     requireConfig: helpers.getRequireSettings(grunt, { baseUrl: './src/' })
@@ -201,7 +201,7 @@ module.exports = function (grunt) {
 
     var jshintConfig = {
         thrust: {
-            src: ['<%= meta.thrust.scripts %>', '<%= meta.tests.scripts %>', '<%= meta.buildTests.scripts %>']
+            src: metadata.thrust.scripts.concat(metadata.tests.scripts).concat(metadata.buildTests.scripts)
         },
         options: {
             jshintrc: '.jshintrc',
@@ -273,7 +273,7 @@ module.exports = function (grunt) {
                 modules: [{
                     name: 'thrust',
                     include: integratedInclusions,
-                    exclude: ['jquery'],
+                    exclude: metadata.libraryExclusions,
                     override: {},
                 }],
             })
@@ -315,9 +315,10 @@ module.exports = function (grunt) {
 
     var typescriptConfig = {
         thrust: {
-            src: ['<%= meta.thrust.typeScripts %>'],
+            src: metadata.thrust.typeScripts,
             dest: '.',
             options: {
+                outputMany: true,
                 module: 'amd',
                 target: 'es3',
                 sourcemap: true,
@@ -331,7 +332,7 @@ module.exports = function (grunt) {
             }
         },
         /*tests: {
-            src: ['<%= meta.tests.typeScripts %>'],
+            src: metadata.tests.typeScripts %>'],
             dest: '.',
             options: {
                 module: 'local',
@@ -345,7 +346,7 @@ module.exports = function (grunt) {
 
     var watchConfig = {
         scripts: {
-            files: ['<%= meta.thrust.typeScripts %>', '<%= meta.tests.typeScripts %>'],
+            files: metadata.thrust.typeScripts.concat(metadata.tests.typeScripts),
             tasks: [
                 'typescript:thrust',
                 'typescript:tests',

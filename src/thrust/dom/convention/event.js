@@ -1,11 +1,4 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
-    /// <reference path="../../interfaces/dom/convention/event.d.ts" />
-    /// <reference path="../../interfaces/mediator/mediator.d.ts" />
-    /// <reference path="../../interfaces/dom/dom.d.ts" />
-    /// <reference path="../../interfaces/thrust.d.ts" />
-    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     'use strict';
     var c = __c__;
 
@@ -27,7 +20,6 @@ define(["require", "exports", 'thrust/convention', 'thrust/util'], function(requ
             var events = mod.convention(EVENTS), $context = facade.context, moduleInstance = mod.instance;
             if(events) {
                 _.forIn(events, function (eventsCollection, event) {
-                    //var eventsCollection = events[event];
                     if(!isArray(eventsCollection)) {
                         eventsCollection = [
                             eventsCollection
@@ -45,21 +37,10 @@ define(["require", "exports", 'thrust/convention', 'thrust/util'], function(requ
                         ];
                         if(isArray(definition)) {
                             bindEvent.push.apply(bindEvent, definition);
-                            // We have one edgecase here
-                            // If the short hand array, has a context that is a string or function
-                            // and it doesnt have information for both selector and data, this will fail
-                            // We can recover when all 5 possible items are defined.
                             var handler = bindEvent[bindEvent.length - 1];
-                            // We were asked for a method on the module.
                             if(isString(handler) && bindEvent.length === 2) {
                                 bindEvent[bindEvent.length - 1] = mod.instance[handler];
                             } else {
-                                // We didnt find a function :(
-                                //  EDGE CASE: If context is a function, we will assume all is well
-                                //              Even if the handler is a string that needs to be referenced.
-                                // Work arrounds:
-                                //      Shorthand: add null/empty values for selector and data
-                                //      Longhand: switch to long hand as it has more explicit syntax.
                                 if(!isString(handler) && !isFunction(handler) && bindEvent.length > 2 || bindEvent.length === 5) {
                                     handler = bindEvent[bindEvent.length - 2];
                                     if(isString(handler)) {
@@ -83,7 +64,6 @@ define(["require", "exports", 'thrust/convention', 'thrust/util'], function(requ
                                 }
                             });
                         }
-                        // Call the on method, with our arguments.
                         $context.on.apply($context, bindEvent);
                     });
                 });

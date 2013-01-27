@@ -1,5 +1,5 @@
 ﻿/// <reference path="../interfaces/dom/dom.d.ts" />
-/// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+/// <reference path="../../../lib/DefinitelyTyped/requirejs/require.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
 /*export module instance {*/
@@ -15,7 +15,7 @@ import log = module('thrust/log');
 import facade = module('thrust/facade');
 import has = module('has');
 import instance = module('thrust/instance');
-export import config = module('./config');
+import config = module('./config');
 export var className = 'Dom';
 
 var format = util.format,

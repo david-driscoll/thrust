@@ -47,7 +47,7 @@ interface IThrustMediatorFacade extends Function, IThrustFacade, IEventManager
 
 interface IThrustModuleInstance
 {
-	mediator: IThrustMediatorFacade;
+	mediator?: IThrustMediatorFacade;
 }
 
 interface IThrustModuleMediatorInstanceConfig

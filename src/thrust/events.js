@@ -1,23 +1,5 @@
 define(["require", "exports", './log', './config', 'has', 'thrust/util'], function(require, exports, __log__, __tConfig__, __has__, __util__) {
-    /// <reference path="interfaces/mediator/mediator.d.ts" />
-    /// <reference path="interfaces/thrust.d.ts" />
-    /// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     'use strict';
-    //     Backbone.js 0.9.1
-    //     (c) 2010-2012 Jeremy Ashkenas, DocumentCloud Inc.
-    //     Backbone may be freely distributed under the MIT license.
-    //     For all details and documentation:
-    //     http://backbonejs.org
-    /**
-    Thrust Events are based off of the Backbone event model, with special additions.
-    
-    * Events can be fired asyncronously.
-    * Events can be namespaced.
-    
-    @module thrust
-    **/
     var log = __log__;
 
     var tConfig = __tConfig__;
@@ -64,14 +46,6 @@ define(["require", "exports", './log', './config', 'has', 'thrust/util'], functi
     };
     var slice = Array.prototype.slice, asyncFire, noop = util.noop, when = util.when, size = _.size, each = _.each, defer = _.defer, bind = _.bind, extend = _.extend, format = util.format;
     var eventSplitter = /\s+/, ALL = 'all', STARALL = '*all';
-    /**
-    Normalizes the given events to the expected namespace.
-    
-    @method normalizeEvents
-    @private
-    @param {String} events The events delimited by a space
-    @param {String} namespace The namespace, including prefixed '.'
-    **/
     function normalizeEvents(events, namespace) {
         var eventsArray = events.split(eventSplitter);
         for(var i = 0, iLen = eventsArray.length; i < iLen; i++) {
@@ -81,25 +55,8 @@ define(["require", "exports", './log', './config', 'has', 'thrust/util'], functi
         }
         return eventsArray.join(' ');
     }
-    /**
-    Trigger one or many events, firing all bound callbacks. Callbacks are
-    passed the same arguments as `trigger` is, apart from the event name
-    (unless you're listening on `"all"`, which will cause your callback to
-    receive the true name of the event as the first argument).
-    
-    @method _trigger
-    @private
-    @param {Boolean} async Fire event async or sync
-    @param {Object} events The events to be fired.
-    delimited by a space.
-    @param [args]* The arguments to pass onto the callback methods.
-    @returns If async then returns a Promise, where the first argument contains all the returned values, as an array
-    If sync then returns an array of the return values.
-    If more than one event, returns an object of arrays or promises, with the key for each event.
-    **/
     function _trigger(async, events) {
-        /*jshint validthis:true */
-                var that = this, event, node, calls, tail, args, all, rest, namespace, onceNodes;
+        var that = this, event, node, calls, tail, args, all, rest, namespace, onceNodes;
         if(!(calls = this._callbacks)) {
             return that;
         }
@@ -117,19 +74,6 @@ define(["require", "exports", './log', './config', 'has', 'thrust/util'], functi
             }
         }
     }
-    /**
-    Triggers all events on a node.
-    Also unbinds any node that is set to only be called once.
-    
-    @method triggerNodes
-    @private
-    @param {Object} that The event container context.
-    @param {String} event The event to be bound or unbound.
-    @param {Boolean} async Fire event async or sync
-    @param {Object} node The node linked list.
-    @param {Array} args The arguments to pass onto the triggered nodes
-    
-    **/
     function triggerNodes(that, event, async, nodeList, args) {
         var tail, onceNodes = [];
         has('DEBUG') && log.info(format('{0}: triggering {1} event "{2}"', that.__pubSubName, async && 'async' || '', event));
@@ -146,19 +90,6 @@ define(["require", "exports", './log', './config', 'has', 'thrust/util'], functi
             });
         }
     }
-    /**
-    Invokes a trigger callback
-    
-    @method triggerCallback
-    @private
-    @param {Boolean} async Fire event async or sync
-    @param {Function} callback The callback method
-    @param {Object} context The calling context
-    @param {Array} args The arguments to call the callback with.
-    @returns {Object} The returned value.
-    For async calls, this is a promise
-    For sync calls this is the value from the method.
-    **/
     function triggerCallback(async, callback, context, args) {
         if(async) {
             defer(triggerAsyncCallback(callback, context, args), 0);
@@ -172,33 +103,11 @@ define(["require", "exports", './log', './config', 'has', 'thrust/util'], functi
             }
         }
     }
-    /**
-    Creates an async event handler
-    
-    @method asyncEventFactory
-    @private
-    @param {Function} callback The callback method
-    @param {Object} that The calling context
-    @param {Array} args The arguments to call the callback with.
-    @returns {Function} The callback for the given arguments.
-    **/
     function triggerAsyncCallback(callback, context, args) {
         return function () {
             return callback.apply(context, args);
         }
     }
-    /**
-    Resubscribes to the appropriate events
-    
-    @method _offProcessNode
-    @private
-    @param {Object} that The event context
-    @param {String} event The event
-    @param {Object} node The node linked list.
-    @param {Function} [callback] The event callback to unsubscribe
-    @param {Object} [context] The event context to unsubscribe
-    @param {String} [namespace] The namespace to unsubscribe
-    **/
     function _offProcessNode(that, event, node, callback, context) {
         var tail, cb, ctx, ns;
         tail = node.tail;
@@ -211,14 +120,6 @@ define(["require", "exports", './log', './config', 'has', 'thrust/util'], functi
             }
         }
     }
-    /**
-    Gets the namespace information, the real event to pass back onto the methods.
-    
-    @method getNamespaceData
-    @private
-    @param {String} event The event to capture namespace data from.
-    @returns {Object} Containing event and namespace.
-    **/
     function getNamespaceData(event) {
         var nsIndex = (event || '').indexOf('.'), hasNs = nsIndex > -1, namespace = hasNs ? event.substring(nsIndex + 1) : undefined, event = hasNs ? event.substring(0, nsIndex) : event;
         if(nsIndex === 0) {
@@ -229,36 +130,14 @@ define(["require", "exports", './log', './config', 'has', 'thrust/util'], functi
             namespace: namespace
         };
     }
-    /**
-    Thrust Events are based off of the Backbone event model, with special additions.
-    
-    * Events can be fired asyncronously.
-    * Events can be namespaced.
-    
-    @class thrust.Events
-    **/
     exports.Events = (function () {
         var events = {
-            subscribe: /**
-            Bind one or more space separated events, `events`, to a `callback`
-            function. Passing `"all"` will bind the callback to all events fired.
-            
-            @method subscribe
-            @param {String} events Spave seperated events
-            @param {Function} callback The callback method to be called when the events are fired.
-            @param {Object} context The context to bind the calling function to.
-            @param {Boolean} once Call this event only once.
-            @chainable
-            **/
-            function (events, callback, context, once) {
+            subscribe: function (events, callback, context, once) {
                 var calls, event, node, tail, list, nd;
                 this.__namespace && (events = normalizeEvents(events, this.__namespace));
                 var eventsArray = events.split(eventSplitter);
                 calls = this._callbacks || (this._callbacks = {
                 });
-                // Create an immutable callback list, allowing traversal during
-                // modification.  The tail is an empty object that will always be used
-                // as the next node.
                 while(event = eventsArray.shift()) {
                     nd = getNamespaceData(event);
                     event = nd.event;
@@ -282,37 +161,13 @@ define(["require", "exports", './log', './config', 'has', 'thrust/util'], functi
                 }
                 return this;
             },
-            once: /**
-            Bind one or more space separated events, `events`, to a `callback`
-            function. Passing `"all"` will bind the callback to all events fired.
-            
-            Each event will only be called once.
-            
-            @method once
-            @param {String} events Spave seperated events
-            @param {Function} callback The callback method to be called when the events are fired.
-            @param {Object} context The context to bind the calling function to.
-            @chainable
-            **/
-            function (events, callback, context) {
+            once: function (events, callback, context) {
                 return this.subscribe(events, callback, context, true);
             },
-            unsubscribe: /**
-            Remove one or many callbacks. If `context` is null, removes all callbacks
-            with that function. If `callback` is null, removes all callbacks for the
-            event. If `event` is null, removes all bound callbacks for all events.
-            
-            @method unsubscribe
-            @param {String} events Spave seperated events
-            @param {Function} callback The callback method to be called when the events are fired.
-            @param {Object} context The context to bind the calling function to.
-            @chainable
-            **/
-            function (events, callback, context) {
+            unsubscribe: function (events, callback, context) {
                 var event, calls, node, nd, ourNs, namespace, that = this, hasNs;
                 ourNs = that.__namespace;
                 ourNs && (ourNs = ourNs.substring(1));
-                // No events, or removing *all* events.
                 if(!(calls = that._callbacks)) {
                     return;
                 }
@@ -330,8 +185,6 @@ define(["require", "exports", './log', './config', 'has', 'thrust/util'], functi
                     }
                     return that;
                 }
-                // Loop through the listed events and contexts, splicing them out of the
-                // linked list of callbacks if appropriate.
                 ourNs && (events = normalizeEvents(events, that.__namespace));
                 var eventsArray = events ? events.split(eventSplitter) : _.keys(calls);
                 while(event = eventsArray.shift()) {
@@ -354,12 +207,6 @@ define(["require", "exports", './log', './config', 'has', 'thrust/util'], functi
                     if(!node || !(callback || context)) {
                         continue;
                     }
-                    /*if (event !== STARALL)
-                    {
-                    node = calls[event];
-                    delete calls[event];
-                    if (!node) continue;
-                    }*/
                     if(event !== STARALL && !callback) {
                         _offProcessNode(that, event, node, callback, context);
                     } else {
@@ -380,27 +227,8 @@ define(["require", "exports", './log', './config', 'has', 'thrust/util'], functi
                 }
                 return that;
             },
-            __pubSubName: /**
-            Trigger one or many events, firing all bound callbacks. Callbacks are
-            passed the same arguments as `trigger` is, apart from the event name
-            (unless you're listening on `"all"`, which will cause your callback to
-            receive the true name of the event as the first argument).
-            
-            @method fire
-            @param {Object} events The events to be fired.
-            delimited by a space.
-            @param [args]* The arguments to pass onto the callback methods.
-            @returns {Array of Values} If more than on event is fired, an Object of Arrays is returned.
-            **/
-            'Events',
-            initEvents: /**
-            Init's the Event module.
-            This is only required if you wish to use fire.async, and namespacing.
-            
-            @method initEvents
-            @chainable
-            **/
-            function (defaultContext) {
+            __pubSubName: 'Events',
+            initEvents: function (defaultContext) {
                 this.fire = this.publish = createAsyncEvent(this);
                 this.initEvents = noop;
                 this.__pubSubName = this.name || 'Events';
@@ -410,14 +238,7 @@ define(["require", "exports", './log', './config', 'has', 'thrust/util'], functi
                 this.__defaultContext = defaultContext;
                 return this;
             },
-            extend: /**
-            Extends Events into the given object.
-            
-            @method extend
-            @param {Object} to The object ot extend events onto
-            @param {Boolean} [init] Optionally init the events.
-            **/
-            function (to, init) {
+            extend: function (to, init) {
                 _.extend(to, exports.Events);
                 delete to.extend;
                 init && to.initEvents();

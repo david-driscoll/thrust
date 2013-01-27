@@ -1,7 +1,4 @@
 define(["require", "exports", 'jquery', 'thrust/util', 'thrust/log', 'has'], function(require, exports, __jQuery__, __util__, __log__, __has__) {
-    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     'use strict';
     var jQuery = __jQuery__;
 
@@ -66,14 +63,13 @@ define(["require", "exports", 'jquery', 'thrust/util', 'thrust/log', 'has'], fun
         'slideToggle', 
         'fadeIn', 
         'fadeOut', 
-        'fadeToggle'/*, 'on', 'off', 'one'*/ 
+        'fadeToggle'
     ];
     function normalizeEvents(events, namespace) {
         if(!namespace) {
             return events;
         }
         if(isObject(events)) {
-            // Create new object, so that original object will not be modified when binding.
             events = extend({
             }, events);
             for(var key in events) {
@@ -97,23 +93,12 @@ define(["require", "exports", 'jquery', 'thrust/util', 'thrust/log', 'has'], fun
             return events.join(' ');
         }
     }
-    /*
-    Clone jquery
-    Remove all excess methods we don't want to expose natively.
-    overrload any methods we want to change behavior of (noteably on, one, and off)
-    
-    Instead of duplicating the jquery behavior we instead realign it to our own.
-    */
-    // jQuery sub
     function subJQuery() {
         var tQuery = function (selector, context, namespace) {
             return new tQuery.prototype.init(selector, context, namespace || (this && this.namespace));
         };
         _.merge(tQuery, jQuery);
-        // Do not like
-        // probably needed in some special unique cases
         tQuery.jQuery = jQuery;
-        // expose events for doing special events as required.
         tQuery.event = (jQuery).event;
         tQuery.fn = tQuery.prototype = extend({
         }, jQuery.fn);
@@ -135,7 +120,6 @@ define(["require", "exports", 'jquery', 'thrust/util', 'thrust/log', 'has'], fun
         };
         tQuery.fn.init.prototype = tQuery.fn;
         var tQueryRoot = tQuery(document);
-        // remove all not applicable methods off of fn.
         each(jQueryFnMethodBlackList, function (x) {
             if(tQuery.fn[x]) {
                 tQuery.fn[x] = null;

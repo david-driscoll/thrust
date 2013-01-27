@@ -1,8 +1,5 @@
-/*! thrust-js - v0.1.5 - 2013-01-05 */
+/*! thrust-js - v0.1.5 - 2013-01-26 */
 define('thrust/dom/subjquery',["require", "exports", 'jquery', 'thrust/util', 'thrust/log', 'has'], function(require, exports, __jQuery__, __util__, __log__, __has__) {
-    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     
     var jQuery = __jQuery__;
 
@@ -67,14 +64,13 @@ define('thrust/dom/subjquery',["require", "exports", 'jquery', 'thrust/util', 't
         'slideToggle', 
         'fadeIn', 
         'fadeOut', 
-        'fadeToggle'/*, 'on', 'off', 'one'*/ 
+        'fadeToggle'
     ];
     function normalizeEvents(events, namespace) {
         if(!namespace) {
             return events;
         }
         if(isObject(events)) {
-            // Create new object, so that original object will not be modified when binding.
             events = extend({
             }, events);
             for(var key in events) {
@@ -98,23 +94,12 @@ define('thrust/dom/subjquery',["require", "exports", 'jquery', 'thrust/util', 't
             return events.join(' ');
         }
     }
-    /*
-    Clone jquery
-    Remove all excess methods we don't want to expose natively.
-    overrload any methods we want to change behavior of (noteably on, one, and off)
-    
-    Instead of duplicating the jquery behavior we instead realign it to our own.
-    */
-    // jQuery sub
     function subJQuery() {
         var tQuery = function (selector, context, namespace) {
             return new tQuery.prototype.init(selector, context, namespace || (this && this.namespace));
         };
         _.merge(tQuery, jQuery);
-        // Do not like
-        // probably needed in some special unique cases
         tQuery.jQuery = jQuery;
-        // expose events for doing special events as required.
         tQuery.event = (jQuery).event;
         tQuery.fn = tQuery.prototype = extend({
         }, jQuery.fn);
@@ -136,7 +121,6 @@ define('thrust/dom/subjquery',["require", "exports", 'jquery', 'thrust/util', 't
         };
         tQuery.fn.init.prototype = tQuery.fn;
         var tQueryRoot = tQuery(document);
-        // remove all not applicable methods off of fn.
         each(jQueryFnMethodBlackList, function (x) {
             if(tQuery.fn[x]) {
                 tQuery.fn[x] = null;
@@ -166,33 +150,11 @@ define('thrust/dom/subjquery',["require", "exports", 'jquery', 'thrust/util', 't
 //@ sourceMappingURL=subjquery.js.map
 ;
 define('thrust/dom/config',["require", "exports"], function(require, exports) {
-    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     
-    /**
-    Resolves the given properties when creating an instance of the plugin.
-    
-    This is for internal thrust use.  Thrust uses this array to generate the properties that need to be handed
-    to the plugin constructor method.
-    
-    @for thrust.dom.config
-    @private
-    @property resolve
-    @readOnly
-    @type {Array}
-    **/
     exports.resolve = [
         'name', 
         'mediator'
     ];
-    /**
-    The set of conventions to load into thrust/dom.
-    
-    @property conventions
-    @readOnly
-    @type {Array}
-    **/
     exports.conventions = [
         'thrust/dom/convention/action', 
         'thrust/dom/convention/context', 
@@ -202,10 +164,6 @@ define('thrust/dom/config',["require", "exports"], function(require, exports) {
 //@ sourceMappingURL=config.js.map
 ;
 define('thrust/dom/main',["require", "exports", './subjquery', 'thrust/util', 'thrust/log', 'thrust/facade', 'has', 'thrust/instance', './config'], function(require, exports, __subjquery__, __util__, __log__, __facade__, __has__, __instance__, __config__) {
-    /// <reference path="../interfaces/dom/dom.d.ts" />
-    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     
     var subjquery = __subjquery__;
 
@@ -225,7 +183,6 @@ define('thrust/dom/main',["require", "exports", './subjquery', 'thrust/util', 't
 
     exports.className = 'Dom';
     var format = util.format, extend = _.extend, bind = _.bind, hasOwn = Object.prototype.hasOwnProperty, isObject = _.isObject, slice = Array.prototype.slice, when = util.when, isArray = _.isArray;
-    //#region DomFacade
     var DomFacade = (function () {
         var domFacade = facade.createFacade(function (mod, parent) {
             this.name = parent.name;
@@ -257,10 +214,7 @@ define('thrust/dom/main',["require", "exports", './subjquery', 'thrust/util', 't
         };
         return domFacade;
     })();
-    //#endregion
-    //#region Dom
     var Dom = (function () {
-        //#endregion
         function Dom(name, mediator) {
             if(!name) {
                 throw new Error('Dom: module name must be defined.');
@@ -278,8 +232,7 @@ define('thrust/dom/main',["require", "exports", './subjquery', 'thrust/util', 't
 
             });
         }
-        Dom.prototype.initEvents = //#region Events
-        function () {
+        Dom.prototype.initEvents = function () {
         };
         Dom.prototype.extend = function (to, init) {
             return null;
@@ -301,26 +254,18 @@ define('thrust/dom/main',["require", "exports", './subjquery', 'thrust/util', 't
                 dom = facades.dom;
             } else {
                 dom = facades.dom = new DomFacade(mod, this);
-                mod.dom = mod.$ = dom.context;
             }
             return dom;
         };
         return Dom;
     })();
     exports.Dom = Dom;    
-    //#endregion
-    })
+})
 //@ sourceMappingURL=main.js.map
 ;
 define('thrust/dom', ['thrust/dom/main'], function (main) { return main; });
 
 define('thrust/dom/convention/action',["require", "exports", 'thrust/convention', 'thrust/util', '../subjquery'], function(require, exports, __c__, __util__, __subjquery__) {
-    /// <reference path="../../interfaces/dom/convention/action.d.ts" />
-    /// <reference path="../../interfaces/dom/dom.d.ts" />
-    /// <reference path="../../interfaces/thrust.d.ts" />
-    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     
     var c = __c__;
 
@@ -424,8 +369,6 @@ define('thrust/dom/convention/action',["require", "exports", 'thrust/convention'
             thrust.dom.actionHandler = actionHandler;
             var $body = $(window.document.body);
             _.each(events, function (eventSelectors, eventName) {
-                // using thrust name, as callback needs to be per thrust instance
-                // in the event of multiple thrust instances.
                 $body.on(eventName + '.' + ACTIONSSINGLE + thrust.name, eventSelectors.join(getActionAttribute(eventName) + ', '), actionHandler.callbackFor(eventName, true));
             });
         },
@@ -494,12 +437,6 @@ define('thrust/dom/convention/action',["require", "exports", 'thrust/convention'
 //@ sourceMappingURL=action.js.map
 ;
 define('thrust/dom/convention/animate.container',["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
-    /// <reference path="../../interfaces/dom/dom.d.ts" />
-    /// <reference path="../../interfaces/mediator/mediator.d.ts" />
-    /// <reference path="../../interfaces/thrust.d.ts" />
-    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     
     var c = __c__;
 
@@ -547,13 +484,6 @@ changeContainer: 'thrust-convention-container-change'    }, any = _.any, defer =
 //@ sourceMappingURL=animate.container.js.map
 ;
 define('thrust/dom/convention/context',["require", "exports", 'thrust/convention', 'thrust/util', '../subjquery'], function(require, exports, __c__, __util__, __subjquery__) {
-    /// <reference path="../../interfaces/dom/convention/context.d.ts" />
-    /// <reference path="../../interfaces/mediator/mediator.d.ts" />
-    /// <reference path="../../interfaces/dom/dom.d.ts" />
-    /// <reference path="../../interfaces/thrust.d.ts" />
-    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     
     var c = __c__;
 
@@ -572,7 +502,7 @@ define('thrust/dom/convention/context',["require", "exports", 'thrust/convention
         ready: function (mod, facade) {
             var context = mod.convention(CONTEXT);
             if(context) {
-                mod.instance.dom = mod.instance.$ = facade.context = tQuery(context, mod.instance.$);
+                mod.instance.dom = mod.instance.$ = tQuery(context, facade.context);
             }
         }
     };
@@ -581,13 +511,6 @@ define('thrust/dom/convention/context',["require", "exports", 'thrust/convention
 //@ sourceMappingURL=context.js.map
 ;
 define('thrust/dom/convention/event',["require", "exports", 'thrust/convention', 'thrust/util'], function(require, exports, __c__, __util__) {
-    /// <reference path="../../interfaces/dom/convention/event.d.ts" />
-    /// <reference path="../../interfaces/mediator/mediator.d.ts" />
-    /// <reference path="../../interfaces/dom/dom.d.ts" />
-    /// <reference path="../../interfaces/thrust.d.ts" />
-    /// <reference path="../../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     
     var c = __c__;
 
@@ -609,7 +532,6 @@ define('thrust/dom/convention/event',["require", "exports", 'thrust/convention',
             var events = mod.convention(EVENTS), $context = facade.context, moduleInstance = mod.instance;
             if(events) {
                 _.forIn(events, function (eventsCollection, event) {
-                    //var eventsCollection = events[event];
                     if(!isArray(eventsCollection)) {
                         eventsCollection = [
                             eventsCollection
@@ -627,21 +549,10 @@ define('thrust/dom/convention/event',["require", "exports", 'thrust/convention',
                         ];
                         if(isArray(definition)) {
                             bindEvent.push.apply(bindEvent, definition);
-                            // We have one edgecase here
-                            // If the short hand array, has a context that is a string or function
-                            // and it doesnt have information for both selector and data, this will fail
-                            // We can recover when all 5 possible items are defined.
                             var handler = bindEvent[bindEvent.length - 1];
-                            // We were asked for a method on the module.
                             if(isString(handler) && bindEvent.length === 2) {
                                 bindEvent[bindEvent.length - 1] = mod.instance[handler];
                             } else {
-                                // We didnt find a function :(
-                                //  EDGE CASE: If context is a function, we will assume all is well
-                                //              Even if the handler is a string that needs to be referenced.
-                                // Work arrounds:
-                                //      Shorthand: add null/empty values for selector and data
-                                //      Longhand: switch to long hand as it has more explicit syntax.
                                 if(!isString(handler) && !isFunction(handler) && bindEvent.length > 2 || bindEvent.length === 5) {
                                     handler = bindEvent[bindEvent.length - 2];
                                     if(isString(handler)) {
@@ -665,7 +576,6 @@ define('thrust/dom/convention/event',["require", "exports", 'thrust/convention',
                                 }
                             });
                         }
-                        // Call the on method, with our arguments.
                         $context.on.apply($context, bindEvent);
                     });
                 });

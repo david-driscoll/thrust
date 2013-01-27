@@ -1,5 +1,5 @@
 /// <reference path="interfaces/thrust.d.ts" />
-/// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+/// <reference path="../../lib/DefinitelyTyped/requirejs/require.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
 /*export module instance {*/
@@ -13,7 +13,7 @@ var _ = util._;
 import log = module('./log');
 import thrustInstance = module('./instance');
 import igniteSpec = module('./ignite');
-export import m = module('./capsule');
+import m = module('./capsule');
 var Module = m.Module;
 import domReady = module('domReady');
 import has = module('has');
@@ -56,7 +56,8 @@ var INIT = 'init',
     safeInvoke = util.safeInvoke;
 
 //#region Runner Factories
-var runRunnerFactory = memoize(function (method: string) {
+var runRunnerFactory = <(method: string) => (names: string[], ...args: any[]) => Promise[]>
+    memoize((method: string) => {
     var conventionMethod = (method === STOP && START) || (method === DESTROY && INIT) || method,
         conventionValue = !(method === STOP || method === DESTROY),
         unsetReady = method === STOP,
@@ -66,16 +67,16 @@ var runRunnerFactory = memoize(function (method: string) {
         logMessage = format('Thrust: {0}ing module "{{0}}" failed!', method),
         runningMessage = format('Thrust: Running {0} for module "{{0}}".', method);
 
-    return function (names) {
-        var that = this;
+    return function (names : string[], ...args : any[]) : Promise[] {
+        var that : IThrust = this;
         if (!isArray(names))
-            names = [names];
-        var args = slice.call(arguments, 1),
-            results = [];
+            names = [<any> names];
+        var args,
+            results : Promise[] = [];
 
         each(names, function (name) {
             has('DEBUG') && log.debug(format(runningMessage, name));
-            var mod = that.modules[name];
+            var mod : IThrustModule = that.modules[name];
 
             if (!mod && !that.failedModules[name]) {
                 // try to fetch the module.
@@ -95,7 +96,7 @@ var runRunnerFactory = memoize(function (method: string) {
                 results.push(loaderDefer.promise);
             }
             else if ((conventionCheck && mod.convention(conventionName)) || !mod.convention(conventionName)) {
-                if (tConfig.throwErrors) {
+                if (has('DEBUG') && tConfig.throwErrors) {
                     results.push(runner(that, name, mod, args));
                 }
                 else {
@@ -113,7 +114,8 @@ var runRunnerFactory = memoize(function (method: string) {
     };
 });
 
-var runnerFactory = memoize(function (method: string, conventionName: string, conventionValue: any, unsetReady: bool) {
+var runnerFactory = <(method: string, conventionName: string, conventionValue: any, unsetReady: bool) => (that: IThrust, name: string, mod: IThrustModule, args: any[]) => Promise>
+     memoize((method: string, conventionName: string, conventionValue: any, unsetReady: bool) : (that: IThrust, name: string, mod: IThrustModule, args: any[]) => Promise => {
     var eventName = format('thrust/module/{0}', method),
         infoFormat = format('Thrust: {0}ing module "{{0}}"', method.charAt(0).toUpperCase() + method.substring(1)),
         debugFormat = format('Thrust: Calling module "{{0}}" {0}()', method),
@@ -130,10 +132,11 @@ var runnerFactory = memoize(function (method: string, conventionName: string, co
     };
 });
 
-var allRunnerFactory = memoize(function (method: string) {
+var allRunnerFactory = <(method: string) => (that: IThrust) => Promise> 
+    memoize((method: string) : (that: IThrust) => Promise => {
     var infoFormat = format('Thrust: {0}ing all modules... [{{0}}]', method.charAt(0).toUpperCase() + method.substring(1)),
         pluralName = format('thrust/module/all/{0}', method),
-        checkAutoStart = method === INIT || method === START;
+        checkAutoStart = method === INIT || method === START || method === READY;
 
     return function (that: IThrust) {
         that.mediator && that.mediator.fire(pluralName);
@@ -507,7 +510,7 @@ export class Thrust implements IThrust {
 	**/
     public deorbit(calledByParent?: bool): Promise {
         var that = this;
-        if (!thrustShouldExecute(that, calledByParent))
+        if (!thrustShouldExecute(that, calledByParent, true))
             return;
 
         if (that.cfg.automaticLifecycle && (!that.cfg.childInstance)) {
@@ -547,9 +550,11 @@ export class Thrust implements IThrust {
     private moduleMethod(method: string, name: string, args: any[], reverse: bool, dependentMethods?: string[], startedMethods?: string[]): Promise {
         var that = this, pipe = [];
 
-        var result = !name && allRunnerFactory(method)(that);
-        if (result)
-            return result;
+        if (!name) {
+            var result = allRunnerFactory(method)(that);
+            if (result)
+                return result;
+        }
 
         var names: string[] = [];
         if (!isArray(name))
@@ -584,8 +589,6 @@ export class Thrust implements IThrust {
             })
         }
 
-        if (pipe.length === 1)
-            return pipe[0]();
         return when.pipeline(pipe);
     }
 
@@ -689,7 +692,7 @@ export class Thrust implements IThrust {
 	@param {String} name The module name
 	@param {Object} moduleDefn The module definition
 	**/
-    public createModule(name, moduleDefn) {
+    public createModule(name : string, moduleDefn : any) : IThrustModule {
         var that = this;
         if (that.modules[name]) return that.modules[name];
 
@@ -755,7 +758,7 @@ export class Thrust implements IThrust {
             settings.debug = { timeStart: new Date().getTime() };
         }
 
-        igniteSpec.mergeSettings(settings);
+        settings = igniteSpec.mergeSettings(settings);
 
         var pipe: Function[] = [igniteSpec.fuse];
 

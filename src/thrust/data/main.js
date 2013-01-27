@@ -1,9 +1,4 @@
 define(["require", "exports", 'thrust/convention', 'thrust/util', 'jquery', 'thrust/log', './config', 'thrust/config', './event.factory', './response.queue', 'thrust/events', 'thrust/facade', './event.types', 'has'], function(require, exports, __c__, __util__, __jQuery__, __log__, __config__, __tConfig__, __eventFactory__, __responseQueue__, __events__, __facade__, __eventTypes__, __has__) {
-    /// <reference path="../interfaces/data/data.d.ts" />
-    /// <reference path="../../jquery.d.ts" />
-    /// <reference path="../../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
-    // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
-    /*export module instance {*/
     'use strict';
     var c = __c__;
 
@@ -35,26 +30,12 @@ define(["require", "exports", 'thrust/convention', 'thrust/util', 'jquery', 'thr
 
     exports.className = 'Data';
     config;
-    // Variable declaration.
-        var format = util.format, extend = _.extend, type = util.type, when = util.when, slice = Array.prototype.slice, ajax = jQuery.ajax, uid = _.uniqueId, dataEventWait = eventTypes['wait'], dataEventStart = eventTypes['start'], dataEventStop = eventTypes['stop'], dataEventStatus = eventTypes['status'], argumentResolver = function (method) {
+    var format = util.format, extend = _.extend, type = util.type, when = util.when, slice = Array.prototype.slice, ajax = jQuery.ajax, uid = _.uniqueId, dataEventWait = eventTypes['wait'], dataEventStart = eventTypes['start'], dataEventStop = eventTypes['stop'], dataEventStatus = eventTypes['status'], argumentResolver = function (method) {
 return function () {
 return method(_.toArray(arguments));        }    };
     jQuery.ajaxSettings.traditional = !!tConfig.url.traditionalEncoding;
     var jDoc = jQuery(document);
     eventFactory.init(jDoc);
-    //#region DataFacade
-    /**
-    The data facade that is handed off to modules.
-    
-    
-    Enables data transport, using jQuery for thrust.
-    
-    @for thrust.data
-    @class thrust.data.DataFacade
-    @param {thrust.Module} module The module to create the facade for
-    @param {thrust.data.Data} parent The parent thrust data object to create the facade for.
-    @constructor
-    **/
     var DataFacade = (function () {
         var dataFacade = facade.createFacade(function (module, parent) {
             this.name = module.name + '-data';
@@ -70,22 +51,7 @@ return method(_.toArray(arguments));        }    };
         _.extend(dataFacade.prototype, events);
         return dataFacade;
     })();
-    //#endregion
-    /**
-    The master data plugin.
-    
-    
-    Enables data transport, using jQuery for thrust.
-    
-    @for thrust.data
-    @class thrust.data.Data
-    @param {String} name The thrust instance name.
-    @param {thrust.mediator.Mediator} mediator The thrust mediator instance.
-    @param {Object} config The thrust instance configuration.
-    @constructor
-    **/
     var Data = (function () {
-        //#endregion
         function Data(name, mediator, config) {
             if(!name) {
                 throw new Error('Data: module name must be defined.');
@@ -109,8 +75,7 @@ return method(_.toArray(arguments));        }    };
             };
             this.appPath = config.url.path + '/';
         }
-        Data.prototype.initEvents = //#region Events
-        function () {
+        Data.prototype.initEvents = function () {
         };
         Data.prototype.extend = function (to, init) {
             return null;
@@ -121,17 +86,7 @@ return method(_.toArray(arguments));        }    };
         };
         Data.prototype.once = function (events, callback, context) {
         };
-        Data.prototype.createFacade = /**
-        Creates a DataFacade for the given module.
-        
-        @for thrust.data.Data
-        @method createFacade
-        @param {Thrust} thrust The thrust instance
-        @param {Module} module The module
-        @param {Object} facades The available facades
-        @returns {DataFacade} The new DataFacade
-        **/
-        function (thrust, mod, facades) {
+        Data.prototype.createFacade = function (thrust, mod, facades) {
             if(mod.data && !(facades.data instanceof DataFacade)) {
                 throw new Error('"data" is a reserved property');
             }
@@ -143,31 +98,7 @@ return method(_.toArray(arguments));        }    };
                 data = facades.data = mod.data = new DataFacade(mod, this);
             }
             return data;
-        }/**
-        Does a GET to the server, for the given data and settings.
-        
-        @for thrust.data.Data
-        @method getData
-        @param {String} url The url to get data from
-        @param {Object} data The data to pass to the given url
-        @param {Object} settings The settings of the task to be done
-        @param {Boolean} settings.cache Do we cache this call or not.
-        @param {Boolean} settings.silent Do we use the built in data queue.
-        @returns {Promise} The promise if this request completes or fails
-        **/
-        /**
-        Does a GET to the server, for the given data and settings.
-        
-        @for thrust.data.DataFacade
-        @method getData
-        @param {String} url The url to get data from
-        @param {Object} data The data to pass to the given url
-        @param {Object} settings The settings of the task to be done
-        @param {Boolean} settings.cache Do we cache this call or not.
-        @param {Boolean} settings.silent Do we use the built in data queue.
-        @returns {Promise} The promise if this request completes or fails
-        **/
-        ;
+        };
         Data.prototype.getData = function (url, data, settings) {
             settings = !settings ? {
                 data: data
@@ -175,31 +106,7 @@ return method(_.toArray(arguments));        }    };
                 data: data
             });
             return this.get(url, settings);
-        }/**
-        Does a POST to the server, for the given data and settings.
-        
-        @for thrust.data.Data
-        @method postData
-        @param {String} url The url to get data from
-        @param {Object} data The data to pass to the given url
-        @param {Object} settings The settings of the task to be done
-        @param {Boolean} settings.cache Do we cache this call or not.
-        @param {Boolean} settings.silent Do we use the built in data queue.
-        @returns {Promise} The promise if this request completes or fails
-        **/
-        /**
-        Does a POST to the server, for the given data and settings.
-        
-        @for thrust.data.DataFacade
-        @method postData
-        @param {String} url The url to get data from
-        @param {Object} data The data to pass to the given url
-        @param {Object} settings The settings of the task to be done
-        @param {Boolean} settings.cache Do we cache this call or not.
-        @param {Boolean} settings.silent Do we use the built in data queue.
-        @returns {Promise} The promise if this request completes or fails
-        **/
-        ;
+        };
         Data.prototype.postData = function (url, data, settings) {
             settings = !settings ? {
                 data: JSON.stringify(data)
@@ -207,33 +114,7 @@ return method(_.toArray(arguments));        }    };
                 data: JSON.stringify(data)
             });
             return this.post(url, settings);
-        }/**
-        Does a GET to the server, using the given settings.
-        
-        Data must be passed in using settings: { data: {} } otherwise use getData.
-        
-        @for thrust.data.Data
-        @method get
-        @param {String} url The url to get data from
-        @param {Object} settings The settings of the task to be done
-        @param {Boolean} settings.cache Do we cache this call or not.
-        @param {Boolean} settings.silent Do we use the built in data queue.
-        @returns {Promise} The promise if this request completes or fails
-        **/
-        /**
-        Does a GET to the server, using the given settings.
-        
-        Data must be passed in using settings: { data: {} } otherwise use getData.
-        
-        @for thrust.data.DataFacade
-        @method get
-        @param {String} url The url to get data from
-        @param {Object} settings The settings of the task to be done
-        @param {Boolean} settings.cache Do we cache this call or not.
-        @param {Boolean} settings.silent Do we use the built in data queue.
-        @returns {Promise} The promise if this request completes or fails
-        **/
-        ;
+        };
         Data.prototype.get = function (url, settings) {
             if(settings === undefined && typeof url === 'object') {
                 settings = url;
@@ -249,33 +130,7 @@ return method(_.toArray(arguments));        }    };
             }, {
                 type: 'get'
             }));
-        }/**
-        Does a POST to the server, using the given settings.
-        
-        Data must be passed in using settings: { data: {} } otherwise use postData.
-        
-        @for thrust.data.Data
-        @method post
-        @param {String} url The url to get data from
-        @param {Object} settings The settings of the task to be done
-        @param {Boolean} settings.cache Do we cache this call or not.
-        @param {Boolean} settings.silent Do we use the built in data queue.
-        @returns {Promise} The promise if this request completes or fails
-        **/
-        /**
-        Does a POST to the server, using the given settings.
-        
-        Data must be passed in using settings: { data: {} } otherwise use postData.
-        
-        @for thrust.data.DataFacade
-        @method post
-        @param {String} url The url to get data from
-        @param {Object} settings The settings of the task to be done
-        @param {Boolean} settings.cache Do we cache this call or not.
-        @param {Boolean} settings.silent Do we use the built in data queue.
-        @returns {Promise} The promise if this request completes or fails
-        **/
-        ;
+        };
         Data.prototype.post = function (url, settings) {
             if(settings === undefined && typeof url === 'object') {
                 settings = url;
@@ -291,29 +146,7 @@ return method(_.toArray(arguments));        }    };
             }, {
                 type: 'post'
             }));
-        }/**
-        Does an ajax call to the given url, with the given settings.
-        
-        @for thrust.data.Data
-        @method ajax
-        @param {String} url The url to get data from
-        @param {Object} settings The settings of the task to be done
-        @param {Boolean} settings.cache Do we cache this call or not.
-        @param {Boolean} settings.silent Do we use the built in data queue.
-        @returns {Promise} The promise if this request completes or fails
-        **/
-        /**
-        Does an ajax call to the given url, with the given settings.
-        
-        @for thrust.data.DataFacade
-        @method ajax
-        @param {String} url The url to get data from
-        @param {Object} settings The settings of the task to be done
-        @param {Boolean} settings.cache Do we cache this call or not.
-        @param {Boolean} settings.silent Do we use the built in data queue.
-        @returns {Promise} The promise if this request completes or fails
-        **/
-        ;
+        };
         Data.prototype.ajax = function (url, settings) {
             var that = this, options, type, beforeSend;
             has('DEBUG') && log.info(format('Data[{0}]: Fetching data from "{1}"', that.namespace, url));
@@ -353,7 +186,6 @@ return method(_.toArray(arguments));        }    };
     exports.Data = Data;    
     _.extend(Data.prototype, Events);
     _.extend(DataFacade.prototype, Data.prototype);
-    // Take a hold of jQuery... this is sure to be contravesial
     jQuery.ajax = (Data).prototype.ajax;
 })
 //@ sourceMappingURL=main.js.map

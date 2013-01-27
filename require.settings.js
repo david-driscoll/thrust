@@ -2,7 +2,7 @@
     baseUrl: './src',
     paths: {
         'require': '../lib/requirejs/require',
-        'lodash': '../lib/lodash/lodash',
+        'lodash': '../lib/lodash/index',
         'text': '../lib/requirejs-text/text',
         'i18n': '../lib/requirejs-i18n/i18n',
         'domReady': '../lib/requirejs-domready/domReady',

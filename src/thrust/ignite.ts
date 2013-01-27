@@ -1,5 +1,5 @@
 /// <reference path="interfaces/thrust.d.ts" />
-/// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+/// <reference path="../../lib/DefinitelyTyped/requirejs/require.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
 /*export module instance {*/
@@ -62,9 +62,11 @@ export function mergeSettings(settings: IThrustSettings): IThrustSettings {
     var requireConfig = requireModule.config(),
         plugins = ['thrust/mediator'].concat(settings.plugins || requireConfig.plugins || config.plugins || []),
         conventions = [].concat(settings.conventions || requireModule.config().conventions || config.plugins || []);
-    _.merge(settings, config, requireModule.config(), settings, { __settingsMerged: true, plugins: plugins, conventions : conventions });
+    settings = _.merge({}, config, requireModule.config(), settings, { __settingsMerged: true, plugins: plugins, conventions : conventions });
     settings.plugins = plugins;
     settings.conventions = conventions;
+
+    return settings;
 }
 
 export function fuse(settings: IThrustSettings): Promise {

@@ -312,6 +312,28 @@
     @param {thrust.Module} module The module to create the facade for
     @param {thrust.template.Template} parent The template instance to create the facade for.
     **&#x2F;
+&#x2F;**
+AMD API
+load
+
+Handles fetching of a thrust&#x2F;template by path.
+Requires the instance, that the template is expected to come from.
+thrustInstance[:engineName]:templatePath
+
+Prefix with &lt;engineName&gt;: to select a specific template engine.
+thrust&#x2F;template!global:templates&#x2F;myTemplate.tmpl = Specific template
+thrust&#x2F;template!instance2:templates&#x2F;myTemplate = Uses default extension from config
+thrust&#x2F;template!instance2:kendo:templates&#x2F;myTemplate.tmpl = Uses the kendo template engine.
+thrust&#x2F;template!instance3:kendo:templates&#x2F;myTemplate.tmpl = Uses the kendo template engine with the default extension
+
+
+@method load
+@static
+@param {String} name The name of the template that is being fetched
+@param {Function} parentRequire the require method to be loaded
+@param {Function} load Allows the load to inform that AMD for the value to hand off
+@param {Object} config The custom configuration.
+**&#x2F;
 
     </pre>
 </div>

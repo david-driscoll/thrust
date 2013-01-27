@@ -1,5 +1,5 @@
 /// <reference path="interfaces/thrust.d.ts" />
-/// <reference path="../../lib/DefinitelyTyped/requirejs/require-2.1.d.ts" />
+/// <reference path="../../lib/DefinitelyTyped/requirejs/require.d.ts" />
 
 // Disabled until TS supports module per file in some way (ie exports is exports.<export> not  exports.moduleName.<export>)
 /*export module instance {*/
@@ -69,8 +69,8 @@
     **/
     export function clearCache(): void
     {
-        util._.each(util._.keys(instances), (x) => { instances[x] = null });
-        util._.each(util._.keys(loadingInstances), (x) => { loadingInstances[x] = null });
-        util._.each(util._.keys(capsule.Module.thrustCache), (x) => { capsule.Module.thrustCache[x] = null });
+        util._.each(util._.keys(instances), (x) => { instances[x] = null; delete instances[x] });
+        util._.each(util._.keys(loadingInstances), (x) => { loadingInstances[x] = null; delete loadingInstances[x] });
+        util._.each(util._.keys(capsule.Module.thrustCache), (x) => { capsule.Module.thrustCache[x] = null; delete capsule.Module.thrustCache[x] });
     }
 /*}*/
